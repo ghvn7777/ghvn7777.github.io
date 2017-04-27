@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>2-1 列表生成式 — Kaka Blog</title>
-	<meta name="description" content="Title: 2-1 列表生成式; Date: 2017-04-27; Author: kaka">
+	<title>2-1 列表元组 — Kaka Blog</title>
+	<meta name="description" content="Title: 2-1 列表元组; Date: 2017-04-27; Author: kaka">
 	<meta name="author" content="kaka">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -26,7 +26,7 @@
 		<div class="col-md-8 col-md-offset-2">
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">2-1 列表生成式</h1>
+		<h1 itemprop="name headline" class="article-title">2-1 列表元组</h1>
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">kaka</h4>
 		</span>
@@ -1121,14 +1121,635 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="生成器表达式">生成器表达式<a class="anchor-link" href="#生成器表达式">¶</a></h2><p>生成式表达式更省存储空间，因为它是使用迭代产生项目，而不是一次构建整个列表塞给另一个构造器</p>
+<p>Genexp（生成式表达式）语法和 listcomp 一样，但是它使用圆括号而不是方括号</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">symbols</span> <span class="o">=</span> <span class="s2">"a%b&c;$de$"</span>
+<span class="nb">tuple</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">)</span> <span class="c1">#如果生成器表达式是唯一的参数，则不用重复使用括号</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(97, 37, 98, 38, 99, 36, 100, 101, 36)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">array</span> 
+<span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s1">'I'</span><span class="p">,</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">))</span> <span class="c1">#不是唯一的参数，所以必须要加上括号</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array('I', [97, 37, 98, 38, 99, 36, 100, 101, 36])</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Tuple">Tuple<a class="anchor-link" href="#Tuple">¶</a></h1><h2 id="Tuple-并非只是不可变序列">Tuple 并非只是不可变序列<a class="anchor-link" href="#Tuple-并非只是不可变序列">¶</a></h2><p>Tuple 可以当成不可变序列使用，也可以当成栏位名称的记录。将 tuple 当成记录时，重新排序 tuple 会破坏它表示的信息</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lax_coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="mf">33.942</span><span class="p">,</span> <span class="o">-</span><span class="mf">118.4080</span><span class="p">)</span> <span class="c1">#经纬度</span>
+<span class="n">city</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">chg</span><span class="p">,</span> <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'Tokyo'</span><span class="p">,</span> <span class="mi">2003</span><span class="p">,</span> <span class="mi">32450</span><span class="p">,</span> <span class="mf">0.66</span><span class="p">,</span> <span class="mi">8014</span><span class="p">)</span> <span class="c1">#Tokyo 的资料，包括名称年份人口人口变化和面积</span>
+<span class="n">traveler_ids</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'USA'</span><span class="p">,</span> <span class="s1">'31195855'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'BRA'</span><span class="p">,</span> <span class="s1">'CE342567'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'ESP'</span><span class="p">,</span> <span class="s1">'XDA205856'</span><span class="p">)]</span> <span class="c1">#country_code,passport_number</span>
+<span class="k">for</span> <span class="n">passport</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">traveler_ids</span><span class="p">):</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">%s</span><span class="s1">/</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">passport</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>BRA/CE342567
+ESP/XDA205856
+USA/31195855
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">country</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">traveler_ids</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>USA
+BRA
+ESP
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="拆解-Tuple">拆解 Tuple<a class="anchor-link" href="#拆解-Tuple">¶</a></h2><p>在上面我们将元组拆解成 city, year,... 等，接着在下面，我们用 "%s/%s" % passport 打印元组，这些例子是拆解元组的范例。任何可迭代事物都可以进行 tuple 拆解，每个变量捕捉一个元素，除非你用星号（*）来捕捉其它元素</p>
+<p>在 tuple 拆解中，最常见的是平行赋值，也就是将可迭代对象的项目指派给一个变量 tuple，如下所示:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lax_coordinates</span> <span class="o">=</span> <span class="p">(</span><span class="mf">33.348</span><span class="p">,</span> <span class="o">-</span><span class="mf">117.932</span><span class="p">)</span>
+<span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span> <span class="o">=</span> <span class="n">lax_coordinates</span> <span class="c1"># tuple 拆解</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">latitude</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">longitude</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>33.348
+-117.932
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>不用中间变量交换值，是 tuple 拆解的另一种应用</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>5</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>另一种 tuple 拆解,调用函数时，参数前面加个星号</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">divmod</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="c1">#a 除 b，返回商和余数</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(2, 4)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="nb">divmod</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(2, 4)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">quotient</span><span class="p">,</span> <span class="n">remainder</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="n">quotient</span><span class="p">,</span> <span class="n">remainder</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(2, 4)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>上面也是一种 tuple 拆解方法，调用函数时候传多个参数。例如，<code>os.path.split()</code> 函数用路径建立一个 tuple(path, last_part)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/home/kaka/.ssh/idrsa.pub'</span><span class="p">)</span>
+<span class="n">filename</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'idrsa.pub'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>如果在编写国际化的软件，_ 并不是一个很好的占位符，因为传统上，它会被当成 gettext.gettext 函数的别名，如同 gettext 模块所建议的</p>
+<h2 id="使用-*-来捕捉元素">使用 * 来捕捉元素<a class="anchor-link" href="#使用-*-来捕捉元素">¶</a></h2><p>以 *args 来指定函数参数，可以抓取任意数量的参数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rest</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(0, 1, [2, 3, 4])</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rest</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(0, 1, [2])</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rest</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[21]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(0, 1, [])</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>在平行赋值情况下， * 前置符只能套用到一个变量，但是可以放到任意位置</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [23]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">body</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[23]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(0, [1, 2], 3, 4)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [24]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">head</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[24]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>([0, 1], 2, 3, 4)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="拆解嵌套的-Tuple">拆解嵌套的 Tuple<a class="anchor-link" href="#拆解嵌套的-Tuple">¶</a></h2><p>我们可以在需要用运算式来拆解的 tuple 中套入其它的 tuple，例如(a, b, (c, d))，而且如果运算式与嵌套结构匹配，python 就会做出正确的动作</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metro_areas</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">'Tokyo'</span><span class="p">,</span> <span class="s1">'JP'</span><span class="p">,</span> <span class="mf">36.933</span><span class="p">,</span> <span class="p">(</span><span class="mf">35.689722</span><span class="p">,</span> <span class="mf">139.691667</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'Delhi NCR'</span><span class="p">,</span> <span class="s1">'IN'</span><span class="p">,</span> <span class="mf">21.935</span><span class="p">,</span> <span class="p">(</span><span class="mf">28.613889</span><span class="p">,</span> <span class="mf">77.208889</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'Mexico City'</span><span class="p">,</span> <span class="s1">'MX'</span><span class="p">,</span> <span class="mf">20.142</span><span class="p">,</span> <span class="p">(</span><span class="mf">19.43333</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.13333</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'Net York-Newark'</span><span class="p">,</span> <span class="s1">'US'</span><span class="p">,</span> <span class="mf">20.104</span><span class="p">,</span> <span class="p">(</span><span class="mf">40.808611</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.020386</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'Sao Paulo'</span><span class="p">,</span> <span class="s1">'BR'</span><span class="p">,</span> <span class="mf">19.649</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">23.547778</span><span class="p">,</span> <span class="o">-</span><span class="mf">46.635883</span><span class="p">))</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">{:15}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'lat.'</span><span class="p">,</span> <span class="s1">'long.'</span><span class="p">))</span> <span class="c1">#^9 表示占 9 个字符，居中显示</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>                |   lat.    |   long.  
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fmt</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{:15}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1">'</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="p">(</span><span class="n">lattitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span> <span class="ow">in</span> <span class="n">metro_areas</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">longitude</span> <span class="o"><=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#西半球</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mexico City     |  33.348   | -99.13333
+Net York-Newark |  33.348   | -74.020386
+Sao Paulo       |  33.348   | -46.635883
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>在 python3 之前，你可以在定义函数时，使用嵌套 tuple，python3 已经不支持了，例如 <code>def fn(a, (b, c), d):</code>不过这对调用者没有任何影响。</p>
+<p>按照设计，tuple 是非常方便的，可以把它当成记录来使用，不过它不可以指定名字，这也是 namedtuple 被设计出来的原因</p>
+<h2 id="可以指定名字的-tuple">可以指定名字的 tuple<a class="anchor-link" href="#可以指定名字的-tuple">¶</a></h2><p><code>collections.namedtuple</code> 是一个工厂，可以制造 tuple 子类别，并加入别名。使用 namedtuple 创建的实例存储空间与 tuple 完全一样，因为别名被存储到类中。它们使用的存储空间比一般的 tuple 要少，因为不存储到 <code>__dict__</code>实例中的属性</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
+<span class="n">City</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'City'</span><span class="p">,</span> <span class="s1">'name country population coordinates'</span><span class="p">)</span>
+<span class="n">tokyo</span> <span class="o">=</span> <span class="n">City</span><span class="p">(</span><span class="s1">'Tokyo'</span><span class="p">,</span> <span class="s1">'JP'</span><span class="p">,</span> <span class="mf">36.933</span><span class="p">,</span> <span class="p">(</span><span class="mf">35.689722</span><span class="p">,</span> <span class="mf">139.691667</span><span class="p">))</span>
+<span class="n">tokyo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[27]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>City(name='Tokyo', country='JP', population=36.933, coordinates=(35.689722, 139.691667))</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokyo</span><span class="o">.</span><span class="n">coordinates</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[28]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(35.689722, 139.691667)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [29]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tokyo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[29]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'JP'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>构建 namedtuple 需要两个参数，第一个是别名，另一个是 tuple 元素的序列，可以使用可迭代的字符串（列表），也可以使用用空格分隔的字符串。</p>
+<p>我们必须要按照声明顺序为 tuple 赋值</p>
+<p>可以用名称或位置来读取数据</p>
+<p>下面是 namedtuple 的常用属性:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [31]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">City</span><span class="o">.</span><span class="n">_fields</span> <span class="c1">#是 1 个 tuple，里面是我们的字段名</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[31]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('name', 'country', 'population', 'coordinates')</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [33]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LatLong</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'LatLong'</span><span class="p">,</span> <span class="s1">'lat long'</span><span class="p">)</span>
+<span class="n">delhi_data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'Delhi NCR'</span><span class="p">,</span> <span class="s1">'IN'</span><span class="p">,</span> <span class="mf">21.935</span><span class="p">,</span> <span class="n">LatLong</span><span class="p">(</span><span class="mf">28.613889</span><span class="p">,</span> <span class="mf">77.208889</span><span class="p">))</span>
+<span class="n">delhi</span> <span class="o">=</span> <span class="n">City</span><span class="o">.</span><span class="n">_make</span><span class="p">(</span><span class="n">delhi_data</span><span class="p">)</span> <span class="c1">#_make 可以让我们从可迭代项目中实例化一个 namedtuple。City(*delhi_data) 也可以做这件事</span>
+<span class="n">delhi</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span> <span class="c1">#返回 namedtuple 的 collections.OrderedDict, 用来显示好看的城市资料</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[33]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>OrderedDict([('name', 'Delhi NCR'),
+             ('country', 'IN'),
+             ('population', 21.935),
+             ('coordinates', LatLong(lat=28.613889, long=77.208889))])</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tuple-当成不可变列表使用">Tuple 当成不可变列表使用<a class="anchor-link" href="#Tuple-当成不可变列表使用">¶</a></h2><p>当 tuple 当成不可变列表使用时，我们先看总结一下它和列表多么相似。tuple 支持所有不涉及添加或移除元素的方法，除了一个例外: tuple 没有 <code>__reversed__</code> 方法，但是这是为了最佳化，没有它，可以使用 reversed(my_tuple)</p>
 </div>
 </div>
 </div>

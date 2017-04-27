@@ -1,7 +1,6 @@
 #!/bin/bash
 
-rm -rf content/.*
-#find content/ -name ".*" -print | xargs rm -rf
+rm -rf content/.ipy*
 source activate pelican
 pelican content/
 cd output && python -m SimpleHTTPServer
