@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source activate pelican
 pelican content -s publishconf.py
 git checkout dev
 git add .
