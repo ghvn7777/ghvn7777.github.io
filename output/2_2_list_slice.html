@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>1-1 Python 风格扑克牌 — Kaka Blog</title>
-	<meta name="description" content="Title: 1-1 Python 风格扑克牌; Date: 2017-04-26; Author: kaka">
+	<title>2-2 切片和序列 — Kaka Blog</title>
+	<meta name="description" content="Title: 2-2 切片和序列; Date: 2017-04-29; Author: kaka">
 	<meta name="author" content="kaka">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -26,11 +26,11 @@
 		<div class="col-md-8 col-md-offset-2">
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">1-1 Python 风格扑克牌</h1>
+		<h1 itemprop="name headline" class="article-title">2-2 切片和序列</h1>
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">kaka</h4>
 		</span>
-		<time datetime="2017-04-26T00:50:00+02:00" itemprop="datePublished">Wed 26 April 2017</time>
+		<time datetime="2017-04-29T02:00:00+02:00" itemprop="datePublished">Sat 29 April 2017</time>
 	</div>
 	<div>
 		Category:
@@ -1015,54 +1015,57 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="__getitem__--AND--__len__-方法"><strong><code>__getitem__</code></strong>  AND  <strong><code>__len__</code></strong> 方法<a class="anchor-link" href="#__getitem__--AND--__len__-方法">¶</a></h2><p>下面看一个生成扑克牌以及对其进行操作的例子</p>
+<h2 id="切片">切片<a class="anchor-link" href="#切片">¶</a></h2><p>为了计算 seq[start:stop:step]，Python 会调用 <code>seq.__getitem__(slice(start, stop, step))</code>。</p>
+<h3 id="多维切片">多维切片<a class="anchor-link" href="#多维切片">¶</a></h3><p>[] 运算符也可以接收以逗号分隔的多个索引或切片，举例来说，Numpy 中，你可以使用 a[i, j] 取得二维的 numpy.ndarray，以及使用 a[m:n, k:l] 这类的运算符获取二维的切片。处理 [] 运算符的 <code>__getitem__</code> 和 <code>__setitem__</code> 特殊方法，都只会接收 tuple 格式的 a[i, j] 内的索引，换句话说，Python 调用 a.getitem((i, j)) 算出来的 a[i, j]</p>
+<p>Python 会将省略号（三个句点）视为一种标记，在 Numpy 对多维矩阵进行切片时，会使用快捷的方式 <code>...</code>，例如一个四维矩阵 a[i, ...] 相当于 a[i, :, :, :] 的简写。</p>
+<h3 id="对切片赋值">对切片赋值<a class="anchor-link" href="#对切片赋值">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [27]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">l</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">#当赋值对象是切片时候，即使只有一个元素，等式右面也必须是一个可迭代元素</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-9-d02ac7e234f9></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>l<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">:</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">100</span> <span class="ansi-red-fg">#当赋值对象是切片时候，即使只有一个元素，等式右面也必须是一个可迭代元素</span>
 
-<span class="n">Card</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Card'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'rank'</span><span class="p">,</span> <span class="s1">'suit'</span><span class="p">])</span> <span class="c1">#'Card' 是 namedtuple 名字,　后面是元素</span>
-
-<span class="k">class</span> <span class="nc">FrenchDeck</span><span class="p">:</span>
-    <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="s1">'JQKA'</span><span class="p">)</span>
-    <span class="n">suits</span> <span class="o">=</span> <span class="s1">'spades diamonds clubs hearts'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># 黑桃 钻石 梅花 红心</span>
-    
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span>
-                                        <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranks</span><span class="p">]</span>
-        
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span> <span class="c1">#代表了 self._cards 的 []运算符</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [28]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">beer_card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="s1">'7'</span><span class="p">,</span> <span class="s1">'diamonds'</span><span class="p">)</span>
-<span class="n">beer_card</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[28]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='7', suit='diamonds')</pre>
+<span class="ansi-red-fg">TypeError</span>: can only assign an iterable</pre>
 </div>
 </div>
 </div>
@@ -1070,11 +1073,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [29]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="p">()</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>  <span class="c1">#默认调用了 __len__()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">l</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">l</span>
 </pre></div>
 </div>
 </div>
@@ -1082,120 +1085,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[29]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>52</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [30]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#调用了 __getitem__()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[30]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='2', suit='spades')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [31]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[31]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='A', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [32]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
-<span class="n">choice</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[32]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='8', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [33]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[33]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='2', suit='spades'),
- Card(rank='3', suit='spades'),
- Card(rank='4', suit='spades')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [34]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">12</span><span class="p">::</span><span class="mi">13</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[34]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='A', suit='spades'),
- Card(rank='A', suit='diamonds'),
- Card(rank='A', suit='clubs'),
- Card(rank='A', suit='hearts')]</pre>
+<pre>[0, 1, 100, 5, 6, 7, 8, 9]</pre>
 </div>
 </div>
 </div>
@@ -1206,18 +1098,17 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="迭代">迭代<a class="anchor-link" href="#迭代">¶</a></h2>
+<h2 id="对序列使用-+-与-*">对序列使用 + 与 *<a class="anchor-link" href="#对序列使用-+-与-*">¶</a></h2><p>要串接多个同一序列副本，只需要将序列乘上一个整数</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [35]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">deck</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">l</span>
 </pre></div>
 </div>
 </div>
@@ -1225,94 +1116,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='spades')
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [36]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># 也可以反向迭代</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">deck</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='A', suit='hearts')
-Card(rank='K', suit='hearts')
-Card(rank='Q', suit='hearts')
-Card(rank='J', suit='hearts')
-Card(rank='10', suit='hearts')
-Card(rank='9', suit='hearts')
-Card(rank='8', suit='hearts')
-Card(rank='7', suit='hearts')
-Card(rank='6', suit='hearts')
-Card(rank='5', suit='hearts')
-Card(rank='4', suit='hearts')
-Card(rank='3', suit='hearts')
-Card(rank='2', suit='hearts')
-Card(rank='A', suit='clubs')
-Card(rank='K', suit='clubs')
-Card(rank='Q', suit='clubs')
-Card(rank='J', suit='clubs')
-Card(rank='10', suit='clubs')
-Card(rank='9', suit='clubs')
-Card(rank='8', suit='clubs')
-Card(rank='7', suit='clubs')
-Card(rank='6', suit='clubs')
-Card(rank='5', suit='clubs')
-Card(rank='4', suit='clubs')
-Card(rank='3', suit='clubs')
-Card(rank='2', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='K', suit='diamonds')
-Card(rank='Q', suit='diamonds')
-Card(rank='J', suit='diamonds')
-Card(rank='10', suit='diamonds')
-Card(rank='9', suit='diamonds')
-Card(rank='8', suit='diamonds')
-Card(rank='7', suit='diamonds')
-Card(rank='6', suit='diamonds')
-Card(rank='5', suit='diamonds')
-Card(rank='4', suit='diamonds')
-Card(rank='3', suit='diamonds')
-Card(rank='2', suit='diamonds')
-Card(rank='A', suit='spades')
-Card(rank='K', suit='spades')
-Card(rank='Q', suit='spades')
-Card(rank='J', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='2', suit='spades')
-</pre>
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[1, 2, 3]</pre>
 </div>
 </div>
 </div>
@@ -1323,16 +1129,19 @@ Card(rank='2', suit='spades')
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="in-运算符">in 运算符<a class="anchor-link" href="#in-运算符">¶</a></h2><p>如果集合中没有 <strong><code>__contains__</code></strong>　方法， in 操作符就会进行循环扫描，典型的例子是 in 可以在 FrenchDeck 类中使用，in 可以在我们的 FrenchDeck 执行，因为它是可迭代的</p>
+<h3 id="构建内含多个序列的序列">构建内含多个序列的序列<a class="anchor-link" href="#构建内含多个序列的序列">¶</a></h3><p>如果我们想初始化序列中有一定数量的序列，最适合使用列表生成式，例如下面就可以表示井字的棋盘序列，里面有 3 个长度为 3 的序列</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [37]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'hearts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">' '</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="n">board</span>
+<span class="n">board</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'X'</span>
+<span class="n">board</span>
 </pre></div>
 </div>
 </div>
@@ -1340,30 +1149,9 @@ Card(rank='2', suit='spades')
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[13]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>True</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [38]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'beasts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[38]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>False</pre>
+<pre>[[' ', ' ', ' '], [' ', ' ', 'X'], [' ', ' ', ' ']]</pre>
 </div>
 </div>
 </div>
@@ -1374,17 +1162,17 @@ Card(rank='2', suit='spades')
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="排序">排序<a class="anchor-link" href="#排序">¶</a></h2><p>扑克牌一般按照数字大小（ Ａ 最大）来排列，花色按照黑桃（最大），红心，方块，梅花（最小）来排序，我们实现一下此功能</p>
+<p>上面很吸引人，并且是一种标准的做法，下面是一种看起来很简洁，但是是错误的做法</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [39]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">suit_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">spades</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hearts</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diamonds</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clubs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">suit_values</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weir_board</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'_'</span><span class="p">]</span><span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="n">weir_board</span>
 </pre></div>
 </div>
 </div>
@@ -1392,9 +1180,9 @@ Card(rank='2', suit='spades')
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[39]:</div>
+<div class="prompt output_prompt">Out[15]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{'clubs': 0, 'diamonds': 1, 'hearts': 2, 'spades': 3}</pre>
+<pre>[['_', '_', '_'], ['_', '_', '_'], ['_', '_', '_']]</pre>
 </div>
 </div>
 </div>
@@ -1402,24 +1190,11 @@ Card(rank='2', suit='spades')
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [44]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">spades_high</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
-    <span class="n">rank_value</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="o">.</span><span class="n">ranks</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">rank_value</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">suit_values</span><span class="p">)</span> <span class="o">+</span> <span class="n">suit_values</span><span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">suit</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [45]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">spades_high</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weir_board</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'O'</span>
+<span class="n">weir_board</span>
 </pre></div>
 </div>
 </div>
@@ -1427,61 +1202,9 @@ Card(rank='2', suit='spades')
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='clubs')
-Card(rank='2', suit='diamonds')
-Card(rank='2', suit='hearts')
-Card(rank='2', suit='spades')
-Card(rank='3', suit='clubs')
-Card(rank='3', suit='diamonds')
-Card(rank='3', suit='hearts')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='clubs')
-Card(rank='4', suit='diamonds')
-Card(rank='4', suit='hearts')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='clubs')
-Card(rank='5', suit='diamonds')
-Card(rank='5', suit='hearts')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='clubs')
-Card(rank='6', suit='diamonds')
-Card(rank='6', suit='hearts')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='clubs')
-Card(rank='7', suit='diamonds')
-Card(rank='7', suit='hearts')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='clubs')
-Card(rank='8', suit='diamonds')
-Card(rank='8', suit='hearts')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='clubs')
-Card(rank='9', suit='diamonds')
-Card(rank='9', suit='hearts')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='clubs')
-Card(rank='10', suit='diamonds')
-Card(rank='10', suit='hearts')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='clubs')
-Card(rank='J', suit='diamonds')
-Card(rank='J', suit='hearts')
-Card(rank='J', suit='spades')
-Card(rank='Q', suit='clubs')
-Card(rank='Q', suit='diamonds')
-Card(rank='Q', suit='hearts')
-Card(rank='Q', suit='spades')
-Card(rank='K', suit='clubs')
-Card(rank='K', suit='diamonds')
-Card(rank='K', suit='hearts')
-Card(rank='K', suit='spades')
-Card(rank='A', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='A', suit='hearts')
-Card(rank='A', suit='spades')
-</pre>
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['_', '_', 'O'], ['_', '_', 'O'], ['_', '_', 'O']]</pre>
 </div>
 </div>
 </div>
@@ -1492,7 +1215,7 @@ Card(rank='A', suit='spades')
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
