@@ -1138,7 +1138,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">' '</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#建立一个有三个元素的列表，每个元素是一个列表，有三个项目</span>
+<span class="n">board</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">' '</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
 <span class="n">board</span>
 <span class="n">board</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'X'</span>
 <span class="n">board</span>
@@ -1171,7 +1172,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weir_board</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'_'</span><span class="p">]</span><span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weir_board</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'_'</span><span class="p">]</span><span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span> <span class="c1">#这是 3 个指向同一个地址的列表</span>
 <span class="n">weir_board</span>
 </pre></div>
 </div>
@@ -1205,6 +1206,62 @@ h6:hover .anchor-link {
 <div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>[['_', '_', 'O'], ['_', '_', 'O'], ['_', '_', 'O']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>上面的程序本质上相当于:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="s1">' '</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="n">board</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">board</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="n">board</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">board</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'0'</span>
+<span class="n">board</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[[' ', ' ', '0'], [' ', ' ', '0'], [' ', ' ', '0']]</pre>
 </div>
 </div>
 </div>
