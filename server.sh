@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source activate pelican
+rm -rf content/*.ipy
 pelican content -s publishconf.py
 git checkout dev
 git add .
