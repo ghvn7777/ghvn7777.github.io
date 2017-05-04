@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>1-1 Python 风格扑克牌 — Kaka Blog</title>
-	<meta name="description" content="Title: 1-1 Python 风格扑克牌; Date: 2017-04-26; Author: kaka">
+	<title>3-1 字典和集合常用操作 — Kaka Blog</title>
+	<meta name="description" content="Title: 3-1 字典和集合常用操作; Date: 2017-05-05; Author: kaka">
 	<meta name="author" content="kaka">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -26,16 +26,23 @@
 		<div class="col-md-8 col-md-offset-2">
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">1-1 Python 风格扑克牌</h1>
+		<h1 itemprop="name headline" class="article-title">3-1 字典和集合常用操作</h1>
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">kaka</h4>
 		</span>
-		<time datetime="2017-04-26T00:50:00+02:00" itemprop="datePublished">Wed 26 April 2017</time>
+		<time datetime="2017-05-05T00:30:00+02:00" itemprop="datePublished">Fri 05 May 2017</time>
 	</div>
 	<div>
 		Category:
 		<span itemprop="articleSection">
 			<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="./tag/dict-set.html" rel="tag">dict set</a>
 		</span>
 	</div>
 	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
@@ -1015,54 +1022,65 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="__getitem__--AND--__len__-方法"><strong><code>__getitem__</code></strong>  AND  <strong><code>__len__</code></strong> 方法<a class="anchor-link" href="#__getitem__--AND--__len__-方法">¶</a></h2><p>下面看一个生成扑克牌以及对其进行操作的例子</p>
+<p>我们在这章讨论字典和集合，因为它们背后都是哈希表，下面是本章的大纲</p>
+<ul>
+<li>常用字典方法</li>
+<li>特别处理遗失的键</li>
+<li>在标准库中，dict 的变化</li>
+<li>set 与 frozenset 形态</li>
+<li>哈希表的工作原理</li>
+<li>哈希表的影响（键形态限制，无法预知的排序等等）</li>
+</ul>
+<h2 id="什么是可哈希化">什么是可哈希化<a class="anchor-link" href="#什么是可哈希化">¶</a></h2><p>如果一个对象有一个哈希值，而且在生命周期中不被改变（它需要实现一个 <code>__hash__()</code> 方法），而且可以与其它对象比较（需要实现 <code>__eq__()</code> 方法），就是可哈希化的。看下面例子</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [27]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tt</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+<span class="nb">hash</span><span class="p">(</span><span class="n">tt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>8027212646858338501</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span> <span class="c1"># 其中列表是可变的，所以没有哈希值</span>
+<span class="nb">hash</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-5-16500db93317></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> t1 <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">30</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">40</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----> 2</span><span class="ansi-red-fg"> </span>hash<span class="ansi-blue-fg">(</span>t1<span class="ansi-blue-fg">)</span>
 
-<span class="n">Card</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Card'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'rank'</span><span class="p">,</span> <span class="s1">'suit'</span><span class="p">])</span> <span class="c1">#'Card' 是 namedtuple 名字,　后面是元素</span>
-
-<span class="k">class</span> <span class="nc">FrenchDeck</span><span class="p">:</span>
-    <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="s1">'JQKA'</span><span class="p">)</span>
-    <span class="n">suits</span> <span class="o">=</span> <span class="s1">'spades diamonds clubs hearts'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># 黑桃 钻石 梅花 红心</span>
-    
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span>
-                                        <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranks</span><span class="p">]</span>
-        
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span> <span class="c1">#代表了 self._cards 的 []运算符</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [28]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">beer_card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="s1">'7'</span><span class="p">,</span> <span class="s1">'diamonds'</span><span class="p">)</span>
-<span class="n">beer_card</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[28]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='7', suit='diamonds')</pre>
+<span class="ansi-red-fg">TypeError</span>: unhashable type: 'list'</pre>
 </div>
 </div>
 </div>
@@ -1070,11 +1088,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [29]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="p">()</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>  <span class="c1">#默认调用了 __len__()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tf</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">frozenset</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]))</span> <span class="c1">#frozenset 是冻结的集合，不可变的，所以有哈希值</span>
+<span class="nb">hash</span><span class="p">(</span><span class="n">tf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1082,120 +1100,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[29]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>52</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [30]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#调用了 __getitem__()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[30]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='2', suit='spades')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [31]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[31]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='A', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [32]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
-<span class="n">choice</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[32]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='8', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [33]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[33]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='2', suit='spades'),
- Card(rank='3', suit='spades'),
- Card(rank='4', suit='spades')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [34]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">12</span><span class="p">::</span><span class="mi">13</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[34]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='A', suit='spades'),
- Card(rank='A', suit='diamonds'),
- Card(rank='A', suit='clubs'),
- Card(rank='A', suit='hearts')]</pre>
+<pre>-4118419923444501110</pre>
 </div>
 </div>
 </div>
@@ -1206,18 +1113,21 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="迭代">迭代<a class="anchor-link" href="#迭代">¶</a></h2>
+<h2 id="构建字典方法">构建字典方法<a class="anchor-link" href="#构建字典方法">¶</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [35]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">deck</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">two</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">three</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'one'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s1">'two'</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">'one'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">'three'</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">({</span><span class="s1">'three'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'one'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="o">==</span> <span class="n">c</span> <span class="o">==</span> <span class="n">d</span> <span class="o">==</span> <span class="n">e</span>
 </pre></div>
 </div>
 </div>
@@ -1225,122 +1135,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='spades')
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [36]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># 也可以反向迭代</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">deck</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='A', suit='hearts')
-Card(rank='K', suit='hearts')
-Card(rank='Q', suit='hearts')
-Card(rank='J', suit='hearts')
-Card(rank='10', suit='hearts')
-Card(rank='9', suit='hearts')
-Card(rank='8', suit='hearts')
-Card(rank='7', suit='hearts')
-Card(rank='6', suit='hearts')
-Card(rank='5', suit='hearts')
-Card(rank='4', suit='hearts')
-Card(rank='3', suit='hearts')
-Card(rank='2', suit='hearts')
-Card(rank='A', suit='clubs')
-Card(rank='K', suit='clubs')
-Card(rank='Q', suit='clubs')
-Card(rank='J', suit='clubs')
-Card(rank='10', suit='clubs')
-Card(rank='9', suit='clubs')
-Card(rank='8', suit='clubs')
-Card(rank='7', suit='clubs')
-Card(rank='6', suit='clubs')
-Card(rank='5', suit='clubs')
-Card(rank='4', suit='clubs')
-Card(rank='3', suit='clubs')
-Card(rank='2', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='K', suit='diamonds')
-Card(rank='Q', suit='diamonds')
-Card(rank='J', suit='diamonds')
-Card(rank='10', suit='diamonds')
-Card(rank='9', suit='diamonds')
-Card(rank='8', suit='diamonds')
-Card(rank='7', suit='diamonds')
-Card(rank='6', suit='diamonds')
-Card(rank='5', suit='diamonds')
-Card(rank='4', suit='diamonds')
-Card(rank='3', suit='diamonds')
-Card(rank='2', suit='diamonds')
-Card(rank='A', suit='spades')
-Card(rank='K', suit='spades')
-Card(rank='Q', suit='spades')
-Card(rank='J', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='2', suit='spades')
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="in-运算符">in 运算符<a class="anchor-link" href="#in-运算符">¶</a></h2><p>如果集合中没有 <strong><code>__contains__</code></strong>　方法， in 操作符就会进行循环扫描，典型的例子是 in 可以在 FrenchDeck 类中使用，in 可以在我们的 FrenchDeck 执行，因为它是可迭代的</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [37]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'hearts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>True</pre>
 </div>
@@ -1348,12 +1143,28 @@ Card(rank='2', suit='spades')
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>除了常规语法以及 dict 构建之外，我们可以使用字典生成式来构建字典，dictcomp 会由任何一个可迭代对象产生一对 key:value 来构建 dict，下面是使用字典生成式的一个例子:</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [38]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'beasts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DIAL_CODES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">86</span><span class="p">,</span> <span class="s1">'China'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">91</span><span class="p">,</span> <span class="s1">'India'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'United States'</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">country_code</span> <span class="o">=</span> <span class="p">{</span><span class="n">country</span><span class="p">:</span> <span class="n">code</span> <span class="k">for</span> <span class="n">code</span><span class="p">,</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">DIAL_CODES</span><span class="p">}</span>
+<span class="n">country_code</span>
 </pre></div>
 </div>
 </div>
@@ -1361,9 +1172,9 @@ Card(rank='2', suit='spades')
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[38]:</div>
+<div class="prompt output_prompt">Out[11]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>False</pre>
+<pre>{'China': 86, 'India': 91, 'United States': 1}</pre>
 </div>
 </div>
 </div>
@@ -1374,52 +1185,37 @@ Card(rank='2', suit='spades')
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="排序">排序<a class="anchor-link" href="#排序">¶</a></h2><p>扑克牌一般按照数字大小（ Ａ 最大）来排列，花色按照黑桃（最大），红心，方块，梅花（最小）来排序，我们实现一下此功能</p>
+<p>字典有一个内置方法 <code>d.update(m, [**kargs])</code> 它会先判断 m，如果 m 有 keys 方法，就假定它是个映射，负责迭代 m，假设它的元素是 (key, value)，这也就是说明任何产生 (key, value) 的迭代对象都可以构建字典</p>
+<h2 id="使用-setdefault-处理找不到的键">使用 setdefault 处理找不到的键<a class="anchor-link" href="#使用-setdefault-处理找不到的键">¶</a></h2><p>当 dict 使用 d[k] 时，发现 k 不是现有键时，会跑出 KeyError 错误，我们知道 d.get(k, default) 是 d[k] 的另一种用法，使用预处理值要比处理 KeyError 异常更方便，但是如果你要更新你找到的值，使用 <code>__getitem__()</code> 和 <code>get()</code> 都很没有效率，我们下面先看一下一般时候处理找不到键的方式:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [39]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">suit_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">spades</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hearts</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diamonds</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clubs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">suit_values</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[39]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'clubs': 0, 'diamonds': 1, 'hearts': 2, 'spades': 3}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [44]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">spades_high</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
-    <span class="n">rank_value</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="o">.</span><span class="n">ranks</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">rank_value</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">suit_values</span><span class="p">)</span> <span class="o">+</span> <span class="n">suit_values</span><span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">suit</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [45]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">spades_high</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">WORD_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'\w+'</span><span class="p">)</span> <span class="c1"># \w 是匹配任意字母或数字，+ 是匹配一次到任意次</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">#with open(sys.argv[1], encoding="utf-8") as fp:  #正常文件名是参数传的</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"/home/kaka/test.txt"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line_no</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>    <span class="c1"># line_no 是索引（从 1 开始），line 是行的内容</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">WORD_RE</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>  <span class="c1"># 返回所有匹配子串，返回类型是迭代器</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>              <span class="c1"># group 获取该单词 （match 是一个对象）</span>
+            <span class="n">column_no</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>     <span class="c1"># 获取列数，索引从 0 开始</span>
+            <span class="n">location</span> <span class="o">=</span> <span class="p">(</span><span class="n">line_no</span><span class="p">,</span> <span class="n">column_no</span><span class="p">)</span>   <span class="c1"># 构造一个元组，内容是 (row, col)</span>
+            <span class="c1"># 这样写很糟糕，这里仅仅是为了演示</span>
+            <span class="n">occurrences</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="p">[])</span> <span class="c1"># 判断该单词是否被添加过，没有返回 [ ]，注意返回的是原列表的一个备份</span>
+            <span class="n">occurrences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>      <span class="c1"># 为该 key 对应的值添加内容</span>
+            <span class="n">index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">occurrences</span>         <span class="c1"># 这要搜索 word 这个 key 第二次</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">):</span>   <span class="c1"># 按照字母顺序排序，忽略大小写</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>        
 </pre></div>
 </div>
 </div>
@@ -1429,59 +1225,308 @@ Card(rank='2', suit='spades')
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='clubs')
-Card(rank='2', suit='diamonds')
-Card(rank='2', suit='hearts')
-Card(rank='2', suit='spades')
-Card(rank='3', suit='clubs')
-Card(rank='3', suit='diamonds')
-Card(rank='3', suit='hearts')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='clubs')
-Card(rank='4', suit='diamonds')
-Card(rank='4', suit='hearts')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='clubs')
-Card(rank='5', suit='diamonds')
-Card(rank='5', suit='hearts')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='clubs')
-Card(rank='6', suit='diamonds')
-Card(rank='6', suit='hearts')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='clubs')
-Card(rank='7', suit='diamonds')
-Card(rank='7', suit='hearts')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='clubs')
-Card(rank='8', suit='diamonds')
-Card(rank='8', suit='hearts')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='clubs')
-Card(rank='9', suit='diamonds')
-Card(rank='9', suit='hearts')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='clubs')
-Card(rank='10', suit='diamonds')
-Card(rank='10', suit='hearts')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='clubs')
-Card(rank='J', suit='diamonds')
-Card(rank='J', suit='hearts')
-Card(rank='J', suit='spades')
-Card(rank='Q', suit='clubs')
-Card(rank='Q', suit='diamonds')
-Card(rank='Q', suit='hearts')
-Card(rank='Q', suit='spades')
-Card(rank='K', suit='clubs')
-Card(rank='K', suit='diamonds')
-Card(rank='K', suit='hearts')
-Card(rank='K', suit='spades')
-Card(rank='A', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='A', suit='hearts')
-Card(rank='A', suit='spades')
+<pre>a [(2, 49)]
+aided [(2, 194)]
+and [(2, 181)]
+art [(2, 96)]
+artistic [(2, 17), (2, 135)]
+but [(2, 56)]
+channeled [(2, 122)]
+computer [(2, 185)]
+design [(2, 200)]
+film [(2, 175)]
+fine [(2, 91)]
+had [(2, 6)]
+I [(2, 1), (2, 43), (2, 60), (2, 117)]
+impulses [(2, 144)]
+in [(2, 85)]
+Instead [(2, 108)]
+invested [(2, 71)]
+kid [(2, 51)]
+mainly [(2, 153)]
+much [(2, 80)]
+music [(2, 168)]
+my [(2, 88), (2, 132)]
+My [(1, 1)]
+never [(2, 65)]
+point [(1, 13)]
+since [(2, 37)]
+skills [(2, 100)]
+starting [(1, 4)]
+strong [(2, 10)]
+tendencies [(2, 26)]
+through [(2, 160)]
+ve [(2, 3), (2, 62), (2, 119)]
+was [(2, 45)]
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>我们处理 occurrences 的三行可以使用 dict.setdefault 来改为一行</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">WORD_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'\w+'</span><span class="p">)</span> <span class="c1"># \w 是匹配任意字母或数字，+ 是匹配一次到任意次</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">#with open(sys.argv[1], encoding="utf-8") as fp:  #正常文件名是参数传的</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"/home/kaka/test.txt"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line_no</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>    <span class="c1"># line_no 是索引（从 1 开始），line 是行的内容</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">WORD_RE</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>  <span class="c1"># 返回所有匹配子串，返回类型是迭代器</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>              <span class="c1"># group 获取该单词 （match 是一个对象）</span>
+            <span class="n">column_no</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>     <span class="c1"># 获取列数，索引从 0 开始</span>
+            <span class="n">location</span> <span class="o">=</span> <span class="p">(</span><span class="n">line_no</span><span class="p">,</span> <span class="n">column_no</span><span class="p">)</span>   <span class="c1"># 构造一个元组，内容是 (row, col)</span>
+            <span class="n">index</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location</span><span class="p">)</span> <span class="c1">#如果没有 word 这个 key，设为 [ ]，setdefault 会传回该值，所以不用二次搜索就可以被更新</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">):</span>   <span class="c1"># 按照字母顺序排序，忽略大小写</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>      
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a [(2, 49)]
+aided [(2, 194)]
+and [(2, 181)]
+art [(2, 96)]
+artistic [(2, 17), (2, 135)]
+but [(2, 56)]
+channeled [(2, 122)]
+computer [(2, 185)]
+design [(2, 200)]
+film [(2, 175)]
+fine [(2, 91)]
+had [(2, 6)]
+I [(2, 1), (2, 43), (2, 60), (2, 117)]
+impulses [(2, 144)]
+in [(2, 85)]
+Instead [(2, 108)]
+invested [(2, 71)]
+kid [(2, 51)]
+mainly [(2, 153)]
+much [(2, 80)]
+music [(2, 168)]
+my [(2, 88), (2, 132)]
+My [(1, 1)]
+never [(2, 65)]
+point [(1, 13)]
+since [(2, 37)]
+skills [(2, 100)]
+starting [(1, 4)]
+strong [(2, 10)]
+tendencies [(2, 26)]
+through [(2, 160)]
+ve [(2, 3), (2, 62), (2, 119)]
+was [(2, 45)]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>换句话说 <code>index.setdefault(word, []).append(location)</code> 与下面等价</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#if key not in my_dict:</span>
+<span class="c1">#    my_dict[key] = []</span>
+<span class="c1">#else:</span>
+<span class="c1">#    my_dict[key].append(new_value)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="可弹性查找键的映射">可弹性查找键的映射<a class="anchor-link" href="#可弹性查找键的映射">¶</a></h2><p>有时在找不到键时，返回一些虚构值还是很好的，这里有两种方法，第一种是使用预设字典而不是普通字典，第二种是将字典变成子类别或其它的映射类型，并添加一个 <code>__missing__</code> 方法，下面会讨论两种做法</p>
+<h3 id="defaultdict-找不到键的另一种做法">defaultdict 找不到键的另一种做法<a class="anchor-link" href="#defaultdict-找不到键的另一种做法">¶</a></h3><p>下面是使用 collections.defaultdict 优雅的解决上面搜索不存在的键的问题。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">WORD_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">'\w+'</span><span class="p">)</span> 
+
+<span class="n">index</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># 使用 list 建立 defaultdict，将它当成 default_factory</span>
+<span class="c1">#with open(sys.argv[1], encoding="utf-8") as fp:  </span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"/home/kaka/test.txt"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line_no</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>    
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">WORD_RE</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>  
+            <span class="n">word</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>              
+            <span class="n">column_no</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>    
+            <span class="n">location</span> <span class="o">=</span> <span class="p">(</span><span class="n">line_no</span><span class="p">,</span> <span class="n">column_no</span><span class="p">)</span>  
+            <span class="c1"># 如果不存在 word 键，会调用初始化传的 default_factory 产生一个预设值, 如果没有指定 default_factory，会产生 KeyError 异常</span>
+            <span class="n">index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location</span><span class="p">)</span> 
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">):</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>      
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a [(2, 49)]
+aided [(2, 194)]
+and [(2, 181)]
+art [(2, 96)]
+artistic [(2, 17), (2, 135)]
+but [(2, 56)]
+channeled [(2, 122)]
+computer [(2, 185)]
+design [(2, 200)]
+film [(2, 175)]
+fine [(2, 91)]
+had [(2, 6)]
+I [(2, 1), (2, 43), (2, 60), (2, 117)]
+impulses [(2, 144)]
+in [(2, 85)]
+Instead [(2, 108)]
+invested [(2, 71)]
+kid [(2, 51)]
+mainly [(2, 153)]
+much [(2, 80)]
+music [(2, 168)]
+my [(2, 88), (2, 132)]
+My [(1, 1)]
+never [(2, 65)]
+point [(1, 13)]
+since [(2, 37)]
+skills [(2, 100)]
+starting [(1, 4)]
+strong [(2, 10)]
+tendencies [(2, 26)]
+through [(2, 160)]
+ve [(2, 3), (2, 62), (2, 119)]
+was [(2, 45)]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>工作原理: 当我们初始化一个 defaultdict 时候，要提供一个方法，当 <code>__getitem__()</code> 找不到键的时候，会用它产生一个预设值，这里我们将 list 传进去，每次调用会产生一个空列表。</p>
+<p>注意：defaultdict 的 default_factory 只是为了提供一个预设值，不供其它方法使用，例如 dd 是 defaultdict，k 是不存在的键， dd[k] 会调用 default_factory 产生一个预设值，而 dd.get(k) 仍然传回 None，下面是例子</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [23]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>None
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>调用 default_factory 的 defaultdict 机制，实际上是调用 <code>__missing__()</code> 特殊方法，这是所有变暗映射类型都有的方法</p>
+<h2 id="__missing__-方法"><code>__missing__</code> 方法<a class="anchor-link" href="#__missing__-方法">¶</a></h2><p>映射处理找不到键时，底层使用的是 <code>__missing__()</code> 方法，基础的 dict 并没有这个方法，但是如果你将 dict 变成子类别，并提供一个 <code>__missing__()</code> 方法，标准的 <code>dict.__getitem__()</code>  会在找不到键时调用它，而非发出 KeyError</p>
+<p><code>__missing__()</code> 只被 <code>__getitem__()</code> 调用（即 d[k] 运算符），<code>__missing__()</code> 方法的存在，并不会影响到其它方法查询键的行为，例如 get 或 <code>__contains__</code>（in 运算符），这就是 defaultdict 只能与 <code>__getitem__()</code> 一起使用的原因</p>
+<p>如果你想要一个映射，它的键在查询时会被转成 str</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">StrKeyDict0</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__missing__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span>
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    
+<span class="n">d</span> <span class="o">=</span> <span class="n">StrKeyDict0</span><span class="p">([(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'4'</span><span class="p">,</span> <span class="s1">'four'</span><span class="p">)])</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">'2'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[25]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'two'</pre>
 </div>
 </div>
 </div>
@@ -1492,7 +1537,7 @@ Card(rank='A', suit='spades')
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
