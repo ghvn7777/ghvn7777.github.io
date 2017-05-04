@@ -1023,7 +1023,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="切片">切片<a class="anchor-link" href="#切片">¶</a></h2><p>为了计算 seq[start:stop:step]，Python 会调用 <code>seq.__getitem__(slice(start, stop, step))</code>。</p>
-<h3 id="多维切片">多维切片<a class="anchor-link" href="#多维切片">¶</a></h3><p>[] 运算符也可以接收以逗号分隔的多个索引或切片，举例来说，Numpy 中，你可以使用 a[i, j] 取得二维的 numpy.ndarray，以及使用 a[m:n, k:l] 这类的运算符获取二维的切片。处理 [] 运算符的 <code>__getitem__</code> 和 <code>__setitem__</code> 特殊方法，都只会接收 tuple 格式的 a[i, j] 内的索引，换句话说，Python 调用 a.getitem((i, j)) 算出来的 a[i, j]</p>
+<h3 id="多维切片">多维切片<a class="anchor-link" href="#多维切片">¶</a></h3><p>[ ] 运算符也可以接收以逗号分隔的多个索引或切片，举例来说，Numpy 中，你可以使用 a[i, j] 取得二维的 numpy.ndarray，以及使用 a[m:n, k:l] 这类的运算符获取二维的切片。处理 [ ] 运算符的 <code>__getitem__</code> 和 <code>__setitem__</code> 特殊方法，都只会接收 tuple 格式的 a[i, j] 内的索引，换句话说，Python 调用 a.getitem((i, j)) 算出来的 a[i, j]</p>
 <p>Python 会将省略号（三个句点）视为一种标记，在 Numpy 对多维矩阵进行切片时，会使用快捷的方式 <code>...</code>，例如一个四维矩阵 a[i, ...] 相当于 a[i, :, :, :] 的简写。</p>
 <h3 id="对切片赋值">对切片赋值<a class="anchor-link" href="#对切片赋值">¶</a></h3>
 </div>
@@ -1572,8 +1572,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="list.sort-与-sorted()-内部函数">list.sort 与 sorted() 内部函数<a class="anchor-link" href="#list.sort-与-sorted()-内部函数">¶</a></h2><p>list.sort 会将原来的 list 排序，不会产生新的 list 副本，并返回一个 None 值告诉我们，已经改变了目标列表，没有创建一个新的列表，这是一种很重要的 Python API 惯例，当函数或方法改变目标时，返回一个 None值。在 random.shuffle() 函数中也可以看到相同的用法。</p>
-<p>相比之下，内建函数 sorted 会建立一个新的list，并将它返回，事实上，它会接收所有可迭代对象，包括生成器，无论要给它排序的可迭代对象是什么，都会返回一个新的列表</p>
+<h2 id="list.sort-与-sorted()-内部函数">list.sort 与 sorted() 内部函数<a class="anchor-link" href="#list.sort-与-sorted()-内部函数">¶</a></h2><p>list.sort 会将原来的 list 排序，不会产生新的 list 副本，并返回一个 None 值告诉我们，已经改变了目标列表，没有创建一个新的列表，这是一种很重要的 Python API 惯例，当函数或方法改变目标时，返回一个 None 值。在 random.shuffle() 函数中也可以看到相同的用法。</p>
+<p>相比之下，内建函数 sorted 会建立一个新的 list，并将它返回，事实上，它会接收所有可迭代对象，包括生成器，无论要给它排序的可迭代对象是什么，都会返回一个新的列表</p>
 <ul>
 <li>reverse 参数: 如果值是 True，会降序返回，默认是 False</li>
 <li>key 参数: 一个函数，返回每一个元素的排序键。例如你要排序几个字符串，key = str.lower 可以执行不分大小写的排序，key = len 可以按照长度排序</li>
@@ -2609,7 +2609,7 @@ haystack ->  1  4  5  6  8 12 15 20 21 23 23 26 29 30
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="./category/fluent_python.html">fluent_python (4)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (5)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
