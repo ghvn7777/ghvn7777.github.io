@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source activate pelican
-rm -rf content/*.ipy
+find -name ".ipy*" -print | xargs rm -rf
 pelican content -s publishconf.py
 git checkout dev
 git add .
