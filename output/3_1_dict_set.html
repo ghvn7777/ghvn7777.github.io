@@ -1883,6 +1883,397 @@ was [(2, 45)]
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="集合理论">集合理论<a class="anchor-link" href="#集合理论">¶</a></h2><p>我们说的集合包括 frozenset 和 set</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'spam'</span><span class="p">,</span> <span class="s1">'spam'</span><span class="p">,</span> <span class="s1">'eggs'</span><span class="p">,</span> <span class="s1">'spam'</span><span class="p">]</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'eggs', 'spam'}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['spam', 'eggs']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>集合的元素必须可哈希化，set 形态不可以哈希化，但是 frozenset 可以，所以可以在 set 中放入 frozenset 元素。</p>
+<p>集合也支持基本的运算 a | b 代表 a 和 b 的并集， a & b 代表 a 和 b 的交集，a - b 为 a 和 b 的差集。</p>
+<p>我们来看看计算 haystack 中的 needles 数量:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#found = len(needles & haystack)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>但是上面的语法只支持集合，我们让其支持所有可迭代类型</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#found = len(set(needles) & set(haystack))</span>
+<span class="c1"># 也可以写成</span>
+<span class="c1">#found = len(set(needles).intersection(haystack))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="set-常数">set 常数<a class="anchor-link" href="#set-常数">¶</a></h2><p>set 的常数定义语法（{1}, {1, 2} 等）看起来很像数学标记法，不过有一个重要的差别，空的 set 没有常数表示方法，必须显式的定义 set()</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="c1">#这种方式比 set([1]) 快很多，推荐使用</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>set</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>1</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>set()</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1">#看到这样定义的是一个字典，而不是 set</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>dict</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">dis</span> <span class="k">import</span> <span class="n">dis</span>
+<span class="n">dis</span><span class="p">(</span><span class="s1">'</span><span class="si">{1}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  1           0 LOAD_CONST               0 (1)
+              3 BUILD_SET                1
+              6 RETURN_VALUE
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dis</span><span class="p">(</span><span class="s1">'set([1])'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  1           0 LOAD_NAME                0 (set)
+              3 LOAD_CONST               0 (1)
+              6 BUILD_LIST               1
+              9 CALL_FUNCTION            1 (1 positional, 0 keyword pair)
+             12 RETURN_VALUE
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>看到 {1} 的方式直接执行了 1 的赋值， set([1]) 步骤比较多</p>
+<p>frozenset 常数定义没有特殊的语法，必须使用构造式。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">frozenset</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>frozenset({0, 1, 2, 3, 4, 5, 6, 7, 8, 9})</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>集合生成式和字典生成式差不多：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">unicodedata</span> <span class="k">import</span> <span class="n">name</span> <span class="c1">#用 name 函数获取字码名称有 'SIGN' 的子元集合</span>
+<span class="p">{</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="k">if</span> <span class="s1">'SIGN'</span> <span class="ow">in</span> <span class="n">name</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">''</span><span class="p">)}</span> <span class="c1"># 构建字码名称有 'SIGN' 的子元集合</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'#',
+ '$',
+ '%',
+ '+',
+ '<',
+ '=',
+ '>',
+ '¢',
+ '£',
+ '¤',
+ '¥',
+ '§',
+ '©',
+ '¬',
+ '®',
+ '°',
+ '±',
+ 'µ',
+ '¶',
+ '×',
+ '÷'}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="集合运算">集合运算<a class="anchor-link" href="#集合运算">¶</a></h2><p>集合运算符要求两个运算元都是集合，但是其它所有方法并不是这样，例如要产生 a，b，c，d 的并集，a.union(b, c, d) 只要求 a 是集合，b，c，d 是可迭代对象就行</p>
+<h2 id="哈希值是否相等">哈希值是否相等<a class="anchor-link" href="#哈希值是否相等">¶</a></h2><p>如果两个元素比较是相等的，那么它们的哈希值一定相等，例如 1 == 1.0 为 True，所以 hash(1) == hash(1.0) 也是 True，就算 int 类型与 float 类型内部表示形式有很大差别（顺便说一句，int 类型的哈希值是 int 本身的值）</p>
+<h2 id="dict-的实际效果">dict 的实际效果<a class="anchor-link" href="#dict-的实际效果">¶</a></h2><h3 id="键必须是可哈希化元素">键必须是可哈希化元素<a class="anchor-link" href="#键必须是可哈希化元素">¶</a></h3><ul>
+<li><ol>
+<li>可以由 hash() 得到一个不变的值。</li>
+</ol>
+</li>
+<li><ol>
+<li>可以通过 eq() 方法判断是否相等</li>
+</ol>
+</li>
+<li><ol>
+<li>如果 a == b 为 True，那么 hash(a) == hash(b) 为 True</li>
+</ol>
+</li>
+</ul>
+<p>如果你自定义了 eq()，一定要保证 a == b 和 hash(a) == hash(b) 结果相同，否则可能造成字典无法处理你的元素，报错</p>
+<h3 id="dict-要使用大量的内存">dict 要使用大量的内存<a class="anchor-link" href="#dict-要使用大量的内存">¶</a></h3><h3 id="用-key-搜索非常快">用 key 搜索非常快<a class="anchor-link" href="#用-key-搜索非常快">¶</a></h3><h3 id="键的顺序取决与插入顺序">键的顺序取决与插入顺序<a class="anchor-link" href="#键的顺序取决与插入顺序">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DIAL_CODES = [</span>
+<span class="c1">#     (86, 'China'),</span>
+<span class="c1">#     (91, 'India'),</span>
+<span class="c1">#     (1, 'United State')</span>
+<span class="c1"># ]</span>
+<span class="c1"># d1 = dict(DIAL_CODES)</span>
+<span class="c1"># print('d1:', d1.keys())</span>
+<span class="c1"># d2 = dict(sorted(DIAL_CODES))</span>
+<span class="c1"># print('d2:', d2.keys())</span>
+<span class="c1"># d3 = dict(sorted(DIAL_CODES, key = lambda x: x[1]))</span>
+<span class="c1"># print('d3:', d3.keys())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="将元素加到字典可能会改变现有键的顺序">将元素加到字典可能会改变现有键的顺序<a class="anchor-link" href="#将元素加到字典可能会改变现有键的顺序">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
