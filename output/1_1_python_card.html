@@ -1024,7 +1024,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 
 <span class="n">Card</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Card'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'rank'</span><span class="p">,</span> <span class="s1">'suit'</span><span class="p">])</span> <span class="c1">#'Card' 是 namedtuple 名字,　后面是元素</span>
 
@@ -1032,14 +1032,14 @@ h6:hover .anchor-link {
     <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="s1">'JQKA'</span><span class="p">)</span>
     <span class="n">suits</span> <span class="o">=</span> <span class="s1">'spades diamonds clubs hearts'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># 黑桃 钻石 梅花 红心</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span>
                                         <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranks</span><span class="p">]</span>
         
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span> <span class="c1">#代表了 self._cards 的 []运算符</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span> <span class="c1">#代表了 self._cards 的 []运算符</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1051,7 +1051,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">beer_card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="s1">'7'</span><span class="p">,</span> <span class="s1">'diamonds'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">beer_card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="s1">'7'</span><span class="p">,</span> <span class="s1">'diamonds'</span><span class="p">)</span>
 <span class="n">beer_card</span>
 </pre></div>
 </div>
@@ -1073,7 +1073,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="p">()</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>  <span class="c1">#默认调用了 __len__()</span>
 </pre></div>
 </div>
@@ -1095,7 +1095,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [30]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#调用了 __getitem__()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#调用了 __getitem__()</span>
 </pre></div>
 </div>
 </div>
@@ -1116,7 +1116,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [31]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1137,7 +1137,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [32]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">choice</span>
 <span class="n">choice</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1159,7 +1159,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [33]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1">#因为 __getitem__() 方法把 [] 操作交给 slef._cards 列表，我们的 desk 自动支持切片操作</span>
 </pre></div>
 </div>
 </div>
@@ -1182,7 +1182,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [34]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">12</span><span class="p">::</span><span class="mi">13</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">12</span><span class="p">::</span><span class="mi">13</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1215,9 +1215,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [35]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的</span>
 <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">deck</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1248,9 +1248,9 @@ Card(rank='J', suit='spades')
 <div class="prompt input_prompt">In [36]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># 也可以反向迭代</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 也可以反向迭代</span>
 <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">deck</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1323,7 +1323,7 @@ Card(rank='2', suit='spades')
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="in-运算符">in 运算符<a class="anchor-link" href="#in-运算符">¶</a></h2><p>如果集合中没有 <strong><code>__contains__</code></strong>　方法， in 操作符就会进行循环扫描，典型的例子是 in 可以在 FrenchDeck 类中使用，in 可以在我们的 FrenchDeck 执行，因为它是可迭代的</p>
+<h2 id="in-运算符">in 运算符<a class="anchor-link" href="#in-运算符">¶</a></h2><p>迭代通常是隐式的，如果集合中没有 <strong><code>__contains__</code></strong>　方法， in 操作符就会按顺序进行一次迭代搜索，于是 in 可以在 FrenchDeck 类中使用，因为它是可迭代的</p>
 </div>
 </div>
 </div>
@@ -1332,7 +1332,7 @@ Card(rank='2', suit='spades')
 <div class="prompt input_prompt">In [37]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'hearts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'hearts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
 </pre></div>
 </div>
 </div>
@@ -1353,7 +1353,7 @@ Card(rank='2', suit='spades')
 <div class="prompt input_prompt">In [38]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'beasts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'beasts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
 </pre></div>
 </div>
 </div>
@@ -1383,7 +1383,7 @@ Card(rank='2', suit='spades')
 <div class="prompt input_prompt">In [39]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">suit_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">spades</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hearts</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diamonds</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clubs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">suit_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">spades</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hearts</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diamonds</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clubs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">suit_values</span>
 </pre></div>
 </div>
@@ -1405,7 +1405,7 @@ Card(rank='2', suit='spades')
 <div class="prompt input_prompt">In [44]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">spades_high</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spades_high</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
     <span class="n">rank_value</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="o">.</span><span class="n">ranks</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rank_value</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">suit_values</span><span class="p">)</span> <span class="o">+</span> <span class="n">suit_values</span><span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">suit</span><span class="p">]</span>
 </pre></div>
@@ -1418,8 +1418,8 @@ Card(rank='2', suit='spades')
 <div class="prompt input_prompt">In [45]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">spades_high</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">spades_high</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1487,14 +1487,12 @@ Card(rank='A', suit='spades')
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>现在还无法洗牌，因为牌的顺序是不可变的，除非我们破坏这个类的封装性，直接对 <code>_cards</code> 进行操作，在以后我们会讲到，其实只需要一行代码实现 <code>__setitem__</code> 方法就可以了</p>
 </div>
 </div>
 </div>

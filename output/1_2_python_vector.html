@@ -1015,7 +1015,9 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="实现向量类">实现向量类<a class="anchor-link" href="#实现向量类">¶</a></h2><p>我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类</p>
+<p>先说明一下，特殊方法的存在是为了被 Python 解释器调用的，我们自己不需要调用它。也就是说没有 <code>my_object.__len__()</code> 这种写法，而是应该使用 len(my_object)。一般来说，通过内置函数（len, iter, str 等等）来使用特殊方法是最好的选择，这些内置函数不仅会调用特殊方法，通常还会提供特殊的好处。而且对于内置类来说，它的速度更快。</p>
+<h2 id="实现向量类">实现向量类<a class="anchor-link" href="#实现向量类">¶</a></h2><p>通过特殊方法，我们可以自定义对象的 '+' 操作，以后的章节会对此详细介绍，这里只是展示一下特殊方法的使用。</p>
+<p>我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类</p>
 </div>
 </div>
 </div>
@@ -1024,29 +1026,30 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">hypot</span>
 
 <span class="k">class</span> <span class="nc">Vector</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
     
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1">#%r 相当于 %s 不过 %s意义是字符串 %r意义是使用repr,而不是str</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># %r 获取对象各个属性标准字符串表现形式，这是个好习惯，它说明了一个关键点，Vector(1,2) 和 vector('1','2') 是不一样的</span>
+        <span class="c1"># 后者会在定义的时候报错，因为对象的构造只接收数值，不接受字符串</span>
         <span class="k">return</span> <span class="s2">"Vector(</span><span class="si">%r</span><span class="s2">, </span><span class="si">%r</span><span class="s2">)"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">hypot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="c1">#返回欧几里德范数 sqrt(x*x + y*y)</span>
     
     <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
     
-    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span>
         <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
         <span class="k">return</span> <span class="n">Vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">scalar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">scalar</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1067,7 +1070,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">()</span>
 <span class="n">test</span> <span class="c1">#如果注释 __repr__() 方法, 显示 <__main__.Vector at 0x7f587c4c1320></span>
 </pre></div>
 </div>
@@ -1089,10 +1092,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>__repr__()</code> 的返回尽量精确的与类一致, 与 <code>__repr__</code> 比较 <code>__str__</code> 是由 <code>str()</code> 函数调用，并可以让 <code>print()</code> 函数使用。<code>__str__</code> 会返回适合使用者观看的格式，所以 <code>__repr__</code> 的目标是明确，<code>__str__</code> 的目标是可读（另外，<code>__str__</code> 包含了 <code>__repr__</code>）</p>
-<hr>
-<p>如果没有定义 <code>__str__</code> Python 会调用 <code>__repr__</code></p>
-</hr></div>
+<p><code>__repr__()</code> 能把一个对象用字符串的方式表达出来，这就是字符串表示形式。它的返回应该尽量精确的与表达出创建它的对象, 与 <code>__str__()</code> 比较， <code>__str__()</code> 是由 <code>str()</code> 函数调用，并可以让 <code>print()</code> 函数使用。并且它返回的字符串应该对终端用户更友好。 如果你只想实现这两个方法的其中一个，好的选择是 <code>__repr__()</code>，因为一个对象没有 <code>__str__()</code> 函数，python 又要调用它的时候，解释器会使用 <code>__repr__()</code> 来代替。</p>
+</div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
@@ -1100,7 +1101,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1121,7 +1122,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="运算符操作">运算符操作<a class="anchor-link" href="#运算符操作">¶</a></h2><p><code>+</code> 和 <code>*</code> 分别调用的是 <code>__add__</code> 和 <code>__mul__</code> 注意这里我们没有修改 self.x, self.y，而是返回了一个新的实例，这是中缀表达式的预期行为，建立新的类，并不操作原来的类</p>
+<h2 id="算数运算符">算数运算符<a class="anchor-link" href="#算数运算符">¶</a></h2><p><code>+</code> 和 <code>*</code> 分别调用的是 <code>__add__</code> 和 <code>__mul__</code> 注意这里我们没有修改 self.x, self.y，而是返回了一个新的实例，这是中缀表达式的基本原则，不改变操作对象</p>
 </div>
 </div>
 </div>
@@ -1130,7 +1131,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">v2</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span>
 </pre></div>
@@ -1153,7 +1154,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">v1</span> <span class="o">*</span> <span class="mi">3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">*</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -1174,10 +1175,23 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>注意现在我们只能将一个类乘数字，而不能用数字乘类，到后面的章节我们会实现这种乘法的交换性</p>
-<h2 id="自定义类型的布尔值">自定义类型的布尔值<a class="anchor-link" href="#自定义类型的布尔值">¶</a></h2><p>在 if, while 等陈述式运算式，或者 and, or, not 等运算，为了判断值是 true 或 false，Python 会调用 <code>bool()</code> 函数，它永远只返回 true 或 false。</p>
-<p>在默认情况下，使用者自定义的实例都是 true，基本上，<code>bool()</code> 会调用 <code>__bool__()</code>，并使用它的返回值。如果你没有 <code>__bool__</code>，会尝试调用 <code>__len__</code>，如果 <code>__len__()</code> 等于 0，返回 false，否则返回 true</p>
+<p>注意现在我们只能将一个类乘数字，而不能用数字乘类，到后面的章节我们会实现这种乘法的交换性，使用 <code>__rmul__()</code> 解决这个问题。</p>
+<h2 id="自定义类型的布尔值">自定义类型的布尔值<a class="anchor-link" href="#自定义类型的布尔值">¶</a></h2><p>在 if, while 等陈述式运算式，或者 and, or, not 等运算，为了判断值是 true 或 false，Python 会调用 <code>bool()</code> 函数，其实背后调用的是 <code>__bool__()</code>，它永远只返回 True 或 False。</p>
+<p>在默认情况下，使用者自定义的实例都是 除非这个类对于 <code>__bool__()</code> 或者 <code>__len__()</code> 有自己的实现，如果你没有 <code>__bool__</code>，会尝试调用 <code>__len__</code>，如果 <code>__len__()</code> 等于 0，返回 false，否则返回 true</p>
 <p>我们的 <code>__bool__</code>　逻辑很简单，看向量长度是否为 0。</p>
+<p>如果想要 <code>Vector.__bool__</code> 更高效，可以采用这种实现</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#def __bool__(self):</span>
+<span class="c1">#    return bool(self.x or self.y)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1186,18 +1200,10 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="为什么-len-不是一种方法">为什么 len 不是一种方法<a class="anchor-link" href="#为什么-len-不是一种方法">¶</a></h2><p>Raymond Hettinger 说: "practicality beats purity"(实用比单纯重要)。因为 len() 是 CPython 内建方法，跑起来非常快，len() 是一种常见操作，所以要保证效率</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
-</div>
+<p>虽然不是那么易读，但是省去了平方操作。把返回值显式转成 bool 格式是为了符合 <code>__bool__()</code> 对返回值的规定，因为 or 运算符可能返回 x 或 y 本身的值，如果 x 为真，返回的是 x 值，y 为真，返回的是 y 的值。</p>
+<h2 id="为什么-len-不是一种方法">为什么 len 不是一种方法<a class="anchor-link" href="#为什么-len-不是一种方法">¶</a></h2><p>Raymond Hettinger 说: "practicality beats purity"(实用胜于纯粹)。如果 x 是一个内置类型的实例， len(x) 将会很快，背后的 CPython 会直接从 C 结构体中取长度，完全不用调用任何方法。因为 len() 是 CPython 内建方法，跑起来非常快，len() 是一种常见操作，所以要保证效率。</p>
+<p>换句话说 len() 不是一个普通的方法，是为了让 Python 自带数据结构走后门，abs 也是同理。但是也亏了它们是特殊方法，我们也可以把 len 用于自定义数据类型。这种处理方式在保持内置类型效率和语言的一致性找到了一个平衡点。</p>
+<p>如果把 abs 和 len 看成一元运算符可能更容易被接受，它们虽然看起来像函数，但其实不是，有一门叫 ABC 的语言是 Python 的直系祖先，它内置了一个 # 运算符，当你写出 #s 时候，它的作用和 len 一样，如果写成 x#s 这样的中缀运算符的话，它的作用是计算 s 中 x 出现的次数。python 中对应的写法是 s.count(x)。注意这里 s 是一个序列类型</p>
 </div>
 </div>
 </div>
