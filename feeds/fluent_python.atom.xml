@@ -5768,7 +5768,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Listcomp-VS.-map-and-filter"&gt;Listcomp VS. map and filter&lt;a class="anchor-link" href="#Listcomp-VS.-map-and-filter"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;我们可以用 map 和 filter 达到 列表生成式的效果&lt;/p&gt;
+&lt;h2 id="列表生成式和生成式表达式"&gt;列表生成式和生成式表达式&lt;a class="anchor-link" href="#列表生成式和生成式表达式"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;我们可以用 map 和 filter 达到 列表生成式的效果&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5870,7 +5870,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Python中，[], {}, () 内的换行符会被忽略，所以我们在创建列表，字典等时，不必使用 &lt;code&gt;\&lt;/code&gt; 来换行&lt;/p&gt;
+&lt;p&gt;Python中，[], {}, () 内的换行符会被忽略，所以我们在创建列表，字典等时，不必使用 &lt;code&gt;\&lt;/code&gt; 来换行，列表推导式的作用只有一个，生成列表，如果想生成其它类型的序列，生成器就派上了用场。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5879,8 +5879,8 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="生成器表达式"&gt;生成器表达式&lt;a class="anchor-link" href="#生成器表达式"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;生成式表达式更省存储空间，因为它是使用迭代产生项目，而不是一次构建整个列表塞给另一个构造器&lt;/p&gt;
-&lt;p&gt;Genexp（生成式表达式）语法和 listcomp 一样，但是它使用圆括号而不是方括号&lt;/p&gt;
+&lt;h2 id="生成器表达式"&gt;生成器表达式&lt;a class="anchor-link" href="#生成器表达式"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;生成式表达式更省存储空间，因为它背后遵守了迭代器协议，逐个的产生项目，而不是一次构建整个列表然后将列表传递到某个构造函数中。&lt;/p&gt;
+&lt;p&gt;Genexp（生成式表达式）语法和 listcomp（列表生成式） 一样，但是它使用圆括号而不是方括号&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5890,7 +5890,7 @@ h6:hover .anchor-link {
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;symbols&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"a%b&amp;c;$de$"&lt;/span&gt;
-&lt;span class="nb"&gt;tuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#如果生成器表达式是唯一的参数，则不用重复使用括号&lt;/span&gt;
+&lt;span class="nb"&gt;tuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#如果生成器是一个函数的唯一的参数，则不用重复使用括号&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5933,7 +5933,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Tuple"&gt;Tuple&lt;a class="anchor-link" href="#Tuple"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;h2 id="Tuple-并非只是不可变序列"&gt;Tuple 并非只是不可变序列&lt;a class="anchor-link" href="#Tuple-并非只是不可变序列"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Tuple 可以当成不可变序列使用，也可以当成栏位名称的记录。将 tuple 当成记录时，重新排序 tuple 会破坏它表示的信息&lt;/p&gt;
+&lt;h1 id="Tuple"&gt;Tuple&lt;a class="anchor-link" href="#Tuple"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;h2 id="Tuple-并非只是不可变列表"&gt;Tuple 并非只是不可变列表&lt;a class="anchor-link" href="#Tuple-并非只是不可变列表"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Tuple 可以当成不可变序列使用，也可以当成没有字段名的记录。元组其实是对数据的记录，元组中每个元素都存放了记录中的一个字段的数据，外加这个字段的位置，正是这个位置信息给数据赋予了意义。将 tuple 当成记录时，重新排序 tuple 会破坏它表示的信息&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5995,8 +5995,8 @@ ESP
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="拆解-Tuple"&gt;拆解 Tuple&lt;a class="anchor-link" href="#拆解-Tuple"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;在上面我们将元组拆解成 city, year,... 等，接着在下面，我们用 "%s/%s" % passport 打印元组，这些例子是拆解元组的范例。任何可迭代事物都可以进行 tuple 拆解，每个变量捕捉一个元素，除非你用星号（*）来捕捉其它元素&lt;/p&gt;
-&lt;p&gt;在 tuple 拆解中，最常见的是平行赋值，也就是将可迭代对象的项目指派给一个变量 tuple，如下所示:&lt;/p&gt;
+&lt;h2 id="元组拆包"&gt;元组拆包&lt;a class="anchor-link" href="#元组拆包"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;在上面我们将元组拆解成 city, year,... 等，接着在下面，我们用 "%s/%s" % passport 打印元组，这些例子是拆解元组的范例。任何可迭代对象都可以进行元组拆包，被可迭代对象的元素数量必须和接受这些元素的元组空档一致，除非你用星号（*）来处理多余的元素&lt;/p&gt;
+&lt;p&gt;在元组拆包中，最常见的是平行赋值，也就是将可迭代对象的项目指派给一个变量 tuple，如下所示:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6031,7 +6031,7 @@ ESP
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;不用中间变量交换值，是 tuple 拆解的另一种应用&lt;/p&gt;
+&lt;p&gt;不用中间变量交换值，是元组拆包的另一种应用&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6064,7 +6064,7 @@ ESP
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;另一种 tuple 拆解,调用函数时，参数前面加个星号&lt;/p&gt;
+&lt;p&gt;另一种元组拆包,调用函数时，参数前面加个星号&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6138,7 +6138,8 @@ ESP
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;上面也是一种 tuple 拆解方法，调用函数时候传多个参数。例如，&lt;code&gt;os.path.split()&lt;/code&gt; 函数用路径建立一个 tuple(path, last_part)&lt;/p&gt;
+&lt;p&gt;上面也是一种元组拆包方法，调用函数时候用 * 把可迭代对象拆开作为函数参数。&lt;/p&gt;
+&lt;p&gt;下面的例子是让一个函数可以使用元组的方式返回多个值，&lt;code&gt;os.path.split()&lt;/code&gt; 函数返回一个以路径和最后一个文件名组成的元组(path, last_part)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6170,8 +6171,9 @@ ESP
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;如果在编写国际化的软件，_ 并不是一个很好的占位符，因为传统上，它会被当成 gettext.gettext 函数的别名，如同 gettext 模块所建议的&lt;/p&gt;
-&lt;h2 id="使用-*-来捕捉元素"&gt;使用 * 来捕捉元素&lt;a class="anchor-link" href="#使用-*-来捕捉元素"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;以 *args 来指定函数参数，可以抓取任意数量的参数&lt;/p&gt;
+&lt;p&gt;如果在编写国际化的软件，&lt;em&gt; 并不是一个很好的占位符，因为传统上，它会被当成 gettext.gettext 函数的别名，其他时候，&lt;/em&gt; 是一个好的占位符&lt;/p&gt;
+&lt;h2 id="使用-*-来处理剩下的元素"&gt;使用 * 来处理剩下的元素&lt;a class="anchor-link" href="#使用-*-来处理剩下的元素"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;以 *args 来指定函数参数，可以获取任意数量的参数，这是 Python 中一种经典的写法&lt;/p&gt;
+&lt;p&gt;Python 3 中，这个概念被扩展到平行赋值中。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6246,7 +6248,7 @@ ESP
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;在平行赋值情况下， * 前置符只能套用到一个变量，但是可以放到任意位置&lt;/p&gt;
+&lt;p&gt;在平行赋值情况下， * 前置符只能用在一个变量前面，但是可以这个变量可以是任意位置&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6299,13 +6301,13 @@ ESP
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="拆解嵌套的-Tuple"&gt;拆解嵌套的 Tuple&lt;a class="anchor-link" href="#拆解嵌套的-Tuple"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;我们可以在需要用运算式来拆解的 tuple 中套入其它的 tuple，例如(a, b, (c, d))，而且如果运算式与嵌套结构匹配，python 就会做出正确的动作&lt;/p&gt;
+&lt;h2 id="嵌套元组拆包"&gt;嵌套元组拆包&lt;a class="anchor-link" href="#嵌套元组拆包"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;我们可以在需要用运算式来拆解的 tuple 中套入其它的 tuple，例如(a, b, (c, d))，而且如果运算式与嵌套结构匹配，python 就会做出正确的动作&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [25]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;metro_areas&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
@@ -6317,29 +6319,8 @@ ESP
 &lt;span class="p"&gt;]&lt;/span&gt;
 
 &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;{:15}&lt;/span&gt;&lt;span class="s1"&gt; | &lt;/span&gt;&lt;span class="si"&gt;{:^9}&lt;/span&gt;&lt;span class="s1"&gt; | &lt;/span&gt;&lt;span class="si"&gt;{:^9}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'lat.'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'long.'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;#^9 表示占 9 个字符，居中显示&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;                |   lat.    |   long.  
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [26]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fmt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;{:15}&lt;/span&gt;&lt;span class="s1"&gt; | &lt;/span&gt;&lt;span class="si"&gt;{:^9}&lt;/span&gt;&lt;span class="s1"&gt; | &lt;/span&gt;&lt;span class="si"&gt;{:^9}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lattitude&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;longitude&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;metro_areas&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;fmt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;{:15}&lt;/span&gt;&lt;span class="s1"&gt; | &lt;/span&gt;&lt;span class="si"&gt;{:^9}&lt;/span&gt;&lt;span class="s1"&gt; | &lt;/span&gt;&lt;span class="si"&gt;{:^9}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;latitude&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;longitude&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;metro_areas&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;longitude&lt;/span&gt; &lt;span class="o"&gt;&lt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="c1"&gt;#西半球&lt;/span&gt;
         &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;latitude&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;longitude&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -6351,9 +6332,10 @@ ESP
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Mexico City     |  33.348   | -99.13333
-Net York-Newark |  33.348   | -74.020386
-Sao Paulo       |  33.348   | -46.635883
+&lt;pre&gt;                |   lat.    |   long.  
+Mexico City     | 19.43333  | -99.13333
+Net York-Newark | 40.808611 | -74.020386
+Sao Paulo       | -23.547778 | -46.635883
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6365,9 +6347,10 @@ Sao Paulo       |  33.348   | -46.635883
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;在 python3 之前，你可以在定义函数时，使用嵌套 tuple，python3 已经不支持了，例如 &lt;code&gt;def fn(a, (b, c), d):&lt;/code&gt;不过这对调用者没有任何影响。&lt;/p&gt;
+&lt;p&gt;在 python3 之前，你可以在定义函数时，可以使用嵌套元组做形参，例如 def func(a, (b, c), d)。但是 python3 已经不支持了，不过这对函数调用者没有任何影响，它改变的是某些函数的声明方式&lt;/p&gt;
 &lt;p&gt;按照设计，tuple 是非常方便的，可以把它当成记录来使用，不过它不可以指定名字，这也是 namedtuple 被设计出来的原因&lt;/p&gt;
-&lt;h2 id="可以指定名字的-tuple"&gt;可以指定名字的 tuple&lt;a class="anchor-link" href="#可以指定名字的-tuple"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;collections.namedtuple&lt;/code&gt; 是一个工厂，可以制造 tuple 子类别，并加入别名。使用 namedtuple 创建的实例存储空间与 tuple 完全一样，因为别名被存储到类中。它们使用的存储空间比一般的 tuple 要少，因为不存储到 &lt;code&gt;__dict__&lt;/code&gt;实例中的属性&lt;/p&gt;
+&lt;h2 id="可以指定名字的元组（具名元组）"&gt;可以指定名字的元组（具名元组）&lt;a class="anchor-link" href="#可以指定名字的元组（具名元组）"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;collections.namedtuple&lt;/code&gt; 是一个工厂函数，可以构建一个带字段名的元组和一个有名字的类。这个带名字的类对调试程序有很大的帮助。使用 namedtuple 创建的实例消耗的内存与元组是一样的，因为字段名都被存储到相应的类中。这个实例跟普通的对象实例比起来要小一些，因为 Python 不会用到 &lt;code&gt;__dict__&lt;/code&gt; 来存放这些实例的属性&lt;/p&gt;
+&lt;p&gt;下面展示了如何用具名元组来记录一个城市的信息。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6442,9 +6425,9 @@ Sao Paulo       |  33.348   | -46.635883
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;构建 namedtuple 需要两个参数，第一个是别名，另一个是 tuple 元素的序列，可以使用可迭代的字符串（列表），也可以使用用空格分隔的字符串。&lt;/p&gt;
-&lt;p&gt;我们必须要按照声明顺序为 tuple 赋值&lt;/p&gt;
-&lt;p&gt;可以用名称或位置来读取数据&lt;/p&gt;
+&lt;p&gt;构建 namedtuple 需要两个参数，第一个是类名，另一个是各个字段的名字，可以使用可迭代的字符串（列表），也可以使用用空格分隔的字符串。&lt;/p&gt;
+&lt;p&gt;存放在对应字段里的数据要以一串参数的形式传入到构造函数中。注意，元祖的构造函数值接受单一的可迭代对象。&lt;/p&gt;
+&lt;p&gt;可以用字段名或位置来读取数据&lt;/p&gt;
 &lt;p&gt;下面是 namedtuple 的常用属性:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6454,7 +6437,7 @@ Sao Paulo       |  33.348   | -46.635883
 &lt;div class="prompt input_prompt"&gt;In [31]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;City&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_fields&lt;/span&gt; &lt;span class="c1"&gt;#是 1 个 tuple，里面是我们的字段名&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;City&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_fields&lt;/span&gt; &lt;span class="c1"&gt;#是 1 个元组，里面是我们的字段名&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6477,8 +6460,8 @@ Sao Paulo       |  33.348   | -46.635883
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;LatLong&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'LatLong'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'lat long'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;delhi_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Delhi NCR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'IN'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;21.935&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LatLong&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;28.613889&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;77.208889&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;delhi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;City&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;delhi_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#_make 可以让我们从可迭代项目中实例化一个 namedtuple。City(*delhi_data) 也可以做这件事&lt;/span&gt;
-&lt;span class="n"&gt;delhi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_asdict&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;#返回 namedtuple 的 collections.OrderedDict, 用来显示好看的城市资料&lt;/span&gt;
+&lt;span class="n"&gt;delhi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;City&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;delhi_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#_make() 可以让我们接受一个可迭代对象生成这个类的一个实例。City(*delhi_data) 也可以做这件事&lt;/span&gt;
+&lt;span class="n"&gt;delhi&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_asdict&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;#把具名元组按照 collections.OrderedDict 的形式返回, 用来友好的显示城市资料&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6502,7 +6485,7 @@ Sao Paulo       |  33.348   | -46.635883
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Tuple-当成不可变列表使用"&gt;Tuple 当成不可变列表使用&lt;a class="anchor-link" href="#Tuple-当成不可变列表使用"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;当 tuple 当成不可变列表使用时，我们先看总结一下它和列表多么相似。tuple 支持所有不涉及添加或移除元素的方法，除了一个例外: tuple 没有 &lt;code&gt;__reversed__&lt;/code&gt; 方法，但是这是为了最佳化，没有它，可以使用 reversed(my_tuple)&lt;/p&gt;
+&lt;h2 id="Tuple-当成不可变列表使用"&gt;Tuple 当成不可变列表使用&lt;a class="anchor-link" href="#Tuple-当成不可变列表使用"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;当 tuple 当成不可变列表使用时，我们先看总结一下它和列表多么相似。tuple 支持所有不涉及添加或移除元素的方法，除了一个例外: 元组没有 &lt;code&gt;__reversed__&lt;/code&gt; 方法，但是这个方法只是一个优化而已，没有它，也可以使用 reversed(my_tuple)&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7512,7 +7495,9 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="实现向量类"&gt;实现向量类&lt;a class="anchor-link" href="#实现向量类"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类&lt;/p&gt;
+&lt;p&gt;先说明一下，特殊方法的存在是为了被 Python 解释器调用的，我们自己不需要调用它。也就是说没有 &lt;code&gt;my_object.__len__()&lt;/code&gt; 这种写法，而是应该使用 len(my_object)。一般来说，通过内置函数（len, iter, str 等等）来使用特殊方法是最好的选择，这些内置函数不仅会调用特殊方法，通常还会提供特殊的好处。而且对于内置类来说，它的速度更快。&lt;/p&gt;
+&lt;h2 id="实现向量类"&gt;实现向量类&lt;a class="anchor-link" href="#实现向量类"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;通过特殊方法，我们可以自定义对象的 '+' 操作，以后的章节会对此详细介绍，这里只是展示一下特殊方法的使用。&lt;/p&gt;
+&lt;p&gt;我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7521,29 +7506,30 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [21]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;hypot&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;hypot&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
     
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__repr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="c1"&gt;#%r 相当于 %s 不过 %s意义是字符串 %r意义是使用repr,而不是str&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__repr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# %r 获取对象各个属性标准字符串表现形式，这是个好习惯，它说明了一个关键点，Vector(1,2) 和 vector('1','2') 是不一样的&lt;/span&gt;
+        &lt;span class="c1"&gt;# 后者会在定义的时候报错，因为对象的构造只接收数值，不接受字符串&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Vector(&lt;/span&gt;&lt;span class="si"&gt;%r&lt;/span&gt;&lt;span class="s2"&gt;, &lt;/span&gt;&lt;span class="si"&gt;%r&lt;/span&gt;&lt;span class="s2"&gt;)"&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__abs__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__abs__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;hypot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#返回欧几里德范数 sqrt(x*x + y*y)&lt;/span&gt;
     
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__bool__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__add__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__add__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;
         &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__mul__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scalar&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__mul__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scalar&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;scalar&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;scalar&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -7555,7 +7541,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="__repr__"&gt;&lt;code&gt;__repr__&lt;/code&gt;&lt;a class="anchor-link" href="#__repr__"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="__repr__"&gt;&lt;code&gt;__repr__&lt;/code&gt;&lt;a class="anchor-link" href="#__repr__"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;它能把一个对象用字符串的形式表现出来。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7564,7 +7550,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;#如果注释 __repr__() 方法, 显示 &lt;__main__.Vector at 0x7f587c4c1320&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -7586,10 +7572,8 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;code&gt;__repr__()&lt;/code&gt; 的返回尽量精确的与类一致, 与 &lt;code&gt;__repr__&lt;/code&gt; 比较 &lt;code&gt;__str__&lt;/code&gt; 是由 &lt;code&gt;str()&lt;/code&gt; 函数调用，并可以让 &lt;code&gt;print()&lt;/code&gt; 函数使用。&lt;code&gt;__str__&lt;/code&gt; 会返回适合使用者观看的格式，所以 &lt;code&gt;__repr__&lt;/code&gt; 的目标是明确，&lt;code&gt;__str__&lt;/code&gt; 的目标是可读（另外，&lt;code&gt;__str__&lt;/code&gt; 包含了 &lt;code&gt;__repr__&lt;/code&gt;）&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;如果没有定义 &lt;code&gt;__str__&lt;/code&gt; Python 会调用 &lt;code&gt;__repr__&lt;/code&gt;&lt;/p&gt;
-&lt;/hr&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;__repr__()&lt;/code&gt; 能把一个对象用字符串的方式表达出来，这就是字符串表示形式。它的返回应该尽量精确的与表达出创建它的对象, 与 &lt;code&gt;__str__()&lt;/code&gt; 比较， &lt;code&gt;__str__()&lt;/code&gt; 是由 &lt;code&gt;str()&lt;/code&gt; 函数调用，并可以让 &lt;code&gt;print()&lt;/code&gt; 函数使用。并且它返回的字符串应该对终端用户更友好。 如果你只想实现这两个方法的其中一个，好的选择是 &lt;code&gt;__repr__()&lt;/code&gt;，因为一个对象没有 &lt;code&gt;__str__()&lt;/code&gt; 函数，python 又要调用它的时候，解释器会使用 &lt;code&gt;__repr__()&lt;/code&gt; 来代替。&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
@@ -7597,7 +7581,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [19]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7618,7 +7602,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="运算符操作"&gt;运算符操作&lt;a class="anchor-link" href="#运算符操作"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;+&lt;/code&gt; 和 &lt;code&gt;*&lt;/code&gt; 分别调用的是 &lt;code&gt;__add__&lt;/code&gt; 和 &lt;code&gt;__mul__&lt;/code&gt; 注意这里我们没有修改 self.x, self.y，而是返回了一个新的实例，这是中缀表达式的预期行为，建立新的类，并不操作原来的类&lt;/p&gt;
+&lt;h2 id="算数运算符"&gt;算数运算符&lt;a class="anchor-link" href="#算数运算符"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;+&lt;/code&gt; 和 &lt;code&gt;*&lt;/code&gt; 分别调用的是 &lt;code&gt;__add__&lt;/code&gt; 和 &lt;code&gt;__mul__&lt;/code&gt; 注意这里我们没有修改 self.x, self.y，而是返回了一个新的实例，这是中缀表达式的基本原则，不改变操作对象&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7627,7 +7611,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [20]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;v2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Vector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;v1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;v2&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -7650,7 +7634,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [22]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;v1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7671,10 +7655,23 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;注意现在我们只能将一个类乘数字，而不能用数字乘类，到后面的章节我们会实现这种乘法的交换性&lt;/p&gt;
-&lt;h2 id="自定义类型的布尔值"&gt;自定义类型的布尔值&lt;a class="anchor-link" href="#自定义类型的布尔值"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;在 if, while 等陈述式运算式，或者 and, or, not 等运算，为了判断值是 true 或 false，Python 会调用 &lt;code&gt;bool()&lt;/code&gt; 函数，它永远只返回 true 或 false。&lt;/p&gt;
-&lt;p&gt;在默认情况下，使用者自定义的实例都是 true，基本上，&lt;code&gt;bool()&lt;/code&gt; 会调用 &lt;code&gt;__bool__()&lt;/code&gt;，并使用它的返回值。如果你没有 &lt;code&gt;__bool__&lt;/code&gt;，会尝试调用 &lt;code&gt;__len__&lt;/code&gt;，如果 &lt;code&gt;__len__()&lt;/code&gt; 等于 0，返回 false，否则返回 true&lt;/p&gt;
+&lt;p&gt;注意现在我们只能将一个类乘数字，而不能用数字乘类，到后面的章节我们会实现这种乘法的交换性，使用 &lt;code&gt;__rmul__()&lt;/code&gt; 解决这个问题。&lt;/p&gt;
+&lt;h2 id="自定义类型的布尔值"&gt;自定义类型的布尔值&lt;a class="anchor-link" href="#自定义类型的布尔值"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;在 if, while 等陈述式运算式，或者 and, or, not 等运算，为了判断值是 true 或 false，Python 会调用 &lt;code&gt;bool()&lt;/code&gt; 函数，其实背后调用的是 &lt;code&gt;__bool__()&lt;/code&gt;，它永远只返回 True 或 False。&lt;/p&gt;
+&lt;p&gt;在默认情况下，使用者自定义的实例都是 True，除非这个类对于 &lt;code&gt;__bool__()&lt;/code&gt; 或者 &lt;code&gt;__len__()&lt;/code&gt; 有自己的实现，如果你没有 &lt;code&gt;__bool__&lt;/code&gt;，会尝试调用 &lt;code&gt;__len__&lt;/code&gt;，如果 &lt;code&gt;__len__()&lt;/code&gt; 等于 0，返回 False，否则返回 True&lt;/p&gt;
 &lt;p&gt;我们的 &lt;code&gt;__bool__&lt;/code&gt;　逻辑很简单，看向量长度是否为 0。&lt;/p&gt;
+&lt;p&gt;如果想要 &lt;code&gt;Vector.__bool__&lt;/code&gt; 更高效，可以采用这种实现&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#def __bool__(self):&lt;/span&gt;
+&lt;span class="c1"&gt;#    return bool(self.x or self.y)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7683,18 +7680,10 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="为什么-len-不是一种方法"&gt;为什么 len 不是一种方法&lt;a class="anchor-link" href="#为什么-len-不是一种方法"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Raymond Hettinger 说: "practicality beats purity"(实用比单纯重要)。因为 len() 是 CPython 内建方法，跑起来非常快，len() 是一种常见操作，所以要保证效率&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;p&gt;虽然不是那么易读，但是省去了平方操作。把返回值显式转成 bool 格式是为了符合 &lt;code&gt;__bool__()&lt;/code&gt; 对返回值的规定，因为 or 运算符可能返回 x 或 y 本身的值，如果 x 为真，返回的是 x 值，y 为真，返回的是 y 的值。&lt;/p&gt;
+&lt;h2 id="为什么-len-不是一种方法"&gt;为什么 len 不是一种方法&lt;a class="anchor-link" href="#为什么-len-不是一种方法"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Raymond Hettinger 说: "practicality beats purity"(实用胜于纯粹)。如果 x 是一个内置类型的实例， len(x) 将会很快，背后的 CPython 会直接从 C 结构体中取长度，完全不用调用任何方法。因为 len() 是 CPython 内建方法，跑起来非常快，len() 是一种常见操作，所以要保证效率。&lt;/p&gt;
+&lt;p&gt;换句话说 len() 不是一个普通的方法，是为了让 Python 自带数据结构走后门，abs 也是同理。但是也亏了它们是特殊方法，我们也可以把 len 用于自定义数据类型。这种处理方式在保持内置类型效率和语言的一致性找到了一个平衡点。&lt;/p&gt;
+&lt;p&gt;如果把 abs 和 len 看成一元运算符可能更容易被接受，它们虽然看起来像函数，但其实不是，有一门叫 ABC 的语言是 Python 的直系祖先，它内置了一个 # 运算符，当你写出 #s 时候，它的作用和 len 一样，如果写成 x#s 这样的中缀运算符的话，它的作用是计算 s 中 x 出现的次数。python 中对应的写法是 s.count(x)。注意这里 s 是一个序列类型&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8713,7 +8702,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [27]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt;
 
 &lt;span class="n"&gt;Card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;collections&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;namedtuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Card'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'rank'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'suit'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;#'Card' 是 namedtuple 名字,　后面是元素&lt;/span&gt;
 
@@ -8721,14 +8710,14 @@ h6:hover .anchor-link {
     &lt;span class="n"&gt;ranks&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'JQKA'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;suits&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'spades diamonds clubs hearts'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# 黑桃 钻石 梅花 红心&lt;/span&gt;
     
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_cards&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;suit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;suit&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;suits&lt;/span&gt;
                                         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rank&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ranks&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
         
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__len__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__len__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_cards&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__getitem__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;#代表了 self._cards 的 []运算符&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__getitem__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;#代表了 self._cards 的 []运算符&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_cards&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;position&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -8740,7 +8729,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [28]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;beer_card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'7'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'diamonds'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;beer_card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'7'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'diamonds'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;beer_card&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -8762,7 +8751,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [29]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FrenchDeck&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FrenchDeck&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;#默认调用了 __len__()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -8784,7 +8773,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [30]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;#调用了 __getitem__()&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;#调用了 __getitem__()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8805,7 +8794,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [31]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8826,7 +8815,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [32]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;choice&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;choice&lt;/span&gt;
 &lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -8848,7 +8837,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [33]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;#因为 __getitem__() 方法把 [] 操作交给 slef._cards 列表，我们的 desk 自动支持切片操作&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8871,7 +8860,7 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [34]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8904,9 +8893,9 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [35]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8937,9 +8926,9 @@ Card(rank='J', suit='spades')
 &lt;div class="prompt input_prompt"&gt;In [36]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 也可以反向迭代&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 也可以反向迭代&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;reversed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9012,7 +9001,7 @@ Card(rank='2', suit='spades')
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="in-运算符"&gt;in 运算符&lt;a class="anchor-link" href="#in-运算符"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;如果集合中没有 &lt;strong&gt;&lt;code&gt;__contains__&lt;/code&gt;&lt;/strong&gt;　方法， in 操作符就会进行循环扫描，典型的例子是 in 可以在 FrenchDeck 类中使用，in 可以在我们的 FrenchDeck 执行，因为它是可迭代的&lt;/p&gt;
+&lt;h2 id="in-运算符"&gt;in 运算符&lt;a class="anchor-link" href="#in-运算符"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;迭代通常是隐式的，如果集合中没有 &lt;strong&gt;&lt;code&gt;__contains__&lt;/code&gt;&lt;/strong&gt;　方法， in 操作符就会按顺序进行一次迭代搜索，于是 in 可以在 FrenchDeck 类中使用，因为它是可迭代的&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9021,7 +9010,7 @@ Card(rank='2', suit='spades')
 &lt;div class="prompt input_prompt"&gt;In [37]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Q'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'hearts'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deck&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Q'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'hearts'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deck&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9042,7 +9031,7 @@ Card(rank='2', suit='spades')
 &lt;div class="prompt input_prompt"&gt;In [38]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Q'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'beasts'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deck&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Q'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'beasts'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;deck&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9072,7 +9061,7 @@ Card(rank='2', suit='spades')
 &lt;div class="prompt input_prompt"&gt;In [39]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;suit_values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;spades&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hearts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;diamonds&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;clubs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;suit_values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;spades&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hearts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;diamonds&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;clubs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;suit_values&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -9094,7 +9083,7 @@ Card(rank='2', suit='spades')
 &lt;div class="prompt input_prompt"&gt;In [44]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;spades_high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;spades_high&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;rank_value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FrenchDeck&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ranks&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rank&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;rank_value&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;suit_values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;suit_values&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;suit&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -9107,8 +9096,8 @@ Card(rank='2', suit='spades')
 &lt;div class="prompt input_prompt"&gt;In [45]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;spades_high&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;deck&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;spades_high&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9176,14 +9165,12 @@ Card(rank='A', suit='spades')
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;现在还无法洗牌，因为牌的顺序是不可变的，除非我们破坏这个类的封装性，直接对 &lt;code&gt;_cards&lt;/code&gt; 进行操作，在以后我们会讲到，其实只需要一行代码实现 &lt;code&gt;__setitem__&lt;/code&gt; 方法就可以了&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

@@ -119,7 +119,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Listcomp-VS.-map-and-filter">Listcomp VS. map and filter<a class="anchor-link" href="#Listcomp-VS.-map-and-filter">¶</a></h2><p>我们可以用 map 和 filter 达到 列表生成式的效果</p>
+<h2 id="列表生成式和生成式表达式">列表生成式和生成式表达式<a class="anchor-link" href="#列表生成式和生成式表达式">¶</a></h2><p>我们可以用 map 和 filter 达到 列表生成式的效果</p>
 </div>
 </div>
 </div>
@@ -148,7 +148,9 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="实现向量类">实现向量类<a class="anchor-link" href="#实现向量类">¶</a></h2><p>我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类</p>
+<p>先说明一下，特殊方法的存在是为了被 Python 解释器调用的，我们自己不需要调用它。也就是说没有 <code>my_object.__len__()</code> 这种写法，而是应该使用 len(my_object)。一般来说，通过内置函数（len, iter, str 等等）来使用特殊方法是最好的选择，这些内置函数不仅会调用特殊方法，通常还会提供特殊的好处。而且对于内置类来说，它的速度更快。</p>
+<h2 id="实现向量类">实现向量类<a class="anchor-link" href="#实现向量类">¶</a></h2><p>通过特殊方法，我们可以自定义对象的 '+' 操作，以后的章节会对此详细介绍，这里只是展示一下特殊方法的使用。</p>
+<p>我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类</p>
 </div>
 </div>
 </div>

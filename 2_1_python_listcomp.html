@@ -1015,7 +1015,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Listcomp-VS.-map-and-filter">Listcomp VS. map and filter<a class="anchor-link" href="#Listcomp-VS.-map-and-filter">¶</a></h2><p>我们可以用 map 和 filter 达到 列表生成式的效果</p>
+<h2 id="列表生成式和生成式表达式">列表生成式和生成式表达式<a class="anchor-link" href="#列表生成式和生成式表达式">¶</a></h2><p>我们可以用 map 和 filter 达到 列表生成式的效果</p>
 </div>
 </div>
 </div>
@@ -1117,7 +1117,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Python中，[], {}, () 内的换行符会被忽略，所以我们在创建列表，字典等时，不必使用 <code>\</code> 来换行</p>
+<p>Python中，[], {}, () 内的换行符会被忽略，所以我们在创建列表，字典等时，不必使用 <code>\</code> 来换行，列表推导式的作用只有一个，生成列表，如果想生成其它类型的序列，生成器就派上了用场。</p>
 </div>
 </div>
 </div>
@@ -1126,8 +1126,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="生成器表达式">生成器表达式<a class="anchor-link" href="#生成器表达式">¶</a></h2><p>生成式表达式更省存储空间，因为它是使用迭代产生项目，而不是一次构建整个列表塞给另一个构造器</p>
-<p>Genexp（生成式表达式）语法和 listcomp 一样，但是它使用圆括号而不是方括号</p>
+<h2 id="生成器表达式">生成器表达式<a class="anchor-link" href="#生成器表达式">¶</a></h2><p>生成式表达式更省存储空间，因为它背后遵守了迭代器协议，逐个的产生项目，而不是一次构建整个列表然后将列表传递到某个构造函数中。</p>
+<p>Genexp（生成式表达式）语法和 listcomp（列表生成式） 一样，但是它使用圆括号而不是方括号</p>
 </div>
 </div>
 </div>
@@ -1137,7 +1137,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">symbols</span> <span class="o">=</span> <span class="s2">"a%b&c;$de$"</span>
-<span class="nb">tuple</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">)</span> <span class="c1">#如果生成器表达式是唯一的参数，则不用重复使用括号</span>
+<span class="nb">tuple</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">)</span> <span class="c1">#如果生成器是一个函数的唯一的参数，则不用重复使用括号</span>
 </pre></div>
 </div>
 </div>
@@ -1180,7 +1180,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Tuple">Tuple<a class="anchor-link" href="#Tuple">¶</a></h1><h2 id="Tuple-并非只是不可变序列">Tuple 并非只是不可变序列<a class="anchor-link" href="#Tuple-并非只是不可变序列">¶</a></h2><p>Tuple 可以当成不可变序列使用，也可以当成栏位名称的记录。将 tuple 当成记录时，重新排序 tuple 会破坏它表示的信息</p>
+<h1 id="Tuple">Tuple<a class="anchor-link" href="#Tuple">¶</a></h1><h2 id="Tuple-并非只是不可变列表">Tuple 并非只是不可变列表<a class="anchor-link" href="#Tuple-并非只是不可变列表">¶</a></h2><p>Tuple 可以当成不可变序列使用，也可以当成没有字段名的记录。元组其实是对数据的记录，元组中每个元素都存放了记录中的一个字段的数据，外加这个字段的位置，正是这个位置信息给数据赋予了意义。将 tuple 当成记录时，重新排序 tuple 会破坏它表示的信息</p>
 </div>
 </div>
 </div>
@@ -1242,8 +1242,8 @@ ESP
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="拆解-Tuple">拆解 Tuple<a class="anchor-link" href="#拆解-Tuple">¶</a></h2><p>在上面我们将元组拆解成 city, year,... 等，接着在下面，我们用 "%s/%s" % passport 打印元组，这些例子是拆解元组的范例。任何可迭代事物都可以进行 tuple 拆解，每个变量捕捉一个元素，除非你用星号（*）来捕捉其它元素</p>
-<p>在 tuple 拆解中，最常见的是平行赋值，也就是将可迭代对象的项目指派给一个变量 tuple，如下所示:</p>
+<h2 id="元组拆包">元组拆包<a class="anchor-link" href="#元组拆包">¶</a></h2><p>在上面我们将元组拆解成 city, year,... 等，接着在下面，我们用 "%s/%s" % passport 打印元组，这些例子是拆解元组的范例。任何可迭代对象都可以进行元组拆包，被可迭代对象的元素数量必须和接受这些元素的元组空档一致，除非你用星号（*）来处理多余的元素</p>
+<p>在元组拆包中，最常见的是平行赋值，也就是将可迭代对象的项目指派给一个变量 tuple，如下所示:</p>
 </div>
 </div>
 </div>
@@ -1278,7 +1278,7 @@ ESP
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>不用中间变量交换值，是 tuple 拆解的另一种应用</p>
+<p>不用中间变量交换值，是元组拆包的另一种应用</p>
 </div>
 </div>
 </div>
@@ -1311,7 +1311,7 @@ ESP
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>另一种 tuple 拆解,调用函数时，参数前面加个星号</p>
+<p>另一种元组拆包,调用函数时，参数前面加个星号</p>
 </div>
 </div>
 </div>
@@ -1385,7 +1385,8 @@ ESP
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>上面也是一种 tuple 拆解方法，调用函数时候传多个参数。例如，<code>os.path.split()</code> 函数用路径建立一个 tuple(path, last_part)</p>
+<p>上面也是一种元组拆包方法，调用函数时候用 * 把可迭代对象拆开作为函数参数。</p>
+<p>下面的例子是让一个函数可以使用元组的方式返回多个值，<code>os.path.split()</code> 函数返回一个以路径和最后一个文件名组成的元组(path, last_part)</p>
 </div>
 </div>
 </div>
@@ -1417,8 +1418,9 @@ ESP
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>如果在编写国际化的软件，_ 并不是一个很好的占位符，因为传统上，它会被当成 gettext.gettext 函数的别名，如同 gettext 模块所建议的</p>
-<h2 id="使用-*-来捕捉元素">使用 * 来捕捉元素<a class="anchor-link" href="#使用-*-来捕捉元素">¶</a></h2><p>以 *args 来指定函数参数，可以抓取任意数量的参数</p>
+<p>如果在编写国际化的软件，<em> 并不是一个很好的占位符，因为传统上，它会被当成 gettext.gettext 函数的别名，其他时候，</em> 是一个好的占位符</p>
+<h2 id="使用-*-来处理剩下的元素">使用 * 来处理剩下的元素<a class="anchor-link" href="#使用-*-来处理剩下的元素">¶</a></h2><p>以 *args 来指定函数参数，可以获取任意数量的参数，这是 Python 中一种经典的写法</p>
+<p>Python 3 中，这个概念被扩展到平行赋值中。</p>
 </div>
 </div>
 </div>
@@ -1493,7 +1495,7 @@ ESP
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>在平行赋值情况下， * 前置符只能套用到一个变量，但是可以放到任意位置</p>
+<p>在平行赋值情况下， * 前置符只能用在一个变量前面，但是可以这个变量可以是任意位置</p>
 </div>
 </div>
 </div>
@@ -1546,13 +1548,13 @@ ESP
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="拆解嵌套的-Tuple">拆解嵌套的 Tuple<a class="anchor-link" href="#拆解嵌套的-Tuple">¶</a></h2><p>我们可以在需要用运算式来拆解的 tuple 中套入其它的 tuple，例如(a, b, (c, d))，而且如果运算式与嵌套结构匹配，python 就会做出正确的动作</p>
+<h2 id="嵌套元组拆包">嵌套元组拆包<a class="anchor-link" href="#嵌套元组拆包">¶</a></h2><p>我们可以在需要用运算式来拆解的 tuple 中套入其它的 tuple，例如(a, b, (c, d))，而且如果运算式与嵌套结构匹配，python 就会做出正确的动作</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [25]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metro_areas</span> <span class="o">=</span> <span class="p">[</span>
@@ -1564,29 +1566,8 @@ ESP
 <span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">{:15}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'lat.'</span><span class="p">,</span> <span class="s1">'long.'</span><span class="p">))</span> <span class="c1">#^9 表示占 9 个字符，居中显示</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>                |   lat.    |   long.  
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [26]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fmt</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{:15}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1">'</span>
-<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="p">(</span><span class="n">lattitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span> <span class="ow">in</span> <span class="n">metro_areas</span><span class="p">:</span>
+<span class="n">fmt</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{:15}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1"> | </span><span class="si">{:^9}</span><span class="s1">'</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="p">(</span><span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span> <span class="ow">in</span> <span class="n">metro_areas</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">longitude</span> <span class="o"><=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#西半球</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">))</span>
 </pre></div>
@@ -1598,9 +1579,10 @@ ESP
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Mexico City     |  33.348   | -99.13333
-Net York-Newark |  33.348   | -74.020386
-Sao Paulo       |  33.348   | -46.635883
+<pre>                |   lat.    |   long.  
+Mexico City     | 19.43333  | -99.13333
+Net York-Newark | 40.808611 | -74.020386
+Sao Paulo       | -23.547778 | -46.635883
 </pre>
 </div>
 </div>
@@ -1612,9 +1594,10 @@ Sao Paulo       |  33.348   | -46.635883
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>在 python3 之前，你可以在定义函数时，使用嵌套 tuple，python3 已经不支持了，例如 <code>def fn(a, (b, c), d):</code>不过这对调用者没有任何影响。</p>
+<p>在 python3 之前，你可以在定义函数时，可以使用嵌套元组做形参，例如 def func(a, (b, c), d)。但是 python3 已经不支持了，不过这对函数调用者没有任何影响，它改变的是某些函数的声明方式</p>
 <p>按照设计，tuple 是非常方便的，可以把它当成记录来使用，不过它不可以指定名字，这也是 namedtuple 被设计出来的原因</p>
-<h2 id="可以指定名字的-tuple">可以指定名字的 tuple<a class="anchor-link" href="#可以指定名字的-tuple">¶</a></h2><p><code>collections.namedtuple</code> 是一个工厂，可以制造 tuple 子类别，并加入别名。使用 namedtuple 创建的实例存储空间与 tuple 完全一样，因为别名被存储到类中。它们使用的存储空间比一般的 tuple 要少，因为不存储到 <code>__dict__</code>实例中的属性</p>
+<h2 id="可以指定名字的元组（具名元组）">可以指定名字的元组（具名元组）<a class="anchor-link" href="#可以指定名字的元组（具名元组）">¶</a></h2><p><code>collections.namedtuple</code> 是一个工厂函数，可以构建一个带字段名的元组和一个有名字的类。这个带名字的类对调试程序有很大的帮助。使用 namedtuple 创建的实例消耗的内存与元组是一样的，因为字段名都被存储到相应的类中。这个实例跟普通的对象实例比起来要小一些，因为 Python 不会用到 <code>__dict__</code> 来存放这些实例的属性</p>
+<p>下面展示了如何用具名元组来记录一个城市的信息。</p>
 </div>
 </div>
 </div>
@@ -1689,9 +1672,9 @@ Sao Paulo       |  33.348   | -46.635883
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>构建 namedtuple 需要两个参数，第一个是别名，另一个是 tuple 元素的序列，可以使用可迭代的字符串（列表），也可以使用用空格分隔的字符串。</p>
-<p>我们必须要按照声明顺序为 tuple 赋值</p>
-<p>可以用名称或位置来读取数据</p>
+<p>构建 namedtuple 需要两个参数，第一个是类名，另一个是各个字段的名字，可以使用可迭代的字符串（列表），也可以使用用空格分隔的字符串。</p>
+<p>存放在对应字段里的数据要以一串参数的形式传入到构造函数中。注意，元祖的构造函数值接受单一的可迭代对象。</p>
+<p>可以用字段名或位置来读取数据</p>
 <p>下面是 namedtuple 的常用属性:</p>
 </div>
 </div>
@@ -1701,7 +1684,7 @@ Sao Paulo       |  33.348   | -46.635883
 <div class="prompt input_prompt">In [31]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">City</span><span class="o">.</span><span class="n">_fields</span> <span class="c1">#是 1 个 tuple，里面是我们的字段名</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">City</span><span class="o">.</span><span class="n">_fields</span> <span class="c1">#是 1 个元组，里面是我们的字段名</span>
 </pre></div>
 </div>
 </div>
@@ -1724,8 +1707,8 @@ Sao Paulo       |  33.348   | -46.635883
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">LatLong</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'LatLong'</span><span class="p">,</span> <span class="s1">'lat long'</span><span class="p">)</span>
 <span class="n">delhi_data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'Delhi NCR'</span><span class="p">,</span> <span class="s1">'IN'</span><span class="p">,</span> <span class="mf">21.935</span><span class="p">,</span> <span class="n">LatLong</span><span class="p">(</span><span class="mf">28.613889</span><span class="p">,</span> <span class="mf">77.208889</span><span class="p">))</span>
-<span class="n">delhi</span> <span class="o">=</span> <span class="n">City</span><span class="o">.</span><span class="n">_make</span><span class="p">(</span><span class="n">delhi_data</span><span class="p">)</span> <span class="c1">#_make 可以让我们从可迭代项目中实例化一个 namedtuple。City(*delhi_data) 也可以做这件事</span>
-<span class="n">delhi</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span> <span class="c1">#返回 namedtuple 的 collections.OrderedDict, 用来显示好看的城市资料</span>
+<span class="n">delhi</span> <span class="o">=</span> <span class="n">City</span><span class="o">.</span><span class="n">_make</span><span class="p">(</span><span class="n">delhi_data</span><span class="p">)</span> <span class="c1">#_make() 可以让我们接受一个可迭代对象生成这个类的一个实例。City(*delhi_data) 也可以做这件事</span>
+<span class="n">delhi</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span> <span class="c1">#把具名元组按照 collections.OrderedDict 的形式返回, 用来友好的显示城市资料</span>
 </pre></div>
 </div>
 </div>
@@ -1749,7 +1732,7 @@ Sao Paulo       |  33.348   | -46.635883
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tuple-当成不可变列表使用">Tuple 当成不可变列表使用<a class="anchor-link" href="#Tuple-当成不可变列表使用">¶</a></h2><p>当 tuple 当成不可变列表使用时，我们先看总结一下它和列表多么相似。tuple 支持所有不涉及添加或移除元素的方法，除了一个例外: tuple 没有 <code>__reversed__</code> 方法，但是这是为了最佳化，没有它，可以使用 reversed(my_tuple)</p>
+<h2 id="Tuple-当成不可变列表使用">Tuple 当成不可变列表使用<a class="anchor-link" href="#Tuple-当成不可变列表使用">¶</a></h2><p>当 tuple 当成不可变列表使用时，我们先看总结一下它和列表多么相似。tuple 支持所有不涉及添加或移除元素的方法，除了一个例外: 元组没有 <code>__reversed__</code> 方法，但是这个方法只是一个优化而已，没有它，也可以使用 reversed(my_tuple)</p>
 </div>
 </div>
 </div>
