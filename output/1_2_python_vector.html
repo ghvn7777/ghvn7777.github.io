@@ -1061,7 +1061,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="__repr__"><code>__repr__</code><a class="anchor-link" href="#__repr__">¶</a></h2>
+<h2 id="__repr__"><code>__repr__</code><a class="anchor-link" href="#__repr__">¶</a></h2><p>它能把一个对象用字符串的形式表现出来。</p>
 </div>
 </div>
 </div>
@@ -1177,7 +1177,7 @@ h6:hover .anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>注意现在我们只能将一个类乘数字，而不能用数字乘类，到后面的章节我们会实现这种乘法的交换性，使用 <code>__rmul__()</code> 解决这个问题。</p>
 <h2 id="自定义类型的布尔值">自定义类型的布尔值<a class="anchor-link" href="#自定义类型的布尔值">¶</a></h2><p>在 if, while 等陈述式运算式，或者 and, or, not 等运算，为了判断值是 true 或 false，Python 会调用 <code>bool()</code> 函数，其实背后调用的是 <code>__bool__()</code>，它永远只返回 True 或 False。</p>
-<p>在默认情况下，使用者自定义的实例都是 除非这个类对于 <code>__bool__()</code> 或者 <code>__len__()</code> 有自己的实现，如果你没有 <code>__bool__</code>，会尝试调用 <code>__len__</code>，如果 <code>__len__()</code> 等于 0，返回 false，否则返回 true</p>
+<p>在默认情况下，使用者自定义的实例都是 True，除非这个类对于 <code>__bool__()</code> 或者 <code>__len__()</code> 有自己的实现，如果你没有 <code>__bool__</code>，会尝试调用 <code>__len__</code>，如果 <code>__len__()</code> 等于 0，返回 False，否则返回 True</p>
 <p>我们的 <code>__bool__</code>　逻辑很简单，看向量长度是否为 0。</p>
 <p>如果想要 <code>Vector.__bool__</code> 更高效，可以采用这种实现</p>
 </div>
