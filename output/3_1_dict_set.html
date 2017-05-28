@@ -1031,7 +1031,7 @@ h6:hover .anchor-link {
 <li>哈希表的工作原理</li>
 <li>哈希表的影响（键形态限制，无法预知的排序等等）</li>
 </ul>
-<h2 id="什么是可哈希化">什么是可哈希化<a class="anchor-link" href="#什么是可哈希化">¶</a></h2><p>如果一个对象有一个哈希值，而且在生命周期中不被改变（它需要实现一个 <code>__hash__()</code> 方法），而且可以与其它对象比较（需要实现 <code>__eq__()</code> 方法），就是可哈希化的。看下面例子</p>
+<h2 id="什么是可散列化">什么是可散列化<a class="anchor-link" href="#什么是可散列化">¶</a></h2><p>如果一个对象有一个哈希值，而且在生命周期中不被改变（它需要实现一个 <code>__hash__()</code> 方法），而且可以与其它对象比较（需要实现 <code>__eq__()</code> 方法），就是可散列化的。原子不可变数据类型（str, bytes 和数值类型）都是可散列类型，fronenset 也是可散列类型，因为根据其定义，frozenset 只能容纳可散列类型，元祖的话，只有当一个元组的所有元素都是可散列的，元组才是可散列的。</p>
 </div>
 </div>
 </div>
@@ -1148,7 +1148,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>除了常规语法以及 dict 构建之外，我们可以使用字典生成式来构建字典，dictcomp 会由任何一个可迭代对象产生一对 key:value 来构建 dict，下面是使用字典生成式的一个例子:</p>
+<p>除了常规语法以及 dict 构建之外，我们可以使用字典推导来构建字典，dictcomp 会由任何一个可迭代对象产生一对 key:value 来构建 dict，下面是使用字典生成式的一个例子:</p>
 </div>
 </div>
 </div>
@@ -1185,8 +1185,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>字典有一个内置方法 <code>d.update(m, [**kargs])</code> 它会先判断 m，如果 m 有 keys 方法，就假定它是个映射，负责迭代 m，假设它的元素是 (key, value)，这也就是说明任何产生 (key, value) 的迭代对象都可以构建字典</p>
-<h2 id="使用-setdefault-处理找不到的键">使用 setdefault 处理找不到的键<a class="anchor-link" href="#使用-setdefault-处理找不到的键">¶</a></h2><p>当 dict 使用 d[k] 时，发现 k 不是现有键时，会跑出 KeyError 错误，我们知道 d.get(k, default) 是 d[k] 的另一种用法，使用预处理值要比处理 KeyError 异常更方便，但是如果你要更新你找到的值，使用 <code>__getitem__()</code> 和 <code>get()</code> 都很没有效率，我们下面先看一下一般时候处理找不到键的方式:</p>
+<p>字典有一个内置方法 <code>d.update(m, [**kargs])</code> 它会先判断 m，如果 m 有 keys 方法， update 就将它当做映射处理，否则，会退一步，将 m 当做包含键值对 (key, value) 的迭代器，python 绝大多数映射类型构造方法都用了类似的逻辑。因此我们既可以使用一个映射对象来新建一个映射对象，也可以使用 (key, value) 键值对来初始化一个映射对象</p>
+<h2 id="使用-setdefault-处理找不到的键">使用 setdefault 处理找不到的键<a class="anchor-link" href="#使用-setdefault-处理找不到的键">¶</a></h2><p>当 dict 使用 d[k] 时，发现 k 不是现有键时，会抛出 KeyError 错误，我们知道 d.get(k, default) 可以代替 d[k]，给找不到的键一个默认值。这比处理 KeyError 异常方便，但是如果要更新某个键对应的值时，使用 <code>__getitem__()</code> 和 <code>get()</code> 效率都很低，就像下面的例子这样，dict.get 并不是处理找不到键的最好方法。</p>
 </div>
 </div>
 </div>
@@ -1293,7 +1293,8 @@ was [(2, 45)]
             <span class="n">word</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>              <span class="c1"># group 获取该单词 （match 是一个对象）</span>
             <span class="n">column_no</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>     <span class="c1"># 获取列数，索引从 0 开始</span>
             <span class="n">location</span> <span class="o">=</span> <span class="p">(</span><span class="n">line_no</span><span class="p">,</span> <span class="n">column_no</span><span class="p">)</span>   <span class="c1"># 构造一个元组，内容是 (row, col)</span>
-            <span class="n">index</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location</span><span class="p">)</span> <span class="c1">#如果没有 word 这个 key，设为 [ ]，setdefault 会传回该值，所以不用二次搜索就可以被更新</span>
+            <span class="c1">#如果单词没有这个 key，把单词和一个空列表放入映射，然后返回这个空列表，这样就不用二次搜索就可以被更新列表了</span>
+            <span class="n">index</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">location</span><span class="p">)</span> 
 <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">):</span>   <span class="c1"># 按照字母顺序排序，忽略大小写</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="n">word</span><span class="p">])</span>      
 </pre></div>
@@ -1360,8 +1361,7 @@ was [(2, 45)]
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#if key not in my_dict:</span>
 <span class="c1">#    my_dict[key] = []</span>
-<span class="c1">#else:</span>
-<span class="c1">#    my_dict[key].append(new_value)</span>
+<span class="c1">#my_dict[key].append(new_value)</span>
 </pre></div>
 </div>
 </div>
@@ -1372,8 +1372,8 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="可弹性查找键的映射">可弹性查找键的映射<a class="anchor-link" href="#可弹性查找键的映射">¶</a></h2><p>有时在找不到键时，返回一些虚构值还是很好的，这里有两种方法，第一种是使用预设字典而不是普通字典，第二种是将字典变成子类别或其它的映射类型，并添加一个 <code>__missing__</code> 方法，下面会讨论两种做法</p>
-<h3 id="defaultdict-找不到键的另一种做法">defaultdict 找不到键的另一种做法<a class="anchor-link" href="#defaultdict-找不到键的另一种做法">¶</a></h3><p>下面是使用 collections.defaultdict 优雅的解决上面搜索不存在的键的问题。</p>
+<h2 id="查找可弹性键的映射">查找可弹性键的映射<a class="anchor-link" href="#查找可弹性键的映射">¶</a></h2><p>有时在找不到键时，希望返回一个默认值，这里有两种方法，第一种是使用 defaultdict 而不是普通 dict，第二种是自定义一个字典的子类，然后在子类中添加一个 <code>__missing__</code> 方法，下面会讨论两种做法</p>
+<h3 id="defaultdict-找不到键的一个选择">defaultdict 找不到键的一个选择<a class="anchor-link" href="#defaultdict-找不到键的一个选择">¶</a></h3><p>在实例化 defaultdict 时候，需要给构造方法提供一个可调用对象，这个可调用对象会在 <code>__getitem__</code> 找不到键时被调用，让其返回一个默认值，例如我们创建了一个这样的字典 dd = defaultdict(lit)，如果 'new-key' 键在 dd 中不存在的话，表达式 dd['new-key']会先调用 list 新建一个列表，把这个新列表作为值，'new-key' 作为键放到 dd 中，最后返回这个列表的引用。下面是上面问题使用 collections.defaultdict 的一个例子。</p>
 </div>
 </div>
 </div>
@@ -1456,7 +1456,7 @@ was [(2, 45)]
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>工作原理: 当我们初始化一个 defaultdict 时候，要提供一个方法，当 <code>__getitem__()</code> 找不到键的时候，会用它产生一个预设值，这里我们将 list 传进去，每次调用会产生一个空列表。</p>
-<p>注意：defaultdict 的 default_factory 只是为了提供一个预设值，不供其它方法使用，例如 dd 是 defaultdict，k 是不存在的键， dd[k] 会调用 default_factory 产生一个预设值，而 dd.get(k) 仍然传回 None，下面是例子</p>
+<p>注意：defaultdict 的 default_factory 只会在调用 <code>__getitem__()</code> 方法时起作用，在其它方法不起作用。例如 dd 是 defaultdict，k 是不存在的键， dd[k] 会调用 default_factory 产生一个预设值，而 dd.get(k) 仍然传回 None，下面是例子</p>
 </div>
 </div>
 </div>
@@ -1490,10 +1490,116 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>调用 default_factory 的 defaultdict 机制，实际上是调用 <code>__missing__()</code> 特殊方法，这是所有变暗映射类型都有的方法</p>
-<h2 id="__missing__-方法"><code>__missing__</code> 方法<a class="anchor-link" href="#__missing__-方法">¶</a></h2><p>映射处理找不到键时，底层使用的是 <code>__missing__()</code> 方法，基础的 dict 并没有这个方法，但是如果你将 dict 变成子类别，并提供一个 <code>__missing__()</code> 方法，标准的 <code>dict.__getitem__()</code>  会在找不到键时调用它，而非发出 KeyError</p>
+<p>这背后一切的工程其实是 <code>__missing__()</code> 方法，它会在 defaultdict 遇到找不到键的时候调用 default_factory，而实际上这个特性是所有映射类型都可以选择去支持的。</p>
+<h2 id="__missing__-方法"><code>__missing__</code> 方法<a class="anchor-link" href="#__missing__-方法">¶</a></h2><p>映射处理找不到键时，底层使用的是 <code>__missing__()</code> 方法，基础的 dict 并没有这个方法，但是 dict 是知道有这个接口存在的，所以你可以继承 dict 并实现 <code>__missing__()</code> 方法，如果 <code>dict.__getitem__()</code>  在找不到键时就调用它，而非发出 KeyError</p>
 <p><code>__missing__()</code> 只被 <code>__getitem__()</code> 调用（即 d[k] 运算符），<code>__missing__()</code> 方法的存在，并不会影响到其它方法查询键的行为，例如 get 或 <code>__contains__</code>（in 运算符），这就是 defaultdict 只能与 <code>__getitem__()</code> 一起使用的原因</p>
-<p>如果你想要一个映射，它的键在查询时会被转成 str</p>
+<p>有时候我们希望查询时，映射类型里的键统统转成 str，下面是一个可编程电路板项目（Raspberry 和 Arduino 等）的例子，其中电路板上针脚可能是数字或字符串，比如 "A0" 或 "12"，但是为了方便查询，我们希望 my_arduino.pins[13] 也是可以的，这样可以快速找到 arduino 的第 13 个针脚。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">StrKeyDict0</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="c1"># 找不到键会调用此函数</span>
+    <span class="k">def</span> <span class="nf">__missing__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="c1"># 如果找不到的键本身就是 str 类型，直接抛出异常</span>
+        <span class="c1"># 这个判断是必要的，如果没有它，当 key 不是字符串，则会递归调用</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="c1"># 如果找不到的键不是字符串，那么将其转成字符串查找</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># get 方法使用 self[key] 的方式调用 __getitem__() 方法查找，那么某个键不存在的话，还可以通过 __missing__() 给它一个机会</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="c1"># 如果抛出 KeyError，那么说明 __missing__() 也失败了，返回 default</span>
+            <span class="k">return</span> <span class="n">default</span>
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="c1"># 先按照键原来的值查找，找不到将其转成字符串查找，注意 or 返回的不是 true 和 false，而是第一个不为假的那个值</span>
+        <span class="c1"># 例如 0 or 2 返回 2</span>
+        <span class="c1"># 注意这里没用 key in self, 这是因为这回导致 这个函数被递归调用，所以采用了显式的方法，直接在 self.keys() 中查询</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    
+<span class="n">d</span> <span class="o">=</span> <span class="n">StrKeyDict0</span><span class="p">([(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'4'</span><span class="p">,</span> <span class="s1">'four'</span><span class="p">)])</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">'2'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'two'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'four'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-15-6ee4d8336f71></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>d<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg"><ipython-input-13-48c9bc7cf556></span> in <span class="ansi-cyan-fg">__missing__</span><span class="ansi-blue-fg">(self, key)</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span>             <span class="ansi-green-fg">raise</span> KeyError<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span>         <span class="ansi-red-fg"># 如果找不到的键不是字符串，那么将其转成字符串查找</span>
+<span class="ansi-green-fg">----> 9</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">[</span>str<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">     10</span>     <span class="ansi-green-fg">def</span> get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">,</span> default<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     11</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg"><ipython-input-13-48c9bc7cf556></span> in <span class="ansi-cyan-fg">__missing__</span><span class="ansi-blue-fg">(self, key)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>         <span class="ansi-red-fg"># 这个判断是必要的，如果没有它，当 key 不是字符串，则会递归调用</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span>         <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----> 7</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> KeyError<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span>         <span class="ansi-red-fg"># 如果找不到的键不是字符串，那么将其转成字符串查找</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">[</span>str<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-red-fg">KeyError</span>: '1'</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1502,26 +1608,7 @@ was [(2, 45)]
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">StrKeyDict0</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__missing__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="c1"># 判断是不是 str 类型，是的话没有此 key 直接抛出异常，不是的话转成 str 重新调用本方法</span>
-        <span class="c1"># 如果没有 isinstance 判断会不断调用自身，死循环</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="c1"># 判断类型，type()不会认为子类是一种父类类型。isinstance()会认为子类是一种父类类型。</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">default</span>
-    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="c1"># 这种查询方式在 Python3 中很有效率，因为 self.keys() 返回的是一个 view，它和集合很像，速度和字典一样快</span>
-        <span class="c1"># Python2 中返回的是列表，效率低</span>
-        <span class="c1"># 这里使用 key in self.keys() 是有必要的，因为我们类中没有强迫字典所有的键都必须是 str 类型</span>
-        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-    
-<span class="n">d</span> <span class="o">=</span> <span class="n">StrKeyDict0</span><span class="p">([(</span><span class="s1">'2'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">),</span> <span class="p">(</span><span class="s1">'4'</span><span class="p">,</span> <span class="s1">'four'</span><span class="p">)])</span>
-<span class="n">d</span><span class="p">[</span><span class="s1">'2'</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'2'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1542,7 +1629,7 @@ was [(2, 45)]
 <div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1563,7 +1650,7 @@ was [(2, 45)]
 <div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'N/A'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1571,29 +1658,9 @@ was [(2, 45)]
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-18-6ee4d8336f71></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>d<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg"><ipython-input-16-142a12ebece7></span> in <span class="ansi-cyan-fg">__missing__</span><span class="ansi-blue-fg">(self, key)</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>         <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-red-fg"># 判断类型，type()不会认为子类是一种父类类型。isinstance()会认为子类是一种父类类型。</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span>             <span class="ansi-green-fg">raise</span> KeyError<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----> 7</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">[</span>str<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span>     <span class="ansi-green-fg">def</span> get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">,</span> default<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">      9</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg"><ipython-input-16-142a12ebece7></span> in <span class="ansi-cyan-fg">__missing__</span><span class="ansi-blue-fg">(self, key)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>         <span class="ansi-red-fg"># 如果没有 isinstance 判断会不断调用自身，死循环</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span>         <span class="ansi-green-fg">if</span> isinstance<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">,</span> str<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-red-fg"># 判断类型，type()不会认为子类是一种父类类型。isinstance()会认为子类是一种父类类型。</span>
-<span class="ansi-green-fg">----> 6</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> KeyError<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">[</span>str<span class="ansi-blue-fg">(</span>key<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span>     <span class="ansi-green-fg">def</span> get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">,</span> default<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-red-fg">KeyError</span>: '1'</pre>
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'N/A'</pre>
 </div>
 </div>
 </div>
@@ -1604,7 +1671,7 @@ was [(2, 45)]
 <div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'2'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">2</span> <span class="ow">in</span> <span class="n">d</span>
 </pre></div>
 </div>
 </div>
@@ -1614,7 +1681,7 @@ was [(2, 45)]
 <div class="output_area">
 <div class="prompt output_prompt">Out[19]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'two'</pre>
+<pre>True</pre>
 </div>
 </div>
 </div>
@@ -1625,69 +1692,6 @@ was [(2, 45)]
 <div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[20]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>'four'</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [21]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'N/A'</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[21]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>'N/A'</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [22]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">2</span> <span class="ow">in</span> <span class="n">d</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>False</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [23]:</div>
-<div class="inner_cell">
-<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="mi">1</span> <span class="ow">in</span> <span class="n">d</span>
 </pre></div>
 </div>
@@ -1696,7 +1700,7 @@ was [(2, 45)]
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="prompt output_prompt">Out[20]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>False</pre>
 </div>
@@ -1709,21 +1713,29 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dict-的变化">Dict 的变化<a class="anchor-link" href="#Dict-的变化">¶</a></h2><ul>
-<li>collections.OrderedDict<ul>
-<li>让键维持插入顺序， popitem 移除第一个元素，如果你使用 my_odict，popitem(last=True)调用，会移除最后一个元素</li>
+<p>像 key in my_dict.keys() 的这种操作是很快的，即使映射类型对象很庞大也没关系，因为 dict.keys() 返回的是一个视图，视图就像一个集合，而且跟字典类似的是，在视图中查找一个元素速度很快。</p>
+<h2 id="字典的变种">字典的变种<a class="anchor-link" href="#字典的变种">¶</a></h2><ul>
+<li><p>collections.OrderedDict</p>
+<ul>
+<li>让键维持插入顺序， popitem() 方法默认删除并返回字典中的最后一个元素，如果你使用 my_odict.popitem(last=False)调用，会删除并返回第一个被添加的元素</li>
 </ul>
 </li>
-<li>collections.ChainMap<ul>
-<li>保存一个可被当成单一元素搜寻的序列，查找时，会执行每一个映射，如果在它们之间找到键，成功。</li>
-<li>一个使用范例:<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">builtins</span>
+<li><p>collections.ChainMap</p>
+<ul>
+<li>可以容纳几个不同的映射对象，然后在进行键查找操作时，这些对象会被当成一个整体逐个查找，直到键被找到。</li>
+<li>这个功能在给有嵌套作用域的语言做解释器时很有用，可以用一个对象来表示一个作用于的上下文</li>
+<li><p>下面是 collections 文档介绍 ChainMap 对象里的一个具体使用实例，包含了下面这个对 Python 变量查询规则的代码片段</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">builtins</span>
 <span class="n">pylookup</span> <span class="o">=</span> <span class="n">ChainMap</span><span class="p">(</span><span class="nb">locals</span><span class="p">(),</span> <span class="nb">globals</span><span class="p">(),</span> <span class="nb">vars</span><span class="p">(</span><span class="n">builtins</span><span class="p">))</span>
 </pre></div>
 </li>
 </ul>
 </li>
-<li>collections.Counter<ul>
-<li>保存所有键的整数数量映射，更新会增加现有键的数量，这可以计算每个元素出现次数</li>
+<li><p>collections.Counter</p>
+<ul>
+<li>会给键准备一个整数计数器，每更新一个键时候都会增加这个计数器，所以可以给散列表对象计数，或者当成多重集用</li>
+<li>多冲击和就是集合里的元素可以不止出现一次， Counter 实现了 + 和 - 运算符用来合并记录，还有像 most_common([n]) 这类很有用的方法</li>
+<li>most_common([n]) 会按照次序返回映射里最常见的 n 个键和它们的计数。</li>
 <li>一个计算单词内字母数量的案例:<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="n">ct</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="s1">'abracadabra'</span><span class="p">)</span>
 <span class="n">ct</span>
@@ -1737,10 +1749,13 @@ was [(2, 45)]
 </li>
 </ul>
 </li>
+<li>collections.UserDict 
+这个类就是把标准 dict 用纯 Python 实现了一遍</li>
 </ul>
-<h2 id="继承-UserDict">继承 UserDict<a class="anchor-link" href="#继承-UserDict">¶</a></h2><p>要建立新的映射类型，继承 UserDict 要比继承 dict 容易，因为它内部有一些很方便的运作方法，我们可以直接继承 UserDict 语法，不会出问题。我们要将前面的 StrKeyDict0 类所有的键都存成 str 类型</p>
-<p>注意 UserDict 没有继承dict，而是内部有一个 dict 实例，称为 data，它会保存实际的元素，在编写 <code>__setitem__</code> 这种方法时，可以避免不受欢迎的回调。而且可以简化 <code>__contains__</code> 编写</p>
-<p>下面除了将所有键存成 str 类型，当有人使用非字符串键构建或访问实例时，可以避免令人不愉快的意外</p>
+<h2 id="子类化-UserDict">子类化 UserDict<a class="anchor-link" href="#子类化-UserDict">¶</a></h2><p>要建立新的映射类型，继承 UserDict 要比继承 dict 容易，这体现在，我们可以很容易的改进前面的 StrKeyDict0 类，将所有的键都存成 str 类型。</p>
+<p>我们更倾向继承 UserDict 而不是 dict 的原因是，dict 在某些方法的实现上会走一些捷径，导致我们不得不在它的子类重写这些方法，而 UserDict 就没有这个问题。</p>
+<p>注意 UserDict 没有继承dict，而是内部有一个 dict 实例，称为 data，这是 UserDict 最终存储数据的地方，这样做的好处是，相比上面 StrKeyDict0 类，UserDict 的子类在实现 <code>__setitem__</code> 这种方法时，可以避免不必要的地柜。而且可以使 <code>__contains__</code> 方法更简洁。</p>
+<p>下面的例子不仅比 StrKeyDict0 类更简洁，功能还更完善，不但把所有的键都以字符串的方式存储，还能处理一些创建或者更新实例时包含非字符串类型的键的意外情况</p>
 </div>
 </div>
 </div>
@@ -1753,14 +1768,15 @@ was [(2, 45)]
 
 <span class="k">class</span> <span class="nc">StrKeyDict</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">UserDict</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__missing__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="c1"># 这个方法和之前的一模一样</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
     
-    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span> <span class="c1">#这个方法更简洁一些，因为已经放心假设所有的键都是字符串</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
     
-    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="c1"># 这个方法会把所有的键都转成字符串</span>
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">item</span>
 </pre></div>
 </div>
@@ -1772,20 +1788,20 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>因为 UserDict 是 MutableMapping 的子类，让 StrKeyDict 类的健全的映射方法都是从 UserDict, MutableMapping, Mapping 继承来的，下面是它比较优秀的方法:</p>
+<p>因为 UserDict 是 MutableMapping 的子类，所以 StrKeyDict 里的剩下的那些映射类型方法都是从 UserDict、MutableMapping 和 Mapping 这些超类继承来的，特别是最后的 Mapping 类，它虽然是一个抽象基类（ABC），但是却提供了好几个使用的方法，下面是比较值得关注的方法:</p>
 <ul>
 <li><p>MutableMapping.update:</p>
 <ul>
-<li>我们可以直接调用这个方法，也可以通过 <code>__init__()</code> 调用，用来加载其它映射，可迭代（key, value）的实例，以及关键字个数。因为它使用 self[key] = value 来添加元素，最终调用的是 <code>__setitem__()</code></li>
+<li>这个方法不仅可以直接使用，而且它还用在 <code>__init__</code> 里，让构造方法可以利用传入的各种参数（其它映射类型，元素是 (key, value) 对的可迭代对象和键值参数）来新建实例，因为这个方法背后用的是 self[key] = value 来添加新值的，所以它实际是在使用我们的 <code>__setitem__()</code> 方法。</li>
 </ul>
 </li>
 <li><p>Mapping.get</p>
 <ul>
-<li>在 StrKeyDict0 中，我们必须自己编写 get 方法，这里我们继承 Mapping.get()，它的运作方式和 StrKeyDict0.get() 很像。</li>
+<li>在 StrKeyDict0 中，我们必须自己编写 get 方法，好让其表现和 <code>__getitem__()</code> 一致，而在我们的这个例子中就不用了，因为它继承 Mapping.get() 方法，而 Python 源码显示，这个方法的实现方式和 StrKeyDict0.get() 是一模一样的。</li>
 </ul>
 </li>
 </ul>
-<h2 id="不可变映射">不可变映射<a class="anchor-link" href="#不可变映射">¶</a></h2><p>Python3.3 后，types 提供 MappingProxyType 包装类，当你给它一个映射后，它返回一个只读的 mappingproxy 实例，但它是原始映射的动态展示，也就是说，你可以在 mappingproxy 中看到原是映射的改变，但是无法通过它改变原始映射。下面的例子说明了这点</p>
+<h2 id="不可变映射">不可变映射<a class="anchor-link" href="#不可变映射">¶</a></h2><p>Python3.3 后，types 提供 MappingProxyType 包装类，当你给它一个映射后，它返回一个只读的视图，但它是原始映射的动态展示，也就是说，你可以在视图中中看到原始映射的改变，但是无法通过它改变原始映射。下面的例子说明了这点：</p>
 </div>
 </div>
 </div>
@@ -1889,6 +1905,7 @@ was [(2, 45)]
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="集合理论">集合理论<a class="anchor-link" href="#集合理论">¶</a></h2><p>我们说的集合包括 frozenset 和 set</p>
+<p>集的本质是许多唯一对象的聚集，所以，集合可以用来去重。</p>
 </div>
 </div>
 </div>
@@ -1940,9 +1957,9 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>集合的元素必须可哈希化，set 形态不可以哈希化，但是 frozenset 可以，所以可以在 set 中放入 frozenset 元素。</p>
-<p>集合也支持基本的运算 a | b 代表 a 和 b 的并集， a & b 代表 a 和 b 的交集，a - b 为 a 和 b 的差集。</p>
-<p>我们来看看计算 haystack 中的 needles 数量:</p>
+<p>集合的元素必须可散列的，set 类型本身是不可散列的，但是 frozenset 可以，所以可以在 set 中放入 frozenset 元素。</p>
+<p>为了保持唯一性，集合实现了很多基础的中缀运算符， a | b 代表 a 和 b 的并集， a & b 代表 a 和 b 的交集，a - b 为 a 和 b 的差集。合理使用这些操作，不仅可以使代码变少，而且还能减少 Python 程序的运行时间。</p>
+<p>例如，我们有一个电子邮件地址的集合（haystack），还要维护一个较小的电子邮件地址集合（needles），然后求出 needles 中有多少地址同时也出现在了 haystack 中，借助集合实现非常简单。</p>
 </div>
 </div>
 </div>
@@ -1984,7 +2001,7 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="set-常数">set 常数<a class="anchor-link" href="#set-常数">¶</a></h2><p>set 的常数定义语法（{1}, {1, 2} 等）看起来很像数学标记法，不过有一个重要的差别，空的 set 没有常数表示方法，必须显式的定义 set()</p>
+<h2 id="集合字面量">集合字面量<a class="anchor-link" href="#集合字面量">¶</a></h2><p>集合的常数定义语法（{1}, {1, 2} 等）看起来很像数学标记法，不过有一个重要的差别，空的 set 没有常数表示方法，必须显式的定义 set()，如果写成 {} 的形式，你只是定义了一个空的字典</p>
 </div>
 </div>
 </div>
@@ -1993,7 +2010,9 @@ was [(2, 45)]
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="c1">#这种方式比 set([1]) 快很多，推荐使用</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 下面这种方式比 set([1]) 快，因为后者需要先从 set 这个名字查询构造方法，然后新建一个列表，最后再把列表传到构造方法中</span>
+<span class="c1"># 但是如果像 {1, 2, 3} 这种字面量，Python 有一个专门叫作 BUILD_SET 的字节码创建集合</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span> 
 <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2131,7 +2150,7 @@ was [(2, 45)]
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>看到 {1} 的方式直接执行了 1 的赋值， set([1]) 步骤比较多</p>
-<p>frozenset 常数定义没有特殊的语法，必须使用构造式。</p>
+<p>frozenset 常数定义没有特殊的语法，必须使用构造方法。Python 3 里 fronzenset 的标准字符串表示形式看起来就像构造方法调用一样。来看这段控制台对话</p>
 </div>
 </div>
 </div>
@@ -2161,7 +2180,7 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>集合生成式和字典生成式差不多：</p>
+<h2 id="集合推导">集合推导<a class="anchor-link" href="#集合推导">¶</a></h2><p>集合推导式和字典推导差不多：</p>
 </div>
 </div>
 </div>
@@ -2170,8 +2189,8 @@ was [(2, 45)]
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">unicodedata</span> <span class="k">import</span> <span class="n">name</span> <span class="c1">#用 name 函数获取字码名称有 'SIGN' 的子元集合</span>
-<span class="p">{</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="k">if</span> <span class="s1">'SIGN'</span> <span class="ow">in</span> <span class="n">name</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">''</span><span class="p">)}</span> <span class="c1"># 构建字码名称有 'SIGN' 的子元集合</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">unicodedata</span> <span class="k">import</span> <span class="n">name</span> <span class="c1">#用 name 函数获取字符的名字</span>
+<span class="p">{</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="k">if</span> <span class="s1">'SIGN'</span> <span class="ow">in</span> <span class="n">name</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="s1">''</span><span class="p">)}</span> <span class="c1"># 将字符名里有 SIGN 的单词挑出来，放到集合</span>
 </pre></div>
 </div>
 </div>
@@ -2212,15 +2231,43 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="集合运算">集合运算<a class="anchor-link" href="#集合运算">¶</a></h2><p>集合运算符要求两个运算元都是集合，但是其它所有方法并不是这样，例如要产生 a，b，c，d 的并集，a.union(b, c, d) 只要求 a 是集合，b，c，d 是可迭代对象就行</p>
-<h2 id="哈希值是否相等">哈希值是否相等<a class="anchor-link" href="#哈希值是否相等">¶</a></h2><p>如果两个元素比较是相等的，那么它们的哈希值一定相等，例如 1 == 1.0 为 True，所以 hash(1) == hash(1.0) 也是 True，就算 int 类型与 float 类型内部表示形式有很大差别（顺便说一句，int 类型的哈希值是 int 本身的值）</p>
-<h2 id="dict-的实际效果">dict 的实际效果<a class="anchor-link" href="#dict-的实际效果">¶</a></h2><h3 id="键必须是可哈希化元素">键必须是可哈希化元素<a class="anchor-link" href="#键必须是可哈希化元素">¶</a></h3><ul>
+<h2 id="集合操作">集合操作<a class="anchor-link" href="#集合操作">¶</a></h2><p>集合中缀运算符要求两个运算元都是集合，但是所其它所有的方法不是这样，例如要产生 a，b，c，d 的并集，a.union(b, c, d) 只要求 a 是集合，b，c，d 是可迭代对象就行</p>
+<h2 id="dict-和-set-的背后">dict 和 set 的背后<a class="anchor-link" href="#dict-和-set-的背后">¶</a></h2><p>这一节会回答下面几个问题：</p>
+<ul>
+<li>Python 里的 dict 和 set 效率有多高</li>
+<li>为什么它们是无序的</li>
+<li>为什么并不是所有的 Python 对象都可以当做 dict 的键或者 set 中的元素</li>
+<li>为什么 dict的键和 set 元素的顺序是根据它们被添加的次序决定的，以及为什么在映射对象的生命周期中，这个顺序并不是一成不变的。</li>
+<li>为什么不应该在迭代循环 dict 或是 set 的同时往里添加元素。</li>
+</ul>
+<h3 id="一个关于效率的实验">一个关于效率的实验<a class="anchor-link" href="#一个关于效率的实验">¶</a></h3><p>我们有一个 1000 万个不重复双精度浮点数的字典，名叫 haystack，还有一个 1000 个浮点数的 needles 数组，其中 needles 中的 500 个数字可以在 haystack 中找到，另外 500 个肯定找不到。</p>
+<p>我们使用下面代码来测试下面代码的运行时间（用 timeit 模块可以测试速度）</p>
+<pre><code>found = 0
+for n in needles:
+    for n in haystack:
+        found += 1</code></pre>
+<p>表明当 haystack 个数是 1000 的时候，需要 0.000202 秒，当 haystack 的个数是 10,000,000 的时候，只需要 0.000337 秒。</p>
+<p>作为对比，我们把 haystack 换成 set 和 list 类型，做了同样的实验。对于 set，我们除了运行上面的代码，还测试了用交集计算 needles 出现在 haystack 中的次数运行时间</p>
+<pre><code>found = len(needles & haystack)</code></pre>
+<p>我们发现，最快的是集合交集花费的时间，最慢是列表所花费的时间，集合使用两个 for 循环操作和字典用时差不多。</p>
+<h3 id="字典中的散列表">字典中的散列表<a class="anchor-link" href="#字典中的散列表">¶</a></h3><p>散列表其实是一个稀疏数组（总有空白元素的数组），散列表的单元称为表元，在 dict 散列表中，每个键值对都占用一个表元，每个表元有两部分，一个是对键的引用，一个是对值的引用。因为所有表元大小一致，所以可以通过偏移量来读取某个表元。</p>
+<p>因为 python 会保证大概还有三分之一的表元是空的，所以快要到达这个阈值的时候，原有的散列表会被复制到一个更大的空间中。</p>
+<p>如果把一个对象放到散列表，那么首先要计算这个元素键的散列值，Python 中可以用 hash() 方法来做这件事。</p>
+<h4 id="散列值的相等性">散列值的相等性<a class="anchor-link" href="#散列值的相等性">¶</a></h4><p>内置的 hash() 方法可以用于所有的内置类型对象，如果自定义对象调用 hash() 方法，实际上是运行自定义的 <code>__hash__()</code>。如果两个对象相等，那么它们的散列值必须相等，否则散列表就不能正常运行了。例如 1 == 1.0 为真，那么 hash(1) 和 hash(1.0) 也必须为真，但其实两个数字（整数和浮点）内部结构是完全不一样的。</p>
+<h4 id="散列表算法">散列表算法<a class="anchor-link" href="#散列表算法">¶</a></h4><p>为了获取　my_dict[search_key] 背后的值，Python 首先会调用 hash(search_key) 来计算 search_key 的散列值，把这个值的最低几个数字当做偏移量，在散列表里查找表元（具体取几位取决于当前散列表的大小）。若找到表元是空的，抛出 KeyError 异常。如果不是空的，则表元里会有一对 found_key:found_value。这时候 Python 会校验 search_key == found_key 是否为真，如果它们相等的话，就会返回 found_value</p>
+<p>如果 search_key 和 found_key 不匹配的话，这种情况称为散列冲突，发生这种情况是因为，散列表所做的其实是把随机的元素映射到只有几位的数字上，而散列表本身的索引有只依赖这个数字的一部分。为了解决散列冲突，算法会在散列值中再取几位，然后用特殊方法处理一下，把新得到的数字再索引来寻找表元（C 语言写的用来打乱散列值位的算法名字叫 perturb）。如果这次找到的表元是空的，则抛出 KeyError，如果非空，看看是否匹配，如果键匹配，返回这个值，又发生了散列冲突的话，重复之前步骤。</p>
+<p>添加新元素和更新现有元素操作几乎和上面一样。只不过对于前者，发现空表元会放入一个新表元，后者找到相应表元会将原表元的值替换。</p>
+<p>另外插入新值时，Python 可能会按照散列表的拥挤程度来决定是否重新分配内存并为它扩容，如果增加了散列表大小，那么散列值所占的位数和用作索引的位数都会随之增加，这样做的目的是为了减少发生散列冲突的概率。</p>
+<p>表面看来这个算法很费劲，实际上就算 dict 有上百万个元素，多数的搜索并不会有冲突发生，平均下来每次搜索可能有一到两次冲突，在正常情况下，最不走运时候键所遇到的冲突次数一只手也能数过来。</p>
+<h2 id="dict-的实现以及导致的结果">dict 的实现以及导致的结果<a class="anchor-link" href="#dict-的实现以及导致的结果">¶</a></h2><p>下面会讨论散列表给 dict 带来的优势和限制。</p>
+<h3 id="1.-键值必须是可散列的">1. 键值必须是可散列的<a class="anchor-link" href="#1.-键值必须是可散列的">¶</a></h3><p>一个可散列的对象必须满足以下条件</p>
+<ul>
 <li><ol>
 <li>可以由 hash() 得到一个不变的值。</li>
 </ol>
 </li>
 <li><ol>
-<li>可以通过 eq() 方法判断是否相等</li>
+<li>可以通过 <code>__eq__()</code> 方法判断是否相等</li>
 </ol>
 </li>
 <li><ol>
@@ -2228,28 +2275,55 @@ was [(2, 45)]
 </ol>
 </li>
 </ul>
-<p>如果你自定义了 eq()，一定要保证 a == b 和 hash(a) == hash(b) 结果相同，否则可能造成字典无法处理你的元素，报错</p>
-<h3 id="dict-要使用大量的内存">dict 要使用大量的内存<a class="anchor-link" href="#dict-要使用大量的内存">¶</a></h3><h3 id="用-key-搜索非常快">用 key 搜索非常快<a class="anchor-link" href="#用-key-搜索非常快">¶</a></h3><h3 id="键的顺序取决与插入顺序">键的顺序取决与插入顺序<a class="anchor-link" href="#键的顺序取决与插入顺序">¶</a></h3>
+<p>如果你自定义了 <code>__eq__()</code>，一定要保证 a == b 和 hash(a) == hash(b) 结果相同，否则可能造成字典无法处理你的元素，另一方面，如果一个含有自定义的 <code>__eq__()</code> 依赖的类处于可变状态，那就不要在这个类中实现 <code>__hash__()</code> 方法，因为它的实例是不可散列的。</p>
+<h3 id="2.-字典在内存开销巨大">2. 字典在内存开销巨大<a class="anchor-link" href="#2.-字典在内存开销巨大">¶</a></h3><p>由于字典使用了散列表，而散列表又是稀疏的，这导致它在空间上效率低下，举例而言，如果我们需要存放数量巨大的记录，那么存放在元组或者具名元组构成的列表是一个比较好的选择。最好不要根据 JSON 风格，存放到字典中，用字典取代元组的原因有两个，其一是避免了散列表所耗费的空间，其二是无需把记录中字段的名字在每个元素都存一遍。</p>
+<p>在用户自定义类型中 <code>__stots__</code> 属性可以改变实例属性的存储方式，由 dict 变成 tuple，相关细节在第 9 章会谈到。</p>
+<p>记住我们现在讨论的是空间优化，如果你手里有几百万对象而机器只有几 GB 内存时才真正需要考虑空间优化，因为优化往往是可维护性的对立面。</p>
+<h3 id="3.-键值查询很快">3. 键值查询很快<a class="anchor-link" href="#3.-键值查询很快">¶</a></h3><p>dict 是典型的空间换时间。有着巨大的内存开销，但是它提供了无视数据大小的快速访问-只要字典可以被装到内存里。</p>
+<h3 id="4.-键的顺序取决与添加顺序">4. 键的顺序取决与添加顺序<a class="anchor-link" href="#4.-键的顺序取决与添加顺序">¶</a></h3><p>当往 dict 里添加新键而又发生散列冲突时，新建可能会被安排存放到另一个位置。于是下面这种情况就会发生：由 dict([(key1, value1), (key2, value2]) 和 dict([(key2, value2), (key1, value1]) 得到的两个字典，在比较的时候，它们是相等的，但是如果在 key1 和 key2 被添加到字典过程中有冲突的话，这两个键出现在字典里的顺序是不一样的。</p>
+<p>下面展示了这个现象，用同样的数据创建了 3 个字典，唯一的区别就是数据出现的次序不一样，可以看到，虽然键的次序是乱的，这 3 个字典仍然被视为相等的。</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DIAL_CODES = [</span>
-<span class="c1">#     (86, 'China'),</span>
-<span class="c1">#     (91, 'India'),</span>
-<span class="c1">#     (1, 'United State')</span>
-<span class="c1"># ]</span>
-<span class="c1"># d1 = dict(DIAL_CODES)</span>
-<span class="c1"># print('d1:', d1.keys())</span>
-<span class="c1"># d2 = dict(sorted(DIAL_CODES))</span>
-<span class="c1"># print('d2:', d2.keys())</span>
-<span class="c1"># d3 = dict(sorted(DIAL_CODES, key = lambda x: x[1]))</span>
-<span class="c1"># print('d3:', d3.keys())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DIAL_CODES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">86</span><span class="p">,</span> <span class="s1">'China'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">91</span><span class="p">,</span> <span class="s1">'India'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'United States'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">62</span><span class="p">,</span> <span class="s1">'Indonesia'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="s1">'Brazil'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">92</span><span class="p">,</span> <span class="s1">'Pakistan'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">880</span><span class="p">,</span> <span class="s1">'Bangladesh'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">234</span><span class="p">,</span> <span class="s1">'Nigeria'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s1">'Russia'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">81</span><span class="p">,</span> <span class="s1">'Japan'</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">d1</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">DIAL_CODES</span><span class="p">)</span> <span class="c1"># 数组元组顺序按照国家人口排名决定</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'d1:'</span><span class="p">,</span> <span class="n">d1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">DIAL_CODES</span><span class="p">))</span> <span class="c1"># 数组元组顺序按照国家区号大小排名决定</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'d2:'</span><span class="p">,</span> <span class="n">d2</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">d3</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">DIAL_CODES</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="c1"># 数组元组顺序按照国家字母顺序排名决定</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'d3:'</span><span class="p">,</span> <span class="n">d3</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">assert</span> <span class="n">d1</span> <span class="o">==</span> <span class="n">d2</span> <span class="ow">and</span> <span class="n">d2</span> <span class="o">==</span> <span class="n">d3</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>d1: dict_keys([880, 1, 86, 55, 7, 234, 91, 92, 62, 81])
+d2: dict_keys([880, 1, 91, 86, 81, 55, 234, 7, 92, 62])
+d3: dict_keys([880, 81, 1, 86, 55, 7, 234, 91, 92, 62])
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -2259,18 +2333,20 @@ was [(2, 45)]
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="将元素加到字典可能会改变现有键的顺序">将元素加到字典可能会改变现有键的顺序<a class="anchor-link" href="#将元素加到字典可能会改变现有键的顺序">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
+<p>可以看到这些字典是相等的，但是 3 个字典的顺序是不一样的</p>
+<h3 id="5.-将元素加到字典可能会改变现有键的顺序">5. 将元素加到字典可能会改变现有键的顺序<a class="anchor-link" href="#5.-将元素加到字典可能会改变现有键的顺序">¶</a></h3><p>无论何时往字典添加新的键，Python 解释器都可能做出为字典扩容的决定。扩容导致的结果就是要建更大的散列表，并把字典已有的元素添加到新表中。这个过程可能产生新的散列冲突。导致散列表中键的次序变化。要注意的是，上面提到的这些变化是否发生以及如何发生都取决于字典背后的具体实现。因此你不能很自信的说自己知道背后发生了什么，如果你在迭代一个字典所有键的过程中同时对字典进行修改，那么这个循环可能跳过一些键，甚至跳过字典中已有的键。</p>
+<p>由此可知，不要对字典同时进行迭代和修改。如果想扫描并修改一个字典，最好分成两步来进行，首先对字典进行迭代，得出需要添加的内容，把这些内容放到一个新字典里，迭代结束后再进行更新。</p>
+<p>在 Python 3 中 .keys() .items() 和.values() 返回的都是字典视图。也就是说，这些方法返回值更像集合，而不是 Python 2 中那样返回列表。视图还有动态的特性，它们可以实时反馈字典的变化。</p>
+<h2 id="set-的实现以及导致的结果">set 的实现以及导致的结果<a class="anchor-link" href="#set-的实现以及导致的结果">¶</a></h2><p>set 和 frozenset 的实现也依赖于散列表，但在它们散列表存放的只元素的引用（就像在字典里存放的只有键没有值）。在 set 加入 Python 前，我们都是把字典加上无意义的值当做集合来用的。</p>
+<p>在上面提到字典和散列表的几个特点，对于集合来说几乎都是适用的。为了避免重复，我们简单总结一下：</p>
+<ul>
+<li>集合里的元素必须是可散列的</li>
+<li>集合很消耗内存</li>
+<li>可以很高效的判断元素是否存在与某个集合</li>
+<li>元素的次序取决于被添加到集合里的次序</li>
+<li>往集合里添加元素，可能改变集合里已有的元素的次序</li>
+</ul>
+<h2 id="延伸">延伸<a class="anchor-link" href="#延伸">¶</a></h2><p>如果对 dict 的顺序有要求，可以使用 OrderdDict，然而对于映射类型来说，排序并不是一个常用的需求，因此会把它排除在核心功能之外，以标准库的形式提供其他的衍生类型。</p>
 </div>
 </div>
 </div>
