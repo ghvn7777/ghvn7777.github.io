@@ -1022,6 +1022,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>这篇文章需要看 ipynb 文件，这个 html 没有转换全，而且还有很多格式不对</strong></p>
 <p>在 Python 中，函数是一等对象。编程语言理论家把 “一等对象” 定义为满足下面条件的程序实体：</p>
 <ul>
 <li>在运行时创建</li>
@@ -1036,7 +1037,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1051,30 +1052,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>1405006117752879898543142606244511569936384000000000</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [2]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">factorial</span><span class="o">.</span><span class="vm">__doc__</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
 <div class="prompt output_prompt">Out[2]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'return n!'</pre>
+<pre>1405006117752879898543142606244511569936384000000000</pre>
 </div>
 </div>
 </div>
@@ -1085,7 +1065,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">factorial</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">factorial</span><span class="o">.</span><span class="vm">__doc__</span>
 </pre></div>
 </div>
 </div>
@@ -1094,6 +1074,27 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'return n!'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">factorial</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>function</pre>
 </div>
@@ -1112,7 +1113,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fact</span><span class="o">=</span> <span class="n">factorial</span>
@@ -1124,30 +1125,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>120</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [5]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">map</span><span class="p">(</span><span class="n">factorial</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
 <div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><map at 0x7f140854d3c8></pre>
+<pre>120</pre>
 </div>
 </div>
 </div>
@@ -1158,7 +1138,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">factorial</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">map</span><span class="p">(</span><span class="n">factorial</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1167,6 +1147,27 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><map at 0x7f6ca05ceac8></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">factorial</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>[1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800]</pre>
 </div>
@@ -1186,7 +1187,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'strawberry'</span><span class="p">,</span> <span class="s1">'fig'</span><span class="p">,</span> <span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'cherry'</span><span class="p">,</span> <span class="s1">'raspberry'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">]</span>
@@ -1198,7 +1199,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>['fig', 'apple', 'cherry', 'banana', 'raspberry', 'strawberry']</pre>
 </div>
@@ -1365,7 +1366,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span>
@@ -1378,7 +1379,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt output_prompt">Out[15]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>4950</pre>
 </div>
@@ -1388,7 +1389,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
@@ -1399,7 +1400,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>4950</pre>
 </div>
@@ -1431,7 +1432,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [19]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'strawberry'</span><span class="p">,</span> <span class="s1">'fig'</span><span class="p">,</span> <span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'cherry'</span><span class="p">,</span> <span class="s1">'raspberry'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">]</span>
@@ -1443,7 +1444,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[19]:</div>
+<div class="prompt output_prompt">Out[17]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>['banana', 'apple', 'fig', 'raspberry', 'strawberry', 'cherry']</pre>
 </div>
@@ -1501,7 +1502,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [20]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">abs</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="mi">13</span>
@@ -1512,7 +1513,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[20]:</div>
+<div class="prompt output_prompt">Out[18]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(<function abs>, str, 13)</pre>
 </div>
@@ -1522,7 +1523,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">abs</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="mi">13</span><span class="p">)]</span>
@@ -1533,7 +1534,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[21]:</div>
+<div class="prompt output_prompt">Out[19]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>[True, True, False]</pre>
 </div>
@@ -1552,7 +1553,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -1580,7 +1581,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[20]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>2</pre>
 </div>
@@ -1590,7 +1591,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bingo</span><span class="o">.</span><span class="n">pick</span><span class="p">()</span>
@@ -1601,9 +1602,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[21]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>0</pre>
+<pre>1</pre>
 </div>
 </div>
 </div>
@@ -1611,7 +1612,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">callable</span><span class="p">(</span><span class="n">bingo</span><span class="p">)</span>
@@ -1622,7 +1623,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>True</pre>
 </div>
@@ -1643,7 +1644,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">factorial</span><span class="p">)</span>
@@ -1654,7 +1655,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[23]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>['__annotations__',
  '__call__',
@@ -1707,7 +1708,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">upper_case_name</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
@@ -1730,7 +1731,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">:</span> <span class="k">pass</span>
@@ -1745,7 +1746,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[25]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>['__annotations__',
  '__call__',
@@ -1775,7 +1776,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [18]:</div>
+<div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">content</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
@@ -1800,10 +1801,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [19]:</div>
+<div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tag</span><span class="p">(</span><span class="s1">'br'</span><span class="p">)</span>
+<span class="c1">#'<br />'</span>
 </pre></div>
 </div>
 </div>
@@ -1811,7 +1813,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[19]:</div>
+<div class="prompt output_prompt">Out[27]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'<br />'</pre>
 </div>
@@ -1821,10 +1823,12 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [22]:</div>
+<div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">(</span><span class="s1">'p'</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'world'</span><span class="p">))</span>
+<span class="c1">#<p>hello</p></span>
+<span class="c1">#<p>world</p></span>
 </pre></div>
 </div>
 </div>
@@ -1844,10 +1848,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tag</span><span class="p">(</span><span class="s1">'p'</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">33</span><span class="p">)</span> <span class="c1"># tag 函数签名中没有明确指定名称的关键字会被 **attrs 捕获，存入一个字典</span>
+<span class="c1">#'<p id="33">hello</p>'</span>
 </pre></div>
 </div>
 </div>
@@ -1855,7 +1860,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[21]:</div>
+<div class="prompt output_prompt">Out[29]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'<p id="33">hello</p>'</pre>
 </div>
@@ -1865,7 +1870,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [23]:</div>
+<div class="prompt input_prompt">In [30]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">(</span><span class="s1">'p'</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'world'</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s1">'sidebar'</span><span class="p">))</span> <span class="c1"># cls 只能作为关键字传入</span>
@@ -1888,10 +1893,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [24]:</div>
+<div class="prompt input_prompt">In [31]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tag</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s1">'testing'</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">"img"</span><span class="p">)</span> <span class="c1"># 调用 tag 时，即使第一个定位参数也能作为关键字参数传入</span>
+<span class="c1">#'<img content="testing" />'</span>
 </pre></div>
 </div>
 </div>
@@ -1899,7 +1905,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[31]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'<img content="testing" />'</pre>
 </div>
@@ -1909,12 +1915,13 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [25]:</div>
+<div class="prompt input_prompt">In [32]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_tag</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'img'</span><span class="p">,</span> <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'Sunset Boulevard'</span><span class="p">,</span>
            <span class="s1">'src'</span><span class="p">:</span> <span class="s1">'sunset.jpg'</span><span class="p">,</span> <span class="s1">'cls'</span><span class="p">:</span> <span class="s1">'framed'</span><span class="p">}</span>
 <span class="n">tag</span><span class="p">(</span><span class="o">**</span><span class="n">my_tag</span><span class="p">)</span> <span class="c1">#字典中所有元素作为单个参数传入，同名键会自动对应的具名参数上，剩下的被 **attrs 捕获</span>
+<span class="c1">#'<img class="framed" src="sunset.jpg" title="Sunset Boulevard" />'</span>
 </pre></div>
 </div>
 </div>
@@ -1922,7 +1929,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[25]:</div>
+<div class="prompt output_prompt">Out[32]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'<img class="framed" src="sunset.jpg" title="Sunset Boulevard" />'</pre>
 </div>
@@ -1941,7 +1948,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [26]:</div>
+<div class="prompt input_prompt">In [33]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -1955,7 +1962,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[26]:</div>
+<div class="prompt output_prompt">Out[33]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(1, 2)</pre>
 </div>
@@ -1974,7 +1981,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [29]:</div>
+<div class="prompt input_prompt">In [34]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">bobo</span>
@@ -2025,7 +2032,7 @@ Bobo 怎么知道函数需要哪个参数呢？又怎么知道参数有没有默
 
 
 
-In [30]:
+In [35]:
 
 
 def clip(text, max_len = 80):
@@ -2062,7 +2069,7 @@ def clip(text, max_len = 80):
 
 
 
-In [32]:
+In [36]:
 
 
 clip.__defaults__
@@ -2073,51 +2080,9 @@ clip.__defaults__
 
 
 
-Out[32]:
+Out[36]:
 
 (80,)
-
-
-
-
-
-
-
-In [33]:
-
-
-clip.__code__
-
-
-
-
-
-
-
-Out[33]:
-
-", line 1>
-
-
-
-
-
-
-
-In [35]:
-
-
-clip.__code__.co_varnames
-
-
-
-
-
-
-
-Out[35]:
-
-('text', 'max_len', 'end', 'space_before', 'space_after')
 
 
 
@@ -2128,7 +2093,7 @@ Out[35]:
 In [37]:
 
 
-clip.__code__.co_argcount
+clip.__code__
 
 
 
@@ -2137,6 +2102,48 @@ clip.__code__.co_argcount
 
 
 Out[37]:
+
+", line 1>
+
+
+
+
+
+
+
+In [38]:
+
+
+clip.__code__.co_varnames
+
+
+
+
+
+
+
+Out[38]:
+
+('text', 'max_len', 'end', 'space_before', 'space_after')
+
+
+
+
+
+
+
+In [39]:
+
+
+clip.__code__.co_argcount
+
+
+
+
+
+
+
+Out[39]:
 
 2
 
@@ -2156,7 +2163,7 @@ Out[37]:
 
 
 
-In [38]:
+In [40]:
 
 
 from inspect import signature
@@ -2169,7 +2176,7 @@ sig
 
 
 
-Out[38]:
+Out[40]:
 
 
 
@@ -2179,7 +2186,7 @@ Out[38]:
 
 
 
-In [39]:
+In [41]:
 
 
 str(sig)
@@ -2190,7 +2197,7 @@ str(sig)
 
 
 
-Out[39]:
+Out[41]:
 
 '(text, max_len=80)'
 
@@ -2200,7 +2207,7 @@ Out[39]:
 
 
 
-In [40]:
+In [42]:
 
 
 for name, param in sig.parameters.items():
@@ -2244,7 +2251,7 @@ inspect.Signature 对象有一个 bind 方法，它可以把任意个参数绑�
 
 
 
-In [52]:
+In [43]:
 
 
 import inspect
@@ -2260,7 +2267,7 @@ bound_args # 得到一个 BoundArguments 对象
 
 
 
-Out[52]:
+Out[43]:
 
 
 
@@ -2270,7 +2277,7 @@ Out[52]:
 
 
 
-In [53]:
+In [44]:
 
 
 for name, value in bound_args.arguments.items(): #迭代 bound_args.arguments 中的元素，显示参数的名称和值
@@ -2295,7 +2302,7 @@ attrs = {'src': 'sunset.jpg', 'title': 'Sunset Boulevard'}
 
 
 
-In [54]:
+In [45]:
 
 
 del my_tag['name']
@@ -2348,7 +2355,7 @@ TypeError: missing a required argument: 'name'
 
 
 
-In [56]:
+In [46]:
 
 
 def clip(text:str, max_len: 'int > 0' = 80) -> str:
@@ -2386,7 +2393,7 @@ def clip(text:str, max_len: 'int > 0' = 80) -> str:
 
 
 
-In [57]:
+In [47]:
 
 
 clip.__annotations__
@@ -2397,7 +2404,7 @@ clip.__annotations__
 
 
 
-Out[57]:
+Out[47]:
 
 {'max_len': 'int > 0', 'return': str, 'text': str}
 
@@ -2418,7 +2425,7 @@ Python 所做的唯一的是就是把注解存到 __annotations__ 属性中，�
 
 
 
-In [58]:
+In [48]:
 
 
 from inspect import signature
@@ -2431,7 +2438,7 @@ sig.return_annotation
 
 
 
-Out[58]:
+Out[48]:
 
 str
 
@@ -2441,7 +2448,7 @@ str
 
 
 
-In [59]:
+In [49]:
 
 
 for param in sig.parameters.values():
@@ -2479,7 +2486,7 @@ operator 模块¶在函数式编程中，经常需要把算术运算符当做函
 
 
 
-In [60]:
+In [50]:
 
 
 from functools import reduce
@@ -2501,7 +2508,7 @@ operator 模块为算数运算符提供了对应的函数，从而避免写 lamb
 
 
 
-In [62]:
+In [51]:
 
 
 from functools import reduce
@@ -2526,7 +2533,7 @@ operator 模块中还有一类函数，能替代从序列中去除元素或读�
 
 
 
-In [92]:
+In [52]:
 
 
 metro_data = [
@@ -2571,7 +2578,7 @@ for city in sorted(metro_data, key = itemgetter(1)):
 
 
 
-In [93]:
+In [53]:
 
 
 cc_name = itemgetter(1, 0)
@@ -2609,7 +2616,7 @@ attrgetter 和 itemgetter 作用类似，它创建的函数根据名称提取对
 
 
 
-In [95]:
+In [54]:
 
 
 from collections import namedtuple
@@ -2626,7 +2633,7 @@ metro_areas[0]
 
 
 
-Out[95]:
+Out[54]:
 
 Metropolis(name='Tokyo', cc='JP', pop=36.933, coord=LatLong(lat=35.69, long=139.69))
 
@@ -2636,7 +2643,7 @@ Metropolis(name='Tokyo', cc='JP', pop=36.933, coord=LatLong(lat=35.69, long=139.
 
 
 
-In [96]:
+In [55]:
 
 
 metro_areas[0].coord.lat
@@ -2647,7 +2654,7 @@ metro_areas[0].coord.lat
 
 
 
-Out[96]:
+Out[55]:
 
 35.69
 
@@ -2657,7 +2664,7 @@ Out[96]:
 
 
 
-In [98]:
+In [56]:
 
 
 from operator import attrgetter
@@ -2695,7 +2702,7 @@ for city in sorted(metro_areas, key = attrgetter('coord.lat')):
 
 
 
-In [101]:
+In [57]:
 
 
 import operator
@@ -2707,7 +2714,7 @@ import operator
 
 
 
-Out[101]:
+Out[57]:
 
 ['abs',
  'add',
@@ -2780,7 +2787,7 @@ Out[101]:
 
 
 
-In [102]:
+In [58]:
 
 
 from operator import methodcaller
@@ -2794,7 +2801,7 @@ upcase(s)
 
 
 
-Out[102]:
+Out[58]:
 
 'THE TIME HAS COME'
 
@@ -2804,7 +2811,7 @@ Out[102]:
 
 
 
-In [104]:
+In [59]:
 
 
 hiphenate = methodcaller('replace', ' ', '-')
@@ -2816,7 +2823,7 @@ hiphenate(s)
 
 
 
-Out[104]:
+Out[59]:
 
 'The-time-has-come'
 
@@ -2835,7 +2842,7 @@ Out[104]:
 
 
 
-In [106]:
+In [60]:
 
 
 str.upper(s)
@@ -2846,7 +2853,7 @@ str.upper(s)
 
 
 
-Out[106]:
+Out[60]:
 
 'THE TIME HAS COME'
 
@@ -2867,7 +2874,7 @@ functools.partial 这个高阶函数用于部分应用一个函数，部分应�
 
 
 
-In [108]:
+In [61]:
 
 
 from operator import mul
@@ -2882,7 +2889,7 @@ triple(7)
 
 
 
-Out[108]:
+Out[61]:
 
 21
 
@@ -2892,7 +2899,7 @@ Out[108]:
 
 
 
-In [109]:
+In [62]:
 
 
 list(map(triple, range(1, 10)))
@@ -2903,7 +2910,7 @@ list(map(triple, range(1, 10)))
 
 
 
-Out[109]:
+Out[62]:
 
 [3, 6, 9, 12, 15, 18, 21, 24, 27]
 
@@ -2922,7 +2929,7 @@ Out[109]:
 
 
 
-In [110]:
+In [63]:
 
 
 import unicodedata, functools
@@ -2937,7 +2944,7 @@ s1, s2
 
 
 
-Out[110]:
+Out[63]:
 
 ('café', 'café')
 
@@ -2947,7 +2954,7 @@ Out[110]:
 
 
 
-In [111]:
+In [64]:
 
 
 s1 == s2
@@ -2958,7 +2965,7 @@ s1 == s2
 
 
 
-Out[111]:
+Out[64]:
 
 False
 
@@ -2968,7 +2975,7 @@ False
 
 
 
-In [112]:
+In [65]:
 
 
 nfc(s1) == nfc(s2)
@@ -2979,7 +2986,7 @@ nfc(s1) == nfc(s2)
 
 
 
-Out[112]:
+Out[65]:
 
 True
 
@@ -2998,13 +3005,14 @@ True
 
 
 
-In [114]:
+In [67]:
 
 
 from functools import partial
 
 picture = partial(tag, 'img', cls = 'pic-frame')
 picture(src = 'wumpus.jpeg')
+#''
 
 
 
@@ -3012,7 +3020,7 @@ picture(src = 'wumpus.jpeg')
 
 
 
-Out[114]:
+Out[67]:
 
 ''
 
@@ -3022,7 +3030,7 @@ Out[114]:
 
 
 
-In [115]:
+In [68]:
 
 
 picture #返回一个 functools.partial 对象
@@ -3033,7 +3041,7 @@ picture #返回一个 functools.partial 对象
 
 
 
-Out[115]:
+Out[68]:
 
 functools.partial(, 'img', cls='pic-frame')
 
@@ -3043,7 +3051,7 @@ functools.partial(, 'img', cls='pic-frame')
 
 
 
-In [116]:
+In [69]:
 
 
 picture.func #functools.partial 对象提供了访问原函数的固定参数的属性
@@ -3054,7 +3062,7 @@ picture.func #functools.partial 对象提供了访问原函数的固定参数的
 
 
 
-Out[116]:
+Out[69]:
 
 
 
@@ -3064,7 +3072,7 @@ Out[116]:
 
 
 
-In [117]:
+In [70]:
 
 
 picture.args
@@ -3075,7 +3083,7 @@ picture.args
 
 
 
-Out[117]:
+Out[70]:
 
 ('img',)
 
@@ -3085,7 +3093,7 @@ Out[117]:
 
 
 
-In [118]:
+In [71]:
 
 
 picture.keywords
@@ -3096,7 +3104,7 @@ picture.keywords
 
 
 
-Out[118]:
+Out[71]:
 
 {'cls': 'pic-frame'}
 
