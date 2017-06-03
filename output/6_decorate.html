@@ -2377,18 +2377,127 @@ factorial = clock(factorial)</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span> <span class="c1"># 默认情况下， 在 <pre> 标签内显示 HTML 转义后的字符串表示形式</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<pre>{1, 2, 3}</pre>'</pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<pre>&lt;built-in function abs&gt;</pre>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="s1">'Heimlich & Co.</span><span class="se">\n</span><span class="s1">- a game'</span><span class="p">)</span><span class="c1"># str 对象也是显示 HTML 转义后的形式，\n 换成 <br>\n 并且放到 <p> 标签内</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<p>Heimlich &amp; Co.<br>\n- a game</p>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># 数字显示 10进制和 16进制形式</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<pre>42 (0x2a)</pre>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">htmlize</span><span class="p">([</span><span class="s1">'alpha'</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}]))</span> <span class="c1">#列表根据各自的类型格式化显示</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><ul>
+<li><p>alpha</p></li>
+<li><pre>66 (0x42)</pre></li>
+<li><pre>{1, 2, 3}</pre></li>
+</ul>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python 不支持重载方法或函数，所以我们不能使用不同签名定义 htmlize 的变体。也无法使用不同方式处理不同的数据类型。在 Python 中，一种常见的做法是把 htmlize 变成一个分派函数，使用一串 if else 来调用专门的函数，但是这样太笨，而且不好维护</p>
+<p>Python 3.4 新增了 functools.singledispatch 装饰器可以把整体方案拆成多个模块，甚至可以为你无法修改的类提供专门的函数。使用 @singledispathc 会把普通的函数变成泛函数。根据第一参数的类型，以不同方式执行相同操作的一组函数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">singledispatch</span>
@@ -2399,23 +2508,377 @@ factorial = clock(factorial)</code></pre>
 <span class="nd">@singledispatch</span>
 <span class="k">def</span> <span class="nf">htmlize</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
-    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{}</span><span class="s1"></pre}'&lt;><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{}</span><span class="s1"></pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
-<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="c1">#各个函数用 @base_function.register(type) 装饰</span>
+<span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> <span class="c1">#专门函数的名称不重要， _ 是个不错的选择</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'<br></span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
     <span class="k">return</span> <span class="s1">'<p></span><span class="si">{0}</span><span class="s1"></p>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
-<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)</span>
+<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)</span> <span class="c1"># Integral 是 int 的虚拟超类</span>
 <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{0}</span><span class="s1"> (0x</span><span class="si">{0:x}</span><span class="s1">)</pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">tuple</span><span class="p">)</span>
+<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">tuple</span><span class="p">)</span>  <span class="c1">#可以叠放多个装饰器，让同一个函数支持不同的类型</span>
 <span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
     <span class="n">inner</span> <span class="o">=</span> <span class="s1">'</li></span><span class="se">\n</span><span class="s1"><li>'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">htmlize</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s1">'<ul></span><span class="se">\n</span><span class="s1"><li>'</span> <span class="o">+</span> <span class="n">inner</span> <span class="o">+</span> <span class="o"><!--</span--><span class="n">li</span><span class="o">></span>\<span class="n">n</span><span class="o"><!--</span--><span class="n">ul</span><span class="o">></span>
+    <span class="k">return</span> <span class="s1">'<ul></span><span class="se">\n</span><span class="s1"><li>'</span> <span class="o">+</span> <span class="n">inner</span> <span class="o">+</span> <span class="s1">'</li></span><span class="se">\n</span><span class="s1"></ul>'</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>只要有可能，注册的专门函数应该处理抽象基类（例如 numbers.Integral 和 abc.MutableSequence），不要处理具体实现（如 int 和 list）。这样，代码支持的兼容类型更广泛</p>
+<h2 id="叠放装饰器">叠放装饰器<a class="anchor-link" href="#叠放装饰器">¶</a></h2><p>上面已经用过了叠放装饰器的方式，@lru_cache 应用到 @clock 装饰 fibonacci 得到的结果上。上面的例子最后也用到了两个 @htmlize.register 装饰器</p>
+<p>把 @d1 和 @d2 两个装饰器按顺序应用到 f 函数上，作用相当于 f = d1(d2(f))，也就是说</p>
+<pre><code>@d1
+@d2
+def f():
+    print('f')</code></pre>
+<p>等同于</p>
+<pre><code>def f():
+    print('f')
+
+f = d1(d2(f))</code></pre>
+<p>除了叠放装饰器以外，我们还用到了接收参数的装饰器，例如上面的 htmlize.register(type)</p>
+<h2 id="参数化装饰器">参数化装饰器<a class="anchor-link" href="#参数化装饰器">¶</a></h2><p>Python 把被装饰的函数作为第一个参数传给装饰器函数。我们可以创建一个装饰器工厂函数，把参数传给他，返回一个装饰器，然后再把它应用到要装饰器函数上，我们以见过的最简单的装饰器为例说明：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'funning register(</span><span class="si">%s</span><span class="s1">)'</span> <span class="o">%</span> <span class="n">func</span><span class="p">)</span>
+    <span class="n">registry</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">func</span>
+
+<span class="nd">@register</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f1()'</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">'running main()'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'registry ->'</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
+<span class="n">f1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>funning register(<function f1 at 0x7f00767727b8>)
+running main()
+registry -> [<function f1 at 0x7f00767727b8>]
+running f1()
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>为了便于启动和禁用 register 执行的函数注册功能，我们为他提供一个可选的 activate 参数，设为 False 时，不注册被装饰的函数。实现如下，从概念上来看，这个新的 register 函数不是装饰器，而是装饰器工厂函数。调用它会返回真正的装饰器，这才是应用到目标上的装饰器</p>
+<p>为了接受参数，新的 register 装饰器必须作为函数调用</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1">#添加删除元素更快（相比列表）</span>
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">):</span> <span class="c1">#这是真正的装饰器，它的参数是一个函数</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'running register(active=</span><span class="si">%s</span><span class="s1">)->decorate(</span><span class="si">%s</span><span class="s1">)'</span> <span class="o">%</span> <span class="p">(</span><span class="n">active</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">active</span><span class="p">:</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">func</span> <span class="c1">#decorate 是装饰器函数，所以返回 func</span>
+    <span class="k">return</span> <span class="n">decorate</span> <span class="c1"># register 是装饰器工厂函数，返回 decorate</span>
+
+<span class="nd">@register</span><span class="p">(</span><span class="n">active</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># @register 工厂函数必须作为函数调用，传入需要的参数</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f1()'</span><span class="p">)</span>
+
+<span class="nd">@register</span><span class="p">()</span> <span class="c1"># 如果不传入参数也要作为函数调用</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"running f2()"</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">f3</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f3()'</span><span class="p">)</span>
+    
+<span class="n">registry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running register(active=False)->decorate(<function f1 at 0x7f0075e880d0>)
+running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{<function __main__.f2>}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这里的关键是，register() 要返回 decorate，并把它应用到被装饰器函数上，注意只有 f2 在 registry 中，因为 f1 传给装饰器工厂函数的参数是 False。如果不能使用 @ 语法，那就要像常规函数那样使用 register，若想把 f 添加到 registry 中，则装饰 f 函数的语法是 register()(f)。下面演示了如何把函数添加到 registry 中，以及如何从中删除函数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">register</span><span class="p">()(</span><span class="n">f3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running register(active=True)->decorate(<function f3 at 0x7f0076772f28>)
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><function __main__.f3></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{<function __main__.f2>, <function __main__.f3>}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">register</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">f2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running register(active=False)->decorate(<function f2 at 0x7f0075edcd08>)
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><function __main__.f2></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{<function __main__.f3>}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>参数化装饰器原理相当复杂，我们讨论的是很简单的内容，参数化装饰器通常会把被装饰的函数替换掉，而且结构上需要多一层嵌套，接下来会讨论这种函数金字塔</p>
+<h2 id="参数化-clock-装饰器">参数化 clock 装饰器<a class="anchor-link" href="#参数化-clock-装饰器">¶</a></h2><p>我们这次为 clock 装饰器添加一个功能，让用户传入一个格式字符串，控制被装饰函数的输出，见下面例子，为了方便起见，我们下面用的是最初实现的 clock，而不是示例中使用 @functools.wraps 的改进后的版本，因为那一版增加了一层函数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">DEFAULT_FMT</span> <span class="o">=</span> <span class="s1">'[</span><span class="si">{elapsed:0.8f}</span><span class="s1">s] </span><span class="si">{name}</span><span class="s1">(</span><span class="si">{args}</span><span class="s1">) -> </span><span class="si">{result}</span><span class="s1">'</span>
+
+<span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">fmt</span> <span class="o">=</span> <span class="n">DEFAULT_FMT</span><span class="p">):</span> <span class="c1"># 参数化装饰器工厂函数</span>
+    <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>       <span class="c1"># 真正的装饰器</span>
+        <span class="k">def</span> <span class="nf">clocked</span><span class="p">(</span><span class="o">*</span><span class="n">_args</span><span class="p">):</span>  <span class="c1"># 包装被装饰器的函数</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> 
+            <span class="n">_result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">_args</span><span class="p">)</span> 
+            <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">_args</span><span class="p">)</span> 
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">_result</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">()))</span> <span class="c1">#是为了在 fmt 中引用 clocked 的局部变量 --> 用得好！</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">clocked</span>
+    <span class="k">return</span> <span class="n">decorate</span>
+
+<span class="nd">@clock</span><span class="p">()</span> <span class="c1">#不传入参数调用 clock()，应用的装饰器默认格式的 str</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0.12315559s] snooze(0.123) -> None
+[0.12337589s] snooze(0.123) -> None
+[0.12318420s] snooze(0.123) -> None
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面是用户传入自定义的格式字符串的调用：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@clock</span><span class="p">(</span><span class="s1">'</span><span class="si">{name}</span><span class="s1">: </span><span class="si">{elapsed}</span><span class="s1">s'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>snooze: 0.12341785430908203s
+snooze: 0.12339353561401367s
+snooze: 0.12339425086975098s
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@clock</span><span class="p">(</span><span class="s1">'</span><span class="si">{name}</span><span class="s1">(</span><span class="si">{args}</span><span class="s1">) dt=</span><span class="si">{elapsed:0.3f}</span><span class="s1">s'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>snooze(0.123) dt=0.123s
+snooze(0.123) dt=0.123s
+snooze(0.123) dt=0.123s
+</pre>
+</div>
 </div>
 </div>
 </div>
