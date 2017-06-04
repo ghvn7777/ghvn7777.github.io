@@ -27,7 +27,42 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="../6_decorate.html">
+	<a href="../8_object.html">
+		<h2 itemprop="name headline">8 对象引用，可变性和垃圾回收</h2>
+	</a>
+	<time datetime="2017-06-04T11:05:00+02:00" itemprop="datePublished">Sun 04 June 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本章先用一个比喻说变量不是盒子，而是标注，然后讨论对象标示，值和别名的概念。随后会揭露元组的一个神奇的特性，元组是不可变的，其中的值可以改变。之后引申到浅复制和深复制。接下来是引用和函数参数。然后最后一节讨论垃圾回收，del 命令以及如何使弱引用 “记住” 对象，而无需对象本身存在</p>
+<p>本章的内容是许多 Python 程序中不易察觉的 bug 关键</p>
+<h2 id="变量不是盒子">变量不是盒子<a class="anchor-link" href="#变量不是盒子">¶</a></h2><p>人们经常使用变量是盒子这样的比喻，但是这不易理解面向对象语言中的引用式变量。最好把它们理解为附加在对象上的标注：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../7_decorate.html">
 		<h2 itemprop="name headline">7 装饰器</h2>
 	</a>
 	<time datetime="2017-06-02T01:45:00+02:00" itemprop="datePublished">Fri 02 June 2017</time>
@@ -394,50 +429,14 @@ target = decorate(target)</code></pre>
 	Tags:
 </div>
 <hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="../2017_04_22_predict_ibm_attrition.html">
-		<h2 itemprop="name headline">IBM 人员流失预测</h2>
-	</a>
-	<time datetime="2017-04-22T08:00:00+02:00" itemprop="datePublished">Sat 22 April 2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">kaka</span>
-	</span>
-	<div class="summary">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="IBM-人员流失预测">IBM 人员流失预测<a class="anchor-link" href="#IBM-人员流失预测">¶</a></h1><h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>address: <a href="https://github.com/ghvn7777/kaggle/blob/master/ibm_employee/predict_ibm_attrition.ipynb">https://github.com/ghvn7777/kaggle/blob/master/ibm_employee/predict_ibm_attrition.ipynb</a></p>
-<p>保持雇员的快乐和对公司满意度是一个古老的挑战，如果你对雇员投资了很多，而他却离开了，这意味着你还要花费更多时间雇用别人，本着 Kaggle 的精神，让我们构建一个预测模型来根据 IBM 的数据集预测 IBM 员工的流失</p>
-<p>这个笔记包括以下内容：</p>
-<ol>
-<li>Exploratory Data Analysis: 在这个章节，我们探索数据集分布特征，特征间如何对应并可视化</li>
-<li>Feature Engineering and Categorical Encoding: 进行一些特征工程并将我们的的特征编码为多个变量</li>
-<li>Implementing Machine Learning models: 我们实现一个随机森林和梯度增强模型，然后看在这些模型中特征的重要性</li>
-</ol>
-<p>Let's Go.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input"></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="../category/feature_engineering.html" rel="category">feature_engineering</a>
-	</span>
-	Tags:
-</div>
-<hr>
  <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
     <li class="active"><a href="../author/kaka.html">1</a></li>
+    <li class=""><a href="../author/kaka2.html">2</a></li>
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+    <li class="next"><a href="../author/kaka2.html">Next &rarr;</a></li>
 
 </ul>
 </div> 		</div>
@@ -466,7 +465,7 @@ target = decorate(target)</code></pre>
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="../category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="../category/fluent_python.html">fluent_python (9)</a></li>
+							<li><a href="../category/fluent_python.html">fluent_python (10)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
