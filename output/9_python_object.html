@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>1-1 Python 风格扑克牌 — Kaka Blog</title>
-	<meta name="description" content="Title: 1-1 Python 风格扑克牌; Date: 2017-04-26; Author: kaka">
+	<title>9 符合 Python 风格的对象 — Kaka Blog</title>
+	<meta name="description" content="Title: 9 符合 Python 风格的对象; Date: 2017-06-07; Author: kaka">
 	<meta name="author" content="kaka">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -26,16 +26,23 @@
 		<div class="col-md-8 col-md-offset-2">
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">1-1 Python 风格扑克牌</h1>
+		<h1 itemprop="name headline" class="article-title">9 符合 Python 风格的对象</h1>
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">kaka</h4>
 		</span>
-		<time datetime="2017-04-26T00:50:00+02:00" itemprop="datePublished">Wed 26 April 2017</time>
+		<time datetime="2017-06-07T07:38:00+02:00" itemprop="datePublished">Wed 07 June 2017</time>
 	</div>
 	<div>
 		Category:
 		<span itemprop="articleSection">
 			<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="./tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
 		</span>
 	</div>
 	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
@@ -1015,209 +1022,38 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="__getitem__--AND--__len__-方法"><strong><code>__getitem__</code></strong>  AND  <strong><code>__len__</code></strong> 方法<a class="anchor-link" href="#__getitem__--AND--__len__-方法">¶</a></h2><p>下面看一个生成扑克牌以及对其进行操作的例子</p>
+<p>得益于 Python 数据模型，自定义类型行为可以像内置类型那样自然。实现如此自然的行为，靠的不是继承，而是鸭子类型，我们只需要按照预定行为实现对象所需方法即可</p>
+<p>这一章我们定义自己的类，而且让类的行为跟真正的 Python 对象一样，这一章延续第一章，说明如何实现在很多 Python 类型中常见的特殊方法。</p>
+<p>本章包含以下话题：</p>
+<ul>
+<li>支持用于生成对象其他表示形式的内置函数（如 repr(), bytes() 等等）</li>
+<li>使用一个类方法实现备选构造方法</li>
+<li>扩展内置的 format() 函数和 str.format() 方法使用的格式微语言</li>
+<li>实现只读属性</li>
+<li>把对象变成可散列的，以便在集合中及作为 dict 的键使用</li>
+<li>利用 <code>__slots__</code> 节省内存</li>
+</ul>
+<p>我们将开发一个二维欧几里得向量模型，这个过程中覆盖上面所有话题。这个过程中我们会讨论两个概念</p>
+<ul>
+<li>如何以及何时利用 @classmethod 和 @staticmethod 装饰器</li>
+<li>Python 的私有属性和受保护属性的用法，约定和局限</li>
+</ul>
+<h2 id="对象表示形式">对象表示形式<a class="anchor-link" href="#对象表示形式">¶</a></h2><p>每门面向对象的语言至少都有一种获取对象的字符串表示形式的标准方式。Python 提供了两种方式</p>
+<p>repr(): 便于开发者理解的方式返回对象的字符串表示形式</p>
+<p>str(): 便于用户理解的方式返回对象的字符串表示形式</p>
+<p>为了给对象提供其他的表现形式，还会用到两个特殊的方法, <code>__bytes__</code> 和 <code>__format__</code>。<code>__bytes__</code> 方法与 <code>__str__</code>方法类似：bytes() 函数调用它获取对象的字节序列表示形式。而 <code>__format__</code> 方法会被内置的 format() 和 str.format() 调用。使用特殊的格式代码显示对象的字符串表示形式。</p>
+<p>注意：Python3 中 <code>__repr__</code>, <code>__str__</code>, <code>__format__</code> 方法都必须返回 Unicode 字符串（str）类型。只有 <code>__bytes__</code> 方法应该返回字节序列（bytes 类型）</p>
+<h2 id="再谈向量类">再谈向量类<a class="anchor-link" href="#再谈向量类">¶</a></h2><p>为了说明用于生成对象表示形式的众多方法，我们将使用一个 Vector2d 类，与第一章的类似。这几节会不断完善这个类，我们期望这个类行为如下所示：</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [27]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
-
-<span class="n">Card</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Card'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'rank'</span><span class="p">,</span> <span class="s1">'suit'</span><span class="p">])</span> <span class="c1">#'Card' 是 namedtuple 名字,　后面是元素</span>
-
-<span class="k">class</span> <span class="nc">FrenchDeck</span><span class="p">:</span>
-    <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="s1">'JQKA'</span><span class="p">)</span>
-    <span class="n">suits</span> <span class="o">=</span> <span class="s1">'spades diamonds clubs hearts'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># 黑桃 钻石 梅花 红心</span>
-    
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span>
-                                        <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranks</span><span class="p">]</span>
-        
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span> <span class="c1">#代表了 self._cards 的 []运算符</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [28]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">beer_card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="s1">'7'</span><span class="p">,</span> <span class="s1">'diamonds'</span><span class="p">)</span>
-<span class="n">beer_card</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[28]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='7', suit='diamonds')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [29]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="p">()</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>  <span class="c1">#默认调用了 __len__()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[29]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>52</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [30]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#调用了 __getitem__()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[30]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='2', suit='spades')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [31]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[31]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='A', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [32]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">choice</span>
-<span class="n">choice</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[32]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='8', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [33]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1">#因为 __getitem__() 方法把 [] 操作交给 slef._cards 列表，我们的 desk 自动支持切片操作</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[33]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='2', suit='spades'),
- Card(rank='3', suit='spades'),
- Card(rank='4', suit='spades')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [34]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">12</span><span class="p">::</span><span class="mi">13</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[34]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='A', suit='spades'),
- Card(rank='A', suit='diamonds'),
- Card(rank='A', suit='clubs'),
- Card(rank='A', suit='hearts')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="迭代">迭代<a class="anchor-link" href="#迭代">¶</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [35]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">deck</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="c1"># 可以直接通过属性访问</span>
 </pre></div>
 </div>
 </div>
@@ -1227,16 +1063,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='spades')
+<pre>3.0 4.0
 </pre>
 </div>
 </div>
@@ -1245,12 +1072,11 @@ Card(rank='J', suit='spades')
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [36]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 也可以反向迭代</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">deck</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">v1</span> <span class="c1"># 可以拆包成元祖</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
@@ -1258,81 +1084,20 @@ Card(rank='J', suit='spades')
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='A', suit='hearts')
-Card(rank='K', suit='hearts')
-Card(rank='Q', suit='hearts')
-Card(rank='J', suit='hearts')
-Card(rank='10', suit='hearts')
-Card(rank='9', suit='hearts')
-Card(rank='8', suit='hearts')
-Card(rank='7', suit='hearts')
-Card(rank='6', suit='hearts')
-Card(rank='5', suit='hearts')
-Card(rank='4', suit='hearts')
-Card(rank='3', suit='hearts')
-Card(rank='2', suit='hearts')
-Card(rank='A', suit='clubs')
-Card(rank='K', suit='clubs')
-Card(rank='Q', suit='clubs')
-Card(rank='J', suit='clubs')
-Card(rank='10', suit='clubs')
-Card(rank='9', suit='clubs')
-Card(rank='8', suit='clubs')
-Card(rank='7', suit='clubs')
-Card(rank='6', suit='clubs')
-Card(rank='5', suit='clubs')
-Card(rank='4', suit='clubs')
-Card(rank='3', suit='clubs')
-Card(rank='2', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='K', suit='diamonds')
-Card(rank='Q', suit='diamonds')
-Card(rank='J', suit='diamonds')
-Card(rank='10', suit='diamonds')
-Card(rank='9', suit='diamonds')
-Card(rank='8', suit='diamonds')
-Card(rank='7', suit='diamonds')
-Card(rank='6', suit='diamonds')
-Card(rank='5', suit='diamonds')
-Card(rank='4', suit='diamonds')
-Card(rank='3', suit='diamonds')
-Card(rank='2', suit='diamonds')
-Card(rank='A', suit='spades')
-Card(rank='K', suit='spades')
-Card(rank='Q', suit='spades')
-Card(rank='J', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='2', suit='spades')
-</pre>
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(3.0, 4.0)</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="in-运算符">in 运算符<a class="anchor-link" href="#in-运算符">¶</a></h2><p>迭代通常是隐式的，如果集合中没有 <strong><code>__contains__</code></strong>　方法， in 操作符就会按顺序进行一次迭代搜索，于是 in 可以在 FrenchDeck 类中使用，因为它是可迭代的</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [37]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'hearts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span>
 </pre></div>
 </div>
 </div>
@@ -1340,7 +1105,29 @@ Card(rank='2', suit='spades')
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Vector2d(3.0,4.0)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1_clone</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span> <span class="c1"># repr 函数调用 Vector2d 实例，结果类似于构建实例的源码</span>
+<span class="n">v1</span> <span class="o">==</span> <span class="n">v1_clone</span> <span class="c1"># 支持 == 比较</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>True</pre>
 </div>
@@ -1350,76 +1137,10 @@ Card(rank='2', suit='spades')
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [38]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'beasts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[38]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>False</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="排序">排序<a class="anchor-link" href="#排序">¶</a></h2><p>扑克牌一般按照数字大小（ Ａ 最大）来排列，花色按照黑桃（最大），红心，方块，梅花（最小）来排序，我们实现一下此功能</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [39]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">suit_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">spades</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hearts</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diamonds</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clubs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">suit_values</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[39]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'clubs': 0, 'diamonds': 1, 'hearts': 2, 'spades': 3}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [44]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spades_high</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
-    <span class="n">rank_value</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="o">.</span><span class="n">ranks</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">rank_value</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">suit_values</span><span class="p">)</span> <span class="o">+</span> <span class="n">suit_values</span><span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">suit</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [45]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">spades_high</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="c1"># 会调用 str 函数，对 Vector2d 来说，输出的是一个有序对</span>
 </pre></div>
 </div>
 </div>
@@ -1429,59 +1150,209 @@ Card(rank='2', suit='spades')
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='clubs')
-Card(rank='2', suit='diamonds')
-Card(rank='2', suit='hearts')
-Card(rank='2', suit='spades')
-Card(rank='3', suit='clubs')
-Card(rank='3', suit='diamonds')
-Card(rank='3', suit='hearts')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='clubs')
-Card(rank='4', suit='diamonds')
-Card(rank='4', suit='hearts')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='clubs')
-Card(rank='5', suit='diamonds')
-Card(rank='5', suit='hearts')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='clubs')
-Card(rank='6', suit='diamonds')
-Card(rank='6', suit='hearts')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='clubs')
-Card(rank='7', suit='diamonds')
-Card(rank='7', suit='hearts')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='clubs')
-Card(rank='8', suit='diamonds')
-Card(rank='8', suit='hearts')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='clubs')
-Card(rank='9', suit='diamonds')
-Card(rank='9', suit='hearts')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='clubs')
-Card(rank='10', suit='diamonds')
-Card(rank='10', suit='hearts')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='clubs')
-Card(rank='J', suit='diamonds')
-Card(rank='J', suit='hearts')
-Card(rank='J', suit='spades')
-Card(rank='Q', suit='clubs')
-Card(rank='Q', suit='diamonds')
-Card(rank='Q', suit='hearts')
-Card(rank='Q', suit='spades')
-Card(rank='K', suit='clubs')
-Card(rank='K', suit='diamonds')
-Card(rank='K', suit='hearts')
-Card(rank='K', suit='spades')
-Card(rank='A', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='A', suit='hearts')
-Card(rank='A', suit='spades')
+<pre>(3.0, 4.0)
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">octets</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="c1"># 调用 __bytes__ 方法，生成实例的二进制表示形式</span>
+<span class="n">octets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>b'd\x00\x00\x00\x00\x00\x00\x08@\x00\x00\x00\x00\x00\x00\x10@'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="c1"># 会调用 __abs__ 方法，返回 Vector2d 实例的模</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>5.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="n">v1</span><span class="p">),</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># 会调用 __bool__ 方法，判断 Vector2d 的实例的向量长度</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(True, False)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">array</span> <span class="k">import</span> <span class="n">array</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">class</span> <span class="nc">Vector2d</span><span class="p">:</span>
+    <span class="n">typecode</span> <span class="o">=</span> <span class="s1">'d'</span> <span class="c1"># 类属性，Vector2d 实例和字节序之间转换使用</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># 转换成浮点数，尽早捕捉错误，防止传入不当参数</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span> <span class="c1"># 将 Vector2d 变成可迭代对象，这样才可以拆包</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+         <span class="c1"># {!r} 获取各个分量的表示形式，然后插值，构成一个字符串。因为 Vector2d 是可迭代对象，所以用 *self 会把 x 和 y 分量提供给 format 函数</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">(</span><span class="si">{!r}</span><span class="s1">,</span><span class="si">{!r}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 我们使用 typecode 转换成字节序列然后返回</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="nb">ord</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">typecode</span><span class="p">)])</span> <span class="o">+</span>
+                <span class="nb">bytes</span><span class="p">(</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">typecode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1">#为了快速比较所有分量，在操作数中构建元祖，对 Vector2d 实例来说，这样做还有问题，看下面的警告</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>上面的 <code>__eq__</code> 方法，在两个操作数都是 Vector2d 的时候可用，不过拿 Vector2d 实例和其他具有相同数值的可迭代对象相比，结果也是 True(如 Vector2d(3, 4) == [3, 4])。这个行为可以视为特性，也可以视为缺陷在第 13 章运算符重载时候进一步讨论</p>
+<p>我们已经定义了许多基本方法，但是显然少了一个操作：使用 bytes() 函数生成的二进制重建 Vecotr2d 实例</p>
+<h2 id="备选构造方法">备选构造方法<a class="anchor-link" href="#备选构造方法">¶</a></h2><p>我们可以把 Vector2d 实例转成字节序列；同理，也应该能从字节序列转换成 Vector2d 实例。在标准库中探索一番之后，我们发现 array.array 有个类方法 <code>.frombytes</code>（2.91 章介绍过，从文件读取数据） 正好符合需求。下面为 Vector2d 定义一个同名的类方法</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">array</span> <span class="k">import</span> <span class="n">array</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">class</span> <span class="nc">Vector2d</span><span class="p">:</span>
+    <span class="n">typecode</span> <span class="o">=</span> <span class="s1">'d'</span> 
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        
+    <span class="nd">@classmethod</span> <span class="c1"># 类方法使用 @classmethod 装饰器</span>
+    <span class="k">def</span> <span class="nf">frombytes</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">octets</span><span class="p">):</span> <span class="c1"># 不用传入 self 参数，相反，要通过 cls 传入类本身</span>
+        <span class="n">typecode</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">octets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#从第一个字节中读取 typecode</span>
+        <span class="c1"># 用传入的 octets 字节序列创建一个 memoryview，然后使用 typecode 转换</span>
+        <span class="n">memv</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">octets</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">typecode</span><span class="p">)</span> <span class="c1"># 2.92 章介绍了 cast 方法，将一段内存转换成指定的类型，d 代表 float</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">memv</span><span class="p">)</span> <span class="c1">#拆包转换后的 memoryview，得到构造方法所需的一对参数</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span> 
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">(</span><span class="si">{!r}</span><span class="s1">,</span><span class="si">{!r}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="nb">ord</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">typecode</span><span class="p">)])</span> <span class="o">+</span>
+                <span class="nb">bytes</span><span class="p">(</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">typecode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">octets</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">octets</span><span class="p">)</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="o">.</span><span class="n">frombytes</span><span class="p">(</span><span class="n">octets</span><span class="p">)</span>
+<span class="n">v2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>b'd\x00\x00\x00\x00\x00\x00\x08@\x00\x00\x00\x00\x00\x00\x10@'
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[22]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Vector2d(3.0,4.0)</pre>
 </div>
 </div>
 </div>
@@ -1492,7 +1363,8 @@ Card(rank='A', suit='spades')
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>现在还无法洗牌，因为牌的顺序是不可变的，除非我们破坏这个类的封装性，直接对 <code>_cards</code> 进行操作，在以后我们会讲到，其实只需要一行代码实现 <code>__setitem__</code> 方法就可以了</p>
+<p>我们上面用的 classmethod 装饰器是 Python 专用的，下面解释一下</p>
+<h2 id="classmethod-和-staticmethod">classmethod 和 staticmethod<a class="anchor-link" href="#classmethod-和-staticmethod">¶</a></h2>
 </div>
 </div>
 </div>
