@@ -1049,7 +1049,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -1072,7 +1072,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">v1</span> <span class="c1"># 可以拆包成元祖</span>
@@ -1084,7 +1084,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(3.0, 4.0)</pre>
 </div>
@@ -1094,7 +1094,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [10]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span>
@@ -1105,7 +1105,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>Vector2d(3.0,4.0)</pre>
 </div>
@@ -1115,7 +1115,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1_clone</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span> <span class="c1"># repr 函数调用 Vector2d 实例，结果类似于构建实例的源码</span>
@@ -1127,7 +1127,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>True</pre>
 </div>
@@ -1137,7 +1137,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [12]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="c1"># 会调用 str 函数，对 Vector2d 来说，输出的是一个有序对</span>
@@ -1159,7 +1159,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [13]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">octets</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="c1"># 调用 __bytes__ 方法，生成实例的二进制表示形式</span>
@@ -1171,7 +1171,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>b'd\x00\x00\x00\x00\x00\x00\x08@\x00\x00\x00\x00\x00\x00\x10@'</pre>
 </div>
@@ -1181,7 +1181,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [14]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="c1"># 会调用 __abs__ 方法，返回 Vector2d 实例的模</span>
@@ -1192,7 +1192,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[10]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>5.0</pre>
 </div>
@@ -1202,7 +1202,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="n">v1</span><span class="p">),</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># 会调用 __bool__ 方法，判断 Vector2d 的实例的向量长度</span>
@@ -1213,7 +1213,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[15]:</div>
+<div class="prompt output_prompt">Out[11]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(True, False)</pre>
 </div>
@@ -1223,7 +1223,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [14]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">array</span> <span class="k">import</span> <span class="n">array</span>
@@ -1279,7 +1279,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">array</span> <span class="k">import</span> <span class="n">array</span>
@@ -1328,7 +1328,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [22]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -1350,7 +1350,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
+<div class="prompt output_prompt">Out[14]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>Vector2d(3.0,4.0)</pre>
 </div>
@@ -1371,7 +1371,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Demo</span><span class="p">:</span>
@@ -1391,7 +1391,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[15]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(__main__.Demo,)</pre>
 </div>
@@ -1401,7 +1401,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Demo</span><span class="o">.</span><span class="n">klassmeth</span><span class="p">(</span><span class="s1">'kaka'</span><span class="p">)</span>
@@ -1412,7 +1412,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(__main__.Demo, 'kaka')</pre>
 </div>
@@ -1422,7 +1422,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Demo</span><span class="o">.</span><span class="n">statmeth</span><span class="p">()</span>
@@ -1433,7 +1433,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[17]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>()</pre>
 </div>
@@ -1443,7 +1443,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Demo</span><span class="o">.</span><span class="n">statmeth</span><span class="p">(</span><span class="s1">'kaka'</span><span class="p">)</span>
@@ -1454,7 +1454,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[18]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>('kaka',)</pre>
 </div>
@@ -1478,7 +1478,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">brl</span> <span class="o">=</span>  <span class="mi">1</span> <span class="o">/</span> <span class="mf">2.43</span>
@@ -1490,7 +1490,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[5]:</div>
+<div class="prompt output_prompt">Out[20]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>0.4115226337448559</pre>
 </div>
@@ -1500,7 +1500,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">brl</span><span class="p">,</span> <span class="s1">'0.4f'</span><span class="p">)</span>
@@ -1511,7 +1511,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[21]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'0.4115'</pre>
 </div>
@@ -1521,7 +1521,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="s1">'1 BRL = </span><span class="si">{rate:0.2f}</span><span class="s1"> USD'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rate</span> <span class="o">=</span> <span class="n">brl</span><span class="p">)</span>
@@ -1532,7 +1532,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'1 BRL = 0.41 USD'</pre>
 </div>
@@ -1552,7 +1552,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">)</span>
@@ -1563,7 +1563,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[23]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'101010'</pre>
 </div>
@@ -1573,7 +1573,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [10]:</div>
+<div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'.1%'</span><span class="p">)</span>
@@ -1584,7 +1584,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[24]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'66.7%'</pre>
 </div>
@@ -1603,7 +1603,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
@@ -1616,9 +1616,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[25]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'01:02:1496941333'</pre>
+<pre>'11:58:1497067119'</pre>
 </div>
 </div>
 </div>
@@ -1626,7 +1626,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [12]:</div>
+<div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"It's now {:%I：%M %p}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
@@ -1637,9 +1637,9 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[12]:</div>
+<div class="prompt output_prompt">Out[26]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>"It's now 01：02 AM"</pre>
+<pre>"It's now 11：58 AM"</pre>
 </div>
 </div>
 </div>
@@ -1656,7 +1656,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -1668,9 +1668,45 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt output_prompt">Out[27]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'(3.0, 4.0)'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>然而，传入格式说明符，<code>object.__format__</code> 方法会抛出 TypeError</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="s1">'.3f'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-28-5732af69f96b></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>format<span class="ansi-blue-fg">(</span>v1<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">'.3f'</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: unsupported format string passed to Vector2d.__format__</pre>
 </div>
 </div>
 </div>
@@ -1687,11 +1723,64 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [36]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">format</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[36]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'(3.0, 4.0)'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [37]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="s1">'.2f'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[37]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'(3.00, 4.00)'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [38]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="s1">'3e'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[38]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'(3.000000e+00, 4.000000e+00)'</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1718,14 +1807,1026 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面要在微语言添加一个自定义格式的代码：如果格式说明以 'p' 为结尾，那么在极坐标中显示向量，即 <r, theta>，其中 r 是 模，theta 是弧度，其他部分（'p' 之前的部分像往常一样解释）</p>
+<p>注意自定义的格式代码不要和已有的重复，整数使用的有 'bcdoxXn', 浮点数使用的有 'eEfFgGn%', 字符串有的是 's'。所以我们选的极坐标代码是 'p'，各个类都有自己的方式解释格式代码，自定义格式代码中重复使用代码字母不会出错，但是可能会让用户迷惑。</p>
+<p>对于极坐标来说，我们已经定义了计算模的 <code>__abs__</code> 方法，因此还要定义一个简单的 angle 方法，使用 math.atan2() 函数计算角度。angle 方法的代码如下：</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这样方便增强 <code>__format__</code> 方法，现在我们可以让其计算极坐标：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [31]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt_spec</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">fmt_spec</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'p'</span><span class="p">):</span>
+        <span class="n">fmt_spec</span> <span class="o">=</span> <span class="n">fmt_spec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 删除 p 后缀</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span> <span class="c1"># 构建元组，表示极坐标</span>
+        <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">>'</span> 
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">)'</span>
+    <span class="n">components</span> <span class="o">=</span> <span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">fmt_spec</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">outer_fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="可散列的-Vector2d">可散列的 Vector2d<a class="anchor-link" href="#可散列的-Vector2d">¶</a></h2><p>按照定义，我们现在的 Vector2d 是不可散列的，因此不能放入集合 (set) 中：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [32]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">hash</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-32-450ace16a47d></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> v1 <span class="ansi-blue-fg">=</span> Vector2d<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----> 2</span><span class="ansi-red-fg"> </span>hash<span class="ansi-blue-fg">(</span>v1<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: unhashable type: 'Vector2d'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>为了将其设成可散列的，必须使用 <code>__hash__</code> 方法（还需要 <code>__eq__</code> 方法，前面实现了）。此外，还要让向量不可变。</p>
+<p>目前我们可以为分量赋新值，如 v1.x = 7，我们应该让其无法赋值。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [33]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Vector2d</span><span class="p">:</span>
+    <span class="n">typecode</span> <span class="o">=</span> <span class="s1">'d'</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># 有两个前导下划线，或一个，把属性标记为私有的</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        
+    <span class="nd">@property</span>               <span class="c1"># property 把读值方法标记为特性</span>
+    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>            <span class="c1"># 读值方法与公开属性名一样，x</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__x</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__y</span>
+    
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+    
+    <span class="c1"># ...下面省略了。</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>注意，我们让这些向量不可变是有原因的，因为这样才能实现 <code>__hash__</code> 方法。这个方法应该返回一个整数，理想情况下还要考虑对象属性的散列值（<code>__eq__</code> 方法也要使用），因为相等的对象应该具有相同的散列值。根据官方文档，最好使用 异或（^）来混合各个分量的散列值</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [34]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">^</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>如果创建可散列的类型，不一定实现特性，也不一定要保护实例属性。只需要正确的实现 <code>__hash__</code> 和 <code>__eq__</code> 方法即可。但是，实例的散列值绝不应该变化，因此我们借机提到了只读属性。</p>
+<p>如果定义的类型有标量数值，可能还要实现 <code>__int__</code> 和 <code>__float__</code> 方法（分别被 int() 和 float() 构造函数调用），以便在某些情况下用于强制类型转换，此外，还有用于支持内置的 complex() 构造函数的 <code>__complex__</code> 方法。</p>
+<p>下面是完整的代码：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [71]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">array</span> <span class="k">import</span> <span class="n">array</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">class</span> <span class="nc">Vector2d</span><span class="p">:</span>
+    <span class="n">typecode</span> <span class="o">=</span> <span class="s1">'d'</span> 
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">__y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="nd">@property</span>               <span class="c1"># property 把读值方法标记为特性</span>
+    <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>            <span class="c1"># 读值方法与公开属性名一样，x</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__x</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__y</span>
+        
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))</span> 
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">(</span><span class="si">{!r}</span><span class="s1">,</span><span class="si">{!r}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">([</span><span class="nb">ord</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">typecode</span><span class="p">)])</span> <span class="o">+</span>
+                <span class="nb">bytes</span><span class="p">(</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">typecode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)))</span>
+    
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">^</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt_spec</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">fmt_spec</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'p'</span><span class="p">):</span>
+            <span class="n">fmt_spec</span> <span class="o">=</span> <span class="n">fmt_spec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 删除 p 后缀</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">())</span> <span class="c1"># 构建元组，表示极坐标</span>
+            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">>'</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span>
+            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">)'</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">fmt_spec</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">outer_fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span> <span class="c1"># 类方法使用 @classmethod 装饰器</span>
+    <span class="k">def</span> <span class="nf">frombytes</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">octets</span><span class="p">):</span> <span class="c1"># 不用传入 self 参数，相反，要通过 cls 传入类本身</span>
+        <span class="n">typecode</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">octets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#从第一个字节中读取 typecode</span>
+        <span class="c1"># 用传入的 octets 字节序列创建一个 memoryview，然后使用 typecode 转换</span>
+        <span class="n">memv</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">octets</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">typecode</span><span class="p">)</span> <span class="c1"># 2.92 章介绍了 cast 方法，将一段内存转换成指定的类型，d 代表 float</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">memv</span><span class="p">)</span> <span class="c1">#拆包转换后的 memoryview，得到构造方法所需的一对参数</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>测试：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [41]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3.0 4.0
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [42]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">v1</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[42]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(3.0, 4.0)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [43]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[43]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Vector2d(3.0,4.0)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [45]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1_clone</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span>
+<span class="n">v1</span> <span class="o">==</span> <span class="n">v1_clone</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[45]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [46]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(3.0, 4.0)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [47]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">octets</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="n">octets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[47]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>b'd\x00\x00\x00\x00\x00\x00\x08@\x00\x00\x00\x00\x00\x00\x10@'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [48]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[48]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>5.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [49]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">bool</span><span class="p">(</span><span class="n">v1</span><span class="p">),</span> <span class="nb">bool</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[49]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(True, False)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [51]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1_clone</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="o">.</span><span class="n">frombytes</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span>
+<span class="n">v1_clone</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[51]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Vector2d(3.0,4.0)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [52]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">==</span> <span class="n">v1_clone</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[52]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [53]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[53]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'(3.0, 4.0)'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [54]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="s1">'.2f'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[54]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'(3.00, 4.00)'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [55]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="s1">'.3e'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[55]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'(3.000e+00, 4.000e+00)'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [56]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[56]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [57]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[57]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [59]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">8</span>
+<span class="nb">abs</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o"><</span> <span class="n">epsilon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[59]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [60]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">angle</span><span class="p">()</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span> <span class="o"><</span> <span class="n">epsilon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[60]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [61]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">'p'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[61]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.4142135623730951, 0.7853981633974483>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [62]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">'.3ep'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[62]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.414e+00, 7.854e-01>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [63]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">'.5fp'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[63]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.41421, 0.78540>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [64]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">v1</span><span class="o">.</span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[64]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(3.0, 4.0)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [65]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-65-755261bacf40></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>v1<span class="ansi-blue-fg">.</span>x <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">123</span>
+
+<span class="ansi-red-fg">AttributeError</span>: can't set attribute</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [66]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mf">3.1</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">)</span>
+<span class="nb">hash</span><span class="p">(</span><span class="n">v1</span><span class="p">),</span> <span class="nb">hash</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[66]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(7, 384307168202284039)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [67]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[67]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Python-的私有属性和-“受保护”-的属性">Python 的私有属性和 “受保护” 的属性<a class="anchor-link" href="#Python-的私有属性和-“受保护”-的属性">¶</a></h2><p>Python 不能像 Java 一样使用 private 修饰符创建私有属性，但是 Python 有个简单的机制，能避免子类意外覆盖 “私有” 属性</p>
+<p>举个例子，如果有人编写了一个 Dog 类，有一个 mood 实例属性，但是没有开放，你创建了 Dog 子类，你在毫不知情的情况下又创建了 mood 的实例属性，那么会在继承方法中会把 Dog 类的 mood 属性覆盖掉。这是难以调试的问题</p>
+<p>为了避免这种情况，如果以 <code>__mood</code> 的形式（两个前导下划线，尾部没有或最多有一个前导下划线）命名实例属性，Python 会把属性名存到实例的 <code>__dict__</code> 属性中，而且会在前面加上一个下划线和类名。因此，对于 Dog 类来说，<code>__mood</code> 会变成 <code>_Dog__mood</code>，对于 Beagle 类来说，会变成 <code>_Beagle__mood</code>。这个语言特性叫名称改写</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [68]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">v1</span><span class="o">.</span><span class="vm">__dict__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[68]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'_Vector2d__x': 3.0, '_Vector2d__y': 4.0}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>名称改写是一种安全措施，不能保证万无一失，它的目的是避免意外访问，不能防止故意做错事。</p>
+<p>但不是所有 Python 程序员都喜欢这个功能，他们不喜欢两个下划线的这种特别不对称的写法，所以约定使用一个下划线编写受保护的属性（例如 <code>self.x</code>）。Python 不会对单下划线进行特殊处理，不过这是很多 Python 程序员严格遵守的约定，他们不会在外部访问这种属性。</p>
+<p>Python 文档的某些角落将使用一个下划线前缀标记为受保护的属性。</p>
+<p>总之，Vector2d 的分量都是 “私有的”，而 Vector2d 实例都是 “不可变” 的。这里用了两对引号是因为不能真正实现私有和不可变</p>
+<h2 id="使用-__slots__-类属性节省空间">使用 <code>__slots__</code> 类属性节省空间<a class="anchor-link" href="#使用-__slots__-类属性节省空间">¶</a></h2><p>默认情况下，Python 在各个实例名为 <code>__dict__</code> 字典里存储实例属性，如第三章所说，为了使用底层的散列表提升访问速度，字典会消耗大量内存，通过 <code>__slots__</code> 类属性，能节省大量内存，方法是让解释器在元祖中存储实例属性，而不用字典</p>
+<blockquote><p>继承自超类的 <code>__slots__</code> 属性没有效果。Python 只会使用各个类中定义的 <code>__slots__</code> 属性。</p>
+</blockquote>
+<p>定义 <code>__slots__</code> 的方式是，创建一个类属性，使用 <code>__slots__</code> 这个名字，并把它的值设为一个字符串构成的可迭代对象，其中各个元素表示各个实例属性。我喜欢使用元组，因为这样定义的 <code>__slots__</code> 所含的信息不会变化，如下所示：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [69]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Vector2d</span><span class="p">:</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'__x'</span><span class="p">,</span> <span class="s1">'__y'</span><span class="p">)</span>
+    <span class="c1"># 下面是各个方法，省略</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>在类中定义 <code>__slots__</code> 属性的目的是告诉解释器：这个类中的所有实例属性都在这了，这样，Python 会在各个实例中使用类似元祖的结构存储实例变量，从而避免使用消耗内存的 <code>__dict__</code> 属性。如果有数百万个实例同时活动，这样能大量节省内存</p>
+<blockquote><p>如果要处理数百万个数值对象，应该使用 Numpy 数组，它能高效使用内存，而且提供了高度优化的数值处理函数，其中很多都一次操作整个数组</p>
+</blockquote>
+<p>然而，节省的内存也可能被再次吃掉，如果把 <code>__dict__</code> 这个名称添加到 <code>__slots__</code> 中，实例会在元祖中保存各个实例的属性。此外还支持动态创建属性，这些属性存储在常规的 <code>__dict__</code> 中。当然，把 <code>__dict__</code> 加到 <code>__slots__</code> 中可能完全违背了初衷，这取决于各个实例的静态属性和动态属性的数量及其用法。粗心的优化甚至比提早优化还糟糕</p>
+<p>此外，还有一个实例属性值得注意，<code>__weakref__</code> 属性，为了让对象支持弱引用，必须有这个属性，用户定义的类中默认就有 <code>__weakref__</code> 属性。可是如果类中定义了 <code>__slots__</code> 属性，而且想把实例作为弱引用的目标，就要把 <code>__weakref__</code> 添加到 <code>__slots__</code> 中。</p>
+<p>综上，<code>__slots__</code> 属性有些需要注意的地方，而且不能滥用。不能使用它来限制用户能赋值的属性。处理列表中数据时，<code>__slots__</code> 属性最有用，例如模式固定的数据库记录，大型数据集。然而，如果你经常处理大量数据，一定要看一下 Numpy，此外 Pandas 也值得了解</p>
+<h2 id="__slots__-的问题"><code>__slots__</code> 的问题<a class="anchor-link" href="#__slots__-的问题">¶</a></h2><p>总之，如果使用得当，<code>__slots__</code> 能显著节省内存，不过有几点需要注意。</p>
+<ul>
+<li>每个子类都要定义  <code>__slots__</code> 属性，因为解释器会忽略继承的 <code>__slots__</code> 属性</li>
+<li>每个实例只能拥有 <code>__slots__</code> 列出来的属性，除非把 <code>__dict__</code>  加入 <code>__slots__</code> 中（这样做失去了节省内存的功效）</li>
+<li>如果不把 <code>__weakref__</code> 加入 <code>__slots__</code>，实例就不能作为弱引用的目标</li>
+</ul>
+<p>如果你的程序不用处理百万个实例，或许不值得费劲去创建不寻常的类，那就禁止它创建动态属性或者不支持弱引用。与其它优化措施一样，仅当权衡当下的需求并仔细搜集资料后证明确实有必要使用，才使用 <code>__slots__</code> 属性</p>
+<h2 id="覆盖类属性">覆盖类属性<a class="anchor-link" href="#覆盖类属性">¶</a></h2><p>Python 有一个很独特的特性，类属性可用于为实例属性提供默认值。Vector2d 中有个 typecode 类属性，<code>__bytes__</code> 方法两次用到了它，而且都故意使用 self.typecode 读取它的值，因为 Vector2d 实例本身没有 typecode 属性，所以 self.typecode 默认获取的是 Vector2d.typecode 的值</p>
+<p>但是，如果为不存在的实例属性赋值，会新建实例属性。假如我们为 typecode 实例属性赋值，那么同名类属性不受影响。然而，自此以后，实例读取的 self.typecode 是实例属性 typecode，也就是把同名类属性遮盖了。借助这一特性，可以为各个实例的 typecode 属性定制不同的值。</p>
+<p>Vector2d.typecode 属性默认值是 'd'，即转换成字节序列时使用 8 字节双精度浮点数表示各个分量。如果在转换之前把 typecode 属性改成 'f'，那么使用 4 字节单精度浮点数表示各个分量。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [72]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector2d</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>
+<span class="n">dumpd</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="n">dumpd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[72]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>b'd\x9a\x99\x99\x99\x99\x99\xf1?\x9a\x99\x99\x99\x99\x99\x01@'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [73]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">dumpd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[73]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>17</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [74]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span><span class="o">.</span><span class="n">typecode</span> <span class="o">=</span> <span class="s1">'f'</span>
+<span class="n">dumpf</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="n">dumpf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[74]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>b'f\xcd\xcc\x8c?\xcd\xcc\x0c@'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [75]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">dumpf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[75]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>9</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这就是我们为什么要在字节序列之前加上 typecode 的值的原因：为了<strong>支持不同格式</strong></p>
+<p>如果想修改类属性的值，必须直接在类上修改，不能通过实例修改。如果想修改所有实例（没有 typecode 实例变量）的 typecode 属性的默认值，可以这么做：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [77]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Vector2d</span><span class="o">.</span><span class="n">typecode</span> <span class="o">=</span> <span class="s1">'f'</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>然而，有种修改方法更符合 Python 风格，而且效果更持久，也更有针对性。类属性是公开的，因此会被子类继承，于是经常会创建一个子类，只用于定制类的属性。Django 基于类的视图就大量使用了这种技术。就像下面这样：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [80]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ShortVector2d</span><span class="p">(</span><span class="n">Vector2d</span><span class="p">):</span>
+    <span class="n">typecode</span> <span class="o">=</span> <span class="s1">'f'</span>
+
+<span class="n">sv</span> <span class="o">=</span> <span class="n">ShortVector2d</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">27</span><span class="p">)</span>
+<span class="n">sv</span>  <span class="c1"># 查看 sv 的 repr 形式</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[80]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>ShortVector2d(0.09090909090909091,0.037037037037037035)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [81]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">sv</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[81]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>9</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这也说明了我们在 <code>Vector2d.__repr__</code> 方法中为什么没有硬编码 class_name 的值，而是使用 <code>type(self).__name__</code> 获取。因为如果硬编码，子类继承的时候还要重写 <code>__repr__</code> 方法，这样从实例读取类名，<code>__repr__</code> 方法就可以放心的继承</p>
+<p>至此，我们通过一个简单的类说明了如何利用数据模型处理 Python 的其他功能：提供不同的对象表示形式，实现自定义格式代码，公开只读属性，以及通过 hash() 函数支持集合和映射</p>
 </div>
 </div>
 </div>
