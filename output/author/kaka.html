@@ -27,6 +27,49 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../10_list_modify_hash_slice.html">
+		<h2 itemprop="name headline">10 序列的修改，散列和切片</h2>
+	</a>
+	<time datetime="2017-06-13T00:30:00+02:00" itemprop="datePublished">Tue 13 June 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本章以第 9 章定义的二维向量 Vector2d 类为基础，向前迈出一大步，定义表示多维向量的 Vector 类。这个类的行为与 Python 标准中的不可变扁平序列一样。Vector 实例中的元素是浮点数，本章结束后 Vector2d 类将支持以下功能</p>
+<ul>
+<li>基本的序列协议 -- <code>__len__</code> 和 <code>__getitem__</code></li>
+<li>正确表述拥有很多元素的实例</li>
+<li>适当的切片支持，用于生成新的 Vector 实例</li>
+<li>综合各个元素的值计算散列值</li>
+<li>自定义的格式语言扩展</li>
+</ul>
+<p>此外，我们还将通过 <code>__getattr__</code> 方法实现属性的动态存取，以此取代 Vector2d 使用的只读属性 -- 不过，序列类型通常不会这么做</p>
+<p>在大量代码之间，我们将穿插讨论一个概念：把协议当做正式借口。我们将说明协议和鸭子类型之间的关系，以及对自定义类型的影响</p>
+<h2 id="Vector-第一版：与-Vector2d-类兼容">Vector 第一版：与 Vector2d 类兼容<a class="anchor-link" href="#Vector-第一版：与-Vector2d-类兼容">¶</a></h2><p>Vector 类要尽量与上一章的 Vector2d 类兼容。为了编写 Vector(3, 4)，Vector(3, 4, 5) 这样的代码，我们可以让 <code>__init__</code> 方法接受任意个参数（通过 <code>*args</code>)；但是，序列类型的构造方法最好接受可迭代的对象为参数，因为所有内置的序列类型都是这样做的。下面是我们的第一版 Vector 代码</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="../9_python_object.html">
 		<h2 itemprop="name headline">9 符合 Python 风格的对象</h2>
 	</a>
@@ -418,37 +461,6 @@ target = decorate(target)</code></pre>
 	Tags:
 </div>
 <hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="../1_2_python_vector.html">
-		<h2 itemprop="name headline">1-2 Python 向量类</h2>
-	</a>
-	<time datetime="2017-04-27T00:17:00+02:00" itemprop="datePublished">Thu 27 April 2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">kaka</span>
-	</span>
-	<div class="summary">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>先说明一下，特殊方法的存在是为了被 Python 解释器调用的，我们自己不需要调用它。也就是说没有 <code>my_object.__len__()</code> 这种写法，而是应该使用 len(my_object)。一般来说，通过内置函数（len, iter, str 等等）来使用特殊方法是最好的选择，这些内置函数不仅会调用特殊方法，通常还会提供特殊的好处。而且对于内置类来说，它的速度更快。</p>
-<h2 id="实现向量类">实现向量类<a class="anchor-link" href="#实现向量类">¶</a></h2><p>通过特殊方法，我们可以自定义对象的 '+' 操作，以后的章节会对此详细介绍，这里只是展示一下特殊方法的使用。</p>
-<p>我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input"></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
-	</span>
-	Tags:
-</div>
-<hr>
  <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -485,7 +497,7 @@ target = decorate(target)</code></pre>
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="../category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="../category/fluent_python.html">fluent_python (11)</a></li>
+							<li><a href="../category/fluent_python.html">fluent_python (12)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
