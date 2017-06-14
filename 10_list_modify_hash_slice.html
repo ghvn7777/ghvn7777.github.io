@@ -2449,7 +2449,7 @@ indices(...)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [80]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">array</span> <span class="k">import</span> <span class="n">array</span>
@@ -2549,7 +2549,7 @@ indices(...)
             <span class="k">return</span> <span class="n">a</span>
     
     <span class="k">def</span> <span class="nf">angles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
         
     <span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt_spec</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fmt_spec</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'h'</span><span class="p">):</span>
@@ -2573,7 +2573,68 @@ indices(...)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>下面是一些这个类的测试：</p>
+<p>注意 itertools.chain 函数</p>
+<p>hain(iter1, iter2, ..., iterN)：</p>
+<p>给出一组迭代器(iter1, iter2, ..., iterN)，此函数创建一个新迭代器来将所有的迭代器链接起来，返回的迭代器从iter1开始生成项，知道iter1被用完，然后从iter2生成项，这一过程会持续到iterN中所有的项都被用完。下面是一个简单的例子：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">,</span> <span class="s1">'de'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">)</span>
+<span class="n">test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><itertools.chain at 0x7f4ab04f4b00></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">test</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a
+b
+c
+d
+e
+f
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面是一些 Vector 类的测试：</p>
 </div>
 </div>
 </div>
@@ -3453,7 +3514,7 @@ indices(...)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [81]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="s1">'h'</span><span class="p">)</span>
@@ -3464,26 +3525,9 @@ indices(...)
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-81-5d3a79709956></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>format<span class="ansi-blue-fg">(</span>Vector<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">'h'</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg"><ipython-input-80-5596a6db94db></span> in <span class="ansi-cyan-fg">__format__</span><span class="ansi-blue-fg">(self, fmt_spec)</span>
-<span class="ansi-green-intense-fg ansi-bold">    109</span>             outer_fmt <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">'({})'</span> <span class="ansi-red-fg"># 笛卡尔坐标</span>
-<span class="ansi-green-intense-fg ansi-bold">    110</span>         components <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>format<span class="ansi-blue-fg">(</span>c<span class="ansi-blue-fg">,</span> fmt_spec<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> c <span class="ansi-green-fg">in</span> coords<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--> 111</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> outer_fmt<span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">', '</span><span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">(</span>components<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg"><ipython-input-80-5596a6db94db></span> in <span class="ansi-cyan-fg"><genexpr></span><span class="ansi-blue-fg">(.0)</span>
-<span class="ansi-green-intense-fg ansi-bold">    108</span>             coords <span class="ansi-blue-fg">=</span> self
-<span class="ansi-green-intense-fg ansi-bold">    109</span>             outer_fmt <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">'({})'</span> <span class="ansi-red-fg"># 笛卡尔坐标</span>
-<span class="ansi-green-fg">--> 110</span><span class="ansi-red-fg">         </span>components <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span>format<span class="ansi-blue-fg">(</span>c<span class="ansi-blue-fg">,</span> fmt_spec<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> c <span class="ansi-green-fg">in</span> coords<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    111</span>         <span class="ansi-green-fg">return</span> outer_fmt<span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">', '</span><span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">(</span>components<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">TypeError</span>: 'NoneType' object is not iterable</pre>
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.4142135623730951, 0.7853981633974483>'</pre>
 </div>
 </div>
 </div>
@@ -3491,11 +3535,168 @@ indices(...)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="s1">'.3eh'</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.414e+00, 7.854e-01>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="s1">'0.5fh'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.41421, 0.78540>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="s1">'h'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.7320508075688772, 0.9553166181245093, 0.7853981633974483>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="s1">'.3eh'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<3.464e+00, 9.553e-01, 7.854e-01>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="s1">'0.5fh'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<0.00000, 0.00000, 0.00000>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="s1">'h'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<2.0, 2.0943951023931957, 2.186276035465284, 3.9269908169872414>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span> <span class="s1">'.3eh'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<4.000e+00, 1.047e+00, 9.553e-01, 7.854e-01>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">format</span><span class="p">(</span><span class="n">Vector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="s1">'.05fh'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<1.00000, 1.57080, 0.00000, 0.00000>'</pre>
+</div>
 </div>
 </div>
 </div>
