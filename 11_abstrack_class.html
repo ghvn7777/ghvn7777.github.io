@@ -1597,7 +1597,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">abc</span>
@@ -1648,7 +1648,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Fake</span><span class="p">(</span><span class="n">Tombola</span><span class="p">):</span>
@@ -1663,7 +1663,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>__main__.Fake</pre>
 </div>
@@ -1673,7 +1673,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Fake</span><span class="p">()</span>  <span class="c1">#实例化的时候会报错</span>
@@ -1689,7 +1689,7 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-5-22e31e42214b></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg"><ipython-input-3-22e31e42214b></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>f <span class="ansi-blue-fg">=</span> Fake<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg">#实例化的时候会报错</span>
 
 <span class="ansi-red-fg">TypeError</span>: Can't instantiate abstract class Fake with abstract methods load</pre>
@@ -1711,7 +1711,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#class Tombola(metaclass=abc.ABCMeta):</span>
@@ -1732,7 +1732,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#class Tombola(object): # Python 2</span>
@@ -1816,14 +1816,278 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>random.SystemRandom 使用 os.urandom(...) 函数实现 random API，根据 os 模块文档，这个函数生成“适合用于加密”的随即字节序列</p>
+<p>BingoCage 从 Tombola 继承了耗时的 loaded 方法和笨拙的 inspect 方法。这两个方法都可以覆盖，变成下面例子中更快的方法，这里想表达的观点是：我们可以偷懒，直接从抽象基类中继承不是那么理想的具体方法。从 Tombola 中继承的方法没有 BingoCage 自己定义的那么快，不过只要 Tbombola 子类能正确的实现 pick 和 load 方法，就能提供正确的结果</p>
+<p>下面是 Tombola 接口的另一种实现，虽然与之前不同，但是完全有效。LotteryBlower 打乱“数字球”后没有提取最后一个，而是提取一个随即位置上的球</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">LotteryBlower</span><span class="p">(</span><span class="n">Tombola</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">pick</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_balls</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># 为了兼容 Tombola，我们抛出 LookupError</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s1">'pick from empty LotteryBlower'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balls</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">loaded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_balls</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_balls</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>有个习惯做法值得指出，在 <code>__init__</code> 方法中，<code>self._balls</code> 保存的是 list(iterable),而不是 iterable 的引用，这样会 LotterBlower 更灵活，因为 iterable 参数可以是任意可迭代的类型。把元素存入列表中还确保能取出元素。就算 iterable 参数始终传入列表，list(iterable) 会创建参数副本，这依然是好的做法，因为用户可能不希望自己提供的数据被改变</p>
+<h2 id="Tombola-的虚拟子类">Tombola 的虚拟子类<a class="anchor-link" href="#Tombola-的虚拟子类">¶</a></h2><p>白鹅类型的一个基本特性(也是值得用水禽来命名的原因）：即使不继承，也有办法把一个类注册为抽象基类的虚拟子类。这样做时，我们保证注册的类忠实地实现了抽象基类定义的接口，而 Python 会相信我们从不做检查。如果我们说谎了，那么常规运行时异常会把我们捕获</p>
+<p>注册虚拟子类的方式是在抽象基类上调用 register 方法。这么做之后，注册的类会变成抽象基类的虚拟子类，而且 issubclass 和 isinstance 等函数都能识别，但是注册的类不会从抽象基类中继承任何方法或属性。</p>
+<blockquote><p>虚拟子类不会继承注册的抽象基类，而且任何时候都不会检查它是符合抽象基类的接口，即便在实例化时也不会检查。为了避免运行时错误，虚拟子类实现所需的全部方法</p>
+</blockquote>
+<p>register 方法通常作为普通的函数调用，不过也可以作为装饰器使用。在下面的例子，我们使用装饰器语法实现了 TomboList 类，这是 Tombola 的一个虚拟子类</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randrange</span>
+
+<span class="nd">@Tombola</span><span class="o">.</span><span class="n">register</span> <span class="c1">#注册虚拟子类</span>
+<span class="k">class</span> <span class="nc">TomboList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span> <span class="c1">#继承 list</span>
+    <span class="k">def</span> <span class="nf">pick</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">:</span> <span class="c1"># 从 list 继承 __bool__ 方法，列表不为空时候返回 True</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>    <span class="c1">#调用继承自 list 的 pop 方法</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">LooupError</span><span class="p">(</span><span class="s1">'pop from empty TomboList'</span><span class="p">)</span>
+            
+    <span class="n">load</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">extend</span> <span class="c1"># Tombolist.load  和 list.extend 一样</span>
+    
+    <span class="k">def</span> <span class="nf">loaded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    
+<span class="c1">#Tombola.register(TomboList) # Python 3.3 之前不能把 register 当做类装饰器使用，必须使用标准的调用语法</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>注册之后，可以使用 issubclass 和 isinstance 函数判断 TomboList 是不是 Tombola 的子类</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">issubclass</span><span class="p">(</span><span class="n">TomboList</span><span class="p">,</span> <span class="n">Tombola</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">TomboList</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Tombola</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>然而，类的继承关系在一个特殊的类中指定 -- <code>__mro__</code>，即方法解析顺序（Method Resolution Order）。这个属性的作用域很简单，按顺序列出类及超类，Python 会按照这个顺序搜索方法。查看 TomboList 类的 <code>__mro__</code> 属性，你会发现它只列出了 “真实的” 超类，即 list 和 object：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">TomboList</span><span class="o">.</span><span class="vm">__mro__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(__main__.TomboList, list, object)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Python-使用-register-的方式">Python 使用 register 的方式<a class="anchor-link" href="#Python-使用-register-的方式">¶</a></h2><p>Python 3.3 之前的版本不能将 register 当做装饰器使用，必须定义类以后像普通函数那样调用。</p>
+<p>虽然现在可以当装饰器使用了，但是更常见的做法还是当函数，例如 collections.abc 模块源码中：</p>
+<pre><code>Sequence.register(tuple)
+Sequence.register(str)
+Sequence.register(range)
+Sequence.register(memoryview)</code></pre>
+<h2 id="鹅的行为可能像鸭子">鹅的行为可能像鸭子<a class="anchor-link" href="#鹅的行为可能像鸭子">¶</a></h2><p>Alex 讲故事时候说过，即使不注册，抽象基类也能把一个类识别成虚拟子类，下面是他举得一个例子，我添加了一些代码，用 issubclass 来测试：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Struggle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="mi">23</span>
+    
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
+
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">Struggle</span><span class="p">(),</span> <span class="n">abc</span><span class="o">.</span><span class="n">Sized</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">issubclass</span><span class="p">(</span><span class="n">Struggle</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Sized</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>经过 issubclass 函数确认（isinstance 也会得到相同的结论），Struggle 是 abc.Sized 的子类，这是因为 abc.Sized 实现了一个特殊的方法， <code>__subclasshook__</code>。看下面 Sized 类的源码：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># class Sized(metaclass = ABCMeta):</span>
+    
+<span class="c1">#     __slots__ = ()</span>
+    
+<span class="c1">#     @abstractmethod</span>
+<span class="c1">#     def __len__(self):</span>
+<span class="c1">#         return 0</span>
+    
+<span class="c1">#     @classmethod</span>
+<span class="c1">#     def __subclasshook__(cls, C):</span>
+<span class="c1">#         if cls is Sized:</span>
+<span class="c1">#             # 对于 C 类以及其超类，如果 `__dict__` 属性中名为 `__len__` 的属性。。。</span>
+<span class="c1">#             if any("__len__" in B.__dict__ for B in C.__mro__): </span>
+<span class="c1">#                 return True # 返回 True，表明 C 是 Sized 的虚拟子类</span>
+<span class="c1">#         return NotImplemented #否则，返回 NotImplement，让子类检查</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>__subclasshook__</code> 在白鹅类型添加了一些鸭子类型的踪迹，我们可以使用抽象基类定义正式接口，可以始终使用 isinstance 检查，也可以完全使用不相关的类，只要实现特定的方法即可（或者做某些事让 <code>__subclasshook__</code> 信服）。当然，只有提供 <code>__subclasshook__</code> 方法的抽象基类才能这么做</p>
+<p>我们一般不需要在自己定义的抽象基类实现 <code>__subclasshook__</code></p>
 </div>
 </div>
 </div>
