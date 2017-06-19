@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>1-2 Python 向量类 — Kaka Blog</title>
-	<meta name="description" content="Title: 1-2 Python 向量类; Date: 2017-04-27; Author: kaka">
+	<title>12 继承的优缺点 — Kaka Blog</title>
+	<meta name="description" content="Title: 12 继承的优缺点; Date: 2017-06-19; Author: kaka">
 	<meta name="author" content="kaka">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -26,16 +26,23 @@
 		<div class="col-md-8 col-md-offset-2">
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">1-2 Python 向量类</h1>
+		<h1 itemprop="name headline" class="article-title">12 继承的优缺点</h1>
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">kaka</h4>
 		</span>
-		<time datetime="2017-04-27T00:17:00+02:00" itemprop="datePublished">Thu 27 April 2017</time>
+		<time datetime="2017-06-19T22:22:00+02:00" itemprop="datePublished">Mon 19 June 2017</time>
 	</div>
 	<div>
 		Category:
 		<span itemprop="articleSection">
 			<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="./tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
 		</span>
 	</div>
 	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
@@ -1015,43 +1022,85 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>先说明一下，特殊方法的存在是为了被 Python 解释器调用的，我们自己不需要调用它。也就是说没有 <code>my_object.__len__()</code> 这种写法，而是应该使用 len(my_object)。一般来说，通过内置函数（len, iter, str 等等）来使用特殊方法是最好的选择，这些内置函数不仅会调用特殊方法，通常还会提供特殊的好处。而且对于内置类来说，它的速度更快。</p>
-<h2 id="实现向量类">实现向量类<a class="anchor-link" href="#实现向量类">¶</a></h2><p>通过特殊方法，我们可以自定义对象的 '+' 操作，以后的章节会对此详细介绍，这里只是展示一下特殊方法的使用。</p>
-<p>我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类</p>
+<p>本章将讨论继承和子类化，重点是说明对 Python 而言尤为重要的两个细节：</p>
+<ul>
+<li>子类化内置类型的缺点</li>
+<li>多重继承的方法和解析顺序</li>
+</ul>
+<p>我们将通过两个重要的 Python 项目探讨多重继承，这两个项目是 GUI 工具包 Tkinter 和 Web 框架 Django</p>
+<p>我们将首先分析子类化内置类型的问题，然后讨论多重继承，通过案例讨论类层次结构方面好的做法和不好的</p>
+<h2 id="子类化内置类型很麻烦">子类化内置类型很麻烦<a class="anchor-link" href="#子类化内置类型很麻烦">¶</a></h2><p>在 Python 2.2 之前内置类型（如 list 和 dict）不能子类化，之后可以了，但是有个重要事项：内置类型（使用 C 语言编写）不会调用用户定义的类覆盖的特殊方法</p>
+<p>至于内置类型的子类覆盖的方法会不会隐式调用，CPython 没有官方规定，基本上，内置类型的方法不会调用子类覆盖的方法。例如，dict 的子类覆盖 <code>__getitem__()</code> 方法不会被内置类型的 get() 方法调用，下面说明了这个问题：</p>
+<p>内置类型的 dict 的 <code>__init__</code> 和 <code>__update__</code> 方法会忽略我们覆盖的 <code>__setitem__</code> 方法</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">hypot</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">DoppelDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">Vector</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-    
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># %r 获取对象各个属性标准字符串表现形式，这是个好习惯，它说明了一个关键点，Vector(1,2) 和 vector('1','2') 是不一样的</span>
-        <span class="c1"># 后者会在定义的时候报错，因为对象的构造只接收数值，不接受字符串</span>
-        <span class="k">return</span> <span class="s2">"Vector(</span><span class="si">%r</span><span class="s2">, </span><span class="si">%r</span><span class="s2">)"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">hypot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="c1">#返回欧几里德范数 sqrt(x*x + y*y)</span>
-    
-    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-    
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span>
-        <span class="k">return</span> <span class="n">Vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scalar</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">Vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">scalar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">scalar</span><span class="p">)</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">DoppelDict</span><span class="p">(</span><span class="n">one</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dd</span> <span class="c1"># 继承 dict 的 __init__ 方法忽略了我们覆盖的 __setitem__方法，'one' 值没有重复</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'one': 1}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dd</span><span class="p">[</span><span class="s1">'two'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># `[]` 运算符会调用我们覆盖的 __setitem__ 方法</span>
+<span class="n">dd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'one': 1, 'two': [2, 2]}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dd</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">three</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#继承自 dict 的 update 方法也不会调用我们覆盖的 __setitem__ 方法</span>
+<span class="n">dd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'one': 1, 'three': 3, 'two': [2, 2]}</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1061,7 +1110,210 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="__repr__"><code>__repr__</code><a class="anchor-link" href="#__repr__">¶</a></h2><p>它能把一个对象用字符串的形式表现出来。</p>
+<p>原生类型的这种行为违背了面向对象编程的一个基本原则：始终应该从实例（self）所属的类开始搜索方法，即使在超类实现的类中调用也是如此。在这种糟糕的局面中，<code>__missing__</code> 却能按照预期工作（3.4 节），但这是特例</p>
+<p>不止实例内部有这个问题（self.get() 不调用 <code>self.__getitem__()</code>），内置类型的方法调用其他类的方法，如果被覆盖了，也不会被调用。下面是个例子，改编自 PyPy 文档</p>
+<p>dict.update 方法会忽略 <code>AnswerDict.__getitem__</code> 方法</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">AnswerDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">42</span>
+
+<span class="n">ad</span> <span class="o">=</span> <span class="n">AnswerDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">'foo'</span><span class="p">)</span>
+<span class="n">ad</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span>  <span class="c1"># 返回 42，与预期相符</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>42</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>  
+<span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ad</span><span class="p">)</span> <span class="c1"># d 是 dict 的实例，使用 ad 中的值更新 d</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span>       <span class="c1">#dict.update 方法忽略了 AnswerDict.__getitem__ 方法</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'foo'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>直接子类化内置类型（如 dict，list，str）容易出错，因为内置类型的方法通常忽略用户覆盖的方法，不要子类化内置类型，用户自己定义的类应该继承 collections 模块中的类，例如 UserDict, UserList, UserString，这些类，这些类做了特殊设计，因此易于扩展</p>
+<p>如果子类化的是 collections.UserDict，上面暴露的问题就迎刃而解了，如下：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="k">class</span> <span class="nc">DoppelDict2</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">UserDict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">dd</span> <span class="o">=</span> <span class="n">DoppelDict2</span><span class="p">(</span><span class="n">one</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'one': [1, 1]}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dd</span><span class="p">[</span><span class="s1">'two'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">dd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'one': [1, 1], 'two': [2, 2]}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dd</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">three</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">dd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'one': [1, 1], 'two': [2, 2], 'three': [3, 3]}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">AnswerDict2</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">UserDict</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">42</span>
+
+<span class="n">ad</span> <span class="o">=</span> <span class="n">AnswerDict2</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">'foo'</span><span class="p">)</span>
+<span class="n">ad</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>42</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ad</span><span class="p">)</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>42</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'a': 42}</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1070,8 +1322,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">()</span>
-<span class="n">test</span> <span class="c1">#如果注释 __repr__() 方法, 显示 <__main__.Vector at 0x7f587c4c1320></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ad</span>  <span class="c1"># 这里是自己加的，感觉还是有点问题，但是调用时候结果符合预期</span>
 </pre></div>
 </div>
 </div>
@@ -1081,7 +1332,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>Vector(0, 0)</pre>
+<pre>{'a': 'foo'}</pre>
 </div>
 </div>
 </div>
@@ -1092,7 +1343,248 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>__repr__()</code> 能把一个对象用字符串的方式表达出来，这就是字符串表示形式。它的返回应该尽量精确的与表达出创建它的对象, 与 <code>__str__()</code> 比较， <code>__str__()</code> 是由 <code>str()</code> 函数调用，并可以让 <code>print()</code> 函数使用。并且它返回的字符串应该对终端用户更友好。 如果你只想实现这两个方法的其中一个，好的选择是 <code>__repr__()</code>，因为一个对象没有 <code>__str__()</code> 函数，python 又要调用它的时候，解释器会使用 <code>__repr__()</code> 来代替。</p>
+<p>综上，本节所述的问题只是针对与 C 语言实现的内置类型内部的方法委托上，而且只影响直接继承内置类型的用户自定义类。如果子类化使用 Python 编写的类，如 UserDict 和 MutableMapping，就不会受此影响</p>
+<h2 id="多重继承和方法解析顺序">多重继承和方法解析顺序<a class="anchor-link" href="#多重继承和方法解析顺序">¶</a></h2><p>任何实现多重继承的语言都要处理潜在的命名冲突，这种冲突由不相关的祖先类实现同命方法引起，这种冲突称为菱形问题。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'ping'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+    
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">pong</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'pong'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">pong</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'PONG'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        
+<span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'post-ping:'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">pingpong</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pong</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">pong</span>
+        <span class="n">C</span><span class="o">.</span><span class="n">pong</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>B 和 C 都实现了 pong 方法，唯一区别就是打印不一样。在 D 上调用 d.pong 运行的是哪个 pong 方法呢？ C++ 中，必须使用类名限定方法调用来避免歧义。Python 也可以，如下：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">D</span><span class="p">()</span>
+<span class="n">d</span><span class="o">.</span><span class="n">pong</span><span class="p">()</span>  <span class="c1"># 直接调用 d.pong() 是调用的 B 类中的版本</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>pong <__main__.D object at 0x7fd698c96be0>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">C</span><span class="o">.</span><span class="n">pong</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="c1">#超类中的方法都可以直接调用，此时要把实例作为显式参数传入</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>PONG <__main__.D object at 0x7fd698c96be0>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python 能区分 d.pong() 调用的是哪个方法，因为 Python 会按照特定的顺序遍历继承图，这个顺序叫顺序解析（Method Resolution Order，MRO）。类都有一个名为 <code>__mro__</code> 的属性，它的值是一个元组，按照方法解析顺序列出各个超类。从当前类一直向上，直到 object 类。D 类的 <code>__mro__</code> 属性如下：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">D</span><span class="o">.</span><span class="vm">__mro__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(__main__.D, __main__.B, __main__.C, __main__.A, object)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>若想把方法调用委托给超类，推荐的方法是使用内置的 super() 函数。在 Python 3 中，这种方式变得更容易了，如上面的 D 类中的 pingpong 方法所示。然而，有时可能幸亏绕过方法解析顺序，直接调用某个类的超方法 -- 这样有时更加方便。，例如，D.ping 方法可以这样写</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">A</span><span class="o">.</span><span class="n">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="c1"># 而不是 super().ping()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'post-ping'</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>注意，直接在类上调用实例方法时，必须显式传入 self 参数，因为这样访问的是未绑定方法（unbound method）</p>
+<p>然而，使用 super() 最安全，也不易过时，调用框架或不受自己控制的类层次结构中的方法时，尤其适合用 super()。使用 super() 调用方法时，会遵循方法解析顺序，如下所示：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">D</span><span class="p">()</span>
+<span class="n">d</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span> <span class="c1"># 输出了两行，第一行是 super() A 类输出，第二行是 D 类输出</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ping <__main__.D object at 0x7fd698c96f98>
+post-ping: <__main__.D object at 0x7fd698c96f98>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面看看 D 在实例上调用 pingpong 方法得到的结果，如下所示：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">pingpong</span><span class="p">()</span> <span class="c1">#最后一个是直接找到 C 类实现 pong 方法，忽略 mro</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ping <__main__.D object at 0x7fd698c96f98>
+post-ping: <__main__.D object at 0x7fd698c96f98>
+ping <__main__.D object at 0x7fd698c96f98>
+pong <__main__.D object at 0x7fd698c96f98>
+PONG <__main__.D object at 0x7fd698c96f98>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>方法解析顺序不仅考虑继承图，还考虑子类声明中列出超类的顺序。也就是说，如果声明 D 类时把 D 声明为 <code>class D（C, B)</code>，那么 D 类的 <code>__mro__</code> 就会不一样，先搜索 C 类，再 搜索 B 类</p>
+<p>分析类时，我们需要经常查看 <code>__mro__</code> 属性，下面是一些常用类的方法搜索顺序:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">bool</span><span class="o">.</span><span class="vm">__mro__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(bool, int, object)</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1101,7 +1593,10 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_mro</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">))</span>
+
+<span class="n">print_mro</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1109,31 +1604,22 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[19]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>'Vector(0, 0)'</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bool, int, object
+</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="算数运算符">算数运算符<a class="anchor-link" href="#算数运算符">¶</a></h2><p><code>+</code> 和 <code>*</code> 分别调用的是 <code>__add__</code> 和 <code>__mul__</code> 注意这里我们没有修改 self.x, self.y，而是返回了一个新的实例，这是中缀表达式的基本原则，不改变操作对象</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [20]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">v2</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numbers</span>
+<span class="n">print_mro</span><span class="p">(</span><span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1141,9 +1627,10 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[20]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Vector(4, 5)</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Integral, Rational, Real, Complex, Number, object
+</pre>
 </div>
 </div>
 </div>
@@ -1154,7 +1641,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v1</span> <span class="o">*</span> <span class="mi">3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">io</span>
+<span class="n">print_mro</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1162,35 +1650,33 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Vector(6, 12)</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>BytesIO, _BufferedIOBase, _IOBase, object
+</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>注意现在我们只能将一个类乘数字，而不能用数字乘类，到后面的章节我们会实现这种乘法的交换性，使用 <code>__rmul__()</code> 解决这个问题。</p>
-<h2 id="自定义类型的布尔值">自定义类型的布尔值<a class="anchor-link" href="#自定义类型的布尔值">¶</a></h2><p>在 if, while 等陈述式运算式，或者 and, or, not 等运算，为了判断值是 true 或 false，Python 会调用 <code>bool()</code> 函数，其实背后调用的是 <code>__bool__()</code>，它永远只返回 True 或 False。</p>
-<p>在默认情况下，使用者自定义的实例都是 True，除非这个类对于 <code>__bool__()</code> 或者 <code>__len__()</code> 有自己的实现，如果你没有 <code>__bool__</code>，会尝试调用 <code>__len__</code>，如果 <code>__len__()</code> 等于 0，返回 False，否则返回 True</p>
-<p>我们的 <code>__bool__</code>　逻辑很简单，看向量长度是否为 0。</p>
-<p>如果想要 <code>Vector.__bool__</code> 更高效，可以采用这种实现</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#def __bool__(self):</span>
-<span class="c1">#    return bool(self.x or self.y)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_mro</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">TextIOWrapper</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>TextIOWrapper, _TextIOBase, _IOBase, object
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1200,10 +1686,51 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>虽然不是那么易读，但是省去了平方操作。把返回值显式转成 bool 格式是为了符合 <code>__bool__()</code> 对返回值的规定，因为 or 运算符可能返回 x 或 y 本身的值，如果 x 为真，返回的是 x 值，y 为真，返回的是 y 的值。</p>
-<h2 id="为什么-len-不是一种方法">为什么 len 不是一种方法<a class="anchor-link" href="#为什么-len-不是一种方法">¶</a></h2><p>Raymond Hettinger 说: "practicality beats purity"(实用胜于纯粹)。如果 x 是一个内置类型的实例， len(x) 将会很快，背后的 CPython 会直接从 C 结构体中取长度，完全不用调用任何方法。因为 len() 是 CPython 内建方法，跑起来非常快，len() 是一种常见操作，所以要保证效率。</p>
-<p>换句话说 len() 不是一个普通的方法，是为了让 Python 自带数据结构走后门，abs 也是同理。但是也亏了它们是特殊方法，我们也可以把 len 用于自定义数据类型。这种处理方式在保持内置类型效率和语言的一致性找到了一个平衡点。</p>
-<p>如果把 abs 和 len 看成一元运算符可能更容易被接受，它们虽然看起来像函数，但其实不是，有一门叫 ABC 的语言是 Python 的直系祖先，它内置了一个 # 运算符，当你写出 #s 时候，它的作用和 len 一样，如果写成 x#s 这样的中缀运算符的话，它的作用是计算 s 中 x 出现的次数。python 中对应的写法是 s.count(x)。注意这里 s 是一个序列类型</p>
+<p>结束方法解析之前，我们再看看 Tkinter 复杂的多重继承：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [24]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tkinter</span>
+<span class="n">print_mro</span><span class="p">(</span><span class="n">tkinter</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Text, Widget, BaseWidget, Misc, Pack, Place, Grid, XView, YView, object
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>研究 GUI 工具包中的 Tinker 时候，要从底部的 Text 类开始，这个类实现了多行可编辑文本小组文件，自身有丰富的功能，又从其他类继承了很多方法。</p>
+<h2 id="多重继承的真实应用">多重继承的真实应用<a class="anchor-link" href="#多重继承的真实应用">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
 </div>
 </div>
 </div>
