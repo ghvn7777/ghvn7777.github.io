@@ -27,6 +27,52 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../13_operator.html">
+		<h2 itemprop="name headline">13 运算符重载</h2>
+	</a>
+	<time datetime="2017-06-23T01:09:00+02:00" itemprop="datePublished">Fri 23 June 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>我们本章会讨论：</p>
+<ul>
+<li>Python 如何处理终追运算符中不同类型的操作数</li>
+<li>使用鸭子类型或显式类型检查处理不同类型的操作数</li>
+<li>中缀运算符如何表明自己无法处理的操作数</li>
+<li>众多比较运算符（如 ==，>，<= 等等）的特殊行为</li>
+<li>增量赋值运算符（如 += ）的默认处理方式和重载方式</li>
+</ul>
+<h2 id="运算符重载基础">运算符重载基础<a class="anchor-link" href="#运算符重载基础">¶</a></h2><p>在某些圈子里，运算符重载名声不太好，因为总被滥用．Python 加了一些限制，做好了灵活性，可用性和安全性的平衡</p>
+<ul>
+<li>不能重载内置运算符</li>
+<li>不能新建运算符，只能重载现有的</li>
+<li>某些运算符不能重载 -- is，and，or 和 not（不过位运算 &，| 和 ~ 可以）</li>
+</ul>
+<h2 id="一元运算符">一元运算符<a class="anchor-link" href="#一元运算符">¶</a></h2><p><code>- (__neg__)</code> 一元取负运算符，如果 x 是 -2， -x == 2</p>
+<p><code>+　(__pos__)</code>　一元取正运算符，通常 x == +x，但也有一些例外</p>
+<p><code>~ (__invert__)</code>　对整数按位去饭，定义　~x == -(x + 1)，如果 x 是 2, ~x == -3</p>
+<p>支持一元操作符只需要实现相应的特殊方法，这些方法只有一个 self 参数，然后使用符合所在类的逻辑实现。不过，要遵守运算符的一个基本规则：始终返回一个新对象。也就是不能修改 self</p>
+<p>对于 <code>-</code> 和 <code>+</code> 来说，结果可能是与 self 属于同一类的实例，多数的时候， + 最好返回 self 的副本。abs(...) 的结果应该是一个标量，但是对于 ～ 来说，很难说明什么结果是合理的，因为可能处理的不是整数，例如 ORM 中，SQL WHERE 子句应该返回反集</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="../12_inherit.html">
 		<h2 itemprop="name headline">12 继承的优缺点</h2>
 	</a>
@@ -442,48 +488,6 @@ target = decorate(target)</code></pre>
 	</span>
 </div>
 <hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="../3_1_dict_set.html">
-		<h2 itemprop="name headline">3-1 字典和集合常用操作</h2>
-	</a>
-	<time datetime="2017-05-05T00:30:00+02:00" itemprop="datePublished">Fri 05 May 2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">kaka</span>
-	</span>
-	<div class="summary">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>我们在这章讨论字典和集合，因为它们背后都是哈希表，下面是本章的大纲</p>
-<ul>
-<li>常用字典方法</li>
-<li>特别处理遗失的键</li>
-<li>在标准库中，dict 的变化</li>
-<li>set 与 frozenset 形态</li>
-<li>哈希表的工作原理</li>
-<li>哈希表的影响（键形态限制，无法预知的排序等等）</li>
-</ul>
-<h2 id="什么是可散列化">什么是可散列化<a class="anchor-link" href="#什么是可散列化">¶</a></h2><p>如果一个对象有一个哈希值，而且在生命周期中不被改变（它需要实现一个 <code>__hash__()</code> 方法），而且可以与其它对象比较（需要实现 <code>__eq__()</code> 方法），就是可散列化的。原子不可变数据类型（str, bytes 和数值类型）都是可散列类型，fronenset 也是可散列类型，因为根据其定义，frozenset 只能容纳可散列类型，元祖的话，只有当一个元组的所有元素都是可散列的，元组才是可散列的。</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input"></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
-	</span>
-	Tags:
- 
-	<span itemprop="keywords">
-		<a href="../tag/dict-set.html" rel="tag">dict set</a>
-	</span>
-</div>
-<hr>
  <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -520,7 +524,7 @@ target = decorate(target)</code></pre>
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="../category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="../category/fluent_python.html">fluent_python (14)</a></li>
+							<li><a href="../category/fluent_python.html">fluent_python (15)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
