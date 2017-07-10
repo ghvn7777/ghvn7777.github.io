@@ -27,6 +27,62 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="./14_iter.html">
+		<h2 itemprop="name headline">14 可迭代对象，迭代器和生成器</h2>
+	</a>
+	<time datetime="2017-07-10T22:35:00+02:00" itemprop="datePublished">Mon 10 July 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>所有生成器都是迭代器，因为生成器完全实现了迭代器接口，不过迭代器一般用于从集合取出元素，生成器用于 “凭空” 创造元素。斐波那契数列例子可以很好的说明两者区别：斐波那契数列中的数有无穷个，在一个集合里放不下。</p>
+<p>在 Python 3 中，生成器有广泛用途。现在即使是内置的 range() 函数也要返回一个类似生成器的对象，而以前返回完整列表。如果一定让 range() 函数返回列表，必须明确指明（例如，list(range(100))）。</p>
+<p>在 Python 中，所有集合都能迭代。在 Python 内部，迭代器用于支持：</p>
+<ul>
+<li>for 循环</li>
+<li>构建和扩展集合类型</li>
+<li>逐行遍历文本文件</li>
+<li>列表推导，字典推导和集合推导</li>
+<li>元组拆包</li>
+<li>调用函数时，使用 <code>*</code> 拆包</li>
+</ul>
+<p>本章探讨以下话题：</p>
+<ul>
+<li>语言内部使用 iter(...) 内置函数处理可迭代对象的方式</li>
+<li>如何使用 Python 经典的迭代器模式</li>
+<li>详细说明生成器函数的工作原理</li>
+<li>如何使用生成器函数或生成器表达式代替经典的迭代器</li>
+<li>如何使用标准库中通用的生成器函数</li>
+<li>如何使用 yield from 语句合并生成器</li>
+<li>案例分析： 在一个数据库转换工具中使用生成器处理大型数据集</li>
+<li>为什么生成器和协程看似相同，其实差别很大，不能混淆</li>
+</ul>
+<h2 id="Sentence-类第-1-版：单词序列">Sentence 类第 1 版：单词序列<a class="anchor-link" href="#Sentence-类第-1-版：单词序列">¶</a></h2><p>我们创建一个类，并向它传入一些包含文本的字符串，然后可以逐个单词迭代，第 1 版要实现序列协议，这个类的对象可以迭代，因为所有序列都可以迭代 -- 这一点前面已经说过，现在说明真正的原因</p>
+<p>下面展示了一个可以通过索引从文本提取单词的类：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="./tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="./13_operator.html">
 		<h2 itemprop="name headline">13 运算符重载</h2>
 	</a>
@@ -439,55 +495,6 @@ target = decorate(target)</code></pre>
 	</span>
 </div>
 <hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="./4 str_and_bytes.html">
-		<h2 itemprop="name headline">4 文本和字节序列</h2>
-	</a>
-	<time datetime="2017-05-29T22:33:00+02:00" itemprop="datePublished">Mon 29 May 2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">kaka</span>
-	</span>
-	<div class="summary">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>本章将讨论以下话题：</p>
-<ul>
-<li>字符、码位和字节表述</li>
-<li>bytes、bytearray 和 memoryview 等二进制序列的独特特性</li>
-<li>全部 Unicode 和陈旧字符集的编解码器</li>
-<li>避免和处理编码错误</li>
-<li>处理文本文件的最佳实践</li>
-<li>默认编码陷阱和标准 I/O 问题</li>
-<li>规范化 Unicode 文本，进行安全的比较</li>
-<li>规范化、大小写折叠和暴力移除音调符号的实用函数</li>
-<li>实用 locale 模块和 PyUCA 库正确地排序 Unicode 文本</li>
-<li>Unicode 数据库中的字符元数据</li>
-<li>能处理字符串和字节序列的双模式 API</li>
-</ul>
-<p>（有一些东西觉得用不到，就没有记，到时候用到可以对照目录看书）</p>
-<h2 id="字符问题">字符问题<a class="anchor-link" href="#字符问题">¶</a></h2><p>字符串是个简单的概念，一个字符序列，问题出现在 “字符” 的定义上。在 2015 年 “字符” 的最佳定义是 Unicode 字符，因此，从 Python 3 的 str 对象获得的元素是 Unicode 字符，这相当于从 Python 2 中的 unicode 对象中获取的元素，而不是从 Python 2 中的 str 对象获取原始字节序列。</p>
-<p>把码位转成字节序列的过程叫编码，把字节序列转换成码位的过程是解码。下面展示了这一区分:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input"></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
-	</span>
-	Tags:
- 
-	<span itemprop="keywords">
-		<a href="./tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
-	</span>
-</div>
-<hr>
  <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -524,7 +531,7 @@ target = decorate(target)</code></pre>
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="./category/fluent_python.html">fluent_python (15)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (16)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
