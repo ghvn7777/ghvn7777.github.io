@@ -27,6 +27,55 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../4 str_and_bytes.html">
+		<h2 itemprop="name headline">4 文本和字节序列</h2>
+	</a>
+	<time datetime="2017-05-29T22:33:00+02:00" itemprop="datePublished">Mon 29 May 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本章将讨论以下话题：</p>
+<ul>
+<li>字符、码位和字节表述</li>
+<li>bytes、bytearray 和 memoryview 等二进制序列的独特特性</li>
+<li>全部 Unicode 和陈旧字符集的编解码器</li>
+<li>避免和处理编码错误</li>
+<li>处理文本文件的最佳实践</li>
+<li>默认编码陷阱和标准 I/O 问题</li>
+<li>规范化 Unicode 文本，进行安全的比较</li>
+<li>规范化、大小写折叠和暴力移除音调符号的实用函数</li>
+<li>实用 locale 模块和 PyUCA 库正确地排序 Unicode 文本</li>
+<li>Unicode 数据库中的字符元数据</li>
+<li>能处理字符串和字节序列的双模式 API</li>
+</ul>
+<p>（有一些东西觉得用不到，就没有记，到时候用到可以对照目录看书）</p>
+<h2 id="字符问题">字符问题<a class="anchor-link" href="#字符问题">¶</a></h2><p>字符串是个简单的概念，一个字符序列，问题出现在 “字符” 的定义上。在 2015 年 “字符” 的最佳定义是 Unicode 字符，因此，从 Python 3 的 str 对象获得的元素是 Unicode 字符，这相当于从 Python 2 中的 unicode 对象中获取的元素，而不是从 Python 2 中的 str 对象获取原始字节序列。</p>
+<p>把码位转成字节序列的过程叫编码，把字节序列转换成码位的过程是解码。下面展示了这一区分:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="../3_1_dict_set.html">
 		<h2 itemprop="name headline">3-1 字典和集合常用操作</h2>
 	</a>
@@ -265,7 +314,7 @@
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="../category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="../category/fluent_python.html">fluent_python (15)</a></li>
+							<li><a href="../category/fluent_python.html">fluent_python (16)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
