@@ -2,5 +2,5 @@ Title: 9 符合 Python 风格的对象
 Slug: 9_python_object
 Date: 2017-06-07 07:38
 Author: kaka
-Tags: bytes Unicode UTF-8
-Summary: object
+Tags: class
+Summary: class
