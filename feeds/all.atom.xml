@@ -4110,7 +4110,1531 @@ G -&gt; ['G', 'G']
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>13 运算符重载</title><link href="http://ghvn7777.github.io/13_operator.html" rel="alternate"></link><published>2017-06-23T01:09:00+02:00</published><updated>2017-06-23T01:09:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-23:13_operator.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="bytes iter"></category></entry><entry><title>15 with 和 else 语句</title><link href="http://ghvn7777.github.io/15_with.html" rel="alternate"></link><published>2017-07-10T22:35:00+02:00</published><updated>2017-07-10T22:35:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-07-10:15_with.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area &gt; div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area &gt; div.highlight &gt; pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
+&lt;style type="text/css"&gt;
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+&lt;/style&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;本章讨论其他语言不常见的流程控制，用户可能会忽略这些特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;with 语句和上下文管理器&lt;/li&gt;
+&lt;li&gt;for while 和 try 语句的 else 子句&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;with 语句会设置一个临时的上下文，交给上下文管理器对象控制，并负责清理上下文。这么做能避免错误并减少样板代码，因此 API 更安全，更易于使用。除了自动关闭文件之外，with 块还有很多用途&lt;/p&gt;
+&lt;p&gt;else 子句和 with 没关系，不过这两个都内容比较短，所以放到了一个逻辑&lt;/p&gt;
+&lt;h2 id="先做这个，再做那个：-if-之外的-else-块"&gt;先做这个，再做那个： if 之外的 else 块&lt;a class="anchor-link" href="#先做这个，再做那个：-if-之外的-else-块"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;else 子句不仅能在 if 语句中使用，还能在 for，while，try 语句中使用&lt;/p&gt;
+&lt;p&gt;else 子句行为如下：&lt;/p&gt;
+&lt;p&gt;for: 仅当 for 循环运行完毕时（即 for 循环没有被 break 语句终止）才运行 else&lt;/p&gt;
+&lt;p&gt;try: 仅当 try 块中没有异常时候才运行 else 块，else 子句抛出的异常不会由前面的 except 子句处理&lt;/p&gt;
+&lt;p&gt;在所有情况下，如果异常或者 return, break 或 continue 语句导致控制权跳到了复合语句之外，else 也会被跳过&lt;/p&gt;
+&lt;p&gt;for 循环用 else 如下：&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# for item in my_list:&lt;/span&gt;
+&lt;span class="c1"&gt;#     if item.flavor == 'banana':&lt;/span&gt;
+&lt;span class="c1"&gt;#         break&lt;/span&gt;
+&lt;span class="c1"&gt;# else:&lt;/span&gt;
+&lt;span class="c1"&gt;#     raise ValueError('No banana flavor found!')&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;一开始你可能觉得没必要在 try/except 中使用 else 子句，毕竟下面代码中只有 dangerous_cal() 不抛出异常 after_call() 才会执行&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# try:&lt;/span&gt;
+&lt;span class="c1"&gt;#     dangerous_call()&lt;/span&gt;
+&lt;span class="c1"&gt;#     after_call()&lt;/span&gt;
+&lt;span class="c1"&gt;# except OSError:&lt;/span&gt;
+&lt;span class="c1"&gt;#     log('OSError...')&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;然而，after_call() 不应该放在 try 块中。为了清晰准确，try 块应该只抛出预期异常的语句，因此像下面这样写更好：&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# try:&lt;/span&gt;
+&lt;span class="c1"&gt;#     dangerous_call()&lt;/span&gt;
+&lt;span class="c1"&gt;# except OSError:&lt;/span&gt;
+&lt;span class="c1"&gt;#     log('OSError...')&lt;/span&gt;
+&lt;span class="c1"&gt;# else:&lt;/span&gt;
+&lt;span class="c1"&gt;#     after_call()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;现在很明确，try 为了捕获的是 dangerous_call() 的异常。&lt;/p&gt;
+&lt;p&gt;Python 中，try/except 不仅用于处理错误，还用于控制流程，为此，官方定义了几个缩略词：&lt;/p&gt;
+&lt;p&gt;EAFP:
+    取得原谅比获得许可容易(easier to ask for forgiveness than
+permission)。这是一种常见的 Python 编程风格,先假定存在有效
+的键或属性,如果假定不成立,那么捕获异常。这种风格简单明
+快,特点是代码中有很多 try 和 except 语句。与其他很多语言一
+样(如 C 语言),这种风格的对立面是 LBYL 风格。&lt;/p&gt;
+&lt;p&gt;LBYL
+  三思而后行(look before you leap)。这种编程风格在调用函数
+或查找属性或键之前显式测试前提条件。与 EAFP 风格相反,这种
+风格的特点是代码中有很多 if 语句。在多线程环境中,LBYL 风
+格可能会在“检查”和“行事”的空当引入条件竞争。例如,对 if
+key in mapping: return mapping[key] 这段代码来说,如果
+在测试之后,但在查找之前,另一个线程从映射中删除了那个键,
+那么这段代码就会失败。这个问题可以使用锁或者 EAFP 风格解
+决。
+如果选择使用 EAFP 风格,那就要更深入地了解 else 子句，并在 try/except 中合理使用&lt;/p&gt;
+&lt;h2 id="上下文管理器和-with-块"&gt;上下文管理器和 with 块&lt;a class="anchor-link" href="#上下文管理器和-with-块"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;上下文管理器对象存在的目的是管理 with 语句，就像迭代器存在是为了管理 for 语句。&lt;/p&gt;
+&lt;p&gt;with 语句目的是为了简化 try/finally 模式。上下文管理器协议包含 &lt;code&gt;__enter__&lt;/code&gt; 和 &lt;code&gt;__exit__&lt;/code&gt; 方法，with 开始时，会调用 &lt;code&gt;__enter__&lt;/code&gt; 方法，结束时候会调用 &lt;code&gt;__exit__&lt;/code&gt; 方法&lt;/p&gt;
+&lt;p&gt;最常见的是打开文件：&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'with.ipynb'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;fp&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;src&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;60&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fp&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[5]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;&lt;_io.TextIOWrapper name='with.ipynb' mode='r' encoding='UTF-8'&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;closed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encoding&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;(True, 'UTF-8')&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# fp 虽然可用，但不能执行 I/O 操作，&lt;/span&gt;
+&lt;span class="c1"&gt;# 因为在 with 末尾，调用 TextIOWrapper.__exit__ 关闭了文件&lt;/span&gt;
+&lt;span class="n"&gt;fp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;
+&lt;span class="ansi-red-fg"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-fg"&gt;ValueError&lt;/span&gt;                                Traceback (most recent call last)
+&lt;span class="ansi-green-fg"&gt;&lt;ipython-input-7-a91ac20aa9d8&gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&lt;module&gt;&lt;/span&gt;&lt;span class="ansi-blue-fg"&gt;()&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;      1&lt;/span&gt; &lt;span class="ansi-red-fg"&gt;# fp 虽然可用，但不能执行 I/O 操作，&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;      2&lt;/span&gt; &lt;span class="ansi-red-fg"&gt;# 因为在 with 末尾，调用 TextIOWrapper.__exit__ 关闭了文件&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;----&gt; 3&lt;/span&gt;&lt;span class="ansi-red-fg"&gt; &lt;/span&gt;fp&lt;span class="ansi-blue-fg"&gt;.&lt;/span&gt;read&lt;span class="ansi-blue-fg"&gt;(&lt;/span&gt;&lt;span class="ansi-cyan-fg"&gt;60&lt;/span&gt;&lt;span class="ansi-blue-fg"&gt;)&lt;/span&gt;
+
+&lt;span class="ansi-red-fg"&gt;ValueError&lt;/span&gt;: I/O operation on closed file.&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;with 的 as 子句是可选的，对 open 来说，必须加 as 子句，以便获取文件的引用。不过，有些上下文管理器会返回 None，因为没有什么有用的对象能提供给用户&lt;/p&gt;
+&lt;p&gt;下面是一个精心制作的上下文管理器执行操作，以此强调上下文管理器与 &lt;code&gt;__enter__&lt;/code&gt; 方法返回的对象之间的区别&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;LookingGlass&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__enter__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;# enter 只有一个 self 参数&lt;/span&gt;
+        &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;original_write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="c1"&gt;# 保存供日后使用&lt;/span&gt;
+        &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reverse_write&lt;/span&gt; &lt;span class="c1"&gt;# 打猴子补丁，换成自己方法&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'JABBERWOCKY'&lt;/span&gt; &lt;span class="c1"&gt;# 返回的字符串讲存入 with 语句的 as 后的变量&lt;/span&gt;
+    
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reverse_write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;#取代 sys.stdout.write，反转 text&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;original_write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;[::&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        
+    &lt;span class="c1"&gt;# 正常传的参数是 None， None， None，有异常传如下异常信息&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__exit__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;exc_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;exc_value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;traceback&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt; &lt;span class="c1"&gt;# 重复导入不会消耗很多资源，Python 会缓存导入模块&lt;/span&gt;
+        &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;original_write&lt;/span&gt; &lt;span class="c1"&gt;# 还原 sys.stdout.write 方法&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;exc_type&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ne"&gt;ZeroDivisionError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="c1"&gt;# 如果有除 0 异样，打印消息&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Please DO NOT divide by zero'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt; &lt;span class="c1"&gt;# 返回 True 告诉解释器已经处理了异常&lt;/span&gt;
+&lt;span class="c1"&gt;# 如果 __exit__ 方法返回 None，或者 True 之外的值，with 块中的任何异常都会向上冒泡&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;LookingGlass&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;what&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Alice, Kitty and Snowdrop'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#打印出的内容是反向的&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;what&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;pordwonS dna yttiK ,ecilA
+YKCOWREBBAJ
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# with 执行完毕，可以看出 __enter__ 方法返回的值 -- 即存储在 what 变量中的值是 'JABBERWOCKY' &lt;/span&gt;
+&lt;span class="n"&gt;what&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[3]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;'JABBERWOCKY'&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Back to normal'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 输出不再是反向的了&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;Back to normal
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;blockquote&gt;&lt;p&gt;在实际应用中，如果程序接管了标准输出，可能会把 sys.stdout 换成类似文件的其他对象，然后再切换成原来的版本。contextlib.redirect_stdout 上下文管理器就是这么做的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;解释器调用 &lt;strong&gt;enter&lt;/strong&gt; 方法时，除了隐式的 self 之外，不会传入任何参数，传给 &lt;code&gt;__exit__&lt;/code&gt; 的三个参数如下：&lt;/p&gt;
+&lt;p&gt;exc_type: 异常类（例如 ZeroDivisionError）&lt;/p&gt;
+&lt;p&gt;exc_value: 异常实例。有时好有参数传给异常构造方法，例如错误消息，参数可以通过 exc_value.args 获取&lt;/p&gt;
+&lt;p&gt;traceback： traceback 对象&lt;/p&gt;
+&lt;p&gt;上下文管理器具体工作方式如下：&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# In [2]: manager = LookingGlass()&lt;/span&gt;
+&lt;span class="c1"&gt;#    ...: manager&lt;/span&gt;
+&lt;span class="c1"&gt;#    ...: &lt;/span&gt;
+&lt;span class="c1"&gt;# Out[2]: &lt;__main__.LookingGlass at 0x7f586d4aa1d0&gt;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# In [3]: monster = manager.__enter__()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# In [4]: monster == 'JABBERWOCKY'&lt;/span&gt;
+&lt;span class="c1"&gt;# Out[4]: eurT&lt;/span&gt;
+
+&lt;span class="c1"&gt;# In [5]: monster&lt;/span&gt;
+&lt;span class="c1"&gt;# Out[5]: 'YKCOWREBBAJ'&lt;/span&gt;
+
+&lt;span class="c1"&gt;# In [6]: manager.__exit__(None, None, None)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# In [7]: monster&lt;/span&gt;
+&lt;span class="c1"&gt;# Out[7]: 'JABBERWOCKY'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;上面在命令行执行的，因为在 jupyter notebook 的输出有时候有莫名其妙的 bug&lt;/p&gt;
+&lt;h2 id="contextlib-模块中的实用工具"&gt;contextlib 模块中的实用工具&lt;a class="anchor-link" href="#contextlib-模块中的实用工具"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;自定义上下文管理器类之前，先看一下 Python 标准库文档中的 contextlib。除了前面提到的 redirect_stdout 函数，contextlib 模块中还有一些类和其它函数，实用范围更广&lt;/p&gt;
+&lt;p&gt;closing: 如过对象提供了 close() 方法，但没有实现 &lt;code&gt;__enter__/__exit__&lt;/code&gt; 协议，可以实用这个函数构建上下文管理器&lt;/p&gt;
+&lt;p&gt;suppress: 构建临时忽略指定异常的上下文管理器&lt;/p&gt;
+&lt;p&gt;@contextmanager: 这个装饰器把简单的生成器函数变成上下文管理器，这样就不用创建类去实现管理协议了&lt;/p&gt;
+&lt;p&gt;ContextDecorator: 这是个基类，用于定义基于类的上下文管理器。这种上下文管理器也能用于装饰函数，在受管理的上下文中运行整个函数&lt;/p&gt;
+&lt;p&gt;ExitStack: 这个上下文管理器能进入多个上下文管理器，with 块结束时，ExitStack 按照后进先出的顺序调用栈中各个上下文管理器的 &lt;code&gt;__exit__&lt;/code&gt; 方法。如果事先不知道 with 块要进入多少个上下文管理器，可以使用这个类。例如同时打开任意一个文件列表中的所有文件&lt;/p&gt;
+&lt;p&gt;这些工具中使用最广泛的是 @contextmanager 装饰器，因此要格外小心，这个装饰器也有迷惑人的一面，因为它与迭代无关，却使用 yield 语句，由此可以引出协程&lt;/p&gt;
+&lt;h2 id="使用-@contextmanager"&gt;使用 @contextmanager&lt;a class="anchor-link" href="#使用-@contextmanager"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;@contextmanager 装饰器能减少创建上下文管理器的样板代码量，因为不用编写一个完整的类，定义 &lt;code&gt;__enter__&lt;/code&gt; 和 &lt;code&gt;__exit__&lt;/code&gt; 方法，而只需实现一个有 yield 语句的生成器，生成想让 &lt;code&gt;__enter__&lt;/code&gt; 方法返回的值&lt;/p&gt;
+&lt;p&gt;在使用 @contextmanager 装饰器能减少创建上下文管理器的样板代码量，因为不用编写一个完整的类，定义 &lt;code&gt;__enter__&lt;/code&gt; 和 &lt;code&gt;__exit__&lt;/code&gt; 方法，而只需实现有一个 yield 语句的生成器，生成想让 &lt;code&gt;__enter__&lt;/code&gt; 方法返回的值&lt;/p&gt;
+&lt;p&gt;在使用 @contextmanager 装饰器的生成器中，yield 语句的作用是把函数的定义体分成两个部分：yield 语句前面所有代码在 with 块开始时（即解释器调用 &lt;code&gt;__enter__&lt;/code&gt; 方法时）执行，yield 语句后面的代码在 with 块结束时（即调用 &lt;code&gt;__exit__&lt;/code&gt; 方法时）执行&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;contextlib&lt;/span&gt;
+
+&lt;span class="nd"&gt;@contextlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contextmanager&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;looking_glass&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+    &lt;span class="n"&gt;original_write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;
+    
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reverse_write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;original_write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;[::&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;reverse_write&lt;/span&gt;
+    &lt;span class="c1"&gt;# 产生一个值，这个值会绑定到 with 语句的 as 子句后的目标变量上&lt;/span&gt;
+    &lt;span class="c1"&gt;# 执行 with 块中的代码时，这个函数会在这一点暂停&lt;/span&gt;
+    &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="s1"&gt;'JABBERWOCKY'&lt;/span&gt; 
+    &lt;span class="c1"&gt;# 控制权一旦跳出 with 块，继续执行 yield 语句后的代码&lt;/span&gt;
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;original_write&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;looking_glass&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;what&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Alice, Kitty and Snowdrop'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;what&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;pordwonS dna yttiK ,ecilA
+YKCOWREBBAJ
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;其实，contextlib.contextmanager 装饰器会把函数包装成实现 &lt;code&gt;__enter__&lt;/code&gt; 和 &lt;code&gt;__exit__&lt;/code&gt; 方法的类&lt;/p&gt;
+&lt;p&gt;这个类的 &lt;code&gt;__enter__&lt;/code&gt; 作用如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;调用生成器函数，保存生成器对象（这里称为 gen）&lt;/li&gt;
+&lt;li&gt;调用 next(gen)，执行到 yield 关键字位置&lt;/li&gt;
+&lt;li&gt;返回 next(gen) 产生的值，以便把产生的值绑定到 &lt;code&gt;with/as&lt;/code&gt; 语句中目标变量上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;with 块终止时，&lt;code&gt;__exit__&lt;/code&gt; 方法会做以下几件事&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;检查有没有把异常传给 exc_type, 如果有，调用 gen.throw(exception), 在生成器函数定义体中包含 yield 关键字的那一行跑出异常&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;否则，调用 next(gen)，继续执行生成器函数体中 yield 语句之后的代码&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上面的例子其实有一个严重的错误，如果在 with 块中抛出了异常，Python 解释器会将其捕获，然后在 looking_glass 函数的 yield 表达式再次跑出，但是，那里没有处理错误的代码，因此 looking_glass 函数会终止，永远无法恢复成原来的 sys.stdout.write 方法，导致系统处于无效状态，下面添加了一些代码，用于处理 ZeroDivisionError 异常，这样就比较健壮了&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;contextlib&lt;/span&gt;
+
+&lt;span class="nd"&gt;@contextlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contextmanager&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;looking_glass&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+    &lt;span class="n"&gt;original_write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;
+    
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reverse_write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;original_write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;[::&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;reverse_write&lt;/span&gt;
+    &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
+    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="s1"&gt;'JABBERWOCKY'&lt;/span&gt; 
+    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;ZeroDivisionError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Please DO NOT divide by zero'&lt;/span&gt;
+    &lt;span class="k"&gt;finally&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;original_write&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;前面说过，为了告诉解释器异常已经处理了，&lt;code&gt;__exit__&lt;/code&gt; 方法返回 True，此时解释器会压制异常。如果 &lt;code&gt;__exit__&lt;/code&gt; 方法没有显式返回一个值，那么解释器得到的是  None，然后向上冒泡异常。使用 @contextmanager 装饰器时，默认行为是相反的，装饰器提供的 &lt;code&gt;__exit__&lt;/code&gt; 方法假定发给生成器的所有异常都得到处理了，因此应该压制异常。如果不想让 &lt;code&gt;@contextmanager&lt;/code&gt; 压制异常，必须在装饰器的函数中显式重新跑出异常&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;把异常发给生成器的方式是使用 throw 方法，下章讲&lt;/p&gt;
+&lt;p&gt;这样的约定的原因是，创建上下文时，生成器无法返回值，只能产出值。不过现在可以返回值了，见下章&lt;/p&gt;
+&lt;p&gt;使用 @contextmanager 装饰器时，要把 yield 语句放到 try/finally 语句中（或者放在 with 语句中），这是无法避免的，因为我们永远不知道上下文管理器用户会在 with 块中做什么&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;除了标准库中举得例子外，Martijin Pieters 实现原地文件重写上下文管理器是 @contextmanager 不错的使用实例，如下：&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# import csv&lt;/span&gt;
+&lt;span class="c1"&gt;# with inplace(csvfilename, 'r', newline='') as (infh, outfh):&lt;/span&gt;
+&lt;span class="c1"&gt;#     reader = csv.reader(infh)&lt;/span&gt;
+&lt;span class="c1"&gt;#     writer = csv.writer(outfh)&lt;/span&gt;
+&lt;span class="c1"&gt;#     for row in reader:&lt;/span&gt;
+&lt;span class="c1"&gt;#         row += ['new', 'columns']&lt;/span&gt;
+&lt;span class="c1"&gt;#         writer.writerow(row)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;inplace 函数是个上下文管理器,为同一个文件提供了两个句柄(这个示例中的 infh 和 outfh),以便同时读写同一个文件。这比标准库中的 fileinput.input 函数更易用&lt;/p&gt;
+&lt;p&gt;注意,在 @contextmanager 装饰器装饰的生成器中,yield 与迭代没有任何关系。在本节所举的示例中,生成器函数的作用更像是协程:执行到某一点时暂停,让客户代码运行,直到客户让协程继续做事。下章会全面讨论协程。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;
+</summary><category term="else with"></category></entry><entry><title>13 运算符重载</title><link href="http://ghvn7777.github.io/13_operator.html" rel="alternate"></link><published>2017-06-23T01:09:00+02:00</published><updated>2017-06-23T01:09:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-23:13_operator.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -7019,7 +8543,7 @@ During handling of the above exception, another exception occurred:
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>12 继承的优缺点</title><link href="http://ghvn7777.github.io/12_inherit.html" rel="alternate"></link><published>2017-06-19T22:22:00+02:00</published><updated>2017-06-19T22:22:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-19:12_inherit.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="bytes operator"></category></entry><entry><title>12 继承的优缺点</title><link href="http://ghvn7777.github.io/12_inherit.html" rel="alternate"></link><published>2017-06-19T22:22:00+02:00</published><updated>2017-06-19T22:22:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-19:12_inherit.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -8773,7 +10297,7 @@ PONG &lt;__main__.D object at 0x7fd698c96f98&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>11 接口：从协议到抽象基类</title><link href="http://ghvn7777.github.io/11_abstrack_class.html" rel="alternate"></link><published>2017-06-17T02:22:00+02:00</published><updated>2017-06-17T02:22:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-17:11_abstrack_class.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="inherit"></category></entry><entry><title>11 接口：从协议到抽象基类</title><link href="http://ghvn7777.github.io/11_abstrack_class.html" rel="alternate"></link><published>2017-06-17T02:22:00+02:00</published><updated>2017-06-17T02:22:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-17:11_abstrack_class.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -10848,7 +12372,7 @@ Sequence.register(memoryview)&lt;/code&gt;&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>10 序列的修改，散列和切片</title><link href="http://ghvn7777.github.io/10_list_modify_hash_slice.html" rel="alternate"></link><published>2017-06-13T00:30:00+02:00</published><updated>2017-06-13T00:30:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-13:10_list_modify_hash_slice.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="abstract"></category></entry><entry><title>10 序列的修改，散列和切片</title><link href="http://ghvn7777.github.io/10_list_modify_hash_slice.html" rel="alternate"></link><published>2017-06-13T00:30:00+02:00</published><updated>2017-06-13T00:30:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-13:10_list_modify_hash_slice.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -14533,7 +16057,7 @@ f
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>9 符合 Python 风格的对象</title><link href="http://ghvn7777.github.io/9_python_object.html" rel="alternate"></link><published>2017-06-07T07:38:00+02:00</published><updated>2017-06-07T07:38:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-07:9_python_object.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="class_duck"></category></entry><entry><title>9 符合 Python 风格的对象</title><link href="http://ghvn7777.github.io/9_python_object.html" rel="alternate"></link><published>2017-06-07T07:38:00+02:00</published><updated>2017-06-07T07:38:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-07:9_python_object.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -17347,7 +18871,7 @@ h6:hover .anchor-link {
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>8 对象引用，可变性和垃圾回收</title><link href="http://ghvn7777.github.io/8_object.html" rel="alternate"></link><published>2017-06-04T11:05:00+02:00</published><updated>2017-06-04T11:05:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-04:8_object.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="class"></category></entry><entry><title>8 对象引用，可变性和垃圾回收</title><link href="http://ghvn7777.github.io/8_object.html" rel="alternate"></link><published>2017-06-04T11:05:00+02:00</published><updated>2017-06-04T11:05:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-04:8_object.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -19974,7 +21498,7 @@ wref_to_a_list = weakref.ref(a_list)&lt;/code&gt;&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>7 装饰器</title><link href="http://ghvn7777.github.io/7_decorate.html" rel="alternate"></link><published>2017-06-02T01:45:00+02:00</published><updated>2017-06-02T01:45:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-02:7_decorate.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="object"></category></entry><entry><title>7 装饰器</title><link href="http://ghvn7777.github.io/7_decorate.html" rel="alternate"></link><published>2017-06-02T01:45:00+02:00</published><updated>2017-06-02T01:45:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-06-02:7_decorate.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -22841,7 +24365,7 @@ snooze(0.123) dt=0.123s
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>6 Python “策略”模式和“命令”模式</title><link href="http://ghvn7777.github.io/6_design_pattern.html" rel="alternate"></link><published>2017-05-30T22:06:00+02:00</published><updated>2017-05-30T22:06:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-05-30:6_design_pattern.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="decorate"></category></entry><entry><title>6 Python “策略”模式和“命令”模式</title><link href="http://ghvn7777.github.io/6_design_pattern.html" rel="alternate"></link><published>2017-05-30T22:06:00+02:00</published><updated>2017-05-30T22:06:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-05-30:6_design_pattern.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -24477,7 +26001,7 @@ h6:hover .anchor-link {
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>5 一等函数</title><link href="http://ghvn7777.github.io/5_functional_languages.html" rel="alternate"></link><published>2017-05-30T17:06:00+02:00</published><updated>2017-05-30T17:06:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-05-30:5_functional_languages.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="design"></category></entry><entry><title>5 一等函数</title><link href="http://ghvn7777.github.io/5_functional_languages.html" rel="alternate"></link><published>2017-05-30T17:06:00+02:00</published><updated>2017-05-30T17:06:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-05-30:5_functional_languages.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -27583,7 +29107,7 @@ functools 模块中的 lru_cache 函数令人印象深刻，它会做备忘(memo
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary><category term="bytes Unicode UTF-8"></category></entry><entry><title>4 文本和字节序列</title><link href="http://ghvn7777.github.io/4%20str_and_bytes.html" rel="alternate"></link><published>2017-05-29T22:33:00+02:00</published><updated>2017-05-29T22:33:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-05-29:4 str_and_bytes.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+</summary><category term="func"></category></entry><entry><title>4 文本和字节序列</title><link href="http://ghvn7777.github.io/4%20str_and_bytes.html" rel="alternate"></link><published>2017-05-29T22:33:00+02:00</published><updated>2017-05-29T22:33:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-05-29:4 str_and_bytes.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
