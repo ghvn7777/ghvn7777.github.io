@@ -27,6 +27,46 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="./15_with.html">
+		<h2 itemprop="name headline">15 with 和 else 语句</h2>
+	</a>
+	<time datetime="2017-07-11T22:35:00+02:00" itemprop="datePublished">Tue 11 July 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本章讨论其他语言不常见的流程控制，用户可能会忽略这些特性：</p>
+<ul>
+<li>with 语句和上下文管理器</li>
+<li>for while 和 try 语句的 else 子句</li>
+</ul>
+<p>with 语句会设置一个临时的上下文，交给上下文管理器对象控制，并负责清理上下文。这么做能避免错误并减少样板代码，因此 API 更安全，更易于使用。除了自动关闭文件之外，with 块还有很多用途</p>
+<p>else 子句和 with 没关系，不过这两个都内容比较短，所以放到了一个逻辑</p>
+<h2 id="先做这个，再做那个：-if-之外的-else-块">先做这个，再做那个： if 之外的 else 块<a class="anchor-link" href="#先做这个，再做那个：-if-之外的-else-块">¶</a></h2><p>else 子句不仅能在 if 语句中使用，还能在 for，while，try 语句中使用</p>
+<p>else 子句行为如下：</p>
+<p>for: 仅当 for 循环运行完毕时（即 for 循环没有被 break 语句终止）才运行 else</p>
+<p>try: 仅当 try 块中没有异常时候才运行 else 块，else 子句抛出的异常不会由前面的 except 子句处理</p>
+<p>在所有情况下，如果异常或者 return, break 或 continue 语句导致控制权跳到了复合语句之外，else 也会被跳过</p>
+<p>for 循环用 else 如下：</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="./tag/else-with.html" rel="tag">else with</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="./14_iter.html">
 		<h2 itemprop="name headline">14 可迭代对象，迭代器和生成器</h2>
 	</a>
@@ -78,46 +118,6 @@
  
 	<span itemprop="keywords">
 		<a href="./tag/bytes-iter.html" rel="tag">bytes iter</a>
-	</span>
-</div>
-<hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="./15_with.html">
-		<h2 itemprop="name headline">15 with 和 else 语句</h2>
-	</a>
-	<time datetime="2017-07-10T22:35:00+02:00" itemprop="datePublished">Mon 10 July 2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">kaka</span>
-	</span>
-	<div class="summary">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>本章讨论其他语言不常见的流程控制，用户可能会忽略这些特性：</p>
-<ul>
-<li>with 语句和上下文管理器</li>
-<li>for while 和 try 语句的 else 子句</li>
-</ul>
-<p>with 语句会设置一个临时的上下文，交给上下文管理器对象控制，并负责清理上下文。这么做能避免错误并减少样板代码，因此 API 更安全，更易于使用。除了自动关闭文件之外，with 块还有很多用途</p>
-<p>else 子句和 with 没关系，不过这两个都内容比较短，所以放到了一个逻辑</p>
-<h2 id="先做这个，再做那个：-if-之外的-else-块">先做这个，再做那个： if 之外的 else 块<a class="anchor-link" href="#先做这个，再做那个：-if-之外的-else-块">¶</a></h2><p>else 子句不仅能在 if 语句中使用，还能在 for，while，try 语句中使用</p>
-<p>else 子句行为如下：</p>
-<p>for: 仅当 for 循环运行完毕时（即 for 循环没有被 break 语句终止）才运行 else</p>
-<p>try: 仅当 try 块中没有异常时候才运行 else 块，else 子句抛出的异常不会由前面的 except 子句处理</p>
-<p>在所有情况下，如果异常或者 return, break 或 continue 语句导致控制权跳到了复合语句之外，else 也会被跳过</p>
-<p>for 循环用 else 如下：</p></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
-	</span>
-	Tags:
- 
-	<span itemprop="keywords">
-		<a href="./tag/else-with.html" rel="tag">else with</a>
 	</span>
 </div>
 <hr>
