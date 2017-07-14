@@ -27,6 +27,48 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="./16_coroutine.html">
+		<h2 itemprop="name headline">16 协程</h2>
+	</a>
+	<time datetime="2017-07-14T23:25:00+02:00" itemprop="datePublished">Fri 14 July 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>字典中 to yield 表示产出和让步，对于 Python 生成器中的 yield 来说，这是成立的，yield item 这行代码会产生一个值，提供给 next(...) 调用方，此外，还会做出让步，暂停执行生成器，让调用方继续工作，直到需要使用另一个值再调用 next()。调用方会从生成器中拉取值</p>
+<p>语法上来说，协程和生成器类似，都是定义体中包含 yield 关键字的函数，可是，在协程中，yield 通常出现在表达式的右边，可以产出值，也可以不产出 -- 如果 yield 关键字后面没有表达式，那么生成器产出 None，协程可能会从调用方接收数据，不过调用方把数据提供给协程使用的是 <code>.send(datum)</code> 方法，而不是 next(...) 函数。通常调用方会把值推送给协程</p>
+<p>yield 关键字甚至还可以不接收或传出数据，不过数据如何流动，yield 都是一种流程控制工具，使用它可以实现协作式多任务：协程可以把控制器让步给中心调度程序，从而激活其他的协程</p>
+<p>从根本上把 yield 视作控制流程的方式，这样就好理解协程了</p>
+<p>本书前面介绍生成器函数作用不大，但是进行一系列功能改进后，得到了 Python 协程。了解 Python 协程有助于理解各个阶段的改进的功能和复杂度</p>
+<p>本章覆盖以下话题：</p>
+<ul>
+<li>生成器作为协程使用时的行为和状态</li>
+<li>使用装饰器自动预激协程</li>
+<li>调用方如何使用生成器对象的 .close() 和 .throw(...) 方法控制协程</li>
+<li>协程终止时如何返回值</li>
+<li>yield from 新语法的用途和语义</li>
+<li>使用案例 -- 使用协程管理仿真系统中的并发活动</li>
+</ul>
+<h2 id="生成器如何进化成协程">生成器如何进化成协程<a class="anchor-link" href="#生成器如何进化成协程">¶</a></h2><p>在 Python 2.5 中实现了 yield 关键字可以在表达式中使用，并在生成器 API 中增加了 .send(value) 方法。生成器的调用可以使用 .send(...) 方法发送数据，发送的数据会称为生成器函数中 yield 表达式的值，因此生成器可以作为协程使用，协程指的是一个过程，这个过程与调用方协作，产出由调用方提供的值</p></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="./tag/coroutine-yield.html" rel="tag">coroutine yield</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="./15_with.html">
 		<h2 itemprop="name headline">15 with 和 else 语句</h2>
 	</a>
@@ -439,60 +481,6 @@ target = decorate(target)</code></pre>
 	</span>
 </div>
 <hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="./6_design_pattern.html">
-		<h2 itemprop="name headline">6 Python “策略”模式和“命令”模式</h2>
-	</a>
-	<time datetime="2017-05-30T22:06:00+02:00" itemprop="datePublished">Tue 30 May 2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">kaka</span>
-	</span>
-	<div class="summary">
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Norvig 建议在有一等函数的语言重新审视 “策略” “命令” “模板方法” 和 “访问者” 模式。通常，我们我们可以把这些模式中涉及的某些类的实例替换成简单的函数，从而减少样板代码，本章将用函数对象重构 “策略” 模式</p>
-<p>策略模式就是定义一些列算法，把它们意义封装起来，并且使它们可以相互替换。本模式使得算法可以独立于它的客户而变化</p>
-<p>电商领域有个功能可以明显使用 “策略” 模式，即根据客户的属性或订单中的商品计算折扣，例如有个网店有如下折扣规则</p>
-<ul>
-<li>有 1000 或以上积分的顾客，每个订单享 %5 折扣。</li>
-<li>同一订单中，单个商品数量达到 20 或以上，享 %10 折扣</li>
-<li>订单中的不同商品达到 10 个或以上，享 %7 折扣</li>
-</ul>
-<p>简单起见，我们规定一个订单只能享有一种折扣。策略涉及如下几个概念:</p>
-<p>上下文：</p>
-<ul>
-<li>把一些计算委托给实现不同算法的可互换组件，它提供服务。在这个电商例子中，上下文是 Order，它会根据不同的算法计算促销折扣</li>
-</ul>
-<p>策略：</p>
-<ul>
-<li>实现不同算法组件的具体接口。在这个例子中，名为 Promotion 的抽象基类扮演这个角色</li>
-</ul>
-<p>具体策略：</p>
-<ul>
-<li>“策略” 的具体子类。fidelityPromo, BulkPromo, LargeOrderPromo 是这里的三个具体策略</li>
-</ul>
-<p>下面例子，实例化订单之前，系统会以某种方式选择一种促销折扣策略，然后传给 Order 构造方法。具体怎么选择策略，不在这个模式职责范围内：</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input"></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
-	</span>
-	Tags:
- 
-	<span itemprop="keywords">
-		<a href="./tag/design.html" rel="tag">design</a>
-	</span>
-</div>
-<hr>
  <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -529,7 +517,7 @@ target = decorate(target)</code></pre>
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="./category/fluent_python.html">fluent_python (17)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (18)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
