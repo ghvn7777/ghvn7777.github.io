@@ -27,6 +27,60 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="./6_design_pattern.html">
+		<h2 itemprop="name headline">6 Python “策略”模式和“命令”模式</h2>
+	</a>
+	<time datetime="2017-05-30T22:06:00+02:00" itemprop="datePublished">Tue 30 May 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Norvig 建议在有一等函数的语言重新审视 “策略” “命令” “模板方法” 和 “访问者” 模式。通常，我们我们可以把这些模式中涉及的某些类的实例替换成简单的函数，从而减少样板代码，本章将用函数对象重构 “策略” 模式</p>
+<p>策略模式就是定义一些列算法，把它们意义封装起来，并且使它们可以相互替换。本模式使得算法可以独立于它的客户而变化</p>
+<p>电商领域有个功能可以明显使用 “策略” 模式，即根据客户的属性或订单中的商品计算折扣，例如有个网店有如下折扣规则</p>
+<ul>
+<li>有 1000 或以上积分的顾客，每个订单享 %5 折扣。</li>
+<li>同一订单中，单个商品数量达到 20 或以上，享 %10 折扣</li>
+<li>订单中的不同商品达到 10 个或以上，享 %7 折扣</li>
+</ul>
+<p>简单起见，我们规定一个订单只能享有一种折扣。策略涉及如下几个概念:</p>
+<p>上下文：</p>
+<ul>
+<li>把一些计算委托给实现不同算法的可互换组件，它提供服务。在这个电商例子中，上下文是 Order，它会根据不同的算法计算促销折扣</li>
+</ul>
+<p>策略：</p>
+<ul>
+<li>实现不同算法组件的具体接口。在这个例子中，名为 Promotion 的抽象基类扮演这个角色</li>
+</ul>
+<p>具体策略：</p>
+<ul>
+<li>“策略” 的具体子类。fidelityPromo, BulkPromo, LargeOrderPromo 是这里的三个具体策略</li>
+</ul>
+<p>下面例子，实例化订单之前，系统会以某种方式选择一种促销折扣策略，然后传给 Order 构造方法。具体怎么选择策略，不在这个模式职责范围内：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="./tag/design.html" rel="tag">design</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="./5_functional_languages.html">
 		<h2 itemprop="name headline">5 一等函数</h2>
 	</a>
@@ -356,7 +410,7 @@
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="./category/fluent_python.html">fluent_python (17)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (18)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
