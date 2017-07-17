@@ -27,6 +27,63 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="./7_decorate.html">
+		<h2 itemprop="name headline">7 装饰器</h2>
+	</a>
+	<time datetime="2017-06-02T01:45:00+02:00" itemprop="datePublished">Fri 02 June 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>装饰器用于在源码中 “标记” 函数，以某种方式增强函数行为。这是一项强大的功能，但是如果想掌握，必须理解闭包</p>
+<p>nonlocal 是新出现的关键字，在 Python 3.0 中引入。作为 Python 程序员，如果严格遵守基于类的面向对象编程方式，即使不知道这个关键字也没事，但是如果想自己实现函数装饰器，那就必须了解闭包的方方面面，因此也就需要知道 nonlocal</p>
+<p>这一章中我们主要讨论的话题如下：、</p>
+<ul>
+<li>Python 如何计算装饰器语法</li>
+<li>Python 如何判断变量是不是局部的</li>
+<li>闭包存在的原因和工作原理</li>
+<li>nonlocal 能解决什么问题</li>
+</ul>
+<p>掌握这些知识，可以进一步探讨装饰器:</p>
+<ul>
+<li>实现行为良好的装饰器</li>
+<li>标准库中有用的装饰器</li>
+<li>实现一个参数化装饰器</li>
+</ul>
+<p>下面我们先介绍基础知识：</p>
+<h2 id="基础知识">基础知识<a class="anchor-link" href="#基础知识">¶</a></h2><p>假如有个 decorate 装饰器</p>
+<pre><code>@decorate
+def target():
+    print('running target()')</code></pre>
+<p>上面的写法与下面效果一样:</p>
+<pre><code>def target():
+    print('running target()')
+
+target = decorate(target)</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="./tag/decorate.html" rel="tag">decorate</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="./6_design_pattern.html">
 		<h2 itemprop="name headline">6 Python “策略”模式和“命令”模式</h2>
 	</a>
@@ -410,7 +467,7 @@
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="./category/fluent_python.html">fluent_python (18)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (19)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

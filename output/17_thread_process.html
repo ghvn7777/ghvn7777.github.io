@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>1-1 Python 风格扑克牌 — Kaka Blog</title>
-	<meta name="description" content="Title: 1-1 Python 风格扑克牌; Date: 2017-04-26; Author: kaka">
+	<title>17 并行 — Kaka Blog</title>
+	<meta name="description" content="Title: 17 并行; Date: 2017-07-17; Author: kaka">
 	<meta name="author" content="kaka">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -26,16 +26,23 @@
 		<div class="col-md-8 col-md-offset-2">
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="text-center article-header">
-		<h1 itemprop="name headline" class="article-title">1-1 Python 风格扑克牌</h1>
+		<h1 itemprop="name headline" class="article-title">17 并行</h1>
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">kaka</h4>
 		</span>
-		<time datetime="2017-04-26T00:50:00+02:00" itemprop="datePublished">Wed 26 April 2017</time>
+		<time datetime="2017-07-17T19:05:00+02:00" itemprop="datePublished">Mon 17 July 2017</time>
 	</div>
 	<div>
 		Category:
 		<span itemprop="articleSection">
 			<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="./tag/thread-process.html" rel="tag">thread process</a>
 		</span>
 	</div>
 	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
@@ -1015,209 +1022,57 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="__getitem__--AND--__len__-方法"><strong><code>__getitem__</code></strong>  AND  <strong><code>__len__</code></strong> 方法<a class="anchor-link" href="#__getitem__--AND--__len__-方法">¶</a></h2><p>下面看一个生成扑克牌以及对其进行操作的例子</p>
+<p>为了高效处理网络 I/O，需要使用并发，因为网络有很高的延时，为了不浪费 CPU 周期去等待，最好在收到网络相应之前做些其他的事</p>
+<p>我们首先看依次从网络下载的代码：</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [27]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">os</span> 
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">Card</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Card'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'rank'</span><span class="p">,</span> <span class="s1">'suit'</span><span class="p">])</span> <span class="c1">#'Card' 是 namedtuple 名字,　后面是元素</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="k">class</span> <span class="nc">FrenchDeck</span><span class="p">:</span>
-    <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="s1">'JQKA'</span><span class="p">)</span>
-    <span class="n">suits</span> <span class="o">=</span> <span class="s1">'spades diamonds clubs hearts'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># 黑桃 钻石 梅花 红心</span>
-    
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span>
-                                        <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranks</span><span class="p">]</span>
+<span class="n">POP20_CC</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'CN IN US ID BR PK NG BD RU JP '</span>
+            <span class="s1">'MX PH VN ET EG DE IR TR CD FR'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'http://flupy.org/data/flags'</span>
+<span class="n">DEST_DIR</span> <span class="o">=</span> <span class="s1">'downloads/'</span>
+
+<span class="k">def</span> <span class="nf">save_flag</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEST_DIR</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="n">cc</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'{}/{cc}/{cc}.gif'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">content</span>
+
+<span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span> <span class="c1"># 输出末尾的换行符变成了空格</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span> <span class="c1">#Python 中正常情况下,遇到换行才会刷新 stdout 缓冲。所以这里手动刷新缓冲</span>
     
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span> <span class="c1">#代表了 self._cards 的 []运算符</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cards</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [28]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">beer_card</span> <span class="o">=</span> <span class="n">Card</span><span class="p">(</span><span class="s1">'7'</span><span class="p">,</span> <span class="s1">'diamonds'</span><span class="p">)</span>
-<span class="n">beer_card</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[28]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='7', suit='diamonds')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [29]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="p">()</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>  <span class="c1">#默认调用了 __len__()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[29]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>52</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [30]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1">#调用了 __getitem__()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[30]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='2', suit='spades')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [31]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[31]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='A', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [32]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">choice</span>
-<span class="n">choice</span><span class="p">(</span><span class="n">deck</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[32]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Card(rank='8', suit='hearts')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [33]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="c1">#因为 __getitem__() 方法把 [] 操作交给 slef._cards 列表，我们的 desk 自动支持切片操作</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[33]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='2', suit='spades'),
- Card(rank='3', suit='spades'),
- Card(rank='4', suit='spades')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [34]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deck</span><span class="p">[</span><span class="mi">12</span><span class="p">::</span><span class="mi">13</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[34]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[Card(rank='A', suit='spades'),
- Card(rank='A', suit='diamonds'),
- Card(rank='A', suit='clubs'),
- Card(rank='A', suit='hearts')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="迭代">迭代<a class="anchor-link" href="#迭代">¶</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [35]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 我们只要写了 __getitem__() 方法，就可以将类变成可迭代的</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">deck</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">download_many</span><span class="p">(</span><span class="n">cc_list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cc_list</span><span class="p">):</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+        <span class="n">show</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+        <span class="n">save_flag</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s1">'.gif'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">cc_list</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">):</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">download_many</span><span class="p">(</span><span class="n">POP20_CC</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">{} flags downloaded in {:.2f}s'</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">))</span>
+    
+<span class="n">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1227,91 +1082,8 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='spades')
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [36]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 也可以反向迭代</span>
-<span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">deck</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='A', suit='hearts')
-Card(rank='K', suit='hearts')
-Card(rank='Q', suit='hearts')
-Card(rank='J', suit='hearts')
-Card(rank='10', suit='hearts')
-Card(rank='9', suit='hearts')
-Card(rank='8', suit='hearts')
-Card(rank='7', suit='hearts')
-Card(rank='6', suit='hearts')
-Card(rank='5', suit='hearts')
-Card(rank='4', suit='hearts')
-Card(rank='3', suit='hearts')
-Card(rank='2', suit='hearts')
-Card(rank='A', suit='clubs')
-Card(rank='K', suit='clubs')
-Card(rank='Q', suit='clubs')
-Card(rank='J', suit='clubs')
-Card(rank='10', suit='clubs')
-Card(rank='9', suit='clubs')
-Card(rank='8', suit='clubs')
-Card(rank='7', suit='clubs')
-Card(rank='6', suit='clubs')
-Card(rank='5', suit='clubs')
-Card(rank='4', suit='clubs')
-Card(rank='3', suit='clubs')
-Card(rank='2', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='K', suit='diamonds')
-Card(rank='Q', suit='diamonds')
-Card(rank='J', suit='diamonds')
-Card(rank='10', suit='diamonds')
-Card(rank='9', suit='diamonds')
-Card(rank='8', suit='diamonds')
-Card(rank='7', suit='diamonds')
-Card(rank='6', suit='diamonds')
-Card(rank='5', suit='diamonds')
-Card(rank='4', suit='diamonds')
-Card(rank='3', suit='diamonds')
-Card(rank='2', suit='diamonds')
-Card(rank='A', suit='spades')
-Card(rank='K', suit='spades')
-Card(rank='Q', suit='spades')
-Card(rank='J', suit='spades')
-Card(rank='10', suit='spades')
-Card(rank='9', suit='spades')
-Card(rank='8', suit='spades')
-Card(rank='7', suit='spades')
-Card(rank='6', suit='spades')
-Card(rank='5', suit='spades')
-Card(rank='4', suit='spades')
-Card(rank='3', suit='spades')
-Card(rank='2', suit='spades')
+<pre>BD BR CD CN DE EG ET FR ID IN IR JP MX NG PH PK RU TR US VN 
+20 flags downloaded in 33.59s
 </pre>
 </div>
 </div>
@@ -1323,103 +1095,38 @@ Card(rank='2', suit='spades')
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="in-运算符">in 运算符<a class="anchor-link" href="#in-运算符">¶</a></h2><p>迭代通常是隐式的，如果集合中没有 <strong><code>__contains__</code></strong>　方法， in 操作符就会按顺序进行一次迭代搜索，于是 in 可以在 FrenchDeck 类中使用，因为它是可迭代的</p>
+<p>注意上面代码细节，导入标准库 os time 和 sys 之后，使用一个空格分开了非标准库 requests</p>
+<p>为了清楚起见，这里并没有处理异常。看到依次下载需要 33 秒</p>
+<h2 id="使用-concurrent.futures-模块下载">使用 concurrent.futures 模块下载<a class="anchor-link" href="#使用-concurrent.futures-模块下载">¶</a></h2><p>concurrent.futures 模块的主要特色是 ThreadPoolExecutor 和 ProcessPoolExecutor 类，这两个类实现的接口能分别在不同的线程或进程中执行可调用的对象，这两个类在内部维护着一个工作线程或进程池，以及要执行的任务队列。不过这个接口抽象层级很高，像下国旗这种简单的案例，不用关心任何实现细节</p>
+<p>下面展示了如何使用 ThreadPoolExecutor.map 方法，以最简单的方式实现并发下载</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [37]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'hearts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[37]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>True</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [38]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Card</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">,</span> <span class="s1">'beasts'</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deck</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[38]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>False</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="排序">排序<a class="anchor-link" href="#排序">¶</a></h2><p>扑克牌一般按照数字大小（ Ａ 最大）来排列，花色按照黑桃（最大），红心，方块，梅花（最小）来排序，我们实现一下此功能</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [39]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">suit_values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">spades</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hearts</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">diamonds</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">clubs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">suit_values</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[39]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'clubs': 0, 'diamonds': 1, 'hearts': 2, 'spades': 3}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [44]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spades_high</span><span class="p">(</span><span class="n">card</span><span class="p">):</span>
-    <span class="n">rank_value</span> <span class="o">=</span> <span class="n">FrenchDeck</span><span class="o">.</span><span class="n">ranks</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">rank</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">rank_value</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">suit_values</span><span class="p">)</span> <span class="o">+</span> <span class="n">suit_values</span><span class="p">[</span><span class="n">card</span><span class="o">.</span><span class="n">suit</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [45]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">deck</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">spades_high</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">concurrent</span> <span class="kn">import</span> <span class="n">futures</span>
+
+<span class="n">MAX_WORKERS</span> <span class="o">=</span> <span class="mi">20</span> 
+
+<span class="k">def</span> <span class="nf">download_one</span><span class="p">(</span><span class="n">cc</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+    <span class="n">save_flag</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s1">'.gif'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cc</span>
+
+<span class="k">def</span> <span class="nf">download_many</span><span class="p">(</span><span class="n">cc_list</span><span class="p">):</span>
+    <span class="n">workers</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">MAX_WORKERS</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cc_list</span><span class="p">))</span>
+    <span class="k">with</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="c1"># 与内置的 map 方法类似，不过 download_one 函数会在多个线程中并发调用</span>
+        <span class="c1"># map 方法返回一个生成器，因此可以迭代，获取各个函数的返回值</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">download_one</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cc_list</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+
+<span class="n">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1429,58 +1136,8 @@ Card(rank='2', suit='spades')
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Card(rank='2', suit='clubs')
-Card(rank='2', suit='diamonds')
-Card(rank='2', suit='hearts')
-Card(rank='2', suit='spades')
-Card(rank='3', suit='clubs')
-Card(rank='3', suit='diamonds')
-Card(rank='3', suit='hearts')
-Card(rank='3', suit='spades')
-Card(rank='4', suit='clubs')
-Card(rank='4', suit='diamonds')
-Card(rank='4', suit='hearts')
-Card(rank='4', suit='spades')
-Card(rank='5', suit='clubs')
-Card(rank='5', suit='diamonds')
-Card(rank='5', suit='hearts')
-Card(rank='5', suit='spades')
-Card(rank='6', suit='clubs')
-Card(rank='6', suit='diamonds')
-Card(rank='6', suit='hearts')
-Card(rank='6', suit='spades')
-Card(rank='7', suit='clubs')
-Card(rank='7', suit='diamonds')
-Card(rank='7', suit='hearts')
-Card(rank='7', suit='spades')
-Card(rank='8', suit='clubs')
-Card(rank='8', suit='diamonds')
-Card(rank='8', suit='hearts')
-Card(rank='8', suit='spades')
-Card(rank='9', suit='clubs')
-Card(rank='9', suit='diamonds')
-Card(rank='9', suit='hearts')
-Card(rank='9', suit='spades')
-Card(rank='10', suit='clubs')
-Card(rank='10', suit='diamonds')
-Card(rank='10', suit='hearts')
-Card(rank='10', suit='spades')
-Card(rank='J', suit='clubs')
-Card(rank='J', suit='diamonds')
-Card(rank='J', suit='hearts')
-Card(rank='J', suit='spades')
-Card(rank='Q', suit='clubs')
-Card(rank='Q', suit='diamonds')
-Card(rank='Q', suit='hearts')
-Card(rank='Q', suit='spades')
-Card(rank='K', suit='clubs')
-Card(rank='K', suit='diamonds')
-Card(rank='K', suit='hearts')
-Card(rank='K', suit='spades')
-Card(rank='A', suit='clubs')
-Card(rank='A', suit='diamonds')
-Card(rank='A', suit='hearts')
-Card(rank='A', suit='spades')
+<pre>CN FR EG ID RU TR BR IN CD NG JP PK PH MX US IR ET DE BD VN 
+20 flags downloaded in 2.18s
 </pre>
 </div>
 </div>
@@ -1492,7 +1149,245 @@ Card(rank='A', suit='spades')
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>现在还无法洗牌，因为牌的顺序是不可变的，除非我们破坏这个类的封装性，直接对 <code>_cards</code> 进行操作，在以后我们会讲到，其实只需要一行代码实现 <code>__setitem__</code> 方法就可以了</p>
+<p>这里为了方便引用了第一个代码块的一些函数，注意，上面的 download_one 函数其实是第一个例子的 for 循环结构体，编写并发代码经常这样重构，把依次执行的 for 循环改成函数，以便并发调用</p>
+<h2 id="期物在哪里">期物在哪里<a class="anchor-link" href="#期物在哪里">¶</a></h2><p>期物是 concurrent.futures 模块和 asyncio 包的重要组件，可是，作为这两个库的用户，我们有时候却见不到期物，在上面例子背后用到了期物，但是我们编写的代码并没有直接使用。这一节概述期物并举一个例子，展示用法</p>
+<p>从 Python3.4 起，标准库中有两个名为 Future 的类：concurrent.futures.Future 和 asyncio.Future。这两个类的作用完全相同：两个 Future 类的实例都表示可能已经完成或者尚未完成的延时计算。这与 Twisted 引擎中的 Deferred 类，Tornado 框架中的 Future 类，以及多个 JavaScript 库中的 Promise 对象类似</p>
+<p>期物封装待完成的操作，可以放入队列，完成的状态可以查询，得到结果（或抛出异常）后可以获取结果（或异常）。</p>
+<p>我们要记住一件事：通常情况自己不应该创建期物，而只能由并发框架（concurrent.futures 或 asyncio）实例化。原因很简单：期物表示终将发生的事，而确定某件事会发生的唯一方式是执行的时间已经排定。因此，只有排定把某件事交给 concurrent.futures.Executor 子类处理，才会创建 concurrent.futures.Future 实例。例如 Executor.submit() 方法的参数是一个可调用的对象，调用这个方法后会为传入的可调用对象排期，并返回一个期物。</p>
+<p>客户端代码不应该改变期物的状态，并发框架在期物表示的延时计算结束后会改变期物状态，而我们无法控制计算何时结束</p>
+<p>这两种期物都有 .done() 方法，这个方法不阻塞，返回值是 布尔值，指明期物链接的可调用对象是否已经执行。客户端代码通常不会询问期物是否运行结束，而会等待通知。因此，两个 Future 类都用 .add_done_callback() 方法；这个方法只有一个参数，类型是可调用的对象，期物运行结束后会调用指定的可调用对象</p>
+<p>此外，还有 .result() 方法，在期物运行结束后调用的话，这个方法在两个 Future 类中的作用相同；返回可调用对象的结果，或者重新抛出执行的可调用的对象时抛出异常。可是，如果期物没有运行结束，result 方法在两个 Future 类中的行为相差很大。对 concurrency.futures.Future 实例来说，调用 f.result() 方法会阻塞调用方所在的线程，直到有结果可返回，此时， result 方法可以接收可选的 timeout 参数，如果在指定时间期物没有完毕，会抛出 TimeError 异常，第 18 章你会发现，asyncio.Future.result 方法不支持设定超时时间，在那个库中获取期物的结果最好使用 yield from 结构。不过，对 concurrency.futures.Future 实例不能这么做。</p>
+<p>这两个库都有几个函数返回期物，其他函数则使用期物，以用户易于理解的方式实现自身，上面的例子中的 Executor.map 方法属于后者：返回值是一个迭代器，迭代器的 <code>__next__</code> 方法调用各个期物的 result 方法，因此我们得到的是各个期物的结果，而非期物本身</p>
+<p>为了从实用的角度理解期物，我们使用 concurrent.futures.as_complete 函数重写上面例子，这个函数是一个期物列表，返回值是一个迭代器，在期物运行结束后产出期物</p>
+<p>为了使用 futures.as_completed 函数,只需修改 download_many 函数,把较抽象的 executor.map 调用换成两个 for 循环:一个用于创建并排定期物,另一个用于获取期物的结果。同时,我们会添加几个print 调用,显示运行结束前后的期物。修改后的 download_many 函数如下所示</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">download_many</span><span class="p">(</span><span class="n">cc_list</span><span class="p">):</span>
+    <span class="n">cc_list</span> <span class="o">=</span> <span class="n">cc_list</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+    
+    <span class="c1"># max_workers 硬编码为 3，以便在输出中观察待完成的期物</span>
+    <span class="k">with</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="n">to_do</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 按照字母表迭代国家代码，明确表明输出的顺序与输入一致</span>
+        <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cc_list</span><span class="p">):</span>
+            <span class="c1"># submit 方法可以排定调用对象的执行时间，然后返回一个期物，表示这个待执行的操作</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">download_one</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
+            <span class="n">to_do</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">'Scheduled for {}: {}'</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">future</span><span class="p">))</span>
+        
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">futures</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">to_do</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{} result: {!r}'</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">future</span><span class="p">,</span> <span class="n">res</span><span class="p">))</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    
+<span class="n">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Scheduled for BR: <future at 0x7f174c4bbcc0 state="running">
+Scheduled for CN: <future at 0x7f174c4bf630 state="running">
+Scheduled for ID: <future at 0x7f174c4b3dd8 state="running">
+Scheduled for IN: <future at 0x7f174c4b74e0 state="pending">
+Scheduled for US: <future at 0x7f174c4b7128 state="pending">
+BR <future at 0x7f174c4bbcc0 state="finished" returned str> result: 'BR'
+ID <future at 0x7f174c4b3dd8 state="finished" returned str> result: 'ID'
+IN <future at 0x7f174c4b74e0 state="finished" returned str> result: 'IN'
+US <future at 0x7f174c4b7128 state="finished" returned str> result: 'US'
+CN <future at 0x7f174c4bf630 state="finished" returned str> result: 'CN'
+
+5 flags downloaded in 4.58s
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>注意，这个示例中调用 future.result() 方法绝不会阻塞，因为 future 由 as_completed 函数产出。</p>
+<p>上面输出可以看出，期物的 repr() 方法会显示期物的状态；前 3 个期物是 running，因为有 3 个工作的线程</p>
+<p>后两个期物的状态是 pending，等待有线程可用</p>
+<p>严格的来说，我们现在的脚本都不能并行下载，因为 GIL 锁的限制，他们都在单个线程中运行</p>
+<h2 id="阻塞型-Ｉ/O-和-GIL">阻塞型 Ｉ/O 和 GIL<a class="anchor-link" href="#阻塞型-Ｉ/O-和-GIL">¶</a></h2><p>CPython 解释器本身就不是线程安全的，因此有全局解释器锁（GIL），一次只允许使用一个线程执行 Python 字节码。因此，一个 Python 进程通常不能使用多个 CPU 核心</p>
+<blockquote><p>这是 CPython 解释器的局限，与 Python 语言无关，Jython 和 IronPython 没有这种限制，不过目前最快的 PyPy 也有 GIL</p>
+</blockquote>
+<p>不过标准库中的阻塞型 I/O 操作函数在操作系统返回结果时都会释放 GIL，这意味着一个内置的函数或一个使用 C 语言编写的扩展释放 GIL。其实有个使用 C 语言编写的 Python 库可以管理 GIL，不过太麻烦，不建议使用</p>
+<p>然而，标准库中所有执行阻塞型 I/O 操作的函数，在等待操作系统返回结果时都会释放 GIL。这意味着 Python 在这个层次可以使用多线程程，I/O 密集型 Python 程序能从中收益，一个 Python 程序等待网络响应，阻塞型 I/O 函数会释放 GIL，再运行一个进程</p>
+<blockquote><p>Python 标准库中所有的阻塞型 I/O 函数都会释放 GIL，允许其他线程运行。time.sleep() 函数也会释放 GIL。因此，尽管有 GIL，Python 还是能在 I/O 密集型应用发挥作用</p>
+</blockquote>
+<h2 id="使用-concurrent.futures-模块启动进程">使用 concurrent.futures 模块启动进程<a class="anchor-link" href="#使用-concurrent.futures-模块启动进程">¶</a></h2><p>concurrent.futures 模块文档副标题是执行并行任务。这个模块实现的是真正的并行计算，因为它使用 ProcessPoolExecutor 类把工作分配给多个进程处理，因此，如果需要做 CPU 密集型处理，使用这个模块能绕开 GIL，利用所有 CPU 核心</p>
+<p>ProcessPoolExecutor 和 ThreadPoolExecutor 类都实现了通用的Executor 接口,因此使用 concurrent.futures 模块能特别轻松地把基于线程的方案转成基于进程的方案。</p>
+<p>只需要把第二个例子的</p>
+<pre><code>def download_many(cc_list):
+     workers = min(MAX_WORKERS, len(cc_list))
+    with futures.ThreadPoolExecutor(workers) as executor:</code></pre>
+<p>改成：</p>
+<pre><code>def download_many(cc_list):
+    with futures.ProcessPoolExecutor() as executor:</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">concurrent</span> <span class="kn">import</span> <span class="n">futures</span>
+
+<span class="n">MAX_WORKERS</span> <span class="o">=</span> <span class="mi">20</span> 
+
+<span class="k">def</span> <span class="nf">download_one</span><span class="p">(</span><span class="n">cc</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+    <span class="n">save_flag</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s1">'.gif'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cc</span>
+
+<span class="k">def</span> <span class="nf">download_many</span><span class="p">(</span><span class="n">cc_list</span><span class="p">):</span>
+    <span class="n">workers</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">MAX_WORKERS</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cc_list</span><span class="p">))</span>
+    <span class="k">with</span> <span class="n">futures</span><span class="o">.</span><span class="n">ProcessPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">download_one</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cc_list</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+
+<span class="n">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CN BD BR ET CD EG ID FR IN JP IR DE NG MX RU PH VN PK TR US 
+20 flags downloaded in 4.89s
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>对于简单用途来说，这两个实现 Executor 接口的唯一指的注意的区别是，<code>ThreadPoolExecutor.__init__</code> 方法需要 max_workers 参数，指定线程池中的线程数量，在 ProcessPoolExecutor 类中，那个参数是可选的，大多数时候不适用，默认值是 os.cpu_count() 函数返回的 CPU 数量，这样处理说得通，因为对 CPU 密集型的处理来说，不可能要求使用超过 CPU 数量的职程。二队 I/O 密集型处理来说，可以在一个 ThreadPoolExecutor 实例中使用 10 和 100 个或 1000 个线程，最佳线程数量取决于线程做的事，以及可用内存等</p>
+<h2 id="实验-Executor.map-方法">实验 Executor.map 方法<a class="anchor-link" href="#实验-Executor.map-方法">¶</a></h2><p>如果想并发运行多个可调用对象，最简单方式是使用上面 Executor.map 方法，下面展示了这个方法的某些运作细节</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">strftime</span>
+<span class="kn">from</span> <span class="nn">concurrent</span> <span class="kn">import</span> <span class="n">futures</span>
+
+<span class="c1"># 将参数打印，前面加上时间戳</span>
+<span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'[%H:%M:%S]'</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="c1"># 开始时候显示一个消息，休眠 n 秒，休眠 n 秒，结束时候显示一个消息</span>
+<span class="c1"># 消息使用制表符缩进，缩进量由 n 确定</span>
+<span class="k">def</span> <span class="nf">loiter</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{}loiter({}): doing nothing for {}s...'</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{}loiter({}): done'</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">'Script starting'</span><span class="p">)</span>
+    <span class="n">executor</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">loiter</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">'results:'</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="s1">'Waiting for individual results:'</span><span class="p">)</span>
+    <span class="c1"># for 循环中的 enumerate 函数会隐式调用 next(results),</span>
+    <span class="c1"># 这个函数又会在(内部)表示第一个任务(loiter(0))的 _f 期物上调用_f.result() 方法。</span>
+    <span class="c1"># result 方法会阻塞,直到期物运行结束,因此这个循环每次迭代时都要等待下一个结果做好准备。</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">display</span><span class="p">(</span><span class="s1">'result {}: {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+        
+<span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[14:43:36] Script starting
+[14:43:36] loiter(0): doing nothing for 0s...[14:43:36] 
+[14:43:36][14:43:36]	loiter(1): doing nothing for 1s...[14:43:36] 
+ 		loiter(2): doing nothing for 2s... results:loiter(0): done
+ 
+<generator object executor.map.&lt;locals>.result_iterator at 0x7f174c457eb8>[14:43:36]
+ [14:43:36]			loiter(3): doing nothing for 3s... 
+Waiting for individual results:
+[14:43:36] result 0: 0
+[14:43:37] 	loiter(1): done
+[14:43:37] 				loiter(4): doing nothing for 4s...
+[14:43:37] result 1: 10
+[14:43:38] [14:43:38]		loiter(2): done 
+result 2: 20
+[14:43:39] 			loiter(3): done
+[14:43:39] result 3: 30
+[14:43:41] 				loiter(4): done
+[14:43:41] result 4: 40
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Executor.map 函数易于使用,不过有个特性可能有用,也可能没用,具体情况取决于需求:这个函数返回结果的顺序与调用开始的顺序一
+致。如果第一个调用生成结果用时 10 秒,而其他调用只用 1 秒,代码会阻塞 10 秒,获取 map 方法返回的生成器产出的第一个结果。在此之
+后,获取后续结果时不会阻塞,因为后续的调用已经结束。如果必须等到获取所有结果后再处理,这种行为没问题;不过,通常更可取的方式
+是,不管提交的顺序,只要有结果就获取。为此,要把Executor.submit 方法和 futures.as_completed 函数结合起来使
+用。</p>
+<blockquote><p>executor.submit 和 futures.as_completed 这个组合比executor.map 更灵活,因为 submit 方法能处理不同的可调用对象和参数,而executor.map 只能处理参数不同的同一个可调用对象。此外,传给futures.as_completed 函数的期物集合可以来自多个 Executor 实例,例如一些由 ThreadPoolExecutor 实例创建,另一些由 ProcessPoolExecutor 实例创建。</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span> 
+</pre></div>
+</div>
 </div>
 </div>
 </div>
