@@ -37,4 +37,4 @@ MARKUP = ('md', 'ipynb')
 
 PLUGIN_PATH = './plugins'
 PLUGINS = ['ipynb.markup']
-THEME = "/custom/bak/pelican-themes-master/aboutwilson"
+THEME = "/custom/pelican-themes/aboutwilson"
