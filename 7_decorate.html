@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>7 装饰器 — Kaka Blog</title>
+	<meta name="description" content="Title: 7 装饰器; Date: 2017-06-02; Author: kaka">
+	<meta name="author" content="kaka">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="./theme/html5.js"></script>
+		<![endif]-->
+	<link href="./theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="./theme/css/local.css" rel="stylesheet">
+	<link href="./theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="./">Kaka Blog</a>
+			<br>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">7 装饰器</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">kaka</h4>
+		</span>
+		<time datetime="2017-06-02T01:45:00+02:00" itemprop="datePublished">Fri 02 June 2017</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="./tag/decorate.html" rel="tag">decorate</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>装饰器用于在源码中 “标记” 函数，以某种方式增强函数行为。这是一项强大的功能，但是如果想掌握，必须理解闭包</p>
+<p>nonlocal 是新出现的关键字，在 Python 3.0 中引入。作为 Python 程序员，如果严格遵守基于类的面向对象编程方式，即使不知道这个关键字也没事，但是如果想自己实现函数装饰器，那就必须了解闭包的方方面面，因此也就需要知道 nonlocal</p>
+<p>这一章中我们主要讨论的话题如下：、</p>
+<ul>
+<li>Python 如何计算装饰器语法</li>
+<li>Python 如何判断变量是不是局部的</li>
+<li>闭包存在的原因和工作原理</li>
+<li>nonlocal 能解决什么问题</li>
+</ul>
+<p>掌握这些知识，可以进一步探讨装饰器:</p>
+<ul>
+<li>实现行为良好的装饰器</li>
+<li>标准库中有用的装饰器</li>
+<li>实现一个参数化装饰器</li>
+</ul>
+<p>下面我们先介绍基础知识：</p>
+<h2 id="基础知识">基础知识<a class="anchor-link" href="#基础知识">¶</a></h2><p>假如有个 decorate 装饰器</p>
+<pre><code>@decorate
+def target():
+    print('running target()')</code></pre>
+<p>上面的写法与下面效果一样:</p>
+<pre><code>def target():
+    print('running target()')
+
+target = decorate(target)</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'running inner()'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inner</span><span class="p">()</span>
+
+<span class="nd">@deco</span>
+<span class="k">def</span> <span class="nf">target</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running target()'</span><span class="p">)</span>
+    
+<span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running inner()
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Python-何时执行装饰器">Python 何时执行装饰器<a class="anchor-link" href="#Python-何时执行装饰器">¶</a></h2><p>装饰器一个关键特性是，它们被装饰的函数定义之后立即运行。这通常是在导入模块（Python 加载模块时），如下面的 register.py 模块</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+
+<span class="n">registry</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running register(</span><span class="si">%s</span><span class="s1">)'</span> <span class="o">%</span> <span class="n">func</span><span class="p">)</span>
+    <span class="n">registry</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">func</span>
+
+<span class="nd">@register</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f1()'</span><span class="p">)</span>
+
+<span class="nd">@register</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f2()'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f3</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f3()'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running main()'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'registry ->'</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
+    <span class="n">f1</span><span class="p">()</span>
+    <span class="n">f2</span><span class="p">()</span>
+    <span class="n">f3</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 运行后答案如下</span>
+<span class="c1"># running register(<function f1 at 0x7fbac67ca6a8>)</span>
+<span class="c1"># running register(<function f2 at 0x7fbac67ca730>)</span>
+<span class="c1"># running main()</span>
+<span class="c1"># registry -> [<function f1 at 0x7fbac67ca6a8>, <function f2 at 0x7fbac67ca730>]</span>
+<span class="c1"># running f1()</span>
+<span class="c1"># running f2()</span>
+<span class="c1"># running f3()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>看到 register 在模块中其它函数之前运行（两次）。调用 register 时，传给它的参数是被装饰的函数，例如 <function f1 at 0x7fbac67ca6a8></p>
+<p>加载模块后，registry 有两个被装饰函数的引用：f1 和 f2。这两个函数，以及 f3，只在 main 明确调用它们时候才执行</p>
+<p>如果单纯导入 register.py</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">register</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running register(<function f1 at 0x7f2054630c80>)
+running register(<function f2 at 0x7f2054630ea0>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>此时查看 registry 的值：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">register</span><span class="o">.</span><span class="n">registry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[<function register.f1>, <function register.f2>]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这主要为了强调，函数装饰器在导入模块时立即执行，而被装饰的函数只在明确调用时执行。这突出了 Python 程序员说的 导入时 和 运行时 的区别</p>
+<p>考虑到装饰器在真实代码中的常用方式，上面的例子有两个不同寻常的地方：</p>
+<ul>
+<li>装饰器函数与被装饰的函数在同一个模块定义，实际上装饰器通常在一个模块中定义，然后应用到其它模块中的函数上</li>
+<li>register 装饰器返回的函数与通过参数传入的相同，实际上大多数装饰器会在内部定义一个函数，然后返回</li>
+</ul>
+<h2 id="使用装饰器改进-“策略”-模式">使用装饰器改进 “策略” 模式<a class="anchor-link" href="#使用装饰器改进-“策略”-模式">¶</a></h2><p>在上一章的商品折扣例子中有一个问题，每次通过 best_promo 函数判断最大折扣，这个函数也需要一个折扣函数列表，如果忘了添加，会导致一些不容易被发现的问题。下面使用注册装饰器解决了这个问题：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">promos</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">promotion</span><span class="p">(</span><span class="n">promo_func</span><span class="p">):</span>
+    <span class="n">promos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">promo_func</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">promo_func</span>
+
+<span class="nd">@promotion</span>
+<span class="k">def</span> <span class="nf">fidelity_promo</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+    <span class="sd">'''为积分为 1000 或以上的顾客提供 5% 折扣'''</span>
+    <span class="k">return</span> <span class="n">order</span><span class="o">.</span><span class="n">total</span><span class="p">()</span> <span class="o">*</span> <span class="o">.</span><span class="mi">05</span> <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">customer</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">>=</span> <span class="mi">1000</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="nd">@promotion</span>
+<span class="k">def</span> <span class="nf">bulk_item_promo</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+    <span class="sd">'''单个商品为 20 个或以上时提供 %10 折扣'''</span>
+    
+    <span class="n">discount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">order</span><span class="o">.</span><span class="n">cart</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">quantity</span> <span class="o">>=</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">total</span><span class="p">()</span> <span class="o">*</span> <span class="o">.</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">discount</span>
+
+<span class="nd">@promotion</span>
+<span class="k">def</span> <span class="nf">large_order_promo</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+    <span class="sd">'''订单中的不同商品达到 10 个或以上时提供 %7 折扣'''</span>
+    
+<span class="k">def</span> <span class="nf">best_promo</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">promo</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="k">for</span> <span class="n">promo</span> <span class="ow">in</span> <span class="n">promos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这个方案有几个优点</p>
+<ul>
+<li>促销策略函数无需使用特殊名（即不用以 _promo 结尾）</li>
+<li>@promotion 装饰器突出了被装饰函数的作用，还可以临时禁止某个折扣策略，只需要把装饰器注释</li>
+<li>促销折扣策略可以在其它模块中定义，在系统任意地方都行，只要使用 @promotion 装饰器即可</li>
+</ul>
+<p>不过，多数的装饰器会修改被装饰函数。通常，它们会定义一个内部函数，然后将其返回，替换被装饰的函数。使用内部函数的代码几乎都要靠闭包才能正确工作。为了理解闭包，我们先退后一步，了解 Python 中变量的作用域</p>
+<h2 id="变量作用域规则">变量作用域规则<a class="anchor-link" href="#变量作用域规则">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">f1</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-7-009ad9378744></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>     print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-fg">----> 5</span><span class="ansi-red-fg"> </span>f1<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg"><ipython-input-7-009ad9378744></span> in <span class="ansi-cyan-fg">f1</span><span class="ansi-blue-fg">(a)</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">def</span> f1<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span>     print<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----> 3</span><span class="ansi-red-fg">     </span>print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span> f1<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name 'b' is not defined</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这里出现错误不奇怪，如果先给全局变量 b 赋值，然后调用 f1，就不会出错</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">f1</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+6
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这也很正常，下面是一个会让你大吃一惊的例子：），前面代码和上面的例子一样，可是，在赋值之前，第二个 print 失败了。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">f2</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">UnboundLocalError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-9-fde9fff01553></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>     print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     b <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">9</span>
+<span class="ansi-green-fg">----> 6</span><span class="ansi-red-fg"> </span>f2<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg"><ipython-input-9-fde9fff01553></span> in <span class="ansi-cyan-fg">f2</span><span class="ansi-blue-fg">(a)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">def</span> f2<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>     print<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----> 4</span><span class="ansi-red-fg">     </span>print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     b <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">9</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> f2<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">UnboundLocalError</span>: local variable 'b' referenced before assignment</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>首先输出了 3，表明 print(a) 执行了。但是 print(b) 无法执行，这是因为，Python 编译函数的定义时，判断 b 是局部变量，因为在函数中给它赋值了。生成的字节码证实了这种判断，Python 会尝试从本地环境获取 b。后面调用 f2(3) 时，f2 的定义体会获取并打印局部变量 a 的值，但是尝试获取局部变量 b 的时候，发现 b 没有绑定值。</p>
+<p>这不是缺陷，而是设计选择，Python 不要求声明变量，但是假定在函数定义体中赋值的变量是局部变量。</p>
+<p>如果在函数中赋值时想让解释器把 b 当成全局变量，要求使用 global 声明：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">b</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">f3</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+6
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">f3</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+9
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>30</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>了解了 Python 的变量作用域之后，我们就可以讨论闭包了</p>
+<h2 id="闭包">闭包<a class="anchor-link" href="#闭包">¶</a></h2><p>人们有时会把闭包和匿名函数弄混，这是有历史原因的，在函数内部定义函数不常见，直到开始使用匿名函数才这么做。而且，只有涉及嵌套函数时才有闭包的问题。因此，很多人是同时知道这两个概念的</p>
+<p>其实，闭包指延伸了作用域的函数，其中包含函数定义体中引用、但是不在定义体中定义的非全局变量。函数是不是匿名的没有关系，关键是它能访问定义体之外定义的非全局变量。</p>
+<p>我们通过例子来理解，加入 avg 函数是计算不断增加的系列值的均值，例如整个历史中的某个商品的平均收盘价，每天都会增加新价格，因此平均值要考虑至目前为止的所有价格。</p>
+<p>一开始，avg 是这样的：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Averager</span><span class="p">():</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_value</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">)</span>
+    
+<span class="n">avg</span> <span class="o">=</span> <span class="n">Averager</span><span class="p">()</span>
+<span class="n">avg</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>10.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>10.5</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>11.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面是函数式实现，使用高阶函数 make_averager，调用 make_averager，返回一个 averager 函数对象。每次调用 averager 时，都会把参数添加到系列值中，然后计算当前平均值</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">make_averager</span><span class="p">():</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">averager</span><span class="p">(</span><span class="n">new_value</span><span class="p">):</span>
+        <span class="n">series</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_value</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">averager</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">make_averager</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>10.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>10.5</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>11.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>注意，这两个例子有共通之处，调用 Averager() 或 make_averager() 得到一个可调用对象 avg，它会更新历史值，然后计算当前均值。</p>
+<p>Averager 将历史值存在哪里很明显，self.series 属性中，avg 函数将 series 存在哪里呢？</p>
+<p>注意 series 是 make_averager 的局部变量，因为那个函数的定义体中初始化了 series，<code>series = []</code>，可是调用 avg(10) 时候，make_averager 已经返回了，而它本身地作用域也没有了</p>
+<p>在 averager 函数中，series 是自由变量。这是一个技术术语，指未在本地作用域绑定的变量，averager 的闭包延伸到这个函数的作用于之外，包含自由变量 series 的绑定</p>
+<p>审查返回的 averager 对象，我们会在 <code>__code__</code> 属性发现保存局部变量和自由变量的名称</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('new_value', 'total')</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_freevars</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('series',)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>series 的绑定在返回的 avg 函数的 <code>__closure__</code> 属性中，<code>avg.__closure__</code> 中的各个元素对应于 <code>avg.__code__.co_freevars</code> 中的一个名称。这些元素是 cell 对象，有个 cell_contents 属性，保存着真正的值。这些属性如下所示：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_freevars</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('series',)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="o">.</span><span class="vm">__closure__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(<cell at 0x7ff43cdcb378: list object at 0x7ff43d660c48>,)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="o">.</span><span class="vm">__closure__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cell_contents</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[10, 11, 12]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>综上，闭包是一种函数，它会保留定义函数时存在的自有变量的绑定，这样调用函数时，虽然定义域不可用了，但是仍然能使用这些绑定</p>
+<p>注意，只有嵌套在其它函数中的函数才可能需要处理不在全局作用域中的外部变量</p>
+<h2 id="nonlocal-声明">nonlocal 声明<a class="anchor-link" href="#nonlocal-声明">¶</a></h2><p>前面实现的计算平均值方法效率不高，因为每次把值存到历史数列中，遍历历史数列求平均数，更好的方法是只存储目前的平均数和个数，然后用这两个数计算平均值</p>
+<p>下面是一个有缺陷的的程序，只是为了阐明某个观点，我们来看一下：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">make_averager</span><span class="p">():</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">averager</span><span class="p">(</span><span class="n">new_value</span><span class="p">):</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">new_value</span>
+        <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span>
+    
+    <span class="k">return</span> <span class="n">averager</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">make_averager</span><span class="p">()</span>
+<span class="n">avg</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">UnboundLocalError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-13-4fe265be513b></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> avg <span class="ansi-blue-fg">=</span> make_averager<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----> 2</span><span class="ansi-red-fg"> </span>avg<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg"><ipython-input-12-fe9bdbf03cae></span> in <span class="ansi-cyan-fg">averager</span><span class="ansi-blue-fg">(new_value)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     <span class="ansi-green-fg">def</span> averager<span class="ansi-blue-fg">(</span>new_value<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----> 6</span><span class="ansi-red-fg">         </span>count <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span>         total <span class="ansi-blue-fg">+=</span> new_value
+<span class="ansi-green-intense-fg ansi-bold">      8</span>         <span class="ansi-green-fg">return</span> total <span class="ansi-blue-fg">/</span> count
+
+<span class="ansi-red-fg">UnboundLocalError</span>: local variable 'count' referenced before assignment</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>问题是，当 count 是数字和不可变类型时， count += 1 和 count = count + 1 是等价的。我们在 averager 函数中为 count 赋值了，这会把 Count变成局部变量，total 变量也会受这个问题影响。</p>
+<p>在前面的例子没有这个问题，因为我们没有给 series 赋值，我们只是调用 series.append()， 并把 series 传给 sum 和 len。也就是说，我们利用了列表是可变对象的这一事实</p>
+<p>但是对于数字，字符串，元组等不可变类型来说，只能读取，不能更新。如果尝试像上面重新绑定，就会隐式的创建局部变量 count。这样 count 就不是自由变量了，因此不会保存到闭包中</p>
+<p>为了解决这个问题，Python 3 引入了 nonlocal 声明。它的作用是把变量标记为自由变量，即使在函数中为变量赋予新值了，也会变成自由变量。如果为 nonlocal 声明的变量赋予新值，闭包中保存的绑定会更新。最新版 make_averager 的正确实现如下所示：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">make_averager</span><span class="p">():</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">averager</span><span class="p">(</span><span class="n">new_value</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">count</span><span class="p">,</span> <span class="n">total</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">new_value</span>
+        <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span>
+    
+    <span class="k">return</span> <span class="n">averager</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">make_averager</span><span class="p">()</span>
+<span class="n">avg</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>10.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">avg</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>10.5</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python 2 中的处理方法可以把 count 和 total 存储为可变对象，例如列表和字典就可以了。</p>
+<h2 id="实现一个简单的装饰器">实现一个简单的装饰器<a class="anchor-link" href="#实现一个简单的装饰器">¶</a></h2><p>下面定义一个装饰器，会在每次调用被装饰的函数时计时，然后把经过的时间、传入的参数和调用结果打印</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [29]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">clocked</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span> 
+        <span class="c1">#返回计时器的精准时间（系统的运行时间），包含整个系统的睡眠时间。系统起始运行时间不确定，所以一般只有两个时间差才有效</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> 
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="c1"># repr 方法用得好，用的对象例如列表不能用 str()，但是可以用 repr() 获取对象的标准字符串表示形式</span>
+        <span class="n">arg_str</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span> 
+        <span class="c1"># %r 把对象转成标准字符串形式，因为不知道返回值类型</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'[</span><span class="si">%0.8f</span><span class="s1">s]</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">) -> </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg_str</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> 
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">clocked</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [30]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="nd">@clock</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="nd">@clock</span>
+<span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'*'</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Calling snooze(.123)'</span><span class="p">)</span>
+<span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'*'</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Calling factorial(6)'</span><span class="p">)</span>
+<span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**************************************** Calling snooze(.123)
+[0.12319872s]snooze(0.123) -> None
+**************************************** Calling factorial(6)
+[0.00000132s]factorial(1) -> 1
+[0.00008399s]factorial(2) -> 2
+[0.00014803s]factorial(3) -> 6
+[0.00104888s]factorial(4) -> 24
+[0.00134182s]factorial(5) -> 120
+[0.00140561s]factorial(6) -> 720
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[30]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>720</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>clock 中还定义 clocked 函数的原因是 clock 函数中的内容在模块引入后会被执行，所以再嵌套一个函数，保证不会在模块引入后直接执行装饰器内容，然后在 clocked 中对原函数计时</p>
+<h3 id="工作原理">工作原理<a class="anchor-link" href="#工作原理">¶</a></h3>
+<pre><code>@clock
+def factorial(n):
+    return 1 if n < 2 else n * factorial(n - 1)</code></pre>
+<p>等价于</p>
+<pre><code>def factorial(n):
+    return 1 if n < 2 else n * factorial(n - 1) 
+factorial = clock(factorial)</code></pre>
+<p>因此，在这两个示例中，factorial 会作为 func 参数传给 clock，然后 clock 函数会返回 clocked 函数， Python 解释器在背后会把 clocked 赋值给 factorial。可以看到查看 factorial 的 <code>__name__</code> 属性会得到以下结果：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [31]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">factorial</span><span class="o">.</span><span class="vm">__name__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[31]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'clocked'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>所以，现在 factorial 保存的是 clocked 函数的引用。此后，调用 factorial(n)，执行的都是 clocked(n)。clocked 大致做了以下几件事</p>
+<ul>
+<li>记录初试时间 t0</li>
+<li>调用原来的 factorial 函数，保存结果</li>
+<li>计算经过的时间</li>
+<li>格式化收集的数据，打印</li>
+<li>返回第二步保存的结果</li>
+</ul>
+<p>上面的 clock 装饰器有几个缺点，不支持关键字参数，而且遮盖了被装饰函数的 <code>__name__</code> 和 <code>__doc__</code> 属性。下面使用 functools.wraps 装饰器可以把相关属性从 func 复制到 clocked 中。此外还能正确处理关键字参数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [32]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">clocked</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span> 
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+        
+        <span class="n">arg_lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">arg_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">pairs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'</span><span class="si">%s</span><span class="s1">=</span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())]</span>
+            <span class="n">arg_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pairs</span><span class="p">))</span>
+        <span class="n">arg_str</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arg_lst</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'[</span><span class="si">%0.8f</span><span class="s1">s]</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">) -> </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg_str</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> 
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">clocked</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [33]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="nd">@clock</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="nd">@clock</span>
+<span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'*'</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Calling snooze(.123)'</span><span class="p">)</span>
+<span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'*'</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Calling factorial(6)'</span><span class="p">)</span>
+<span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>**************************************** Calling snooze(.123)
+[0.12322402s]snooze(0.123) -> None
+**************************************** Calling factorial(6)
+[0.00000048s]factorial(1) -> 1
+[0.00003409s]factorial(2) -> 2
+[0.00024486s]factorial(3) -> 6
+[0.00047541s]factorial(4) -> 24
+[0.00056529s]factorial(5) -> 120
+[0.00059152s]factorial(6) -> 720
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[33]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>720</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [34]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">factorial</span><span class="o">.</span><span class="vm">__name__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[34]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'factorial'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>看到 factorial 的属性已经被复制到了 <code>clocked</code> 中。functools.wraps 只是标准库中拿来即用的装饰器之一，下面介绍 functools 模块中最令人印象深刻的两个装饰器： lru_cache 和 singledispatch</p>
+<h2 id="标准库中的装饰器">标准库中的装饰器<a class="anchor-link" href="#标准库中的装饰器">¶</a></h2><p>Python 内置了 3 个用于装饰器方法的函数：property, classmethod, staticmethod。property 在第 19 章讨论， 另外两个在第 9 章讨论</p>
+<p>另一个常见的装饰器是 functools.wraps，它的作用是协助构建行为良好的装饰器。我们在前面用过，现在来介绍标准库中最值得关注的两个装饰器 lru_cache 和全新的 singledispatch（Python 3.4 新增）。这两个装饰器都在 functools 模块中定义。接下来分别讨论它们</p>
+<h3 id="使用-functools.lru_cache-做备忘">使用 functools.lru_cache 做备忘<a class="anchor-link" href="#使用-functools.lru_cache-做备忘">¶</a></h3><p>functools.lru_cache 是一个非常实用的装饰器，它实现了备忘功能。这是一项优化技术，它把耗时的函数结果保存起来，避免传入相同的参数时重复计算。 LRU 3 个字母是 “Least Recently Used” 的缩写，表明缓存不会无限制增长，一段时间不用的缓存条目会被扔掉</p>
+<p>下面是一个生成 n 个斐波那契数的例子:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [35]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@clock</span>
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0.00000048s]fibonacci(0) -> 0
+[0.00000072s]fibonacci(1) -> 1
+[0.00012255s]fibonacci(2) -> 1
+[0.00000048s]fibonacci(1) -> 1
+[0.00000048s]fibonacci(0) -> 0
+[0.00000072s]fibonacci(1) -> 1
+[0.00004625s]fibonacci(2) -> 1
+[0.00017476s]fibonacci(3) -> 2
+[0.00037074s]fibonacci(4) -> 3
+[0.00000048s]fibonacci(1) -> 1
+[0.00000024s]fibonacci(0) -> 0
+[0.00000048s]fibonacci(1) -> 1
+[0.00014830s]fibonacci(2) -> 1
+[0.00028253s]fibonacci(3) -> 2
+[0.00000024s]fibonacci(0) -> 0
+[0.00000048s]fibonacci(1) -> 1
+[0.00013685s]fibonacci(2) -> 1
+[0.00000048s]fibonacci(1) -> 1
+[0.00000024s]fibonacci(0) -> 0
+[0.00000048s]fibonacci(1) -> 1
+[0.00011635s]fibonacci(2) -> 1
+[0.00023150s]fibonacci(3) -> 2
+[0.00048327s]fibonacci(4) -> 3
+[0.00088310s]fibonacci(5) -> 5
+[0.00136709s]fibonacci(6) -> 8
+8
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>看到很浪费时间， fibonacci(1) 调用了 8 次， fibonacci(2) 调用了 5 次。但是如果增加两行代码，性能会显著改善，如下：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [37]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">()</span> <span class="c1"># note</span>
+<span class="nd">@clock</span>
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0.00000024s]fibonacci(0) -> 0
+[0.00000095s]fibonacci(1) -> 1
+[0.00141406s]fibonacci(2) -> 1
+[0.00000095s]fibonacci(3) -> 2
+[0.00145030s]fibonacci(4) -> 3
+[0.00000095s]fibonacci(5) -> 5
+[0.00159645s]fibonacci(6) -> 8
+8
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>注意，必须像常规函数那样调用 lru_cache。这一行中有一对括号： @functools.lru_cache()。这么做的原因是，lru_cache() 可以接受配置参数，稍后说明</p>
+<p>这里还叠放了装饰器，lru_cache() 应用到了 @clock 返回的函数上</p>
+<p>这样一来，看到执行时间减半，而且 n 的每个值只调用一次函数。</p>
+<p>除了优化递归算法之外，lru_cache 在从 Web 中获取信息的应用也能发挥巨大作用。特别要注意，lru_cache 可以使用两个可选的参数来配置。它的签名是：functools.lru_cache(maxsize = 128, typed = False)</p>
+<p>maxsize 指定最多存储多少个调用结果，缓存满了后，旧的结果会被扔掉，为了得到最佳性能， maxsize 应该设为 2 的次幂。typed 参数如果设为 True，把不同参数类型得到的结构分开保存，即把通常认为相等的浮点数和整数参数（如 1 和 1.0）区分开。顺便说一下，因为 lru_cache 使用字典存储结果，而且键根据调用时传入的定位参数和关键字创建，所以被 lru_cache 装饰的函数，<strong>它的所有的参数必须是可散列的</strong>。</p>
+<h2 id="单分派泛函数">单分派泛函数<a class="anchor-link" href="#单分派泛函数">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>假如我们在调试一个 Web 应用程序，想生成 HTML，显示不同类型的 Python 对象。</p>
+<p>我们可能会编写这样的函数：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [39]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">html</span>
+<span class="k">def</span> <span class="nf">htmlize</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span> <span class="c1"># 对字符串进行转义，详情见注释说明</span>
+    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{}</span><span class="s1"></pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+<span class="sd">'''</span>
+<span class="sd">html.escape(s, quote=True)</span>
+<span class="sd">Convert the characters &, < and > in string s to HTML-safe sequences. </span>
+<span class="sd">Use this if you need to display text that might contain such characters in HTML.</span>
+<span class="sd">If the optional flag quote is true, the characters (") and (') are also translated; </span>
+<span class="sd">this helps for inclusion in an HTML attribute value delimited by quotes, as in <a href="...">.</span>
+<span class="sd">'''</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这个函数适用于任何 Python 类型，但是我们想做个扩展，让它使用特别的方式显示某些类型。</p>
+<ul>
+<li>str： 把内部的换行符换成 <code><br>\n</code>；不使用 <code><pre></code>，而是使用 <code><p></code></li>
+<li>int： 以十进制和十六进制显示数字</li>
+<li>list：输出一个 HTML 列表，根据各个元素的类型进行格式化</li>
+</ul>
+<p>我们想要的行为如下所示：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span> <span class="c1"># 默认情况下， 在 <pre> 标签内显示 HTML 转义后的字符串表示形式</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<pre>{1, 2, 3}</pre>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<pre>&lt;built-in function abs&gt;</pre>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="s1">'Heimlich & Co.</span><span class="se">\n</span><span class="s1">- a game'</span><span class="p">)</span><span class="c1"># str 对象也是显示 HTML 转义后的形式，\n 换成 <br>\n 并且放到 <p> 标签内</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<p>Heimlich &amp; Co.<br>\n- a game</p>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># 数字显示 10进制和 16进制形式</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'<pre>42 (0x2a)</pre>'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">htmlize</span><span class="p">([</span><span class="s1">'alpha'</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}]))</span> <span class="c1">#列表根据各自的类型格式化显示</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><ul>
+<li><p>alpha</p></li>
+<li><pre>66 (0x42)</pre></li>
+<li><pre>{1, 2, 3}</pre></li>
+</ul>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Python 不支持重载方法或函数，所以我们不能使用不同签名定义 htmlize 的变体。也无法使用不同方式处理不同的数据类型。在 Python 中，一种常见的做法是把 htmlize 变成一个分派函数，使用一串 if else 来调用专门的函数，但是这样太笨，而且不好维护</p>
+<p>Python 3.4 新增了 functools.singledispatch 装饰器可以把整体方案拆成多个模块，甚至可以为你无法修改的类提供专门的函数。使用 @singledispathc 会把普通的函数变成泛函数。根据第一参数的类型，以不同方式执行相同操作的一组函数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">singledispatch</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
+<span class="kn">import</span> <span class="nn">numbers</span>
+<span class="kn">import</span> <span class="nn">html</span>
+
+<span class="nd">@singledispatch</span>
+<span class="k">def</span> <span class="nf">htmlize</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{}</span><span class="s1"></pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="c1">#各个函数用 @base_function.register(type) 装饰</span>
+<span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> <span class="c1">#专门函数的名称不重要， _ 是个不错的选择</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'<br></span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'<p></span><span class="si">{0}</span><span class="s1"></p>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)</span> <span class="c1"># Integral 是 int 的虚拟超类</span>
+<span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{0}</span><span class="s1"> (0x</span><span class="si">{0:x}</span><span class="s1">)</pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">tuple</span><span class="p">)</span>  <span class="c1">#可以叠放多个装饰器，让同一个函数支持不同的类型</span>
+<span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="n">inner</span> <span class="o">=</span> <span class="s1">'</li></span><span class="se">\n</span><span class="s1"><li>'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">htmlize</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'<ul></span><span class="se">\n</span><span class="s1"><li>'</span> <span class="o">+</span> <span class="n">inner</span> <span class="o">+</span> <span class="s1">'</li></span><span class="se">\n</span><span class="s1"></ul>'</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>只要有可能，注册的专门函数应该处理抽象基类（例如 numbers.Integral 和 abc.MutableSequence），不要处理具体实现（如 int 和 list）。这样，代码支持的兼容类型更广泛</p>
+<h2 id="叠放装饰器">叠放装饰器<a class="anchor-link" href="#叠放装饰器">¶</a></h2><p>上面已经用过了叠放装饰器的方式，@lru_cache 应用到 @clock 装饰 fibonacci 得到的结果上。上面的例子最后也用到了两个 @htmlize.register 装饰器</p>
+<p>把 @d1 和 @d2 两个装饰器按顺序应用到 f 函数上，作用相当于 f = d1(d2(f))，也就是说</p>
+<pre><code>@d1
+@d2
+def f():
+    print('f')</code></pre>
+<p>等同于</p>
+<pre><code>def f():
+    print('f')
+
+f = d1(d2(f))</code></pre>
+<p>除了叠放装饰器以外，我们还用到了接收参数的装饰器，例如上面的 htmlize.register(type)</p>
+<h2 id="参数化装饰器">参数化装饰器<a class="anchor-link" href="#参数化装饰器">¶</a></h2><p>Python 把被装饰的函数作为第一个参数传给装饰器函数。我们可以创建一个装饰器工厂函数，把参数传给他，返回一个装饰器，然后再把它应用到要装饰器函数上，我们以见过的最简单的装饰器为例说明：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'funning register(</span><span class="si">%s</span><span class="s1">)'</span> <span class="o">%</span> <span class="n">func</span><span class="p">)</span>
+    <span class="n">registry</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">func</span>
+
+<span class="nd">@register</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f1()'</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">'running main()'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'registry ->'</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
+<span class="n">f1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>funning register(<function f1 at 0x7f00767727b8>)
+running main()
+registry -> [<function f1 at 0x7f00767727b8>]
+running f1()
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>为了便于启动和禁用 register 执行的函数注册功能，我们为他提供一个可选的 activate 参数，设为 False 时，不注册被装饰的函数。实现如下，从概念上来看，这个新的 register 函数不是装饰器，而是装饰器工厂函数。调用它会返回真正的装饰器，这才是应用到目标上的装饰器</p>
+<p>为了接受参数，新的 register 装饰器必须作为函数调用</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1">#添加删除元素更快（相比列表）</span>
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">):</span> <span class="c1">#这是真正的装饰器，它的参数是一个函数</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'running register(active=</span><span class="si">%s</span><span class="s1">)->decorate(</span><span class="si">%s</span><span class="s1">)'</span> <span class="o">%</span> <span class="p">(</span><span class="n">active</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">active</span><span class="p">:</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">func</span> <span class="c1">#decorate 是装饰器函数，所以返回 func</span>
+    <span class="k">return</span> <span class="n">decorate</span> <span class="c1"># register 是装饰器工厂函数，返回 decorate</span>
+
+<span class="nd">@register</span><span class="p">(</span><span class="n">active</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># @register 工厂函数必须作为函数调用，传入需要的参数</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f1()'</span><span class="p">)</span>
+
+<span class="nd">@register</span><span class="p">()</span> <span class="c1"># 如果不传入参数也要作为函数调用</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"running f2()"</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">f3</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'running f3()'</span><span class="p">)</span>
+    
+<span class="n">registry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running register(active=False)->decorate(<function f1 at 0x7f0075e880d0>)
+running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{<function __main__.f2>}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这里的关键是，register() 要返回 decorate，并把它应用到被装饰器函数上，注意只有 f2 在 registry 中，因为 f1 传给装饰器工厂函数的参数是 False。如果不能使用 @ 语法，那就要像常规函数那样使用 register，若想把 f 添加到 registry 中，则装饰 f 函数的语法是 register()(f)。下面演示了如何把函数添加到 registry 中，以及如何从中删除函数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">register</span><span class="p">()(</span><span class="n">f3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running register(active=True)->decorate(<function f3 at 0x7f0076772f28>)
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><function __main__.f3></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{<function __main__.f2>, <function __main__.f3>}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">register</span><span class="p">(</span><span class="n">active</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">f2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>running register(active=False)->decorate(<function f2 at 0x7f0075edcd08>)
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><function __main__.f2></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">registry</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{<function __main__.f3>}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>参数化装饰器原理相当复杂，我们讨论的是很简单的内容，参数化装饰器通常会把被装饰的函数替换掉，而且结构上需要多一层嵌套，接下来会讨论这种函数金字塔</p>
+<h2 id="参数化-clock-装饰器">参数化 clock 装饰器<a class="anchor-link" href="#参数化-clock-装饰器">¶</a></h2><p>我们这次为 clock 装饰器添加一个功能，让用户传入一个格式字符串，控制被装饰函数的输出，见下面例子，为了方便起见，我们下面用的是最初实现的 clock，而不是示例中使用 @functools.wraps 的改进后的版本，因为那一版增加了一层函数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">DEFAULT_FMT</span> <span class="o">=</span> <span class="s1">'[</span><span class="si">{elapsed:0.8f}</span><span class="s1">s] </span><span class="si">{name}</span><span class="s1">(</span><span class="si">{args}</span><span class="s1">) -> </span><span class="si">{result}</span><span class="s1">'</span>
+
+<span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">fmt</span> <span class="o">=</span> <span class="n">DEFAULT_FMT</span><span class="p">):</span> <span class="c1"># 参数化装饰器工厂函数</span>
+    <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>       <span class="c1"># 真正的装饰器</span>
+        <span class="k">def</span> <span class="nf">clocked</span><span class="p">(</span><span class="o">*</span><span class="n">_args</span><span class="p">):</span>  <span class="c1"># 包装被装饰器的函数</span>
+            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> 
+            <span class="n">_result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">_args</span><span class="p">)</span> 
+            <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">_args</span><span class="p">)</span> 
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">_result</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">()))</span> <span class="c1">#是为了在 fmt 中引用 clocked 的局部变量 --> 用得好！</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">clocked</span>
+    <span class="k">return</span> <span class="n">decorate</span>
+
+<span class="nd">@clock</span><span class="p">()</span> <span class="c1">#不传入参数调用 clock()，应用的装饰器默认格式的 str</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0.12315559s] snooze(0.123) -> None
+[0.12337589s] snooze(0.123) -> None
+[0.12318420s] snooze(0.123) -> None
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面是用户传入自定义的格式字符串的调用：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@clock</span><span class="p">(</span><span class="s1">'</span><span class="si">{name}</span><span class="s1">: </span><span class="si">{elapsed}</span><span class="s1">s'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>snooze: 0.12341785430908203s
+snooze: 0.12339353561401367s
+snooze: 0.12339425086975098s
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@clock</span><span class="p">(</span><span class="s1">'</span><span class="si">{name}</span><span class="s1">(</span><span class="si">{args}</span><span class="s1">) dt=</span><span class="si">{elapsed:0.3f}</span><span class="s1">s'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">snooze</span><span class="p">(</span><span class="n">seconds</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>snooze(0.123) dt=0.123s
+snooze(0.123) dt=0.123s
+snooze(0.123) dt=0.123s
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+	<hr>
+	<h2>Comments</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href=".">Kaka Blog</a></li>
+							<li><a href="http://ghvn7777.github.io/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">You can add links in your config file</a></li>
+							<li><a href="#">Another social link</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (20)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; kaka 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

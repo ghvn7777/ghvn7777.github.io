@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Kaka Blog <small>kaka</small></title>
+	<meta name="description" content="Coding, scientific development, finance, data analysis, visualization, statistics, and machine learning">
+	<meta name="author" content="kaka">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="../theme/html5.js"></script>
+		<![endif]-->
+	<link href="../theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="../theme/css/local.css" rel="stylesheet">
+	<link href="../theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="../">Kaka Blog</a>
+			<br>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+        
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../8_object.html">
+		<h2 itemprop="name headline">8 对象引用，可变性和垃圾回收</h2>
+	</a>
+	<time datetime="2017-06-04T11:05:00+02:00" itemprop="datePublished">Sun 04 June 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本章先用一个比喻说变量不是盒子，而是标注，然后讨论对象标示，值和别名的概念。随后会揭露元组的一个神奇的特性，元组是不可变的，其中的值可以改变。之后引申到浅复制和深复制。接下来是引用和函数参数。然后最后一节讨论垃圾回收，del 命令以及如何使弱引用 “记住” 对象，而无需对象本身存在</p>
+<p>本章的内容是许多 Python 程序中不易察觉的 bug 关键</p>
+<h2 id="变量不是盒子">变量不是盒子<a class="anchor-link" href="#变量不是盒子">¶</a></h2><p>人们经常使用变量是盒子这样的比喻，但是这不易理解面向对象语言中的引用式变量。最好把它们理解为附加在对象上的标注：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/object.html" rel="tag">object</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../7_decorate.html">
+		<h2 itemprop="name headline">7 装饰器</h2>
+	</a>
+	<time datetime="2017-06-02T01:45:00+02:00" itemprop="datePublished">Fri 02 June 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>装饰器用于在源码中 “标记” 函数，以某种方式增强函数行为。这是一项强大的功能，但是如果想掌握，必须理解闭包</p>
+<p>nonlocal 是新出现的关键字，在 Python 3.0 中引入。作为 Python 程序员，如果严格遵守基于类的面向对象编程方式，即使不知道这个关键字也没事，但是如果想自己实现函数装饰器，那就必须了解闭包的方方面面，因此也就需要知道 nonlocal</p>
+<p>这一章中我们主要讨论的话题如下：、</p>
+<ul>
+<li>Python 如何计算装饰器语法</li>
+<li>Python 如何判断变量是不是局部的</li>
+<li>闭包存在的原因和工作原理</li>
+<li>nonlocal 能解决什么问题</li>
+</ul>
+<p>掌握这些知识，可以进一步探讨装饰器:</p>
+<ul>
+<li>实现行为良好的装饰器</li>
+<li>标准库中有用的装饰器</li>
+<li>实现一个参数化装饰器</li>
+</ul>
+<p>下面我们先介绍基础知识：</p>
+<h2 id="基础知识">基础知识<a class="anchor-link" href="#基础知识">¶</a></h2><p>假如有个 decorate 装饰器</p>
+<pre><code>@decorate
+def target():
+    print('running target()')</code></pre>
+<p>上面的写法与下面效果一样:</p>
+<pre><code>def target():
+    print('running target()')
+
+target = decorate(target)</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/decorate.html" rel="tag">decorate</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../6_design_pattern.html">
+		<h2 itemprop="name headline">6 Python “策略”模式和“命令”模式</h2>
+	</a>
+	<time datetime="2017-05-30T22:06:00+02:00" itemprop="datePublished">Tue 30 May 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Norvig 建议在有一等函数的语言重新审视 “策略” “命令” “模板方法” 和 “访问者” 模式。通常，我们我们可以把这些模式中涉及的某些类的实例替换成简单的函数，从而减少样板代码，本章将用函数对象重构 “策略” 模式</p>
+<p>策略模式就是定义一些列算法，把它们意义封装起来，并且使它们可以相互替换。本模式使得算法可以独立于它的客户而变化</p>
+<p>电商领域有个功能可以明显使用 “策略” 模式，即根据客户的属性或订单中的商品计算折扣，例如有个网店有如下折扣规则</p>
+<ul>
+<li>有 1000 或以上积分的顾客，每个订单享 %5 折扣。</li>
+<li>同一订单中，单个商品数量达到 20 或以上，享 %10 折扣</li>
+<li>订单中的不同商品达到 10 个或以上，享 %7 折扣</li>
+</ul>
+<p>简单起见，我们规定一个订单只能享有一种折扣。策略涉及如下几个概念:</p>
+<p>上下文：</p>
+<ul>
+<li>把一些计算委托给实现不同算法的可互换组件，它提供服务。在这个电商例子中，上下文是 Order，它会根据不同的算法计算促销折扣</li>
+</ul>
+<p>策略：</p>
+<ul>
+<li>实现不同算法组件的具体接口。在这个例子中，名为 Promotion 的抽象基类扮演这个角色</li>
+</ul>
+<p>具体策略：</p>
+<ul>
+<li>“策略” 的具体子类。fidelityPromo, BulkPromo, LargeOrderPromo 是这里的三个具体策略</li>
+</ul>
+<p>下面例子，实例化订单之前，系统会以某种方式选择一种促销折扣策略，然后传给 Order 构造方法。具体怎么选择策略，不在这个模式职责范围内：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/design.html" rel="tag">design</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../5_functional_languages.html">
+		<h2 itemprop="name headline">5 一等函数</h2>
+	</a>
+	<time datetime="2017-05-30T17:06:00+02:00" itemprop="datePublished">Tue 30 May 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>这篇文章需要看 ipynb 文件，这个 html 没有转换全，而且还有很多格式不对</strong></p>
+<p>在 Python 中，函数是一等对象。编程语言理论家把 “一等对象” 定义为满足下面条件的程序实体：</p>
+<ul>
+<li>在运行时创建</li>
+<li>能赋值给变量或者数据结构中的元素</li>
+<li>能作为参数传给函数</li>
+<li>能作为函数返回结果</li>
+</ul>
+<p>Python 中，整数、字符串和字典都是一等对象。人们经常将　”把函数视作一等对象“ 简称为 ”一等函数“。这样说并不完美，似乎表明函数是一等对象中的特殊群体。在 Python 中，所有的函数都是一等对象</p>
+<h2 id="把函数视作对象">把函数视作对象<a class="anchor-link" href="#把函数视作对象">¶</a></h2><p>下面的例子表明 Python 函数是对象，创建了一个函数，然后调用它，读取它的 <code>__doc__</code> 属性，并确定函数对象本身是 function 类的实例</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/func.html" rel="tag">func</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../4 str_and_bytes.html">
+		<h2 itemprop="name headline">4 文本和字节序列</h2>
+	</a>
+	<time datetime="2017-05-29T22:33:00+02:00" itemprop="datePublished">Mon 29 May 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本章将讨论以下话题：</p>
+<ul>
+<li>字符、码位和字节表述</li>
+<li>bytes、bytearray 和 memoryview 等二进制序列的独特特性</li>
+<li>全部 Unicode 和陈旧字符集的编解码器</li>
+<li>避免和处理编码错误</li>
+<li>处理文本文件的最佳实践</li>
+<li>默认编码陷阱和标准 I/O 问题</li>
+<li>规范化 Unicode 文本，进行安全的比较</li>
+<li>规范化、大小写折叠和暴力移除音调符号的实用函数</li>
+<li>实用 locale 模块和 PyUCA 库正确地排序 Unicode 文本</li>
+<li>Unicode 数据库中的字符元数据</li>
+<li>能处理字符串和字节序列的双模式 API</li>
+</ul>
+<p>（有一些东西觉得用不到，就没有记，到时候用到可以对照目录看书）</p>
+<h2 id="字符问题">字符问题<a class="anchor-link" href="#字符问题">¶</a></h2><p>字符串是个简单的概念，一个字符序列，问题出现在 “字符” 的定义上。在 2015 年 “字符” 的最佳定义是 Unicode 字符，因此，从 Python 3 的 str 对象获得的元素是 Unicode 字符，这相当于从 Python 2 中的 unicode 对象中获取的元素，而不是从 Python 2 中的 str 对象获取原始字节序列。</p>
+<p>把码位转成字节序列的过程叫编码，把字节序列转换成码位的过程是解码。下面展示了这一区分:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/bytes-unicode-utf-8.html" rel="tag">bytes Unicode UTF-8</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../3_1_dict_set.html">
+		<h2 itemprop="name headline">3-1 字典和集合常用操作</h2>
+	</a>
+	<time datetime="2017-05-05T00:30:00+02:00" itemprop="datePublished">Fri 05 May 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>我们在这章讨论字典和集合，因为它们背后都是哈希表，下面是本章的大纲</p>
+<ul>
+<li>常用字典方法</li>
+<li>特别处理遗失的键</li>
+<li>在标准库中，dict 的变化</li>
+<li>set 与 frozenset 形态</li>
+<li>哈希表的工作原理</li>
+<li>哈希表的影响（键形态限制，无法预知的排序等等）</li>
+</ul>
+<h2 id="什么是可散列化">什么是可散列化<a class="anchor-link" href="#什么是可散列化">¶</a></h2><p>如果一个对象有一个哈希值，而且在生命周期中不被改变（它需要实现一个 <code>__hash__()</code> 方法），而且可以与其它对象比较（需要实现 <code>__eq__()</code> 方法），就是可散列化的。原子不可变数据类型（str, bytes 和数值类型）都是可散列类型，fronenset 也是可散列类型，因为根据其定义，frozenset 只能容纳可散列类型，元祖的话，只有当一个元组的所有元素都是可散列的，元组才是可散列的。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/dict-set.html" rel="tag">dict set</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../2_2_list_slice.html">
+		<h2 itemprop="name headline">2-2 list, tutle, array 的常用操作</h2>
+	</a>
+	<time datetime="2017-04-29T02:00:00+02:00" itemprop="datePublished">Sat 29 April 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="切片">切片<a class="anchor-link" href="#切片">¶</a></h2><p>为了计算 seq[start:stop:step]，Python 会调用 <code>seq.__getitem__(slice(start, stop, step))</code>。</p>
+<h3 id="多维切片">多维切片<a class="anchor-link" href="#多维切片">¶</a></h3><p>[ ] 运算符也可以接收以逗号分隔的多个索引或切片，举例来说，Numpy 中，你可以使用 a[i, j] 取得二维的 numpy.ndarray，以及使用 a[m:n, k:l] 这类的运算符获取二维的切片。处理 [ ] 运算符的 <code>__getitem__</code> 和 <code>__setitem__</code> 特殊方法，都只会接收 tuple 格式的 a[i, j] 内的索引，换句话说，Python 调用 a.getitem((i, j)) 算出来的 a[i, j]</p>
+<p>Python 会将省略号（三个句点）视为一种标记，在 Numpy 对多维矩阵进行切片时，会使用快捷的方式 <code>...</code>，例如一个四维矩阵 a[i, ...] 相当于 a[i, :, :, :] 的简写。</p>
+<h3 id="对切片赋值">对切片赋值<a class="anchor-link" href="#对切片赋值">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="../tag/slice-sort.html" rel="tag">slice sort</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../2_1_python_listcomp.html">
+		<h2 itemprop="name headline">2-1 列表元组</h2>
+	</a>
+	<time datetime="2017-04-27T19:33:00+02:00" itemprop="datePublished">Thu 27 April 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="列表生成式和生成式表达式">列表生成式和生成式表达式<a class="anchor-link" href="#列表生成式和生成式表达式">¶</a></h2><p>我们可以用 map 和 filter 达到 列表生成式的效果</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../1_2_python_vector.html">
+		<h2 itemprop="name headline">1-2 Python 向量类</h2>
+	</a>
+	<time datetime="2017-04-27T00:17:00+02:00" itemprop="datePublished">Thu 27 April 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>先说明一下，特殊方法的存在是为了被 Python 解释器调用的，我们自己不需要调用它。也就是说没有 <code>my_object.__len__()</code> 这种写法，而是应该使用 len(my_object)。一般来说，通过内置函数（len, iter, str 等等）来使用特殊方法是最好的选择，这些内置函数不仅会调用特殊方法，通常还会提供特殊的好处。而且对于内置类来说，它的速度更快。</p>
+<h2 id="实现向量类">实现向量类<a class="anchor-link" href="#实现向量类">¶</a></h2><p>通过特殊方法，我们可以自定义对象的 '+' 操作，以后的章节会对此详细介绍，这里只是展示一下特殊方法的使用。</p>
+<p>我们想要实现一个简单的支持加法，取绝对值，标量乘法的二维向量类</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="../1_1_python_card.html">
+		<h2 itemprop="name headline">1-1 Python 风格扑克牌</h2>
+	</a>
+	<time datetime="2017-04-26T00:50:00+02:00" itemprop="datePublished">Wed 26 April 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="__getitem__--AND--__len__-方法"><strong><code>__getitem__</code></strong>  AND  <strong><code>__len__</code></strong> 方法<a class="anchor-link" href="#__getitem__--AND--__len__-方法">¶</a></h2><p>下面看一个生成扑克牌以及对其进行操作的例子</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="../category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+</div>
+<hr>
+ <div class="pagination">
+<ul>
+    <li class="prev"><a href="../author/kaka.html">&larr; Previous</a></li>
+
+    <li class=""><a href="../author/kaka.html">1</a></li>
+    <li class="active"><a href="../author/kaka2.html">2</a></li>
+    <li class=""><a href="../author/kaka3.html">3</a></li>
+
+    <li class="next"><a href="../author/kaka3.html">Next &rarr;</a></li>
+
+</ul>
+</div> 		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="..">Kaka Blog</a></li>
+							<li><a href="http://ghvn7777.github.io/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">You can add links in your config file</a></li>
+							<li><a href="#">Another social link</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="../category/feature_engineering.html">feature_engineering (1)</a></li>
+							<li><a href="../category/fluent_python.html">fluent_python (20)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; kaka 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>
