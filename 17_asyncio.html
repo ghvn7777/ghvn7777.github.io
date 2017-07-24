@@ -1221,7 +1221,355 @@ h6:hover .anchor-link {
 <ul>
 <li>这个函数统一了协程与期物：第一个参数可以是二者中的任意一个。如果是 Future 或 Task对象，那就原封不动的返回，如果是协程，那么 async 函数会调用 loop.create_task(...) 方法创建 Task 对象，loop 关键字是可选的用于传入事件循环；如果没有传入，那么 async 函数会通过调用 asyncio.get_event_loop() 函数获取循环对象</li>
 </ul>
-<p>BaseEventLoop.create_task(...</p>
+<p>BaseEventLoop.create_task(coro)</p>
+<ul>
+<li>这个方法排定协程的执行时间，返回一个 asyncio.Task 对象。如果在自定义的 BaseEventLoop 子类上调用，返回的对象可能是外部库（如 Tornado）中与 Task 类兼容的某个类的实例</li>
+</ul>
+<blockquote><p>BaseEventLoop.create_task(...) 只能在 Python 3.4.2 及以上版本使用，Python 3.3 或 Python 3.4 要使用 asyncio.async(...) 函数或从 PyPI 中安装新的 asyncio 版本</p>
+</blockquote>
+<p>asyncio 包中有多个函数会自动（内部使用的是 asyncio.async 函数）把参数指定的协程包装在 asyncio.Task 对象中，例如 BaseEventLoop.run_until_complete(...) 方法</p>
+<p>如果想在控制台或小型测试脚本中试验期物和协程，可以使用下面代码：</p>
+<pre><code>import asyncio
+def run_sync(coro_or_future):
+    loop = asyncio.get_event_loop()
+    return loop.run_until_complete(coro_or_future)
+
+a = run_sync(some_coroutine())</code></pre>
+<p>在 asyncio 文档中有个注解说道：这份文档把一些方法说成协程，即使它们其实是返回 Future 对象的普通 Python 函数，这是故意的，为的是给以后修改这些函数的实现留下余地</p>
+<h2 id="使用-asyncio-和--aiohttp-包下载">使用 asyncio 和  aiohttp 包下载<a class="anchor-link" href="#使用-asyncio-和--aiohttp-包下载">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">aiohttp</span> <span class="c1"># 不是标准库中的，需要 pip 安装</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">POP20_CC</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'CN IN US ID BR PK NG BD RU JP '</span>
+            <span class="s1">'MX PH VN ET EG DE IR TR CD FR'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'http://flupy.org/data/flags'</span>
+<span class="n">DEST_DIR</span> <span class="o">=</span> <span class="s1">'downloads/'</span>
+
+<span class="k">def</span> <span class="nf">save_flag</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEST_DIR</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        
+<span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">)</span> <span class="c1"># 输出末尾的换行符变成了空格</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span> <span class="c1">#Python 中正常情况下,遇到换行才会刷新 stdout 缓冲。所以这里手动刷新缓冲</span>
+    
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">):</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">download_many</span><span class="p">(</span><span class="n">POP20_CC</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="si">{}</span><span class="s1"> flags downloaded in </span><span class="si">{:.2f}</span><span class="s1">s'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">))</span>
+
+<span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="n">cc</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">/</span><span class="si">{cc}</span><span class="s1">/</span><span class="si">{cc}</span><span class="s1">.gif'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">,</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">image</span>
+
+<span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">download_one</span><span class="p">(</span><span class="n">cc</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+    <span class="n">show</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+    <span class="n">save_flag</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s1">'.gif'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cc</span>
+
+<span class="k">def</span> <span class="nf">download_many</span><span class="p">(</span><span class="n">cc_list</span><span class="p">):</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">to_do</span> <span class="o">=</span> <span class="p">[</span><span class="n">download_one</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span> <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cc_list</span><span class="p">)]</span>
+    <span class="n">wait_coro</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">to_do</span><span class="p">)</span>
+    <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">wait_coro</span><span class="p">)</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+<span class="n">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55e72b0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>JP </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa454d6a0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>VN </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55e7e10>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>TR </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa4553da0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>IN </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa4569a90>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>EG </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55e7860>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>RU </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55fab00>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>BD </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa454d0f0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>NG </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa454dc50>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ID </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa455d390>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>DE </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa45537f0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CN </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55fa550>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>FR </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa45694e0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>BR </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55f1400>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ET </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa455d940>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>PK </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55c3e10>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CD </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55f19b0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>MX </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa4553240>
+Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa455def0>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>PH IR </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Unclosed client session
+client_session: <aiohttp.client.clientsession object at 0x7f4fa55f1f60>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>US 
+20 flags downloaded in 0.70s
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
