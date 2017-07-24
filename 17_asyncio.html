@@ -1215,7 +1215,13 @@ h6:hover .anchor-link {
 <li>无需调用 my_future.result()，因为 yield from 从期物中产出的值就是结果（例如 result = yield from my_future) </li>
 </ul>
 <p>当然，有时也是用这些方法，但是一般情况下， asyncio.Future 对象是由 yield from 驱动，而不是靠调用这些方法驱动</p>
-<h2 id="从期物、任务和协程中产出">从期物、任务和协程中产出<a class="anchor-link" href="#从期物、任务和协程中产出">¶</a></h2>
+<h2 id="从期物、任务和协程中产出">从期物、任务和协程中产出<a class="anchor-link" href="#从期物、任务和协程中产出">¶</a></h2><p>在 asyncio 包中，期物与协程关系紧密，因为可以使用 yield from 从 asyncio.Future 对象中产出结果。这意味着，如果 foo 是协程函数（调用后返回协程对象），抑或是返回 Future 或 Task 实例的普通函数，那么可以这样写: res = yield from foo() 。这是 asyncio 包的 API中很多地方可以互换协程与期物的原因之一</p>
+<p>为了执行这些操作，必须排定协程运行时间，然后使用 asyncio.Task 对象包装协程。对协程来说，获取 Task 对象有两种主要方式</p>
+<p>asyncio.async(coro_or_future, *, loop=None)</p>
+<ul>
+<li>这个函数统一了协程与期物：第一个参数可以是二者中的任意一个。如果是 Future 或 Task对象，那就原封不动的返回，如果是协程，那么 async 函数会调用 loop.create_task(...) 方法创建 Task 对象，loop 关键字是可选的用于传入事件循环；如果没有传入，那么 async 函数会通过调用 asyncio.get_event_loop() 函数获取循环对象</li>
+</ul>
+<p>BaseEventLoop.create_task(...</p>
 </div>
 </div>
 </div>
