@@ -1620,13 +1620,13 @@ def get_flag(cc):
 <blockquote><p>为了提高性能，save_flag 应该执行异步操作，可是 asyncio 包目前没有提供异步文件系统 API（None有）。如果这是应用的瓶颈，可以使用 loop.run_in_exector 方法。后面会说明如何使用</p>
 </blockquote>
 <p>因为异步操作和执行是交叉执行的，所以并发下载多张图像所需的总时间比依序下载少得多，我们使用 asyncio 包发起了 600 个 HTTP 请求，获得所有结果的时间比依序下载快 70 倍</p>
-<h2 id="改进-asyncio-下载脚本">改进 asyncio 下载脚本<a class="anchor-link" href="#改进-asyncio-下载脚本">¶</a></h2>
+<h2 id="改进-asyncio-下载脚本">改进 asyncio 下载脚本<a class="anchor-link" href="#改进-asyncio-下载脚本">¶</a></h2><p>需要引用 17 章的 flags2_common.py 中的函数，flags2_common.py:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -1645,8 +1645,8 @@ def get_flag(cc):
 <span class="n">POP20_CC</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'CN IN US ID BR PK NG BD RU JP '</span>
             <span class="s1">'MX PH VN ET EG DE IR TR CD FR'</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-<span class="n">DEFAULT_CONCUR_REQ</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">MAX_CONCUR_REQ</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">DEFAULT_CONCUR_REQ</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">MAX_CONCUR_REQ</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="n">SERVERS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'REMOTE'</span><span class="p">:</span> <span class="s1">'http://flupy.org/data/flags'</span><span class="p">,</span>
@@ -1659,18 +1659,6 @@ def get_flag(cc):
 <span class="n">DEST_DIR</span> <span class="o">=</span> <span class="s1">'downloads/'</span>
 <span class="n">COUNTRY_CODES_FILE</span> <span class="o">=</span> <span class="s1">'country_codes.txt'</span>
 
-<span class="k">class</span> <span class="nc">FetchError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_code</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">country_code</span> <span class="o">=</span><span class="n">country_code</span>
-        
-<span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
-<span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="n">cc</span><span class="p">):</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">/</span><span class="si">{cc}</span><span class="s1">/</span><span class="si">{cc}</span><span class="s1">.gif'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">,</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-    <span class="c1"># 阻塞的操作通过协程实现，客户代码通过 yield from 把职责委托给协程，以便异步运行协程</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="c1"># 读取响应内容是一项单独的异步操作</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">image</span>
-    
 
 <span class="k">def</span> <span class="nf">save_flag</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DEST_DIR</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
@@ -1792,6 +1780,147 @@ def get_flag(cc):
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面是我们的改进内容：flags2_asyncio.py：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">contextlib</span>
+
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+<span class="kn">from</span> <span class="nn">aiohttp</span> <span class="k">import</span> <span class="n">web</span>
+<span class="kn">import</span> <span class="nn">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">flags2_common</span> <span class="k">import</span> <span class="n">main</span><span class="p">,</span> <span class="n">HTTPStatus</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">save_flag</span>
+
+<span class="c1"># default set low to avoid errors from remote site, such as</span>
+<span class="c1"># 503 - Service Temporarily Unavailable</span>
+<span class="n">DEFAULT_CONCUR_REQ</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">MAX_CONCUR_REQ</span> <span class="o">=</span> <span class="mi">1000</span>
+
+
+<span class="k">class</span> <span class="nc">FetchError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>  <span class="c1"># 这个自定义的异常用于包装其他 HTTP 或网络异常，并获取 country_code 返回错误</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_code</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="n">country_code</span>
+
+
+<span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">cc</span><span class="p">):</span>
+    <span class="c1"># 返回 3 种结果：返回下载得到的图像，HTTP 代码为 404 时，抛出 web.HTTPNotFound 异常，</span>
+    <span class="c1"># 返回其他 HTTP 状态码时，抛出 aiohttp.HttpProcessingError 异常</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">/</span><span class="si">{cc}</span><span class="s1">/</span><span class="si">{cc}</span><span class="s1">.gif'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">cc</span><span class="o">=</span><span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">closing</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">image</span>
+        <span class="k">elif</span> <span class="n">resp</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">web</span><span class="o">.</span><span class="n">HTTPNotFound</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">HttpProcessingError</span><span class="p">(</span>
+                <span class="n">code</span><span class="o">=</span><span class="n">resp</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">resp</span><span class="o">.</span><span class="n">reason</span><span class="p">,</span>
+                <span class="n">headers</span><span class="o">=</span><span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+
+<span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">download_one</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">semaphore</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span> 
+    <span class="c1"># semaphore 参数是 asyncio.Semaphore 类的实例，用于限制并发请求数量</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 把 semaphore 当成上下文管理器用，防止阻塞整个系统，如果 semaphore 计数器的值是允许的最大值，这个协程会阻塞</span>
+        <span class="k">with</span> <span class="p">(</span><span class="k">yield from</span> <span class="n">semaphore</span><span class="p">):</span>  
+            <span class="c1"># 退出 with 语句后，semaphore 计数器会递减，解除阻塞可能在等待同一个 semaphore 对象的其他协程实例</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>  
+    <span class="k">except</span> <span class="n">web</span><span class="o">.</span><span class="n">HTTPNotFound</span><span class="p">:</span>  <span class="c1"># 没找到国旗，相应的设置 Resutl 状态</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">not_found</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">'not found'</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">FetchError</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>  <span class="c1"># 其他的异常当做 FetchError 抛出</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">save_flag</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s1">'.gif'</span><span class="p">)</span>  <span class="c1"># 国旗保存到硬盘</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">ok</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">'OK'</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="n">msg</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">cc</span><span class="p">)</span>
+<span class="c1"># END FLAGS2_ASYNCIO_TOP</span>
+
+<span class="c1"># BEGIN FLAGS2_ASYNCIO_DOWNLOAD_MANY</span>
+<span class="nd">@asyncio</span><span class="o">.</span><span class="n">coroutine</span>
+<span class="k">def</span> <span class="nf">downloader_coro</span><span class="p">(</span><span class="n">cc_list</span><span class="p">,</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">concur_req</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">()</span>
+    <span class="c1"># 创建一个 asyncio.Semaphore 实例，最多允许激活 concur_req 个使用这个计数器的协程</span>
+    <span class="n">semaphore</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="n">concur_req</span><span class="p">)</span>  
+    <span class="n">to_do</span> <span class="o">=</span> <span class="p">[</span><span class="n">download_one</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">semaphore</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+             <span class="k">for</span> <span class="n">cc</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cc_list</span><span class="p">)]</span>  <span class="c1"># 创建一个协程列表</span>
+
+    <span class="n">to_do_iter</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">to_do</span><span class="p">)</span>  <span class="c1"># 获取一个迭代器，这个迭代器会在期物运行结束后返回期物</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">to_do_iter</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">to_do_iter</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">cc_list</span><span class="p">))</span>  <span class="c1"># 显示进度</span>
+    <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">to_do_iter</span><span class="p">:</span>  <span class="c1"># 迭代运行结束的期物</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">future</span>  <span class="c1"># 获取 asyncio.Future 对象结果</span>
+        <span class="k">except</span> <span class="n">FetchError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>  <span class="c1"># download_one 函数抛出的各个异常都包装在 Fetch 对象里</span>
+            <span class="n">country_code</span> <span class="o">=</span> <span class="n">exc</span><span class="o">.</span><span class="n">country_code</span>  <span class="c1"># 从 FetchError 异常中获取错误发生时的国家代码</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">error_msg</span> <span class="o">=</span> <span class="n">exc</span><span class="o">.</span><span class="n">__cause__</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 尝试从原来的异常(__cause__)中获取错误消息</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">error_msg</span> <span class="o">=</span> <span class="n">exc</span><span class="o">.</span><span class="n">__cause__</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>  <span class="c1"># 如果在原来的异常中找不到错误消息,使用所链接异常的类名作为错误消息。</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="n">error_msg</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s1">'*** Error for </span><span class="si">{}</span><span class="s1">: </span><span class="si">{}</span><span class="s1">'</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">country_code</span><span class="p">,</span> <span class="n">error_msg</span><span class="p">))</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">error</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">status</span>
+
+        <span class="n">counter</span><span class="p">[</span><span class="n">status</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># 记录结果</span>
+
+    <span class="k">return</span> <span class="n">counter</span>  <span class="c1"># 返回计数器</span>
+
+<span class="k">def</span> <span class="nf">download_many</span><span class="p">(</span><span class="n">cc_list</span><span class="p">,</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">concur_req</span><span class="p">):</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">coro</span> <span class="o">=</span> <span class="n">downloader_coro</span><span class="p">(</span><span class="n">cc_list</span><span class="p">,</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">concur_req</span><span class="p">)</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">coro</span><span class="p">)</span>  <span class="c1"># download_many 函数只是实例化 downloader_coro 协程,然后通过 run_until_complete 方法把它传给事件循环。</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">counts</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">download_many</span><span class="p">,</span> <span class="n">DEFAULT_CONCUR_REQ</span><span class="p">,</span> <span class="n">MAX_CONCUR_REQ</span><span class="p">)</span>
+<span class="c1"># END FLAGS2_ASYNCIO_DOWNLOAD_MANY</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>执行效果如下：</p>
+<pre><code>python3 flags2_asyncio.py -s ERROR -al 100 -m 100
+ERROR site: http://localhost:8003/flags
+Searching for 100 flags: from AD to LK
+100 concurrent connections will be used.
+--------------------
+100 flags downloaded.
+Elapsed time: 27.33s</code></pre>
+<p>对于这种网络客户端代码来说，一定要使用某种限流机制，防止向服务器发起太多并发请求，因为如果服务器过载，可能整体性能会下降</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [ ]:</div>
@@ -1862,7 +1991,7 @@ def get_flag(cc):
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="./category/fluent_python.html">fluent_python (20)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (21)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
