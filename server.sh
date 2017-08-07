@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export PATH=/custom/anaconda3/bin:$PATH
 source activate pelican
 find -name ".ipy*" -print | xargs rm -rf
 pelican content -s publishconf.py
