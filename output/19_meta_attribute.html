@@ -1030,7 +1030,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="k">import</span> <span class="n">urlopen</span>
@@ -1057,15 +1057,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/custom/anaconda3/envs/py35/lib/python3.5/site-packages/ipykernel_launcher.py:12: UserWarning: downloading http://www.oreilly.com/pub/sc/osconfeed to /home/kaka/osconfeed.json
-  if sys.path[0] == '':
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>{'Schedule': {'conferences': [{'serial': 115}],
   'events': [{'categories': ['Emerging Languages'],
@@ -8910,7 +8902,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
@@ -8922,7 +8914,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>['conferences', 'events', 'speakers', 'venues']</pre>
 </div>
@@ -8932,7 +8924,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [10]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
@@ -8958,7 +8950,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'speakers'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span> <span class="c1"># 深入潜逃的字典和列表，获取最后一个演讲者名字</span>
@@ -8969,7 +8961,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'Carina C. Zona'</pre>
 </div>
@@ -8979,7 +8971,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [12]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'speakers'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'serial'</span><span class="p">]</span> <span class="c1"># 演讲者编号</span>
@@ -8990,7 +8982,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[12]:</div>
+<div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>141590</pre>
 </div>
@@ -9000,7 +8992,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [13]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'events'</span><span class="p">][</span><span class="mi">40</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span>
@@ -9011,7 +9003,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'There *Will* Be Bugs'</pre>
 </div>
@@ -9021,7 +9013,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'events'</span><span class="p">][</span><span class="mi">40</span><span class="p">][</span><span class="s1">'speakers'</span><span class="p">]</span> <span class="c1"># 每个事件都有一个 'speakers' 字段，列出 0 个或多个演讲者编号</span>
@@ -9032,7 +9024,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>[3471, 5199]</pre>
 </div>
@@ -9050,7 +9042,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
@@ -9058,17 +9050,272 @@ h6:hover .anchor-link {
 <span class="k">class</span> <span class="nc">FrozenJSON</span><span class="p">:</span>
     
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="c1"># 这么做有两个目的，首先确保传入的是字典，其次为了创建一个副本</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span> <span class="c1"># 仅当没有 name 属性时才调用此方法(通常在属性查找找不到时候调用)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="c1"># 如果 name 是 `__data` 的属性，返回那个属性，例如字典自带的 keys 属性</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 否则，从 self.__data 中获取 name 键对应的元素，返回调用 FrozenJSON.build() 方法得到的结果</span>
+            <span class="k">return</span> <span class="n">FrozenJSON</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> 
+    
+    <span class="nd">@classmethod</span> 
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span> <span class="c1"># 这是一个备选构造方法，classmethod 装饰器经常这么用</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span> <span class="c1"># 如果 obj 是映射，那么构造一个 FrozenJSON 对象</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="c1"># 如果是 MutableSequence，必然是列表。因此我们把 obj 中的每个元素递归传给 .build() 方法，构建一个列表</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 既不是字典又不是列表，原封不动返回</span>
+            <span class="k">return</span> <span class="n">obj</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>FrozenJSON 中，尝试获取其它属性会出发解释器调用 <code>__getattr__</code> 方法，这个方法首先查看 <code>self.__data</code> 有没有指定属性名（而不是键），这样 FrozenJSON 实例便可以处理字典的所有方法，例如把 items 方法委托给 <code>self.__data.items()</code> 方法。如果 <code>self.__data</code> 没有指定名称属性，那么 <code>__getattr__</code> 方法以那个名称为键，从 <code>self.__data</code> 中获取一个元素，传给 FrozenJSON.build 方法。这样就能深入 JSON 数据的嵌套结构，使用类方法 build 把每一层嵌套转成一个 FrozenJSON 实例，我们没有缓存或转换原始数据，在迭代数据过程中，嵌套的数据结构不断被转成 FrozenJSON 对象，这么做没问题，因为我们的数据量不大</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raw_feed</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
+<span class="n">feed</span> <span class="o">=</span> <span class="n">FrozenJSON</span><span class="p">(</span><span class="n">raw_feed</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">speakers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>357</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['conferences', 'events', 'speakers', 'venues']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">{:3}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">key</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  1 conferences
+494 events
+357 speakers
+ 53 venues
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">speakers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[22]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'Carina C. Zona'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [24]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span> <span class="o">=</span> <span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">events</span><span class="p">[</span><span class="mi">40</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">talk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[24]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>__main__.FrozenJSON</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [25]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[25]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'There *Will* Be Bugs'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span><span class="o">.</span><span class="n">speakers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[26]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[3471, 5199]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span><span class="o">.</span><span class="n">flavor</span> <span class="c1"># 读取不存在的实例抛出 KeyError 异常，而不是通常的 AttributeError 异常</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-27-0ce41df2377c></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>talk<span class="ansi-blue-fg">.</span>flavor
+
+<span class="ansi-green-fg"><ipython-input-18-23345c6147bf></span> in <span class="ansi-cyan-fg">__getattr__</span><span class="ansi-blue-fg">(self, name)</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     13</span>             <span class="ansi-red-fg"># 否则，从 self.__data 中获取 name 键对应的元素，返回调用 FrozenJSON.build() 方法得到的结果</span>
+<span class="ansi-green-fg">---> 14</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> FrozenJSON<span class="ansi-blue-fg">.</span>build<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>__data<span class="ansi-blue-fg">[</span>name<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> 
+<span class="ansi-green-intense-fg ansi-bold">     16</span>     <span class="ansi-blue-fg">@</span>classmethod
+
+<span class="ansi-red-fg">KeyError</span>: 'flavor'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="处理无效属性名">处理无效属性名<a class="anchor-link" href="#处理无效属性名">¶</a></h2><p>FrozenJSON 有个缺陷，没有对名称为 Python 关键字的属性做特殊处理。比如说像下面这样构建一个对象：</p>
+<pre><code>grad = FrozenJSON({'name': 'Jim Bo', 'class': 1982})</code></pre>
+<p>此时无法读取 grad.class 的值，因为 Python 中 class 是保留关键字</p>
+<pre><code>  File "<ipython-input-29-742ecb9642c1>", line 2
+    grad.class
+             ^
+SyntaxError: invalid syntax</code></pre>
+<p>当然，也可以这么做：</p>
+<pre><code>getattr(grad, 'class')
+# 1982</code></pre>
+<p>但是， FrozenJSON 类的目的是为了便于访问数据，因此更好的方法是检查传给 <code>FrozenJSON.__init__</code> 方法的映射中是否有关键字名称，如果有在键名后加上 <code>_</code>，然后通过下面方式读取</p>
+<pre><code>grad.class</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [48]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
+<span class="kn">import</span> <span class="nn">keyword</span>
+
+<span class="k">class</span> <span class="nc">FrozenJSON</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">keyword</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="c1"># 判断是不是保留字</span>
+                <span class="n">key</span> <span class="o">+=</span> <span class="s1">'_'</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span> 
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">FrozenJSON</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">__data</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">FrozenJSON</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> 
     
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
+    <span class="nd">@classmethod</span> 
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span> 
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">):</span>
             <span class="k">return</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">]</span>
@@ -9076,6 +9323,49 @@ h6:hover .anchor-link {
             <span class="k">return</span> <span class="n">obj</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [50]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">grad</span> <span class="o">=</span> <span class="n">FrozenJSON</span><span class="p">({</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Jim Bo'</span><span class="p">,</span> <span class="s1">'class'</span><span class="p">:</span> <span class="mi">1982</span><span class="p">})</span>
+<span class="n">grad</span><span class="o">.</span><span class="n">class_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">"<ipython-input-50-1081492d1dd5>"</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">3</span>
+<span class="ansi-red-fg">    grad.2be</span>
+         ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>如果 JSON 对象中的键不是有效 Python 标识符，也会遇到类似问题</p>
+<pre><code>grad.2be
+
+  File "<ipython-input-50-1081492d1dd5>", line 3
+    grad.2be
+         ^
+SyntaxError: invalid syntax</code></pre>
+<p>这个问题在 Python 3 中很好解决，可以用 str 提供的 s.isidentifier() 方法能根据语言的语法判断 s 是否为有效的 Python 标识符。但是，把无效的标识符变成有效的属性名不容易，对此，有两个很简单的解决办法，一个是抛出异常，另一个是把无效的键转成通用名称，例如 <code>attr_0</code>，<code>attr_1</code> 等等。这里不做演示</p>
+<h2 id="使用-__new__-方法以灵活的方式创建对象">使用 <code>__new__</code> 方法以灵活的方式创建对象<a class="anchor-link" href="#使用-__new__-方法以灵活的方式创建对象">¶</a></h2>
 </div>
 </div>
 </div>

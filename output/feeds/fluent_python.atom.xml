@@ -984,7 +984,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;urllib.request&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;urlopen&lt;/span&gt;
@@ -1011,15 +1011,7 @@ h6:hover .anchor-link {
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stderr output_text"&gt;
-&lt;pre&gt;/custom/anaconda3/envs/py35/lib/python3.5/site-packages/ipykernel_launcher.py:12: UserWarning: downloading http://www.oreilly.com/pub/sc/osconfeed to /home/kaka/osconfeed.json
-  if sys.path[0] == '':
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
+&lt;div class="prompt output_prompt"&gt;Out[3]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
 &lt;pre&gt;{'Schedule': {'conferences': [{'serial': 115}],
   'events': [{'categories': ['Emerging Languages'],
@@ -8864,7 +8856,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -8876,7 +8868,7 @@ h6:hover .anchor-link {
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+&lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
 &lt;pre&gt;['conferences', 'events', 'speakers', 'venues']&lt;/pre&gt;
 &lt;/div&gt;
@@ -8886,7 +8878,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Schedule'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
@@ -8912,7 +8904,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Schedule'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'speakers'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# 深入潜逃的字典和列表，获取最后一个演讲者名字&lt;/span&gt;
@@ -8923,7 +8915,7 @@ h6:hover .anchor-link {
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[11]:&lt;/div&gt;
+&lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
 &lt;pre&gt;'Carina C. Zona'&lt;/pre&gt;
 &lt;/div&gt;
@@ -8933,7 +8925,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Schedule'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'speakers'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'serial'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# 演讲者编号&lt;/span&gt;
@@ -8944,7 +8936,7 @@ h6:hover .anchor-link {
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+&lt;div class="prompt output_prompt"&gt;Out[7]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
 &lt;pre&gt;141590&lt;/pre&gt;
 &lt;/div&gt;
@@ -8954,7 +8946,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [13]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Schedule'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'events'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -8965,7 +8957,7 @@ h6:hover .anchor-link {
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+&lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
 &lt;pre&gt;'There *Will* Be Bugs'&lt;/pre&gt;
 &lt;/div&gt;
@@ -8975,7 +8967,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Schedule'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'events'&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'speakers'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# 每个事件都有一个 'speakers' 字段，列出 0 个或多个演讲者编号&lt;/span&gt;
@@ -8986,7 +8978,7 @@ h6:hover .anchor-link {
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[16]:&lt;/div&gt;
+&lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
 &lt;pre&gt;[3471, 5199]&lt;/pre&gt;
 &lt;/div&gt;
@@ -9004,7 +8996,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [17]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [18]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;abc&lt;/span&gt;
@@ -9012,17 +9004,272 @@ h6:hover .anchor-link {
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;FrozenJSON&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;# 这么做有两个目的，首先确保传入的是字典，其次为了创建一个副本&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__getattr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__getattr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;# 仅当没有 name 属性时才调用此方法(通常在属性查找找不到时候调用)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;hasattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 如果 name 是 `__data` 的属性，返回那个属性，例如字典自带的 keys 属性&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# 否则，从 self.__data 中获取 name 键对应的元素，返回调用 FrozenJSON.build() 方法得到的结果&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;FrozenJSON&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; 
+    
+    &lt;span class="nd"&gt;@classmethod&lt;/span&gt; 
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;# 这是一个备选构造方法，classmethod 装饰器经常这么用&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;abc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;# 如果 obj 是映射，那么构造一个 FrozenJSON 对象&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="c1"&gt;# 如果是 MutableSequence，必然是列表。因此我们把 obj 中的每个元素递归传给 .build() 方法，构建一个列表&lt;/span&gt;
+        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;abc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MutableSequence&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# 既不是字典又不是列表，原封不动返回&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;FrozenJSON 中，尝试获取其它属性会出发解释器调用 &lt;code&gt;__getattr__&lt;/code&gt; 方法，这个方法首先查看 &lt;code&gt;self.__data&lt;/code&gt; 有没有指定属性名（而不是键），这样 FrozenJSON 实例便可以处理字典的所有方法，例如把 items 方法委托给 &lt;code&gt;self.__data.items()&lt;/code&gt; 方法。如果 &lt;code&gt;self.__data&lt;/code&gt; 没有指定名称属性，那么 &lt;code&gt;__getattr__&lt;/code&gt; 方法以那个名称为键，从 &lt;code&gt;self.__data&lt;/code&gt; 中获取一个元素，传给 FrozenJSON.build 方法。这样就能深入 JSON 数据的嵌套结构，使用类方法 build 把每一层嵌套转成一个 FrozenJSON 实例，我们没有缓存或转换原始数据，在迭代数据过程中，嵌套的数据结构不断被转成 FrozenJSON 对象，这么做没问题，因为我们的数据量不大&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [17]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;raw_feed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;feed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FrozenJSON&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_feed&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Schedule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;speakers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[17]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;357&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [19]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Schedule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[19]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;['conferences', 'events', 'speakers', 'venues']&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [21]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Schedule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;{:3}&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;  1 conferences
+494 events
+357 speakers
+ 53 venues
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [22]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Schedule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;speakers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[22]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;'Carina C. Zona'&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [24]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;talk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;feed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Schedule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[24]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;__main__.FrozenJSON&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [25]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;talk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[25]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;'There *Will* Be Bugs'&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [26]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;talk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;speakers&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[26]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;[3471, 5199]&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [27]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;talk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;flavor&lt;/span&gt; &lt;span class="c1"&gt;# 读取不存在的实例抛出 KeyError 异常，而不是通常的 AttributeError 异常&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;
+&lt;span class="ansi-red-fg"&gt;---------------------------------------------------------------------------&lt;/span&gt;
+&lt;span class="ansi-red-fg"&gt;KeyError&lt;/span&gt;                                  Traceback (most recent call last)
+&lt;span class="ansi-green-fg"&gt;&lt;ipython-input-27-0ce41df2377c&gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;&lt;module&gt;&lt;/span&gt;&lt;span class="ansi-blue-fg"&gt;()&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;----&gt; 1&lt;/span&gt;&lt;span class="ansi-red-fg"&gt; &lt;/span&gt;talk&lt;span class="ansi-blue-fg"&gt;.&lt;/span&gt;flavor
+
+&lt;span class="ansi-green-fg"&gt;&lt;ipython-input-18-23345c6147bf&gt;&lt;/span&gt; in &lt;span class="ansi-cyan-fg"&gt;__getattr__&lt;/span&gt;&lt;span class="ansi-blue-fg"&gt;(self, name)&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;     12&lt;/span&gt;         &lt;span class="ansi-green-fg"&gt;else&lt;/span&gt;&lt;span class="ansi-blue-fg"&gt;:&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;     13&lt;/span&gt;             &lt;span class="ansi-red-fg"&gt;# 否则，从 self.__data 中获取 name 键对应的元素，返回调用 FrozenJSON.build() 方法得到的结果&lt;/span&gt;
+&lt;span class="ansi-green-fg"&gt;---&gt; 14&lt;/span&gt;&lt;span class="ansi-red-fg"&gt;             &lt;/span&gt;&lt;span class="ansi-green-fg"&gt;return&lt;/span&gt; FrozenJSON&lt;span class="ansi-blue-fg"&gt;.&lt;/span&gt;build&lt;span class="ansi-blue-fg"&gt;(&lt;/span&gt;self&lt;span class="ansi-blue-fg"&gt;.&lt;/span&gt;__data&lt;span class="ansi-blue-fg"&gt;[&lt;/span&gt;name&lt;span class="ansi-blue-fg"&gt;]&lt;/span&gt;&lt;span class="ansi-blue-fg"&gt;)&lt;/span&gt;
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;     15&lt;/span&gt; 
+&lt;span class="ansi-green-intense-fg ansi-bold"&gt;     16&lt;/span&gt;     &lt;span class="ansi-blue-fg"&gt;@&lt;/span&gt;classmethod
+
+&lt;span class="ansi-red-fg"&gt;KeyError&lt;/span&gt;: 'flavor'&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="处理无效属性名"&gt;处理无效属性名&lt;a class="anchor-link" href="#处理无效属性名"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;FrozenJSON 有个缺陷，没有对名称为 Python 关键字的属性做特殊处理。比如说像下面这样构建一个对象：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grad = FrozenJSON({'name': 'Jim Bo', 'class': 1982})&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;此时无法读取 grad.class 的值，因为 Python 中 class 是保留关键字&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  File "&lt;ipython-input-29-742ecb9642c1&gt;", line 2
+    grad.class
+             ^
+SyntaxError: invalid syntax&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当然，也可以这么做：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;getattr(grad, 'class')
+# 1982&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是， FrozenJSON 类的目的是为了便于访问数据，因此更好的方法是检查传给 &lt;code&gt;FrozenJSON.__init__&lt;/code&gt; 方法的映射中是否有关键字名称，如果有在键名后加上 &lt;code&gt;_&lt;/code&gt;，然后通过下面方式读取&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grad.class&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [48]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;abc&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;keyword&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;FrozenJSON&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;mapping&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="c1"&gt;# 判断是不是保留字&lt;/span&gt;
+                &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s1"&gt;'_'&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__getattr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; 
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;hasattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;FrozenJSON&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;FrozenJSON&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; 
     
-    &lt;span class="nd"&gt;@classmethod&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;abc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nd"&gt;@classmethod&lt;/span&gt; 
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; 
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;abc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; 
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;abc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MutableSequence&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -9030,6 +9277,49 @@ h6:hover .anchor-link {
             &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [50]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;grad&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;FrozenJSON&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'Jim Bo'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'class'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1982&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;class_&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_text output_error"&gt;
+&lt;pre&gt;
+&lt;span class="ansi-cyan-fg"&gt;  File &lt;/span&gt;&lt;span class="ansi-green-fg"&gt;"&lt;ipython-input-50-1081492d1dd5&gt;"&lt;/span&gt;&lt;span class="ansi-cyan-fg"&gt;, line &lt;/span&gt;&lt;span class="ansi-green-fg"&gt;3&lt;/span&gt;
+&lt;span class="ansi-red-fg"&gt;    grad.2be&lt;/span&gt;
+         ^
+&lt;span class="ansi-red-fg"&gt;SyntaxError&lt;/span&gt;&lt;span class="ansi-red-fg"&gt;:&lt;/span&gt; invalid syntax
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;如果 JSON 对象中的键不是有效 Python 标识符，也会遇到类似问题&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grad.2be
+
+  File "&lt;ipython-input-50-1081492d1dd5&gt;", line 3
+    grad.2be
+         ^
+SyntaxError: invalid syntax&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这个问题在 Python 3 中很好解决，可以用 str 提供的 s.isidentifier() 方法能根据语言的语法判断 s 是否为有效的 Python 标识符。但是，把无效的标识符变成有效的属性名不容易，对此，有两个很简单的解决办法，一个是抛出异常，另一个是把无效的键转成通用名称，例如 &lt;code&gt;attr_0&lt;/code&gt;，&lt;code&gt;attr_1&lt;/code&gt; 等等。这里不做演示&lt;/p&gt;
+&lt;h2 id="使用-__new__-方法以灵活的方式创建对象"&gt;使用 &lt;code&gt;__new__&lt;/code&gt; 方法以灵活的方式创建对象&lt;a class="anchor-link" href="#使用-__new__-方法以灵活的方式创建对象"&gt;¶&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
