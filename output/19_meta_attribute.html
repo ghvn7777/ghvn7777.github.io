@@ -9365,7 +9365,71 @@ SyntaxError: invalid syntax</code></pre>
          ^
 SyntaxError: invalid syntax</code></pre>
 <p>这个问题在 Python 3 中很好解决，可以用 str 提供的 s.isidentifier() 方法能根据语言的语法判断 s 是否为有效的 Python 标识符。但是，把无效的标识符变成有效的属性名不容易，对此，有两个很简单的解决办法，一个是抛出异常，另一个是把无效的键转成通用名称，例如 <code>attr_0</code>，<code>attr_1</code> 等等。这里不做演示</p>
-<h2 id="使用-__new__-方法以灵活的方式创建对象">使用 <code>__new__</code> 方法以灵活的方式创建对象<a class="anchor-link" href="#使用-__new__-方法以灵活的方式创建对象">¶</a></h2>
+<h2 id="使用-__new__-方法以灵活的方式创建对象">使用 <code>__new__</code> 方法以灵活的方式创建对象<a class="anchor-link" href="#使用-__new__-方法以灵活的方式创建对象">¶</a></h2><p>我们通常把 <code>__init__</code> 称为构造方法，这是从其他语言借鉴的术语，其实用于构建示例的特殊方法是 <code>__new__</code>，这是个类方法（使用特殊方式处理，因此不用加 @classmethod 装饰器），必须返回一个实例。返回的实例会作为第一个参数（即 self）传给 <code>__init__</code> 方法。因为调用 <code>__init__</code> 方法时要传入实例，而且禁止返回任何值，所以 <code>__init__</code> 其实就是初始化方法。真正的构造方法是 <code>__new__</code>。我们几乎不需要自己编写 <code>__new__</code> 方法，因为从 object 类继承的实现就够用了</p>
+<p>刚才说明的过程是 <code>__new__</code> 方法到 <code>__init__</code> 方法，是最常见的，但不是唯一的。<code>__new__</code> 方法也可以返回其他类的实例，此时解释器不会调用 <code>__init__</code> 方法</p>
+<p>也就是说。Python 构建对象的过程可以使用下面伪代码概括:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">object_maker</span><span class="p">(</span><span class="n">the_class</span><span class="p">,</span> <span class="n">some_arg</span><span class="p">):</span>
+    <span class="n">new_object</span> <span class="o">=</span> <span class="n">the_class</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">some_arg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_object</span><span class="p">,</span> <span class="n">the_class</span><span class="p">):</span>
+        <span class="n">the_class</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">new_object</span><span class="p">,</span> <span class="n">some_arg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_object</span>
+
+<span class="c1"># 下面两个语句作用基本相同</span>
+<span class="c1"># x = Foo('bar')</span>
+<span class="c1"># x = object_maker(Foo, 'bar')</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>使用 <code>__new__</code> 代替 build 方法：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
+<span class="kn">import</span> <span class="nn">keyword</span>
+
+<span class="k">class</span> <span class="nc">FrozenJSON</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span> <span class="c1"># 这是类方法，第一个参数是类本身，余下的参数与 `__init__` 方法一样，只不过没有 self</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
+            <span class="c1"># 默认行为是委托给超类的 __new__` 方法。这里调用的是 object 基类的 __new__ 方法，把唯一的参数设为 FrozenJSON</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">cls</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">arg</span>
+        
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">keyword</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="c1"># 判断是不是保留字</span>
+                <span class="n">key</span> <span class="o">+=</span> <span class="s1">'_'</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">FrozenJSON</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>  <span class="c1"># 之前调用的是 build 方法，现在直接调用构造方法</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
