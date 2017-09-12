@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>19 动态属性和特性 — Kaka Blog</title>
-	<meta name="description" content="Title: 19 动态属性和特性; Date: 2017-08-07; Author: kaka">
+	<meta name="description" content="Title: 19 动态属性和特性; Date: 2017-09-13; Author: kaka">
 	<meta name="author" content="kaka">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -30,7 +30,7 @@
 		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
 			<h4 itemprop="name">kaka</h4>
 		</span>
-		<time datetime="2017-08-07T23:41:00+02:00" itemprop="datePublished">Mon 07 August 2017</time>
+		<time datetime="2017-09-13T00:40:00+02:00" itemprop="datePublished">Wed 13 September 2017</time>
 	</div>
 	<div>
 		Category:
@@ -42,7 +42,7 @@
 	<div>
 		Tags:
 		<span itemprop="keywords">
-			<a href="./tag/meta.html" rel="tag">meta</a>
+			<a href="./tag/__dict__.html" rel="tag">__dict__</a>
 		</span>
 	</div>
 	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
@@ -1030,7 +1030,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [84]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="k">import</span> <span class="n">urlopen</span>
@@ -1057,7 +1057,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[84]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>{'Schedule': {'conferences': [{'serial': 115}],
   'events': [{'categories': ['Emerging Languages'],
@@ -8902,7 +8902,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [85]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
@@ -8914,7 +8914,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
+<div class="prompt output_prompt">Out[85]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>['conferences', 'events', 'speakers', 'venues']</pre>
 </div>
@@ -8924,7 +8924,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [86]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
@@ -8950,10 +8950,10 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [87]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'speakers'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span> <span class="c1"># 深入潜逃的字典和列表，获取最后一个演讲者名字</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'speakers'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span> <span class="c1"># 深入嵌套的字典和列表，获取最后一个演讲者名字</span>
 </pre></div>
 </div>
 </div>
@@ -8961,7 +8961,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[87]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'Carina C. Zona'</pre>
 </div>
@@ -8971,7 +8971,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [88]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'speakers'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'serial'</span><span class="p">]</span> <span class="c1"># 演讲者编号</span>
@@ -8982,7 +8982,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[88]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>141590</pre>
 </div>
@@ -8992,7 +8992,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [89]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'events'</span><span class="p">][</span><span class="mi">40</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span>
@@ -9003,7 +9003,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[89]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'There *Will* Be Bugs'</pre>
 </div>
@@ -9013,7 +9013,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In [90]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">][</span><span class="s1">'events'</span><span class="p">][</span><span class="mi">40</span><span class="p">][</span><span class="s1">'speakers'</span><span class="p">]</span> <span class="c1"># 每个事件都有一个 'speakers' 字段，列出 0 个或多个演讲者编号</span>
@@ -9024,7 +9024,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[90]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>[3471, 5199]</pre>
 </div>
@@ -9042,7 +9042,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [18]:</div>
+<div class="prompt input_prompt">In [91]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
@@ -9085,7 +9085,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [92]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">raw_feed</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
@@ -9098,7 +9098,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
+<div class="prompt output_prompt">Out[92]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>357</pre>
 </div>
@@ -9108,7 +9108,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [19]:</div>
+<div class="prompt input_prompt">In [93]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -9119,7 +9119,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[19]:</div>
+<div class="prompt output_prompt">Out[93]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>['conferences', 'events', 'speakers', 'venues']</pre>
 </div>
@@ -9129,7 +9129,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [94]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
@@ -9155,7 +9155,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [22]:</div>
+<div class="prompt input_prompt">In [95]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">speakers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
@@ -9166,7 +9166,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
+<div class="prompt output_prompt">Out[95]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'Carina C. Zona'</pre>
 </div>
@@ -9176,7 +9176,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [24]:</div>
+<div class="prompt input_prompt">In [96]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span> <span class="o">=</span> <span class="n">feed</span><span class="o">.</span><span class="n">Schedule</span><span class="o">.</span><span class="n">events</span><span class="p">[</span><span class="mi">40</span><span class="p">]</span>
@@ -9188,7 +9188,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[96]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>__main__.FrozenJSON</pre>
 </div>
@@ -9198,7 +9198,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [25]:</div>
+<div class="prompt input_prompt">In [97]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span><span class="o">.</span><span class="n">name</span>
@@ -9209,7 +9209,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[25]:</div>
+<div class="prompt output_prompt">Out[97]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>'There *Will* Be Bugs'</pre>
 </div>
@@ -9219,7 +9219,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [26]:</div>
+<div class="prompt input_prompt">In [98]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span><span class="o">.</span><span class="n">speakers</span>
@@ -9230,7 +9230,7 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[26]:</div>
+<div class="prompt output_prompt">Out[98]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>[3471, 5199]</pre>
 </div>
@@ -9240,7 +9240,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [27]:</div>
+<div class="prompt input_prompt">In [99]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">talk</span><span class="o">.</span><span class="n">flavor</span> <span class="c1"># 读取不存在的实例抛出 KeyError 异常，而不是通常的 AttributeError 异常</span>
@@ -9256,10 +9256,10 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-27-0ce41df2377c></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>talk<span class="ansi-blue-fg">.</span>flavor
+<span class="ansi-green-fg"><ipython-input-99-587132d59ae0></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>talk<span class="ansi-blue-fg">.</span>flavor <span class="ansi-red-fg"># 读取不存在的实例抛出 KeyError 异常，而不是通常的 AttributeError 异常</span>
 
-<span class="ansi-green-fg"><ipython-input-18-23345c6147bf></span> in <span class="ansi-cyan-fg">__getattr__</span><span class="ansi-blue-fg">(self, name)</span>
+<span class="ansi-green-fg"><ipython-input-91-23345c6147bf></span> in <span class="ansi-cyan-fg">__getattr__</span><span class="ansi-blue-fg">(self, name)</span>
 <span class="ansi-green-intense-fg ansi-bold">     12</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">     13</span>             <span class="ansi-red-fg"># 否则，从 self.__data 中获取 name 键对应的元素，返回调用 FrozenJSON.build() 方法得到的结果</span>
 <span class="ansi-green-fg">---> 14</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> FrozenJSON<span class="ansi-blue-fg">.</span>build<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>__data<span class="ansi-blue-fg">[</span>name<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
@@ -9287,13 +9287,13 @@ SyntaxError: invalid syntax</code></pre>
 <pre><code>getattr(grad, 'class')
 # 1982</code></pre>
 <p>但是， FrozenJSON 类的目的是为了便于访问数据，因此更好的方法是检查传给 <code>FrozenJSON.__init__</code> 方法的映射中是否有关键字名称，如果有在键名后加上 <code>_</code>，然后通过下面方式读取</p>
-<pre><code>grad.class</code></pre>
+<pre><code>grad.class_</code></pre>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [48]:</div>
+<div class="prompt input_prompt">In [100]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
@@ -9328,7 +9328,7 @@ SyntaxError: invalid syntax</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [50]:</div>
+<div class="prompt input_prompt">In [101]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">grad</span> <span class="o">=</span> <span class="n">FrozenJSON</span><span class="p">({</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Jim Bo'</span><span class="p">,</span> <span class="s1">'class'</span><span class="p">:</span> <span class="mi">1982</span><span class="p">})</span>
@@ -9340,14 +9340,9 @@ SyntaxError: invalid syntax</code></pre>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">"<ipython-input-50-1081492d1dd5>"</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">3</span>
-<span class="ansi-red-fg">    grad.2be</span>
-         ^
-<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
-</pre>
+<div class="prompt output_prompt">Out[101]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>1982</pre>
 </div>
 </div>
 </div>
@@ -9373,7 +9368,7 @@ SyntaxError: invalid syntax</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [102]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">object_maker</span><span class="p">(</span><span class="n">the_class</span><span class="p">,</span> <span class="n">some_arg</span><span class="p">):</span>
@@ -9400,7 +9395,7 @@ SyntaxError: invalid syntax</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [103]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">abc</span>
@@ -9430,6 +9425,1221 @@ SyntaxError: invalid syntax</code></pre>
             <span class="k">return</span> <span class="n">FrozenJSON</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>  <span class="c1"># 之前调用的是 build 方法，现在直接调用构造方法</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>OSCON 的 JSON 数据源有一个明显的缺点:索引为 40 的事件,即名为'There <em>Will</em> Be Bugs' 的那个,有两位演讲者,3471 和 5199,但却不容易找到他们,因为提供的是编号,而 Schedule.speakers 列表没使用编号建立索引。此外,每条事件记录中都有 venue_serial字段,存储的值也是编号,但是如果想找到对应的记录,那就要线性搜索 Schedule.venues列表</p>
+<h2 id="使用-shelve-模块调整-OSCON-数据源结构">使用 shelve 模块调整 OSCON 数据源结构<a class="anchor-link" href="#使用-shelve-模块调整-OSCON-数据源结构">¶</a></h2><p>标准库中有个 shelve（架子）模块，如果你知道 pickle（泡菜）模块是 Python 对象序列化格式的名字，你就明白 shelve 命令的原因，泡菜坛子摆在架子上，因此 shelve 模块提供了 pickle 存储方式</p>
+<p>shelve.open 高阶函数返回一个 shelve.Shelf 实例，这是简单的键值对象数据库，背后由 dbm 模块支持，具有下面特点</p>
+<ul>
+<li><p>shelve.Shelf 是 abc.MutableMapping 的子类，因此提供了处理映射类型的重要方法</p>
+</li>
+<li><p>shelve.Shelf 还提供了几个管理 I/O 的方法，如 sync 和 close；它也是一个上下文管理器</p>
+</li>
+<li><p>只要把新值赋予键，就会保存键和值</p>
+</li>
+<li><p>键必须是字符串</p>
+</li>
+<li><p>值必须是 pickle 模块能处理的对象</p>
+</li>
+</ul>
+<p>shelve 模块为识别 OSCON 的日程数据提供了一种简单有效的方式。我们将从 JSON 文件中读取所有记录,将其存在一个 shelve.Shelf 对象中,键由记录类型和编号组成(例如,'event.33950' 或 'speaker.3471'),而值是我们即将定义的 Record 类的实例</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [115]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="s1">'/home/kaka/schedule1_db'</span>
+<span class="n">CONFERENCE</span> <span class="o">=</span> <span class="s1">'conference.115'</span>
+
+<span class="k">class</span> <span class="nc">Record</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="c1"># 关键字参数构建实例属性的简便方式</span>
+        
+        
+<span class="k">def</span> <span class="nf">load_db</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="n">raw_data</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">'loading '</span> <span class="o">+</span> <span class="n">DB_NAME</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">collection</span><span class="p">,</span> <span class="n">rec_list</span> <span class="ow">in</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">record_type</span> <span class="o">=</span> <span class="n">collection</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 去掉尾部的 's'，例如 events 变成 event</span>
+        <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">rec_list</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record_type</span><span class="p">,</span> <span class="n">record</span><span class="p">[</span><span class="s1">'serial'</span><span class="p">])</span>
+            <span class="n">record</span><span class="p">[</span><span class="s1">'serial'</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">Record</span><span class="p">(</span><span class="o">**</span><span class="n">record</span><span class="p">)</span>
+            
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [123]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">shelve</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">shelve</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">DB_NAME</span><span class="p">)</span> 
+<span class="k">if</span> <span class="n">CONFERENCE</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">db</span><span class="p">:</span>
+    <span class="n">load_db</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+    
+<span class="n">speaker</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">'speaker.3471'</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">speaker</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/kaka/anaconda2/envs/pytorch/lib/python3.5/site-packages/ipykernel_launcher.py:78: UserWarning: loading /home/kaka/schedule2_db
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[123]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>__main__.DbRecord</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [124]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">speaker</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">speaker</span><span class="o">.</span><span class="n">twitter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[124]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('Anna Martelli Ravenscroft', 'annaraven')</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [66]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>在 Python 中至少有两个类与 Record 类似，我们这里自己写是为了说明一个重要的做法：在 <code>__init__</code> 方法中更新实例的 <code>__dict__</code> 属性</p>
+<p>像上面那样调整日程数据集后，我们可以扩展 Record 类，让它提供一个有用的服务：自动获取 event 记录引用的 venue 和 speaker 记录。这与 Django ORM 访问 models.ForeignKey 字段所做的事类似：得到的不是键，而是链接的模型对象</p>
+<h2 id="使用特性获取链接的记录">使用特性获取链接的记录<a class="anchor-link" href="#使用特性获取链接的记录">¶</a></h2><p>对于从 Shelf 对象中获取的 event 记录来说，读取它的 venue 或 speakers 属性返回的不是编号，而是完整记录对象</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [122]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span> 
+<span class="kn">import</span> <span class="nn">inspect</span> <span class="c1"># load_db 函数中用</span>
+
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="s1">'/home/kaka/schedule2_db'</span> <span class="c1"># 因为要存储几个不同类的实例，所以常见使用不同的数据库文件</span>
+<span class="n">CONFERENCE</span> <span class="o">=</span> <span class="s1">'conference.115'</span>
+
+<span class="k">class</span> <span class="nc">Record</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># 动态添加属性</span>
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> <span class="c1"># 测试时候很有用</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Record</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        
+<span class="k">class</span> <span class="nc">MissingDatabaseError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+    <span class="sd">'''需要数据库但没有指定数据库时抛出'''</span> <span class="c1"># 自定义异常通常是标志类，没有定义体</span>
+    
+<span class="k">class</span> <span class="nc">DbRecord</span><span class="p">(</span><span class="n">Record</span><span class="p">):</span>
+    
+    <span class="n">__db</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># 存储打开的 shelve.Shelf 数据库引用</span>
+   
+    <span class="nd">@staticmethod</span> <span class="c1"># 静态方法，以此强调不管调用多少次，效果始终一样</span>
+    <span class="k">def</span> <span class="nf">set_db</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+        <span class="n">DbRecord</span><span class="o">.</span><span class="n">__db</span> <span class="o">=</span> <span class="n">db</span>
+        
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_db</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">DbRecord</span><span class="o">.</span><span class="n">__db</span>
+    
+    <span class="nd">@classmethod</span> 
+    <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ident</span><span class="p">):</span> <span class="c1">#类方法，因此在子类中易于定制它的行为</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_db</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">db</span><span class="p">[</span><span class="n">ident</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">db</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s1">'database not set; call "</span><span class="si">{}</span><span class="s1">.set_db(my_db)"'</span>
+                <span class="k">raise</span> <span class="n">MissingDatabaseError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="c1"># 如果数据库已经打开，我们不知道怎么处理此异常，继续抛出</span>
+                
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">'serial'</span><span class="p">):</span>
+            <span class="n">cls_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">return</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1"> serial = </span><span class="si">{!r}</span><span class="s1">>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+        
+<span class="k">class</span> <span class="nc">Event</span><span class="p">(</span><span class="n">DbRecord</span><span class="p">):</span>
+    <span class="nd">@property</span> <span class="c1">#可以当属性访问</span>
+    <span class="k">def</span> <span class="nf">venue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s1">'venue.</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">venue_serial</span><span class="p">)</span>
+        <span class="c1"># 传给 DbRecord 类的 fetch 类方法</span>
+        <span class="c1">#不直接用　self.fetch(key)　的原因是为了防止在事件记录中有 'fetch' 键</span>
+        <span class="c1"># 那么在事件记录中获取的是 fetch 字段的值，而不是 event 继承自 DbRecord 的 fetch 类方法</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">speakers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">'_speaker_objs'</span><span class="p">):</span>
+            <span class="c1"># 没有 _speaker_objs 属性就直接从 __dict__ 实例属性中获取 speakers 属性的值，</span>
+            <span class="c1"># 防止无限递归，因为这个特性公开名称也是 speakers</span>
+            <span class="n">spkr_serials</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">'speakers'</span><span class="p">]</span>
+            <span class="n">fetch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">fetch</span> <span class="c1"># 获取 fetch 类方法的引用</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_speaker_objs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fetch</span><span class="p">(</span><span class="s1">'speaker.</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+                                  <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">spkr_serials</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speaker_objs</span>
+        
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">):</span> <span class="c1"># 如果记录有 name 属性，在字符串使用</span>
+            <span class="n">cls_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">return</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1"> </span><span class="si">{!r}</span><span class="s1">>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+        
+<span class="k">def</span> <span class="nf">load_db</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="n">raw_data</span> <span class="o">=</span> <span class="n">load</span><span class="p">()</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">'loading '</span> <span class="o">+</span> <span class="n">DB_NAME</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">collection</span><span class="p">,</span> <span class="n">rec_list</span> <span class="ow">in</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">'Schedule'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">record_type</span> <span class="o">=</span> <span class="n">collection</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># 去掉尾部的 's'，例如 events 变成 event</span>
+        <span class="n">cls_name</span> <span class="o">=</span> <span class="n">record_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="c1"># 把 record_type 变量首字母变大写</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">DbRecord</span><span class="p">)</span> <span class="c1"># 从模块全局作用域获取那个名称对应的对象，找不到使用 DbRecord</span>
+        <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">DbRecord</span><span class="p">):</span> <span class="c1"># 如果获取的对象是类,而且是 DbRecord 的子类</span>
+            <span class="n">factory</span> <span class="o">=</span> <span class="bp">cls</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">factory</span> <span class="o">=</span> <span class="n">DbRecord</span>
+        
+        <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">rec_list</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record_type</span><span class="p">,</span> <span class="n">record</span><span class="p">[</span><span class="s1">'serial'</span><span class="p">])</span>
+            <span class="n">record</span><span class="p">[</span><span class="s1">'serial'</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="c1"># 存储在数据库中的对象由 factory 构建,factory 可能是</span>
+            <span class="c1"># DbRecord 类,也可能是根据 record_type 的值确定的某个子类。</span>
+            <span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">factory</span><span class="p">(</span><span class="o">**</span><span class="n">record</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [125]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DbRecord</span><span class="o">.</span><span class="n">set_db</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="c1">#db 为 /home/kaka/schedule2_db</span>
+<span class="n">event</span> <span class="o">=</span> <span class="n">DbRecord</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">'event.33950'</span><span class="p">)</span>
+<span class="n">event</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[125]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><event &#x27;there *will* be bugs&#x27;></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [126]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">event</span><span class="o">.</span><span class="n">venue</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[126]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><dbrecord serial="venue.1449"></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [127]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">event</span><span class="o">.</span><span class="n">venue</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[127]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'Portland 251'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [128]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">spkr</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">speakers</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="si">{0.serial}</span><span class="s1">: </span><span class="si">{0.name}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spkr</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>speaker.3471: Anna Martelli Ravenscroft
+speaker.5199: Alex Martelli
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="LineItem-类第一版，表示订单中商品的类">LineItem 类第一版，表示订单中商品的类<a class="anchor-link" href="#LineItem-类第一版，表示订单中商品的类">¶</a></h2><p>假设有个销售有机食物的电商应用，客户可以按照重量订购坚果，干果和杂粮。在这个系统中，每个订单都有一系列商品，每个商品可以用下面的类表示</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        
+    <span class="k">def</span> <span class="nf">subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这个类设计的太精简了，有很多问题，例如：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raisins</span> <span class="o">=</span> <span class="n">LineItem</span><span class="p">(</span><span class="s1">'Golden raisins'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">6.95</span><span class="p">)</span>
+<span class="n">raisins</span><span class="o">.</span><span class="n">subtotal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>69.5</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raisins</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20</span>
+<span class="n">raisins</span><span class="o">.</span><span class="n">subtotal</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>-139.0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>看到重量竟然能变成负的，我们可以修改 LineItem 类的接口，使用读值的方法和设值方法管理 weight 属性，但是，如果能直接设定商品 weight 属性，显得更加自然，此外，系统可能在生产环境中，其他buff已经直接访问 item.weight 了。此时，符合 Python 风格做法是，把数据属性换成特性</p>
+<h2 id="LineItem-类第二版，能验证值的特性">LineItem 类第二版，能验证值的特性<a class="anchor-link" href="#LineItem-类第二版，能验证值的特性">¶</a></h2><p>实现特性后，我们可以使用读值和设值的方法，但是 LineItem 类的接口保持不变（即，设置 LineItem 对象的 weight 仍然写成 raisins.weight = 12)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        
+    <span class="k">def</span> <span class="nf">subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span>
+    
+    <span class="nd">@property</span> <span class="c1"># 实现读值方法</span>
+    <span class="k">def</span> <span class="nf">weight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__weight</span> <span class="c1"># 真正的值存到私有属性 __weight 中</span>
+    
+    <span class="nd">@weight</span><span class="o">.</span><span class="n">setter</span> <span class="c1">#这个属性也是装饰器，这个装饰器把读值方法和设值方法绑定在一起</span>
+    <span class="k">def</span> <span class="nf">weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 避免值为负</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__weight</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wlanuts</span> <span class="o">=</span> <span class="n">LineItem</span><span class="p">(</span><span class="s1">'wlanuts'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.00</span><span class="p">)</span> <span class="c1"># 现在不能设值负的重量</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-5-8e9813859e85></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>wlanuts <span class="ansi-blue-fg">=</span> LineItem<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'wlanuts'</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">10.00</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg"><ipython-input-4-9e53e54c45be></span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, description, weight, price)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>     <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> description<span class="ansi-blue-fg">,</span> weight<span class="ansi-blue-fg">,</span> price<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>         self<span class="ansi-blue-fg">.</span>description <span class="ansi-blue-fg">=</span> description
+<span class="ansi-green-fg">----> 5</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>weight <span class="ansi-blue-fg">=</span> weight
+<span class="ansi-green-intense-fg ansi-bold">      6</span>         self<span class="ansi-blue-fg">.</span>price <span class="ansi-blue-fg">=</span> price
+<span class="ansi-green-intense-fg ansi-bold">      7</span> 
+
+<span class="ansi-green-fg"><ipython-input-4-9e53e54c45be></span> in <span class="ansi-cyan-fg">weight</span><span class="ansi-blue-fg">(self, value)</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span>             self<span class="ansi-blue-fg">.</span>__weight <span class="ansi-blue-fg">=</span> value
+<span class="ansi-green-intense-fg ansi-bold">     19</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---> 20</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'value must be > 0'</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">ValueError</span>: value must be > 0</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>现在我们禁止用户为 weight 属性提供负值或 0，但是工作人员可能会犯错，把金额设成负的，为了防止这种情况，我们可以把 price 属性也变成特性，但是这样我们的 Python 代码就存在一些重复</p>
+<p>Paul Graham 有句名言，“当我在自己的程序中发现用到了模式，我觉得这就表明某个地方出错了”，去除重复的方法是抽象，抽象特性的定义有两种方式：使用特性工厂函数，或者用描述符类。后者更灵活，下章会讨论。其实，特性本身就是使用描述符类实现的。不过这里我们要继续讨论特性，实现一个特性工厂函数</p>
+<h2 id="特性全解析">特性全解析<a class="anchor-link" href="#特性全解析">¶</a></h2><p>虽然内置的 property 经常用作装饰器，但它其实是一个类。在 Python 中，函数和类通常可以互换，因为二者都是可调用的对象，而且没有实例化对象的 new 运算符，所以调用构造方法和调用工厂函数没有区别。此外，只要能返回新的可调用对象，代替被装饰的函数，二者都可以用作装饰器</p>
+<p>property 构造方法完整签名如下</p>
+<pre><code>property(fget=None, fset=None, fdel=None, doc=None) -> property attribute</code></pre>
+<p>所有参数都是可选的，如果没有把函数传给某个参数，那么特性对象就不允许执行相应操作。</p>
+<p>不适用装饰器定义特性的 “经典” 语法如下：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        
+    <span class="k">def</span> <span class="nf">subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span>
+    
+    <span class="k">def</span> <span class="nf">get_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__weight</span> <span class="c1"># 真正的值存到私有属性 __weight 中</span>
+    
+    <span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># 避免值为负</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__weight</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+    
+    <span class="n">weight</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_weight</span><span class="p">,</span> <span class="n">set_weight</span><span class="p">)</span> <span class="c1"># 构建 property 对象，然后赋值给公开的类属性</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>某些情况下，这种经典形式比装饰器语法好，稍后讨论的特性工厂函数就是一个例子。但是如果方法特别多的话，使用装饰器，一眼就能看出来哪些是读值方法，哪些是设置方法，很方便</p>
+<h2 id="特性会覆盖实例属性">特性会覆盖实例属性<a class="anchor-link" href="#特性会覆盖实例属性">¶</a></h2><p>如果实例和所属的类有同名数据属性，那么实例属性会覆盖（或遮盖）类属性</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Class</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="s1">'the class data attr'</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">prop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">'the prop value'</span>\
+    
+    
+<span class="n">obj</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
+<span class="nb">vars</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="c1"># 返回 obj 的 __dict__ 属性,表明没有实例属性</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[26]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[27]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'the class data attr'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [28]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s1">'bar'</span>
+<span class="nb">vars</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[28]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'data': 'bar'}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [29]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">data</span> <span class="c1"># 遮盖类属性</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[29]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'bar'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [30]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Class</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[30]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'the class data attr'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面尝试覆盖 obj 实例的 prop 属性</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [31]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Class</span><span class="o">.</span><span class="n">prop</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[31]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><property at 0x7f39c055f098></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [32]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">prop</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[32]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'the prop value'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [33]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">prop</span> <span class="o">=</span> <span class="s1">'foo'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-33-28151f4d3513></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>obj<span class="ansi-blue-fg">.</span>prop <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">'foo'</span>
+
+<span class="ansi-red-fg">AttributeError</span>: can't set attribute</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [34]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">'prop'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'foo'</span>
+<span class="nb">vars</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[34]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'data': 'bar', 'prop': 'foo'}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [35]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">prop</span> <span class="c1"># 仍然运行特征读值的方法，特性没有被实例属性覆盖</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[35]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'the prop value'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [36]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Class</span><span class="o">.</span><span class="n">prop</span> <span class="o">=</span> <span class="s1">'baz'</span> <span class="c1"># 覆盖 Class.prop 特性，销毁特征对象</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">prop</span> <span class="c1"># 现在获取的是实力属性，Class.prop 不是特性了，因此不会覆盖 obj.prop</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[36]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'foo'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面为 Class 类添加一个新特性，覆盖实例属性</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [38]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[38]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'bar'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [39]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Class</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[39]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'the class data attr'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [40]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Class</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="s1">'the "data" prop value'</span><span class="p">)</span> <span class="c1"># 用新特性覆盖 Class.data</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[40]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'the "data" prop value'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [41]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">del</span> <span class="n">Class</span><span class="o">.</span><span class="n">data</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[41]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'bar'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本节主要观点是，obj.attr 这样的表达式不会从 obj 开始寻找 attr，而是从 <code>obj.__class__</code> 开始，而且，仅当类中没有名为 attr 特性时，Python 才会从 obj 实例寻找。这条规则不仅适用与特性，还适用与一整类描述符 -- 覆盖型描述符，下张慧进一步讨论</p>
+<h2 id="特性的文档">特性的文档<a class="anchor-link" href="#特性的文档">¶</a></h2><p>控制台中 help() 函数或 IDE 等工具要显示特性的文档时，会从特性的 <code>__doc__</code> 属性中提取信息。如果是经典调用语法，为 property 对象设置文档字符串传入的是 doc 参数</p>
+<pre><code>weight = property(get_weight, set_weight, doc='weight in kilograms')</code></pre>
+<p>使用装饰器创建 property 对象时，读值方法（有 @property 装饰器的方法）的文档字符串作为一个整体，变成特性的文档</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [43]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">'''The bar attribute'''</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">'bar'</span><span class="p">]</span>
+    
+    <span class="nd">@bar</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">'bar'</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="n">help</span><span class="p">(</span><span class="n">Foo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on class Foo in module __main__:
+
+class Foo(builtins.object)
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+ |  
+ |  bar
+ |      The bar attribute
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [44]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">Foo</span><span class="o">.</span><span class="n">bar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on property:
+
+    The bar attribute
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>至此面我们介绍了特性的重要知识，下面回过头解决前面遇到的问题：保护 LineItem 对象的 weight 和 price 属性，只允许设置大于 0 的值，但是不允许定义两个几乎一样的读值和设值方法</p>
+<h2 id="定义一个特性工厂函数">定义一个特性工厂函数<a class="anchor-link" href="#定义一个特性工厂函数">¶</a></h2><p>我们将定义一个特性工厂函数，去这个名字是因为，在应用中要管理的属性表示不能为负数或 0 的量。下面是 LineItem 的简洁版，用到了 quantity 特性的两个实例：一个用于管理 weight 属性，一个用于管理 price 属性</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [46]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">quantity</span><span class="p">(</span><span class="n">storage_name</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">qty_getter</span><span class="p">(</span><span class="n">instance</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">storage_name</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">qty_setter</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">instance</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">storage_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+            
+    <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">qty_getter</span><span class="p">,</span> <span class="n">qty_setter</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">quantity</span><span class="p">(</span><span class="s1">'weight'</span><span class="p">)</span> <span class="c1"># 用工厂函数将自定义特性 weight 设为类属性</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">quantity</span><span class="p">(</span><span class="s1">'price'</span><span class="p">)</span> <span class="c1"># 记住，赋值语句的右面先计算，因此调用 quantity 时，price 属性还不存在</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span> <span class="c1"># 这里，特性已经激活，确保 weight 不能为负数或 0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span> 
+        
+    <span class="k">def</span> <span class="nf">subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="c1"># 这里也用到了特性，使用特性获取实例中存储的值</span>
+
+
+<span class="n">nutmeg</span> <span class="o">=</span> <span class="n">LineItem</span><span class="p">(</span><span class="s1">'Moluccan nutmeg'</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">13.95</span><span class="p">)</span>
+<span class="n">nutmeg</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">nutmeg</span><span class="o">.</span><span class="n">price</span> <span class="c1"># 使用特性读取 weight 和 price，会遮盖同名实例属性</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[46]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(8, 13.95)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [47]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">nutmeg</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="c1"># 查看真正存储值的实例属性</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[47]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[('description', 'Moluccan nutmeg'), ('price', 13.95), ('weight', 8)]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>注意工厂函数构建的特性，weight 特性覆盖了 weight 实例属性，因此对 self.weight 或 nutmeg.weight 的每个引用都由特性函数处理，只有直接存取 <code>__dict__</code> 属性才能跳过特性的处理逻辑</p>
+<p>在真实的系统中，分散在多个类的多个字段可能要做同样的验证，此时最好把 quantity 工厂函数放到实用工具模块中，方便重复使用。最终可能重构那个简单的工厂函数，改成更易扩展的描述符类，然后使用专门的子类做不同的验证，在下章会这么做</p>
+<h2 id="处理属性删除操作">处理属性删除操作<a class="anchor-link" href="#处理属性删除操作">¶</a></h2><p>我们可以用 del 语句将对象属性删除</p>
+<p>del my_object.an_attribute</p>
+<p>其实，使用 Python 变编程时不常删除属性，通过特性删除属性更少见。但是，Python 支持这么做，我们可以虚构一个实例，演示一下:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [48]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">BlackKnight</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'an arm'</span><span class="p">,</span> <span class="s1">'another arm'</span><span class="p">,</span> 
+                        <span class="s1">'a leg'</span><span class="p">,</span> <span class="s1">'another leg'</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phrases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"'Tis but a scratch."</span><span class="p">,</span>
+                        <span class="s2">"It's just a flesh wound."</span><span class="p">,</span>
+                        <span class="s2">"I'm invincible!"</span><span class="p">,</span>
+                        <span class="s2">"All right, we'll call it a draw."</span><span class="p">]</span>
+        
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">member</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'next member is:'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="nd">@member</span><span class="o">.</span><span class="n">deleter</span>
+    <span class="k">def</span> <span class="nf">member</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s1">'BLACK KNIGHT (loses </span><span class="si">{}</span><span class="s1">)</span><span class="se">\n</span><span class="s1"> -- </span><span class="si">{}</span><span class="s1">'</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">phrases</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [49]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">knight</span> <span class="o">=</span> <span class="n">BlackKnight</span><span class="p">()</span>
+<span class="n">knight</span><span class="o">.</span><span class="n">member</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>next member is:
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[49]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'an arm'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [50]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">del</span> <span class="n">knight</span><span class="o">.</span><span class="n">member</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>BLACK KNIGHT (loses an arm)
+ -- 'Tis but a scratch.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [51]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">del</span> <span class="n">knight</span><span class="o">.</span><span class="n">member</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>BLACK KNIGHT (loses another arm)
+ -- It's just a flesh wound.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [52]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">del</span> <span class="n">knight</span><span class="o">.</span><span class="n">member</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>BLACK KNIGHT (loses a leg)
+ -- I'm invincible!
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>在不使用装饰器的经典调用语法中，fdel 参数用来设置删值函数。例如在 BlackKnight 类的定义体中可以像下面这样 创建 member 特性:</p>
+<pre><code>member = property(member_getter, fdel=member_deleter)</code></pre>
+<p>如果不使用特性，还可以实现低层特殊的 <code>__delattr__</code> 方法处理删除属性的操作</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="处理属性的重要属性和函数">处理属性的重要属性和函数<a class="anchor-link" href="#处理属性的重要属性和函数">¶</a></h2><h3 id="影响属性处理方式的特殊属性">影响属性处理方式的特殊属性<a class="anchor-link" href="#影响属性处理方式的特殊属性">¶</a></h3><p><code>__class__</code>： 对象所属类的引用（即 <code>obj.__class__</code> 与 type(obj) 作用相同）。Python 的某些特殊方法，例如 <code>__getattr__</code>，只在对象的类中寻找，而不在实例中寻找</p>
+<p><code>__dict__</code> ： 一个映射，存储对象或类的可写属性。有 <code>__dict__</code> 属性的对象，任何时候都能随意设置新属性。如果类有 <code>__slots__</code> 属性，它的实例可能没有 <code>__dict__</code> 属性，参见下面 <code>__slots__</code> 说明</p>
+<p><code>__slots__</code>： 类可以定义这个属性，限制实例能有哪些属性。<code>__slots</code> 属性的值是一个字符串组成的元祖，指明允许有的属性。如果 <code>__slots__</code> 中没有 <code>__dict__</code>，那么该类的实例没有 <code>__dict__</code> 属性，实例只允许有指定名称的属性</p>
+<h3 id="处理属性的内置函数">处理属性的内置函数<a class="anchor-link" href="#处理属性的内置函数">¶</a></h3><p>dir([object])：列出对象的大多数属性。dir 函数的目的是交互式使用，因此没有提供完整的属性列表，只列出一组 “重要的” 属性名。dir 函数能审查有没有 <code>__dict__</code> 属性的对象，dir 函数不会列出 <code>__dict__</code> 属性本身，但是会列出其中的键，dir 函数也不会列出类的几个特殊属性，例如 <code>__mro__</code>,<code>___bases__</code> 和 <code>__name__</code>。如果没有指定可选的 object 函数，dir 会列出当前作用域中的名称</p>
+<p>getattr(object, name[, default])：从 object 对象获取 name 字符串对应的属性。获取的属性可能来自对象所属的类或超类。如果没有指定的属性，getattr 会抛出 AttributeError 异常，或者返回 default 的参数值</p>
+<p>hasattr(object, name)：如果 object 对象存在指定属性，或者能以某种方式，例如继承，通过 object 对象获取指定的属性，返回 True。这个函数的实现方法是调用 getattr，看看是否跑出 AttributeError 异常</p>
+<p>setattr(object, name, value)：把 object 对象指定的属性设为 value，前提是 object对象能接受那个值。这个函数可能会创建一个新属性，或者覆盖现有的属性。</p>
+<p>vars([object])：返回 object 对象的 <code>__dict__</code> 属性，如果实例所属的类定义了 <code>__slots__</code> 属性，实例没有 <code>__dict__</code> 属性，那么 vars 函数不能处理那个实例（相反，dir 函数能处理这样的实例），如果没有指定 参数，那么 vars() 函数的作用与 locals() 函数一样，返回表示本地作用域的字典</p>
+<h3 id="处理属性的特殊方法">处理属性的特殊方法<a class="anchor-link" href="#处理属性的特殊方法">¶</a></h3><p>在自己定义的类中，下面特殊方法用于获取，设置，删除和列出属性，使用点号或内置的 getattr, hasattr 函数存取属性都会出发下面相应的特殊方法，直接通过实例的 <code>__dict__</code> 属性读写属性不会触发这些特殊方法 -- 如果需要，通常使用这种方式跳过这些特殊方法</p>
+<p>Python 文档中警告说，对应用户自定义类来说，如果隐式调用特殊方法，仅当特殊方法在对象所属的类型定义，而不是在对象实例的字典中定义，才能确保调用成功</p>
+<p>也就是说，要假定特殊方法从类上获取，即便是尽快做目标的实例也是如此。因此特殊方法并不会被同名实例覆盖</p>
+<p>下面有个 Class 类，obj 是 Class 类的实例，attr 是 obj 的属性。</p>
+<p>不管使用点号存取属性，还是用某个内置函数，都会触发下面特殊方法的一个，例如 obj.attr 和 getattr(obj, 'attr', 42) 都会触发 <code>Class.__getattribute__(obj. 'attr')</code> 方法</p>
+<p><code>__delattr__</code>： 使用 del 删除属性，例如 del obj.attr 触发 <code>Class.delattr__(obj, 'attr')</code></p>
+<p><code>__dir__</code>： 把对象传给 dir 函数调用，列出属性。例如 dir(obj) 方法</p>
+<p><code>__getattr__</code>：仅当获取指定的属性失败，通过搜索 obj，Class 和超类之后调用。表达式 obj.no_such_attr, getattr(obj, 'no_such_attr') 和 <code>hasattr(obj, 'no_such_attr')</code> 可能会触发 Class.getattr(obj, 'no_such_attr') 方法，但是，仅当在 obj, Class 和超类中找不到指定的属性才触发</p>
+<p><code>__getattribute__</code>： 尝试获取指定的属性总会调用这个方法，不过，寻找的属性是特殊属性或特殊方法时除外。点号与 getattr 和 hasattr 内置函数会触发这个方法。调用 <code>__getattribute__</code> 方法且<strong>抛出 AttributeError 异常时，才会调用</strong> <code>__getattr__</code> 方法。为了获取 obj 实例属性不会无限递归，<code>__getattrbute__</code> 方法的实现要使用 <code>super().__getattrbute__(obj, name)</code></p>
+<p><code>__setattr__</code>： 尝试设置指定属性时总会调用这个方法，点号和 setattr 内置函数都会触发这个方法，例如 obj.attr = 42 和 setattr(obj, 'attr', 42) 都会触发 <code>Class.__setattr__(obj， 'attr', 42)</code> 方法。</p>
+<p>其实，特殊方法 <code>__getattribute__</code> 和 <code>__setattr__</code> 不管怎样都会调用，几乎会影响每一次属性存取，因此比 <code>__getattr__</code> 方法（只处理不存在的属性名）更难正确使用，使用特性或描述符相对不易出错</p>
 </div>
 </div>
 </div>
