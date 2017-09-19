@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>21 元类 — Kaka Blog</title>
+	<meta name="description" content="Title: 21 元类; Date: 2017-09-19; Author: kaka">
+	<meta name="author" content="kaka">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="./theme/html5.js"></script>
+		<![endif]-->
+	<link href="./theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="./theme/css/local.css" rel="stylesheet">
+	<link href="./theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="./">Kaka Blog</a>
+			<br>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">21 元类</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">kaka</h4>
+		</span>
+		<time datetime="2017-09-19T23:35:00+02:00" itemprop="datePublished">Tue 19 September 2017</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="./tag/meta.html" rel="tag">meta</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>类元编程是指在运行时创建或定制类的技艺，在 Python 中，类是一等对象，因此任何时候都可以使用函数新建类，无需使用 class 关键字。类装饰器也是函数，不公审查，修改甚至可以把被装饰类替换成其它类。最后，元类是类元编程最高级的工具，使用元类可以创建具有某种特质的全新类种，例如我们见过的抽象基类</p>
+<h2 id="类工厂函数">类工厂函数<a class="anchor-link" href="#类工厂函数">¶</a></h2><p>标准库的一个类工厂函数 -- collections.namedtuple。我们把一个类名和几个属性名传给这个函数，它会创建一个 tuple 的子类，其中元素通过名称获取，还为调试提供了友好的字符串表示（<code>__repr__</code>）</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">owner</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">owner</span>
+    
+<span class="n">rex</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s1">'Rex'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'Bob'</span><span class="p">)</span>
+<span class="n">rex</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><__main__.Dog at 0x7ff0002e7ba8></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这段代码各个字段名都出现了三次，让人厌烦，字符串表现形式也不友好，我们编写一个 record_factory 类工厂函数解决这个问题</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">record_factory</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">field_names</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 这里体现了鸭子类型，尝试在都好或空格处拆分 field_names，如果失败，则假定 field_names 本身就是可迭代对象</span>
+        <span class="n">field_names</span> <span class="o">=</span> <span class="n">field_names</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s1">' '</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span> <span class="c1">#不能调用 .replace 或 .split 方法</span>
+        <span class="k">pass</span> <span class="c1"># 假定 field_names 本就是标识符组成的序列</span>
+    <span class="n">field_names</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">field_names</span><span class="p">)</span> <span class="c1">#使用属性名构建元组，这将成为新建类的 __slots__属性</span>
+
+    <span class="c1"># __slots__变量，来限制该class能添加的属性</span>
+    <span class="c1"># 将变成新建类的 __init__ 方法</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            
+    <span class="c1"># 把类的实例变成可迭代对象，按照 __slots__ 设定的顺序产出字段值</span>
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'</span><span class="si">{}</span><span class="s1">=</span><span class="si">{!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span>
+                           <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__slots__</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s1">'</span><span class="si">{}</span><span class="s1">(</span><span class="si">{}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+    
+    <span class="c1"># 组建类属性字典</span>
+    <span class="n">cls_attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="vm">__slots__</span> <span class="o">=</span> <span class="n">field_names</span><span class="p">,</span>
+                     <span class="fm">__init__</span>  <span class="o">=</span> <span class="fm">__init__</span><span class="p">,</span> <span class="c1"># 相当于 '__init__': __init__</span>
+                     <span class="fm">__iter__</span>  <span class="o">=</span> <span class="fm">__iter__</span><span class="p">,</span> 
+                     <span class="fm">__repr__</span>  <span class="o">=</span> <span class="fm">__repr__</span><span class="p">)</span>
+    
+    <span class="c1"># 用 type 方法构造，构建新类，然后返回</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="n">cls_attrs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Dog</span> <span class="o">=</span> <span class="n">record_factory</span><span class="p">(</span><span class="s1">'Dog'</span><span class="p">,</span> <span class="s1">'name weight owner'</span><span class="p">)</span>
+<span class="n">rex</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="s1">'Rex'</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'Bob'</span><span class="p">)</span>
+<span class="n">rex</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Dog(name='Rex', weight=30, owner='Bob')</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rex</span> <span class="c1"># 实例是可迭代对象，所以可以方便的拆包</span>
+<span class="n">name</span><span class="p">,</span> <span class="n">weight</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('Rex', 30)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"</span><span class="si">{2}</span><span class="s2">'s dog weight </span><span class="si">{1}</span><span class="s2">kg"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">rex</span><span class="p">)</span> <span class="c1"># 实例是可迭代对象，所以可以方便的拆包</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>"Bob's dog weight 30kg"</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rex</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="mi">32</span> <span class="n">记录实例是可变的对象</span>
+<span class="n">rex</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">"<ipython-input-7-8bcb3e40d9ef>"</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">1</span>
+<span class="ansi-red-fg">    rex.weight = 32 记录实例是可变的对象</span>
+                             ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Dog</span><span class="o">.</span><span class="vm">__mro__</span> <span class="c1"># 新建的类继承 Object 类，和我们的工厂函数没有关系</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(__main__.Dog, object)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>通常，我们将 type 视为函数，因为我们像函数那样使用它，type(my_object) 获取对象所属的类 -- 作用与 <code>my_object.__class__</code> 相同。然而，type 是一个类，当成类使用的时候传入三个参数可以新建一个类（是的，type 可以根据传入的不同参数有不同的用法</p>
+<pre><code>type(类名, 父类的元组（针对继承的情况，可以为空），包含属性的字典（名称和值）)</code></pre>
+<p>比如下面的代码是等价的</p>
+<pre><code>class MyShinyClass:
+    pass
+
+##############
+
+type('MyShinyClass', (), {})</code></pre>
+<p>因此我们要新建如下类:</p>
+<pre><code>class Foo:
+    bar = True</code></pre>
+<p>可以写成:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Foo</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s1">'Foo'</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="s1">'bar'</span><span class="p">:</span><span class="kc">True</span><span class="p">})</span>
+<span class="n">Foo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>__main__.Foo</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Foo</span><span class="o">.</span><span class="n">bar</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="n">f</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><__main__.Foo at 0x7ff0002e7d68></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>如果你继承 Foo 类，可以写成</p>
+<pre><code>FooChild = type('FooChild', (Foo,),{})</code></pre>
+<p>我们看到 type 函数可以创建一个类，因为 type 是元类，Python 中所有对象都是由 type 创建而来，注意，Python 中所有的东西都是对象，包括 整数，字符串、函数以及类，都由 type 创建而来</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="mi">35</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">age</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="n">age</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__class__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><class &#x27;int&#x27;>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>type</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">'bob'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="n">name</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__class__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><class &#x27;str&#x27;>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>type</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span> <span class="k">pass</span>
+<span class="n">foo</span><span class="o">.</span><span class="vm">__class__</span>
+<span class="n">foo</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__class__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>type</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Bar</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">()</span>
+<span class="n">b</span><span class="o">.</span><span class="vm">__class__</span>
+<span class="n">b</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__class__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>type</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>总之，前面的 record_factory 函数最后一行会构建一个类，类的名称是 <code>cls_name</code> 参数的值，唯一直接超类是 object，有 <code>__slots__</code>, <code>__init__</code>, <code>__iter__</code>, <code>__repr__</code> 四个类属性，其中后 3 个是实例方法。</p>
+<p>我们本来可以将 <code>__slots__</code> 类属性改成其它值，不过那样就要实现 <code>__setattr__</code> 方法，为属性赋值时验证属性的名称，而且顺序相同，然而第 9 章说过，<code>__slots__</code> 属性最主要特点就是节省内存，能处理数百万个实例，不过也有一些缺点。</p>
+<p>把 3 个参数传给 type 是动态创建类的常用方式，如果查看 collections.namedtuple 源码会发现另一种方式，先声明一个 <code>_class_template</code> 变量，其值是字符串形式源码模板，然后在 namedtuple 函数中调用 <code>_class_template.format(...)</code> 方法，填充模板里的空白，最后，使用内置的 <code>exec</code>函数计算得到源码字符串</p>
+<p>在 Python 元编程时，最好不要使用 exec 和 eval 函数，如果接受字符串来自不可信的源，这两个函数会有严重的安全风险，Python 提供了足够的内省工具，大多数时候不需要这两个函数。</p>
+<p>record_factory 函数创建的类不能够序列化，即不能使用 pikle 模块里的 dump/load 函数处理，</p>
+<h2 id="定制描述符的类装饰器">定制描述符的类装饰器<a class="anchor-link" href="#定制描述符的类装饰器">¶</a></h2><p>上一章的 LineItem 例子还有个问题，就是储存的属性不具有描述性，即属性 <code>_Quantity#0</code> 不便于调试，如果能存储成 <code>_Quantity#weight</code> 之类的就好多了，上一章说过，我们不能使用描述性的存储属性名称，因为实例化描述符时无法得知托管属性，如前面的 weight 的名称，可是如果组建好整个类，而且把描述符绑定到类属性后，我们就可以审查类，并为描述符设置合理的存储属性名称。LineItem 的 <code>__new__</code> 方法可以做到这一点，因此，在 <code>__init__</code> 方法中使用描述符时，存储属性已经设置了正确的名称。为了解决这个问题使用 <code>__new__</code> 方法属于白费力气，每次新建 LineItem 实例时都会运行 <code>__new__</code> 方法中的逻辑，可是一旦 LineItem 类构建好了，描述符与托管属性之间的绑定就不会变了。因此，我们要在创建类时设置存储属性的名称。使用类装饰器或元类可以做到这一点，我们先使用简单的方式。</p>
+<p>类装饰器和函数装饰器非常类似，是参数为类对象的函数，返回原来的类或修改后的类</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">abc</span> 
+
+<span class="k">class</span> <span class="nc">AutoStorage</span><span class="p">:</span> 
+    <span class="n">__counter</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> 
+        <span class="n">prefix</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__counter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span> <span class="o">=</span> <span class="s1">'_</span><span class="si">{}</span><span class="s1">#</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">__counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="k">def</span> <span class="nf">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span> 
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="c1"># 不进行验证</span>
+      
+    
+<span class="k">class</span> <span class="nc">Validated</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">,</span> <span class="n">AutoStorage</span><span class="p">):</span> <span class="c1"># 抽象类，也继承自 AutoStorage</span>
+    
+    <span class="k">def</span> <span class="nf">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c1"># __set__ 方法把验证委托给 validate 方法</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> 
+        <span class="c1">#返回的 value 值返回给超类的 __set__ 方法，存储值</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__set__</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        
+    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span> <span class="c1"># 抽象方法</span>
+        <span class="sd">'''return validated value or raise ValueError'''</span>
+      
+    
+<span class="k">class</span> <span class="nc">Quantity</span><span class="p">(</span><span class="n">Validated</span><span class="p">):</span>  
+    <span class="sd">'''a number greater than zero'''</span>
+    
+    <span class="c1"># 只需要根据不同的验证规则实现 validate 方法即可</span>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o"><=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+    
+
+<span class="k">class</span> <span class="nc">NonBlank</span><span class="p">(</span><span class="n">Validated</span><span class="p">):</span>
+    <span class="sd">'''a string with at least one not-space character'''</span>
+            
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value cannot be empty or blank'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+            
+        
+<span class="c1"># class LineItem: # 托管类</span>
+<span class="c1">#     weight = Quantity() </span>
+<span class="c1">#     price = Quantity()</span>
+<span class="c1">#     description = NonBlank()</span>
+    
+<span class="c1">#     def __init__(self, description, weight, price):</span>
+<span class="c1">#         self.description = description</span>
+<span class="c1">#         self.weight = weight</span>
+<span class="c1">#         self.price = price</span>
+        
+<span class="c1">#     def subtotal(self):</span>
+<span class="c1">#         return self.weight * self.price</span>
+ 
+<span class="c1">## --------------------</span>
+<span class="c1">## 上面的和 上一章代码相同, LineItem 类只加了 1 行，在下面实现</span>
+<span class="c1">## --------------------</span>
+
+<span class="k">def</span> <span class="nf">entity</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">Validated</span><span class="p">):</span>
+            <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">attr</span><span class="o">.</span><span class="n">storage_name</span> <span class="o">=</span> <span class="s1">'_</span><span class="si">{}</span><span class="s1">#</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">cls</span> <span class="c1">#返回修改后的类</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@entity</span> <span class="c1"># 类装饰器，定义类的时候就会调用</span>
+<span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span> 
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">()</span> 
+    <span class="n">price</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">()</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">NonBlank</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        
+    <span class="k">def</span> <span class="nf">subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raisins</span> <span class="o">=</span> <span class="n">LineItem</span><span class="p">(</span><span class="s1">'Golden raisins'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">6.95</span><span class="p">)</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">raisins</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['_NonBlank#description', '_Quantity#price', '_Quantity#weight']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LineItem</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">storage_name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'_NonBlank#description'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">raisins</span><span class="o">.</span><span class="n">description</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'Golden raisins'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">getattr</span><span class="p">(</span><span class="n">raisins</span><span class="p">,</span> <span class="s1">'_NonBlank#description'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[21]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'Golden raisins'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>类装饰器能以较简单的方式做到以前需要元类去做的事情 -- 创建类的时候定制类</p>
+<p>类装饰器有个重大的缺点：只对直接依附的类有效，这意味着，被装饰的类的子类可能继承也可能不继承装饰类所做的改动，具体情况视改动方式而定</p>
+<h2 id="导入时和运行时比较">导入时和运行时比较<a class="anchor-link" href="#导入时和运行时比较">¶</a></h2><p>定义两个文件, evaltime.py</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+
+<span class="kn">from</span> <span class="nn">evalsupport</span> <span class="k">import</span> <span class="n">deco_alpha</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'<[0]> evaltime module start'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'<[1]> evaltime test Test'</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ClassOne</span><span class="p">():</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[2]> ClassOne body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[3]> ClassOne.__init__'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[4]> ClassOne.__del__'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">method_x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[5]> ClassOne.method_x'</span><span class="p">)</span>
+
+	<span class="k">class</span> <span class="nc">ClassTwo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[6]> ClassTwo body'</span><span class="p">)</span>
+
+
+<span class="nd">@deco_alpha</span>
+<span class="k">class</span> <span class="nc">ClassThree</span><span class="p">():</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[7]> ClassThree body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">method_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[8]> ClassThree.method_y'</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ClassFour</span><span class="p">(</span><span class="n">ClassThree</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[9]> ClassFour body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">method_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[10]> ClassFour.method_y'</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[11]> ClassOne tests'</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="s1">'.'</span><span class="p">)</span>
+	<span class="n">one</span> <span class="o">=</span> <span class="n">ClassOne</span><span class="p">()</span>
+	<span class="n">one</span><span class="o">.</span><span class="n">method_x</span><span class="p">()</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[12]> ClassThree tests'</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="s1">'.'</span><span class="p">)</span>
+	<span class="n">three</span> <span class="o">=</span> <span class="n">ClassThree</span><span class="p">()</span>
+	<span class="n">three</span><span class="o">.</span><span class="n">method_y</span><span class="p">()</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[13]> ClassFour tests'</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="s1">'.'</span><span class="p">)</span>
+	<span class="n">four</span> <span class="o">=</span> <span class="n">ClassFour</span><span class="p">()</span>
+	<span class="n">four</span><span class="o">.</span><span class="n">method_y</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'<[14]> evaltime module end'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>evalsupport.py</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'<[100]> evalsupport module start'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">deco_alpha</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'<[200]> deco_alpha'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">inner_1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[300]> deco_alpha:inner_1'</span><span class="p">)</span>
+
+    <span class="bp">cls</span><span class="o">.</span><span class="n">method_y</span> <span class="o">=</span> <span class="n">inner_1</span>
+    <span class="k">return</span> <span class="bp">cls</span> 
+
+
+<span class="k">class</span> <span class="nc">MetaAleph</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[400]> MetaAleph body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dic</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[500]> MetaAleph.__init__'</span><span class="p">)</span>
+
+		<span class="k">def</span> <span class="nf">inner_2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+			<span class="nb">print</span><span class="p">(</span><span class="s1">'<[600]> MetaAleph.__init__:inner_2'</span><span class="p">)</span>
+
+		<span class="bp">cls</span><span class="o">.</span><span class="n">method_z</span> <span class="o">=</span> <span class="n">inner_2</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'<[700]> evalsupport module end'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code>In [1]: import evaltime
+<[100]> evalsupport module start #evalsupport 模块中所有顶层代码在导入模块时执行，解释器会编译 deco_alpha 函数，但不会执行定义体
+<[400]> MetaAleph body        # 类定义体运行了
+<[700]> evalsupport module end 
+<[0]> evaltime module start
+<[2]> ClassOne body # 每个类的定义体都执行了
+<[6]> ClassTwo body #包括嵌套的类
+<[7]> ClassThree body
+<[200]> deco_alpha　# 先计算被装饰的 ClassThree 类定义体，然后运行装饰器函数
+<[9]> ClassFour body
+<[14]> evaltime module end #这里，evaltime 是被导入的，不会运行 if __name == '__main__'</code></pre>
+<pre><code>(py35) kaka@kaka-deep:~/kaka$ python3 evaltime.py 
+<[100]> evalsupport module start
+<[400]> MetaAleph body
+<[700]> evalsupport module end
+<[0]> evaltime module start
+<[2]> ClassOne body
+<[6]> ClassTwo body
+<[7]> ClassThree body
+<[200]> deco_alpha
+<[9]> ClassFour body
+<[11]> ClassOne tests ..............................
+<[3]> ClassOne.__init__
+<[5]> ClassOne.method_x
+<[12]> ClassThree tests ..............................
+<[300]> deco_alpha:inner_1 # 类装饰器改变了 ClassThree.method_y 方法
+<[13]> ClassFour tests ..............................
+<[10]> ClassFour.method_y
+<[14]> evaltime module end
+<[4]> ClassOne.__del__ # 程序结束后，绑定在全局变量 one 上的 ClassOne 实例才会被垃圾回收</code></pre>
+<h2 id="元类基础知识">元类基础知识<a class="anchor-link" href="#元类基础知识">¶</a></h2><p>元类是制造类的工厂，不过不是函数，而是类。</p>
+<p>根据 Python对象模型，类是对象，因此类肯定是另外某个类的实例，默认情况下，Python 中的类是 type 的实例，也就是说，type 是大多数内置的类和用户定义的类的元类，为了避免无限递归，type 是自身的实例。注意，我们没有说 str 或者 LineItem 继承自 type，而是说 str 和 LineItem 是 type 的实例。</p>
+<p>object 类和 type 类之间的关系很独特，object 是 type 的实例，type 是 object 的子类，这种关系很独特，无法使用 Python 代码表述，因为其定义其中一个之前另一个必须存在，type 是自身的实例这一点也很神奇</p>
+<p>除了 type，标准库中还有一些别的类，例如 ABCMeta 和 Enum。如下所示：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="o">.</span><span class="vm">__class__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>abc.ABCMeta</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">abc</span>
+<span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="o">.</span><span class="vm">__class__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>type</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="o">.</span><span class="vm">__mro__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(abc.ABCMeta, type, object)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>向上追溯，ABCMeta 最终所属的类也是 type，所有类都直接或间接的是 type 的实例，不过只有元类同事也是 type 的子类。若理解元类，一定要知道这种关系：元类（如 ABCMeta）从 type 类继承了构建类的能力。</p>
+<p>我们要抓住的重点是，<strong>所有类都是 type 的实例，但元类还是 type 的子类</strong>，因此可以作为制造类的工厂，具体来说，元类可以通过实现 <code>__init__</code> 方法来定制。元类的 <code>__init__</code> 方法可以做到类装饰器能做的任何事情，但是作用更大</p>
+<h2 id="理解元类计算时间的练习">理解元类计算时间的练习<a class="anchor-link" href="#理解元类计算时间的练习">¶</a></h2><p>我们让 evalsupport.py 与原来相同，新建一个 evaltime_meta.py 作为主脚本：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
+
+<span class="kn">from</span> <span class="nn">evalsupport</span> <span class="k">import</span> <span class="n">deco_alpha</span>
+<span class="kn">from</span> <span class="nn">evalsupport</span> <span class="k">import</span> <span class="n">MetaAleph</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'<[1]> evaltime module start'</span><span class="p">)</span>
+
+
+<span class="nd">@deco_alpha</span>
+<span class="k">class</span> <span class="nc">ClassThree</span><span class="p">():</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[2]> ClassThree body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">method_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[3]> ClassThree.method_y'</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ClassFour</span><span class="p">(</span><span class="n">ClassThree</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[4]> ClassFour body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">method_y</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[5]> ClassFour.method_y'</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ClassFive</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">MetaAleph</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[6]> ClassFive body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[7]> ClassFive body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">method_z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[8]> ClassFive.method_z'</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ClassSix</span><span class="p">(</span><span class="n">ClassFive</span><span class="p">):</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[9]> ClassSix body'</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">method_z</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s1">'<[10]> ClassSix.method_z'</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[11]> ClassThree tests'</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="s1">'.'</span><span class="p">)</span>
+	<span class="n">three</span> <span class="o">=</span> <span class="n">ClassThree</span><span class="p">()</span>
+	<span class="n">three</span><span class="o">.</span><span class="n">method_y</span><span class="p">()</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[12]> ClassFour tests'</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="s1">'.'</span><span class="p">)</span>
+	<span class="n">four</span> <span class="o">=</span> <span class="n">ClassFour</span><span class="p">()</span>
+	<span class="n">four</span><span class="o">.</span><span class="n">method_y</span><span class="p">()</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[13]> ClassFive tests'</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="s1">'.'</span><span class="p">)</span>
+	<span class="n">five</span> <span class="o">=</span> <span class="n">ClassFive</span><span class="p">()</span>
+	<span class="n">five</span><span class="o">.</span><span class="n">method_z</span><span class="p">()</span>
+	<span class="nb">print</span><span class="p">(</span><span class="s1">'<[14]> ClassSix tests'</span><span class="p">,</span> <span class="mi">30</span> <span class="o">*</span> <span class="s1">'.'</span><span class="p">)</span>
+	<span class="n">six</span> <span class="o">=</span> <span class="n">ClassSix</span><span class="p">()</span>
+	<span class="n">six</span><span class="o">.</span><span class="n">method_z</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'<[15]> evaltime module end'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>引入操作：</p>
+<pre><code>In [1]: import evaltime_meta
+<[100]> evalsupport module start
+<[400]> MetaAleph body
+<[700]> evalsupport module end
+<[1]> evaltime module start
+<[2]> ClassThree body
+<[200]> deco_alpha
+<[4]> ClassFour body
+<[6]> ClassFive body
+<[500]> MetaAleph.__init__ #与前面关键区别是，创建 ClassFive时调用了 MetaAleph.__init__ 方法
+<[9]> ClassSix body
+<[500]> MetaAleph.__init__ # 同上
+<[15]> evaltime module end</code></pre>
+<p>Python 解释器计算 ClassFive 类的定义体时没有调用 type 构建具体的类定义体，而是调用 MetaAleph 类。MetaAleph 类的 <code>__init__</code> 有 4 个参数。</p>
+<p>self: 要初始化的对象，例如 ClassFive
+name, bases, dic： 与构建类时传给 type 的参数一样</p>
+<p>重新看一下这个类：</p>
+<pre><code>class MetaAleph(type):
+    print('<[400]> MetaAleph body')
+
+    def __init__(cls, name, bases, dic):
+        print('<[500]> MetaAleph.__init__')
+
+        def inner_2(self):
+            print('<[600]> MetaAleph.__init__:inner_2')
+
+        cls.method_z = inner_2</code></pre>
+<p>编写元类时候，通常把 self 参数改成 cls。<code>__init__</code> 方法的定义体中定义了 <code>inner_2</code> 函数，然后绑定给 <code>cls.method_z</code>。<code>MetaAleph.__init__</code> 方法签名中的 cls 指代要创建的类（例如 ClassFive）。而 <code>inner_2</code> 函数签名中的 self 最终是指代我们创建的类的实例（例如 ClassFive 类的实例）</p>
+<p>运行脚本:</p>
+<pre><code>(pytorch) kaka@kaka-dell:~/kaka/python$ python3 evaltime_meta.py 
+<[100]> evalsupport module start
+<[400]> MetaAleph body
+<[700]> evalsupport module end
+<[1]> evaltime module start
+<[2]> ClassThree body
+<[200]> deco_alpha
+<[4]> ClassFour body
+<[6]> ClassFive body
+<[500]> MetaAleph.__init__
+<[9]> ClassSix body
+<[500]> MetaAleph.__init__
+<[11]> ClassThree tests ..............................
+<[300]> deco_alpha:inner_1
+<[12]> ClassFour tests ..............................
+<[5]> ClassFour.method_y
+<[13]> ClassFive tests ..............................
+<[7]> ClassFive body
+<[600]> MetaAleph.__init__:inner_2 # MetaAleph 类的 __init__ 方法把ClassFive.method_z 方法替换成 inner_2 函数。
+<[14]> ClassSix tests ..............................
+<[7]> ClassFive body
+<[600]> MetaAleph.__init__:inner_2 # ClassFive 的子类 ClassSix 也是一样
+<[15]> evaltime module end</code></pre>
+<p>注意，ClassSix 类没有直接引用 MetaAleph 类，但是却收到了影响，因为它是 ClassFive 的子类，进而也是 MetaAleph 类的实例，所以由 <code>MetaAleph.__init__</code> 实例化</p>
+<h2 id="定制描述符的元类">定制描述符的元类<a class="anchor-link" href="#定制描述符的元类">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">EntityMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">"""元类,用于创建带有验证字段的业务实体"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">):</span> 
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">)</span> <span class="c1"># 在超类（这里是 type）上调用 __init__</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attr_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">Validated</span><span class="p">):</span>
+                <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">storage_name</span> <span class="o">=</span> <span class="s1">'_</span><span class="si">{}</span><span class="s1">#</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                
+                
+<span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">EntityMeta</span><span class="p">):</span> <span class="c1"># 这个类只是为了用起来便利，这个模块的用户直接继承它即可，不用关心元类</span>
+    <span class="sd">'''带有验证字段的业务实体'''</span>
+    
+    
+<span class="k">class</span> <span class="nc">LineItem</span><span class="p">(</span><span class="n">Entity</span><span class="p">):</span> 
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">()</span> 
+    <span class="n">price</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">()</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">NonBlank</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        
+    <span class="k">def</span> <span class="nf">subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>写成这种语法，用户完全不用知道描述符或元类，直接继承库中提供的类就能满足要求</p>
+<h2 id="元类的特殊用法-__prepare__">元类的特殊用法 <code>__prepare__</code><a class="anchor-link" href="#元类的特殊用法-__prepare__">¶</a></h2><p>在某些应用中，可能要知道类属性的定义顺序，例如读写 csv 文件的库，用户定义的类可能想要把类中按顺序声明的字段与 csv 文件中的各列对应起来</p>
+<p>前面说过，type 构造方法以及元类的 <code>__new__</code> 和 <code>__init__</code> 都接收类的定义体，形式是一个名称到属性的字典，也就是说，当元类或装饰器获得映射时，属性的顺序已经丢失了。</p>
+<p>在 Python 3 中可以使用 <code>__prepare__</code>， 这个特殊方法只能在元类中使用，而且要声明为类方法（即，要使用 classmethod 类装饰器定义）。解释器调用元类 <code>__new__</code> 方法之前会调用 <code>__prepare__</code> 方法，使用类定义提中的属性创建映射。<code>__prepare</code> 第一个参数是元类，随后两个参数是类的名称以及组成的元祖，返回值是映射。元类构建新类时，<code>__prepare__</code> 方法返回的映射会传给 <code>__new__</code> 方法的最后一个参数，然后再传给 <code>__init__</code> 方法</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [24]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="k">class</span> <span class="nc">EntityMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">"""元类,用于创建带有验证字段的业务实体"""</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">__prepare__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span> <span class="c1"># 返回空的 OrderedDict 实例，存储类属性</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">):</span> 
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attr_dict</span><span class="p">)</span> <span class="c1"># 在超类（这里是 type）上调用 __init__</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_field_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attr_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">Validated</span><span class="p">):</span>
+                <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">storage_name</span> <span class="o">=</span> <span class="s1">'_</span><span class="si">{}</span><span class="s1">#</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">_field_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="c1"># 按顺序存储类属性</span>
+                
+<span class="k">class</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">EntityMeta</span><span class="p">):</span> <span class="c1"># 这个类只是为了用起来便利，这个模块的用户直接继承它即可，不用关心元类</span>
+    <span class="sd">'''带有验证字段的业务实体'''</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">field_names</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_field_names</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">name</span> <span class="c1"># 按照添加字段的顺序产出字段名称</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [26]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">LineItem</span><span class="p">(</span><span class="n">Entity</span><span class="p">):</span> 
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">()</span> 
+    <span class="n">price</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">()</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">NonBlank</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        
+    <span class="k">def</span> <span class="nf">subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">price</span>
+    
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">LineItem</span><span class="o">.</span><span class="n">field_names</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>weight
+price
+description
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>在现实世界中，框架和库会使用元类协助程序员执行很多任务，例如：</p>
+<ul>
+<li>验证属性</li>
+<li>一次把装饰器依附到多个方法上</li>
+<li>序列化对象或转换数据</li>
+<li>对象关系映射</li>
+<li>基于对象的持久存储</li>
+<li>动态转换使用其他语言写的类结构</li>
+</ul>
+<h2 id="类作为对象">类作为对象<a class="anchor-link" href="#类作为对象">¶</a></h2><p>Python 模型为每个类定义了很多属性，例如</p>
+<ul>
+<li><code>cls.__mro__</code>: 超类元组</li>
+<li><code>cls.__class__</code>: 所属类</li>
+<li><code>cls.__name__</code>: 类名</li>
+<li><code>cls.__bases__</code>: 由类的基类组成的元组</li>
+<li><code>cls.__qualname__</code>: 或函数的限定名称,即从模块的全局作用域到类的点分路径</li>
+<li><code>cls.__subclasses__()</code>: 这个方法返回一个列表,包含类的直接子类。</li>
+<li><code>cls.mro()</code>: 调用 <code>cls.__mro__</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+	<hr>
+	<h2>Comments</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href=".">Kaka Blog</a></li>
+							<li><a href="http://ghvn7777.github.io/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">You can add links in your config file</a></li>
+							<li><a href="#">Another social link</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+							<li><a href="#">You can modify those links in your config file</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; kaka 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

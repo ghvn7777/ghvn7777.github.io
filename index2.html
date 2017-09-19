@@ -27,6 +27,51 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="./11_abstrack_class.html">
+		<h2 itemprop="name headline">11 接口：从协议到抽象基类</h2>
+	</a>
+	<time datetime="2017-06-17T02:22:00+02:00" itemprop="datePublished">Sat 17 June 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>本章讨论的话题是接口，从鸭子类型代表特征动态协议，到使接口更明确，能验证是否符合规定的抽象基类（Abstract Base Class，ABC）</p>
+<p>在 Python 中 上章所说的鸭子类型是接口的常规方式，新只是是抽象基类和类型检查。Python 语言诞生 15 年之后，Python 2.6 才引入抽象基类。</p>
+<p>本章先说明 Python 社区以往对接口的不严谨理解：部分实现接口通常被认为是可接受的。我们通过几个示例强调鸭子类型的动态本性，从而澄清这一点</p>
+<p>接着，通过 Alex Martelili 写的一篇短文，对抽象基类作介绍，还为 Python 编程下一个新趋势下定义。本章余下的内容专门讲解抽象基类。首先，本章说明抽象基类的常见用途：实现接口时作为超类使用。</p>
+<p>然后，说明抽象基类如何检查具体子类是否符合接口定义，以及如何使用注册机制声明一个类实现了某个接口，而不进行子类化操作。最后，说明如何让抽象基类自动 ”识别“ 任何符合接口的类 -- 不进行子类化或注册</p>
+<p>我们将实现一个新抽象基类，看看它的运作方式。但是，作者和 Alex Martelli 都不建议你自己编写抽象基类，因为容易过度设计</p>
+<blockquote><p>抽象基类与描述符和元类一样，是用于构建框架的工具。因此，只有少数 Python 开发者编写的抽象基类不会对用户施加不必要的限制，让他们做无用功</p>
+</blockquote>
+<p>下面从 Python 风格探索接口</p>
+<h2 id="Python-文化中的接口和协议">Python 文化中的接口和协议<a class="anchor-link" href="#Python-文化中的接口和协议">¶</a></h2><p>在引入抽象基类之前，Python 已经非常成功了，即使现在也很少有代码使用抽象基类。在第一章就讨论了鸭子类型和协议，在上一章，我们将协议定义为非正式的接口，是让 Python 这种动态类型语言实现多态的方式。</p>
+<p>接口在动态类型语言是怎么运作的呢？首先，基本的事实是，Python 语言没有 interface 关键字，而且除了抽象基类，每个类都有接口：类实现或继承的公开属性（方法或数据的属性），包括特殊方法，如 <code>__getitem__</code> 或 <code>__add__</code></p>
+<p>按照定义，受保护的属性和私有属性不在接口中：即便有“受保护”属性也只是采用命名约定实现的（单个前导下划线）私有属性也可以轻松的访问（第 9 章），原因也是如此，不要违背这些约定</p>
+<p>另一方面，不要觉得把公开数据属性放入对象接口中不妥，因为如果需要，总能实现读值方法和设值方法，把数据属性变成特性，使用 obj.attr 语法的客户代码不会受到影响。Vector2d 类就是这么做的</p>
+<p>下面的例子 x，y 是公开属性</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="./tag/abstract.html" rel="tag">abstract</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="./10_list_modify_hash_slice.html">
 		<h2 itemprop="name headline">10 序列的修改，散列和切片</h2>
 	</a>
@@ -423,34 +468,6 @@ target = decorate(target)</code></pre>
 	</span>
 </div>
 <hr>
-        
-<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
-	<a href="./2_1_python_listcomp.html">
-		<h2 itemprop="name headline">2-1 列表元组</h2>
-	</a>
-	<time datetime="2017-04-27T19:33:00+02:00" itemprop="datePublished">Thu 27 April 2017</time>
-	&nbsp;—&nbsp;
-	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-		<span itemprop="name">kaka</span>
-	</span>
-	<div class="summary">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="列表生成式和生成式表达式">列表生成式和生成式表达式<a class="anchor-link" href="#列表生成式和生成式表达式">¶</a></h2><p>我们可以用 map 和 filter 达到 列表生成式的效果</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input"></div>
-	Category:
-	<span itemprop="articleSection">
-		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
-	</span>
-	Tags:
-</div>
-<hr>
  <div class="pagination">
 <ul>
     <li class="prev"><a href="./index.html">&larr; Previous</a></li>
@@ -488,7 +505,7 @@ target = decorate(target)</code></pre>
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
-							<li><a href="./category/fluent_python.html">fluent_python (22)</a></li>
+							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
