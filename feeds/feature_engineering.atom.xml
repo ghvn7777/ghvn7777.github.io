@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Kaka Blog</title><link href="http://ghvn7777.github.io/" rel="alternate"></link><link href="http://ghvn7777.github.io/feeds/feature_engineering.atom.xml" rel="self"></link><id>http://ghvn7777.github.io/</id><updated>2017-04-22T08:00:00+02:00</updated><entry><title>IBM 人员流失预测</title><link href="http://ghvn7777.github.io/2017_04_22_predict_ibm_attrition.html" rel="alternate"></link><published>2017-04-22T08:00:00+02:00</published><updated>2017-04-22T08:00:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-04-22:2017_04_22_predict_ibm_attrition.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Kaka Blog - feature_engineering</title><link href="http://ghvn7777.github.io/" rel="alternate"></link><link href="http://ghvn7777.github.io/feeds/feature_engineering.atom.xml" rel="self"></link><id>http://ghvn7777.github.io/</id><updated>2017-04-22T08:00:00+02:00</updated><entry><title>IBM 人员流失预测</title><link href="http://ghvn7777.github.io/2017_04_22_predict_ibm_attrition.html" rel="alternate"></link><published>2017-04-22T08:00:00+02:00</published><updated>2017-04-22T08:00:00+02:00</updated><author><name>kaka</name></author><id>tag:ghvn7777.github.io,2017-04-22:/2017_04_22_predict_ibm_attrition.html</id><summary type="html">
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="IBM-人员流失预测"&gt;IBM 人员流失预测&lt;a class="anchor-link" href="#IBM-人员流失预测"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;h2 id="Introduction"&gt;Introduction&lt;a class="anchor-link" href="#Introduction"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;address: &lt;a href="https://github.com/ghvn7777/kaggle/blob/master/ibm_employee/predict_ibm_attrition.ipynb"&gt;https://github.com/ghvn7777/kaggle/blob/master/ibm_employee/predict_ibm_attrition.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;保持雇员的快乐和对公司满意度是一个古老的挑战，如果你对雇员投资了很多，而他却离开了，这意味着你还要花费更多时间雇用别人，本着 Kaggle 的精神，让我们构建一个预测模型来根据 IBM 的数据集预测 IBM 员工的流失&lt;/p&gt;
+&lt;p&gt;这个笔记包括以下内容：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Exploratory Data Analysis: 在这个章节，我们探索数据集分布特征，特征间如何对应并可视化&lt;/li&gt;
+&lt;li&gt;Feature Engineering and Categorical Encoding: 进行一些特征工程并将我们的的特征编码为多个变量&lt;/li&gt;
+&lt;li&gt;Implementing Machine Learning models: 我们实现一个随机森林和梯度增强模型，然后看在这些模型中特征的重要性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Let's Go.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -1121,7 +1139,7 @@ This module was deprecated in version 0.18 in favor of the model_selection modul
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;279&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;8&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -1145,7 +1163,7 @@ This module was deprecated in version 0.18 in favor of the model_selection modul
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1373&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -1169,7 +1187,7 @@ This module was deprecated in version 0.18 in favor of the model_selection modul
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1392&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -1193,7 +1211,7 @@ This module was deprecated in version 0.18 in favor of the model_selection modul
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;591&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -2469,7 +2487,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;279&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;8&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2493,7 +2511,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1373&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -2517,7 +2535,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1392&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2541,7 +2559,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;591&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -2565,7 +2583,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1005&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2589,7 +2607,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1324&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -2613,7 +2631,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1358&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;24&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2637,7 +2655,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;216&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;23&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2661,7 +2679,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1299&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;27&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -2685,7 +2703,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;809&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;16&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -2709,7 +2727,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;153&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;15&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2733,7 +2751,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;670&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;26&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2757,7 +2775,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1346&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;19&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -2781,7 +2799,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;103&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;24&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2805,7 +2823,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1389&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;21&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2829,7 +2847,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;334&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2853,7 +2871,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;1123&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;16&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -2901,7 +2919,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;371&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2925,7 +2943,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;673&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;11&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -2973,7 +2991,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;419&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;7&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -2997,7 +3015,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;391&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;15&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3021,7 +3039,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;699&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3045,7 +3063,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1282&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -3069,7 +3087,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1125&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;16&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3117,7 +3135,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;477&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;7&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3189,7 +3207,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;688&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3213,7 +3231,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;667&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3237,7 +3255,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1092&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3261,7 +3279,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;300&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3285,7 +3303,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;310&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;7&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Technical Degree&lt;/td&gt;
@@ -3309,7 +3327,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;582&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;28&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3405,7 +3423,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;529&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Technical Degree&lt;/td&gt;
@@ -3549,7 +3567,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1322&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3573,7 +3591,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1199&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;18&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3597,7 +3615,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1194&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3621,7 +3639,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;287&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3645,7 +3663,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1378&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;13&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -3669,7 +3687,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;468&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;28&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3741,7 +3759,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;325&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3789,7 +3807,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;884&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;23&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3813,7 +3831,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;613&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3837,7 +3855,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;155&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -3885,7 +3903,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;628&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;8&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -3979,7 +3997,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Takeaway-from-the-plots"&gt;Takeaway from the plots&lt;a class="anchor-link" href="#Takeaway-from-the-plots"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;从上图中，我们可以看到有相当多的列好像彼此关系很差，一般来说，做一个预测模型，我们的训练数据最好彼此不相关，因为我们不需要冗余数据，在这个例子中，在我们有相当多的相关特征情况下，或许我们应该应用 PCA（Principal Component Analysis --&gt; 主成分分析）来减少特征空间&lt;/p&gt;
+&lt;h3 id="Takeaway-from-the-plots"&gt;Takeaway from the plots&lt;a class="anchor-link" href="#Takeaway-from-the-plots"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;从上图中，我们可以看到有相当多的列好像彼此关系很差，一般来说，做一个预测模型，我们的训练数据最好彼此不相关，因为我们不需要冗余数据，在这个例子中，在我们有相当多的相关特征情况下，或许我们应该应用 PCA（Principal Component Analysis --&amp;gt; 主成分分析）来减少特征空间&lt;/p&gt;
 &lt;h3 id="Pairplot-Visualisations"&gt;Pairplot Visualisations&lt;a class="anchor-link" href="#Pairplot-Visualisations"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;现在让我们创建一些 Seaborn pairplot 并且设置 Attrition 列作为目标变量得到各个特征分布对人员流失的影响&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4005,7 +4023,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="2.-Feature-Engineering-&amp;amp;-Categorical-Encoding"&gt;2. Feature Engineering &amp; Categorical Encoding&lt;a class="anchor-link" href="#2.-Feature-Engineering-&amp;amp;-Categorical-Encoding"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;我们对数据集进行了简单的探索，现在我们处理特征工程和对分类进行数字编码，特征工程简单地说就是从已有的特征创建新的特征关系，特征工程非常重要。&lt;/p&gt;
+&lt;h2 id="2.-Feature-Engineering-&amp;amp;-Categorical-Encoding"&gt;2. Feature Engineering &amp;amp; Categorical Encoding&lt;a class="anchor-link" href="#2.-Feature-Engineering-&amp;amp;-Categorical-Encoding"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;我们对数据集进行了简单的探索，现在我们处理特征工程和对分类进行数字编码，特征工程简单地说就是从已有的特征创建新的特征关系，特征工程非常重要。&lt;/p&gt;
 &lt;p&gt;在开始之前，我们使用 dtype 方法将数字和分类隔离&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4084,7 +4102,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;279&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;8&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4108,7 +4126,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1373&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -4132,7 +4150,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1392&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4156,7 +4174,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;591&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4180,7 +4198,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1005&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4204,7 +4222,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1324&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4228,7 +4246,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1358&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;24&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4252,7 +4270,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;216&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;23&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4276,7 +4294,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1299&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;27&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4300,7 +4318,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;809&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;16&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4324,7 +4342,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;153&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;15&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4348,7 +4366,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;670&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;26&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4372,7 +4390,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1346&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;19&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4396,7 +4414,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;103&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;24&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4420,7 +4438,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1389&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;21&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4444,7 +4462,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;334&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4468,7 +4486,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;1123&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;16&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4516,7 +4534,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;371&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4540,7 +4558,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;673&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;11&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -4588,7 +4606,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;419&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;7&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4612,7 +4630,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;391&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;15&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4636,7 +4654,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;699&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4660,7 +4678,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1282&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -4684,7 +4702,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1125&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;16&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4732,7 +4750,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;477&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;7&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4804,7 +4822,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;688&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4828,7 +4846,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;667&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4852,7 +4870,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1092&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -4876,7 +4894,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;300&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -4900,7 +4918,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;Yes&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;310&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;7&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Technical Degree&lt;/td&gt;
@@ -4924,7 +4942,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;582&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;28&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -5020,7 +5038,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;529&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Technical Degree&lt;/td&gt;
@@ -5164,7 +5182,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1322&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -5188,7 +5206,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;1199&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;18&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -5212,7 +5230,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1194&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -5236,7 +5254,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;287&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -5260,7 +5278,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;1378&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;13&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Other&lt;/td&gt;
@@ -5284,7 +5302,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;468&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;28&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -5356,7 +5374,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Non-Travel&lt;/td&gt;
 &lt;td&gt;325&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;5&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -5404,7 +5422,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Frequently&lt;/td&gt;
 &lt;td&gt;884&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;23&lt;/td&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -5428,7 +5446,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;613&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;6&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -5452,7 +5470,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;155&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;4&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Life Sciences&lt;/td&gt;
@@ -5500,7 +5518,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;td&gt;No&lt;/td&gt;
 &lt;td&gt;Travel_Rarely&lt;/td&gt;
 &lt;td&gt;628&lt;/td&gt;
-&lt;td&gt;Research &amp; Development&lt;/td&gt;
+&lt;td&gt;Research &amp;amp; Development&lt;/td&gt;
 &lt;td&gt;8&lt;/td&gt;
 &lt;td&gt;3&lt;/td&gt;
 &lt;td&gt;Medical&lt;/td&gt;
@@ -5617,66 +5635,66 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;         BusinessTravel              Department    EducationField  Gender  \
 0         Travel_Rarely                   Sales     Life Sciences  Female   
-1     Travel_Frequently  Research &amp; Development     Life Sciences    Male   
-2         Travel_Rarely  Research &amp; Development             Other    Male   
-3     Travel_Frequently  Research &amp; Development     Life Sciences  Female   
-4         Travel_Rarely  Research &amp; Development           Medical    Male   
-5     Travel_Frequently  Research &amp; Development     Life Sciences    Male   
-6         Travel_Rarely  Research &amp; Development           Medical  Female   
-7         Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-8     Travel_Frequently  Research &amp; Development     Life Sciences    Male   
-9         Travel_Rarely  Research &amp; Development           Medical    Male   
-10        Travel_Rarely  Research &amp; Development           Medical    Male   
-11        Travel_Rarely  Research &amp; Development     Life Sciences  Female   
-12        Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-13        Travel_Rarely  Research &amp; Development           Medical    Male   
-14        Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-15        Travel_Rarely  Research &amp; Development     Life Sciences  Female   
-16        Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-17           Non-Travel  Research &amp; Development           Medical    Male   
+1     Travel_Frequently  Research &amp;amp; Development     Life Sciences    Male   
+2         Travel_Rarely  Research &amp;amp; Development             Other    Male   
+3     Travel_Frequently  Research &amp;amp; Development     Life Sciences  Female   
+4         Travel_Rarely  Research &amp;amp; Development           Medical    Male   
+5     Travel_Frequently  Research &amp;amp; Development     Life Sciences    Male   
+6         Travel_Rarely  Research &amp;amp; Development           Medical  Female   
+7         Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+8     Travel_Frequently  Research &amp;amp; Development     Life Sciences    Male   
+9         Travel_Rarely  Research &amp;amp; Development           Medical    Male   
+10        Travel_Rarely  Research &amp;amp; Development           Medical    Male   
+11        Travel_Rarely  Research &amp;amp; Development     Life Sciences  Female   
+12        Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+13        Travel_Rarely  Research &amp;amp; Development           Medical    Male   
+14        Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+15        Travel_Rarely  Research &amp;amp; Development     Life Sciences  Female   
+16        Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+17           Non-Travel  Research &amp;amp; Development           Medical    Male   
 18        Travel_Rarely                   Sales     Life Sciences  Female   
-19        Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-20           Non-Travel  Research &amp; Development             Other  Female   
+19        Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+20           Non-Travel  Research &amp;amp; Development             Other  Female   
 21        Travel_Rarely                   Sales     Life Sciences    Male   
-22        Travel_Rarely  Research &amp; Development     Life Sciences  Female   
-23        Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-24        Travel_Rarely  Research &amp; Development           Medical    Male   
-25        Travel_Rarely  Research &amp; Development             Other  Female   
-26    Travel_Frequently  Research &amp; Development     Life Sciences  Female   
+22        Travel_Rarely  Research &amp;amp; Development     Life Sciences  Female   
+23        Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+24        Travel_Rarely  Research &amp;amp; Development           Medical    Male   
+25        Travel_Rarely  Research &amp;amp; Development             Other  Female   
+26    Travel_Frequently  Research &amp;amp; Development     Life Sciences  Female   
 27        Travel_Rarely                   Sales         Marketing    Male   
-28        Travel_Rarely  Research &amp; Development           Medical  Female   
+28        Travel_Rarely  Research &amp;amp; Development           Medical  Female   
 29        Travel_Rarely                   Sales         Marketing  Female   
 ...                 ...                     ...               ...     ...   
-1440  Travel_Frequently  Research &amp; Development     Life Sciences  Female   
-1441         Non-Travel  Research &amp; Development     Life Sciences    Male   
-1442      Travel_Rarely  Research &amp; Development           Medical    Male   
-1443      Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-1444      Travel_Rarely  Research &amp; Development  Technical Degree    Male   
-1445      Travel_Rarely  Research &amp; Development     Life Sciences  Female   
+1440  Travel_Frequently  Research &amp;amp; Development     Life Sciences  Female   
+1441         Non-Travel  Research &amp;amp; Development     Life Sciences    Male   
+1442      Travel_Rarely  Research &amp;amp; Development           Medical    Male   
+1443      Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+1444      Travel_Rarely  Research &amp;amp; Development  Technical Degree    Male   
+1445      Travel_Rarely  Research &amp;amp; Development     Life Sciences  Female   
 1446      Travel_Rarely                   Sales         Marketing  Female   
 1447         Non-Travel                   Sales         Marketing    Male   
 1448      Travel_Rarely                   Sales     Life Sciences    Male   
-1449      Travel_Rarely  Research &amp; Development  Technical Degree    Male   
+1449      Travel_Rarely  Research &amp;amp; Development  Technical Degree    Male   
 1450      Travel_Rarely         Human Resources     Life Sciences  Female   
 1451      Travel_Rarely                   Sales     Life Sciences  Female   
 1452  Travel_Frequently                   Sales     Life Sciences    Male   
 1453      Travel_Rarely                   Sales         Marketing  Female   
 1454      Travel_Rarely                   Sales     Life Sciences  Female   
-1455      Travel_Rarely  Research &amp; Development     Life Sciences    Male   
-1456  Travel_Frequently  Research &amp; Development     Life Sciences    Male   
-1457      Travel_Rarely  Research &amp; Development           Medical  Female   
-1458      Travel_Rarely  Research &amp; Development     Life Sciences  Female   
-1459      Travel_Rarely  Research &amp; Development             Other    Male   
-1460      Travel_Rarely  Research &amp; Development           Medical  Female   
+1455      Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
+1456  Travel_Frequently  Research &amp;amp; Development     Life Sciences    Male   
+1457      Travel_Rarely  Research &amp;amp; Development           Medical  Female   
+1458      Travel_Rarely  Research &amp;amp; Development     Life Sciences  Female   
+1459      Travel_Rarely  Research &amp;amp; Development             Other    Male   
+1460      Travel_Rarely  Research &amp;amp; Development           Medical  Female   
 1461      Travel_Rarely                   Sales         Marketing    Male   
 1462      Travel_Rarely                   Sales         Marketing  Female   
-1463         Non-Travel  Research &amp; Development           Medical    Male   
+1463         Non-Travel  Research &amp;amp; Development           Medical    Male   
 1464      Travel_Rarely                   Sales             Other  Female   
-1465  Travel_Frequently  Research &amp; Development           Medical    Male   
-1466      Travel_Rarely  Research &amp; Development           Medical    Male   
-1467      Travel_Rarely  Research &amp; Development     Life Sciences    Male   
+1465  Travel_Frequently  Research &amp;amp; Development           Medical    Male   
+1466      Travel_Rarely  Research &amp;amp; Development           Medical    Male   
+1467      Travel_Rarely  Research &amp;amp; Development     Life Sciences    Male   
 1468  Travel_Frequently                   Sales           Medical    Male   
-1469      Travel_Rarely  Research &amp; Development           Medical    Male   
+1469      Travel_Rarely  Research &amp;amp; Development           Medical    Male   
 
                         JobRole MaritalStatus Over18 OverTime  
 0               Sales Executive        Single      Y      Yes  
@@ -5781,7 +5799,7 @@ nRtqj7GIiIiISCkKxiIiIiIiKBiLiIiIiAAKxiIiIiIigIKxiIiIiAigYCwiIiIiAigYi4iIiIgA
 &lt;th&gt;BusinessTravel_Travel_Frequently&lt;/th&gt;
 &lt;th&gt;BusinessTravel_Travel_Rarely&lt;/th&gt;
 &lt;th&gt;Department_Human Resources&lt;/th&gt;
-&lt;th&gt;Department_Research &amp; Development&lt;/th&gt;
+&lt;th&gt;Department_Research &amp;amp; Development&lt;/th&gt;
 &lt;th&gt;Department_Sales&lt;/th&gt;
 &lt;th&gt;EducationField_Human Resources&lt;/th&gt;
 &lt;th&gt;EducationField_Life Sciences&lt;/th&gt;
@@ -10821,4 +10839,4 @@ GBgYGBgYGJi/nP8BRakvGeOoXhcAAAAASUVORK5CYII=
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</summary></entry></feed>
+</content></entry></feed>

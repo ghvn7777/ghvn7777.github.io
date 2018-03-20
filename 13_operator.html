@@ -1026,14 +1026,14 @@ h6:hover .anchor-link {
 <li>Python 如何处理终追运算符中不同类型的操作数</li>
 <li>使用鸭子类型或显式类型检查处理不同类型的操作数</li>
 <li>中缀运算符如何表明自己无法处理的操作数</li>
-<li>众多比较运算符（如 ==，>，<= 等等）的特殊行为</li>
+<li>众多比较运算符（如 ==，&gt;，&lt;= 等等）的特殊行为</li>
 <li>增量赋值运算符（如 += ）的默认处理方式和重载方式</li>
 </ul>
 <h2 id="运算符重载基础">运算符重载基础<a class="anchor-link" href="#运算符重载基础">¶</a></h2><p>在某些圈子里，运算符重载名声不太好，因为总被滥用．Python 加了一些限制，做好了灵活性，可用性和安全性的平衡</p>
 <ul>
 <li>不能重载内置运算符</li>
 <li>不能新建运算符，只能重载现有的</li>
-<li>某些运算符不能重载 -- is，and，or 和 not（不过位运算 &，| 和 ~ 可以）</li>
+<li>某些运算符不能重载 -- is，and，or 和 not（不过位运算 &amp;，| 和 ~ 可以）</li>
 </ul>
 <h2 id="一元运算符">一元运算符<a class="anchor-link" href="#一元运算符">¶</a></h2><p><code>- (__neg__)</code> 一元取负运算符，如果 x 是 -2， -x == 2</p>
 <p><code>+　(__pos__)</code>　一元取正运算符，通常 x == +x，但也有一些例外</p>
@@ -1114,7 +1114,7 @@ h6:hover .anchor-link {
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">pos</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">shortcut_names</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="mi">0</span> <span class="o"><=</span> <span class="n">pos</span> <span class="o"><</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{.__name__!r} object has no attribute </span><span class="si">{!r}</span><span class="s1">'</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
@@ -1140,7 +1140,7 @@ h6:hover .anchor-link {
     <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">:]))</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o"><</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">a</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
@@ -1153,7 +1153,7 @@ h6:hover .anchor-link {
             <span class="n">fmt_spec</span> <span class="o">=</span> <span class="n">fmt_spec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)],</span> <span class="c1"># 使用 chain 函数生成生成器表达式，无缝迭代向量的模和各个角坐标</span>
                                      <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">())</span>
-            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1">>'</span> <span class="c1"># 球面坐标</span>
+            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'&lt;</span><span class="si">{}</span><span class="s1">&gt;'</span> <span class="c1"># 球面坐标</span>
             
         <span class="k">else</span><span class="p">:</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span>
@@ -1428,7 +1428,7 @@ h6:hover .anchor-link {
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">pos</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">shortcut_names</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="mi">0</span> <span class="o"><=</span> <span class="n">pos</span> <span class="o"><</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{.__name__!r} object has no attribute </span><span class="si">{!r}</span><span class="s1">'</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
@@ -1454,7 +1454,7 @@ h6:hover .anchor-link {
     <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">:]))</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o"><</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">a</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
@@ -1467,7 +1467,7 @@ h6:hover .anchor-link {
             <span class="n">fmt_spec</span> <span class="o">=</span> <span class="n">fmt_spec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)],</span> <span class="c1"># 使用 chain 函数生成生成器表达式，无缝迭代向量的模和各个角坐标</span>
                                      <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">())</span>
-            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1">>'</span> <span class="c1"># 球面坐标</span>
+            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'&lt;</span><span class="si">{}</span><span class="s1">&gt;'</span> <span class="c1"># 球面坐标</span>
             
         <span class="k">else</span><span class="p">:</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span>
@@ -1574,9 +1574,9 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-17-2a88335a76c7></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-17-2a88335a76c7&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> v1 <span class="ansi-blue-fg">=</span> Vector<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----> 2</span><span class="ansi-red-fg"> </span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">20</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">30</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> v1
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">20</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">30</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> v1
 
 <span class="ansi-red-fg">TypeError</span>: can only concatenate tuple (not "Vector") to tuple</pre>
 </div>
@@ -1642,13 +1642,13 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-19-76c8c91eaf2e></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>v1 <span class="ansi-blue-fg">+</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-fg">&lt;ipython-input-19-76c8c91eaf2e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>v1 <span class="ansi-blue-fg">+</span> <span class="ansi-cyan-fg">1</span>
 
-<span class="ansi-green-fg"><ipython-input-12-820ea4db6ef9></span> in <span class="ansi-cyan-fg">__add__</span><span class="ansi-blue-fg">(self, other)</span>
+<span class="ansi-green-fg">&lt;ipython-input-12-820ea4db6ef9&gt;</span> in <span class="ansi-cyan-fg">__add__</span><span class="ansi-blue-fg">(self, other)</span>
 <span class="ansi-green-intense-fg ansi-bold">    120</span> 
 <span class="ansi-green-intense-fg ansi-bold">    121</span>     <span class="ansi-green-fg">def</span> __add__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--> 122</span><span class="ansi-red-fg">         </span>pairs <span class="ansi-blue-fg">=</span> itertools<span class="ansi-blue-fg">.</span>zip_longest<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> fillvalue<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.0</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 122</span><span class="ansi-red-fg">         </span>pairs <span class="ansi-blue-fg">=</span> itertools<span class="ansi-blue-fg">.</span>zip_longest<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> fillvalue<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.0</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    123</span>         <span class="ansi-green-fg">return</span> Vector<span class="ansi-blue-fg">(</span>a <span class="ansi-blue-fg">+</span> b <span class="ansi-green-fg">for</span> a<span class="ansi-blue-fg">,</span> b <span class="ansi-green-fg">in</span> pairs<span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">TypeError</span>: zip_longest argument #2 must support iteration</pre>
@@ -1675,25 +1675,25 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-20-30e5276cebc2></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>v1 <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">'ABC'</span>
+<span class="ansi-green-fg">&lt;ipython-input-20-30e5276cebc2&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>v1 <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">'ABC'</span>
 
-<span class="ansi-green-fg"><ipython-input-12-820ea4db6ef9></span> in <span class="ansi-cyan-fg">__add__</span><span class="ansi-blue-fg">(self, other)</span>
+<span class="ansi-green-fg">&lt;ipython-input-12-820ea4db6ef9&gt;</span> in <span class="ansi-cyan-fg">__add__</span><span class="ansi-blue-fg">(self, other)</span>
 <span class="ansi-green-intense-fg ansi-bold">    121</span>     <span class="ansi-green-fg">def</span> __add__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">    122</span>         pairs <span class="ansi-blue-fg">=</span> itertools<span class="ansi-blue-fg">.</span>zip_longest<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> fillvalue<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.0</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--> 123</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> Vector<span class="ansi-blue-fg">(</span>a <span class="ansi-blue-fg">+</span> b <span class="ansi-green-fg">for</span> a<span class="ansi-blue-fg">,</span> b <span class="ansi-green-fg">in</span> pairs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 123</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> Vector<span class="ansi-blue-fg">(</span>a <span class="ansi-blue-fg">+</span> b <span class="ansi-green-fg">for</span> a<span class="ansi-blue-fg">,</span> b <span class="ansi-green-fg">in</span> pairs<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg"><ipython-input-12-820ea4db6ef9></span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, components)</span>
+<span class="ansi-green-fg">&lt;ipython-input-12-820ea4db6ef9&gt;</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, components)</span>
 <span class="ansi-green-intense-fg ansi-bold">     11</span> 
 <span class="ansi-green-intense-fg ansi-bold">     12</span>     <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> components<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---> 13</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_components <span class="ansi-blue-fg">=</span> array<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>typecode<span class="ansi-blue-fg">,</span> components<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 13</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_components <span class="ansi-blue-fg">=</span> array<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>typecode<span class="ansi-blue-fg">,</span> components<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     14</span> 
 <span class="ansi-green-intense-fg ansi-bold">     15</span>     <span class="ansi-green-fg">def</span> __iter__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-green-fg"><ipython-input-12-820ea4db6ef9></span> in <span class="ansi-cyan-fg"><genexpr></span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-fg">&lt;ipython-input-12-820ea4db6ef9&gt;</span> in <span class="ansi-cyan-fg">&lt;genexpr&gt;</span><span class="ansi-blue-fg">(.0)</span>
 <span class="ansi-green-intense-fg ansi-bold">    121</span>     <span class="ansi-green-fg">def</span> __add__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">    122</span>         pairs <span class="ansi-blue-fg">=</span> itertools<span class="ansi-blue-fg">.</span>zip_longest<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> fillvalue<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.0</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--> 123</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> Vector<span class="ansi-blue-fg">(</span>a <span class="ansi-blue-fg">+</span> b <span class="ansi-green-fg">for</span> a<span class="ansi-blue-fg">,</span> b <span class="ansi-green-fg">in</span> pairs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 123</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> Vector<span class="ansi-blue-fg">(</span>a <span class="ansi-blue-fg">+</span> b <span class="ansi-green-fg">for</span> a<span class="ansi-blue-fg">,</span> b <span class="ansi-green-fg">in</span> pairs<span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">TypeError</span>: unsupported operand type(s) for +: 'float' and 'str'</pre>
 </div>
@@ -1780,7 +1780,7 @@ h6:hover .anchor-link {
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">pos</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">shortcut_names</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="mi">0</span> <span class="o"><=</span> <span class="n">pos</span> <span class="o"><</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{.__name__!r} object has no attribute </span><span class="si">{!r}</span><span class="s1">'</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
@@ -1806,7 +1806,7 @@ h6:hover .anchor-link {
     <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">:]))</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o"><</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">a</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
@@ -1819,7 +1819,7 @@ h6:hover .anchor-link {
             <span class="n">fmt_spec</span> <span class="o">=</span> <span class="n">fmt_spec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)],</span> <span class="c1"># 使用 chain 函数生成生成器表达式，无缝迭代向量的模和各个角坐标</span>
                                      <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">())</span>
-            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1">>'</span> <span class="c1"># 球面坐标</span>
+            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'&lt;</span><span class="si">{}</span><span class="s1">&gt;'</span> <span class="c1"># 球面坐标</span>
             
         <span class="k">else</span><span class="p">:</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span>
@@ -1958,7 +1958,7 @@ h6:hover .anchor-link {
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">pos</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">shortcut_names</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="mi">0</span> <span class="o"><=</span> <span class="n">pos</span> <span class="o"><</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{.__name__!r} object has no attribute </span><span class="si">{!r}</span><span class="s1">'</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
@@ -1984,7 +1984,7 @@ h6:hover .anchor-link {
     <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">:]))</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o"><</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">a</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
@@ -1997,7 +1997,7 @@ h6:hover .anchor-link {
             <span class="n">fmt_spec</span> <span class="o">=</span> <span class="n">fmt_spec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)],</span> <span class="c1"># 使用 chain 函数生成生成器表达式，无缝迭代向量的模和各个角坐标</span>
                                      <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">())</span>
-            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1">>'</span> <span class="c1"># 球面坐标</span>
+            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'&lt;</span><span class="si">{}</span><span class="s1">&gt;'</span> <span class="c1"># 球面坐标</span>
             
         <span class="k">else</span><span class="p">:</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span>
@@ -2105,14 +2105,14 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="众多比较运算符">众多比较运算符<a class="anchor-link" href="#众多比较运算符">¶</a></h2><p>Python 解释器对众多比较符（==，!=，>，<，>=，<=）的处理与前文类似，不过在两个方面有重大区别</p>
+<h2 id="众多比较运算符">众多比较运算符<a class="anchor-link" href="#众多比较运算符">¶</a></h2><p>Python 解释器对众多比较符（==，!=，&gt;，&lt;，&gt;=，&lt;=）的处理与前文类似，不过在两个方面有重大区别</p>
 <ul>
 <li><p>正向和反向调用使用的是同一系列方法，对于 == 来说，正向和反向调用都是 <code>__eq__</code> 方法，只是把参数对调了，而正向的 <code>__gt__</code> 方法调用的是反向的 <code>__lt__</code> 方法，并把参数对掉</p>
 </li>
 <li><p>对于 == 和 != 来说，如果反向调用失败，Python 会比较对象的 ID，而不抛出 TypeError</p>
 </li>
 </ul>
-<p>Python 2 之后比较运算符后备机制都变了，对于 <code>__ne__</code>，现在 Python 3 返回结果是对 <code>__eq__</code> 结果取反，对于排序比较运算符，Python 3 抛出 TypeError，并把错误消息设为 “unorderable types: int() < tuple()‘。在 Python 2 中，这些比较的结果很怪异，会考虑对象类型和 ID，并且无规律可循。然而，比较整数和元组确实没有意义，因此此时抛出 TypeError 是这门语言的一大进步</p>
+<p>Python 2 之后比较运算符后备机制都变了，对于 <code>__ne__</code>，现在 Python 3 返回结果是对 <code>__eq__</code> 结果取反，对于排序比较运算符，Python 3 抛出 TypeError，并把错误消息设为 “unorderable types: int() &lt; tuple()‘。在 Python 2 中，这些比较的结果很怪异，会考虑对象类型和 ID，并且无规律可循。然而，比较整数和元组确实没有意义，因此此时抛出 TypeError 是这门语言的一大进步</p>
 <p>了解这些规则之后，我们来分析并改进 <code>Vector.__eq__</code> 方法的行为</p>
 </div>
 </div>
@@ -2238,7 +2238,7 @@ h6:hover .anchor-link {
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">pos</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">shortcut_names</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="mi">0</span> <span class="o"><=</span> <span class="n">pos</span> <span class="o"><</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_components</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="s1">'{.__name__!r} object has no attribute </span><span class="si">{!r}</span><span class="s1">'</span>
         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
@@ -2264,7 +2264,7 @@ h6:hover .anchor-link {
     <span class="k">def</span> <span class="nf">angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">:]))</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o"><</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">a</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span>
@@ -2277,7 +2277,7 @@ h6:hover .anchor-link {
             <span class="n">fmt_spec</span> <span class="o">=</span> <span class="n">fmt_spec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="p">)],</span> <span class="c1"># 使用 chain 函数生成生成器表达式，无缝迭代向量的模和各个角坐标</span>
                                      <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">())</span>
-            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1">>'</span> <span class="c1"># 球面坐标</span>
+            <span class="n">outer_fmt</span> <span class="o">=</span> <span class="s1">'&lt;</span><span class="si">{}</span><span class="s1">&gt;'</span> <span class="c1"># 球面坐标</span>
             
         <span class="k">else</span><span class="p">:</span>
             <span class="n">coords</span> <span class="o">=</span> <span class="bp">self</span>
@@ -2756,8 +2756,8 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-65-af411a756e83></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>void <span class="ansi-blue-fg">=</span> globe <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">20</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">&lt;ipython-input-65-af411a756e83&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>void <span class="ansi-blue-fg">=</span> globe <span class="ansi-blue-fg">+</span> <span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">20</span><span class="ansi-blue-fg">]</span>
 
 <span class="ansi-red-fg">TypeError</span>: unsupported operand type(s) for +: 'AddableBingoCage' and 'list'</pre>
 </div>
@@ -2870,9 +2870,9 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-60-842c09972972></span> in <span class="ansi-cyan-fg">__iadd__</span><span class="ansi-blue-fg">(self, other)</span>
+<span class="ansi-green-fg">&lt;ipython-input-60-842c09972972&gt;</span> in <span class="ansi-cyan-fg">__iadd__</span><span class="ansi-blue-fg">(self, other)</span>
 <span class="ansi-green-intense-fg ansi-bold">     66</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---> 67</span><span class="ansi-red-fg">                 </span>other_iterable <span class="ansi-blue-fg">=</span> iter<span class="ansi-blue-fg">(</span>other<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 67</span><span class="ansi-red-fg">                 </span>other_iterable <span class="ansi-blue-fg">=</span> iter<span class="ansi-blue-fg">(</span>other<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     68</span>             <span class="ansi-green-fg">except</span> TypeError<span class="ansi-blue-fg">:</span>
 
 <span class="ansi-red-fg">TypeError</span>: 'int' object is not iterable
@@ -2880,29 +2880,18 @@ h6:hover .anchor-link {
 During handling of the above exception, another exception occurred:
 
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-70-f0e1c411856a></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>globe <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-fg">&lt;ipython-input-70-f0e1c411856a&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>globe <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
 
-<span class="ansi-green-fg"><ipython-input-60-842c09972972></span> in <span class="ansi-cyan-fg">__iadd__</span><span class="ansi-blue-fg">(self, other)</span>
+<span class="ansi-green-fg">&lt;ipython-input-60-842c09972972&gt;</span> in <span class="ansi-cyan-fg">__iadd__</span><span class="ansi-blue-fg">(self, other)</span>
 <span class="ansi-green-intense-fg ansi-bold">     69</span>                 self_cls <span class="ansi-blue-fg">=</span> type<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__name__
 <span class="ansi-green-intense-fg ansi-bold">     70</span>                 msg <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">'right operand in += must be {!r} or an iterable'</span>
-<span class="ansi-green-fg">---> 71</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">raise</span> TypeError<span class="ansi-blue-fg">(</span>msg<span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self_cls<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 71</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">raise</span> TypeError<span class="ansi-blue-fg">(</span>msg<span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>self_cls<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     72</span>         self<span class="ansi-blue-fg">.</span>load<span class="ansi-blue-fg">(</span>other_iterable<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     73</span>         <span class="ansi-green-fg">return</span> self
 
 <span class="ansi-red-fg">TypeError</span>: right operand in += must be 'AddableBingoCage' or an iterable</pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
 </div>
 </div>
 </div>
@@ -2967,6 +2956,7 @@ During handling of the above exception, another exception occurred:
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

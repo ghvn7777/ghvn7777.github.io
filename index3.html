@@ -27,6 +27,41 @@
         
         
 <div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<a href="./2_2_list_slice.html">
+		<h2 itemprop="name headline">2-2 list, tutle, array 的常用操作</h2>
+	</a>
+	<time datetime="2017-04-29T02:00:00+02:00" itemprop="datePublished">Sat 29 April 2017</time>
+	&nbsp;—&nbsp;
+	<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+		<span itemprop="name">kaka</span>
+	</span>
+	<div class="summary">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="切片">切片<a class="anchor-link" href="#切片">¶</a></h2><p>为了计算 seq[start:stop:step]，Python 会调用 <code>seq.__getitem__(slice(start, stop, step))</code>。</p>
+<h3 id="多维切片">多维切片<a class="anchor-link" href="#多维切片">¶</a></h3><p>[ ] 运算符也可以接收以逗号分隔的多个索引或切片，举例来说，Numpy 中，你可以使用 a[i, j] 取得二维的 numpy.ndarray，以及使用 a[m:n, k:l] 这类的运算符获取二维的切片。处理 [ ] 运算符的 <code>__getitem__</code> 和 <code>__setitem__</code> 特殊方法，都只会接收 tuple 格式的 a[i, j] 内的索引，换句话说，Python 调用 a.getitem((i, j)) 算出来的 a[i, j]</p>
+<p>Python 会将省略号（三个句点）视为一种标记，在 Numpy 对多维矩阵进行切片时，会使用快捷的方式 <code>...</code>，例如一个四维矩阵 a[i, ...] 相当于 a[i, :, :, :] 的简写。</p>
+<h3 id="对切片赋值">对切片赋值<a class="anchor-link" href="#对切片赋值">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+	Category:
+	<span itemprop="articleSection">
+		<a href="./category/fluent_python.html" rel="category">fluent_python</a>
+	</span>
+	Tags:
+ 
+	<span itemprop="keywords">
+		<a href="./tag/slice-sort.html" rel="tag">slice sort</a>
+	</span>
+</div>
+<hr>
+        
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
 	<a href="./2_1_python_listcomp.html">
 		<h2 itemprop="name headline">2-1 列表元组</h2>
 	</a>
@@ -185,6 +220,7 @@
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">
