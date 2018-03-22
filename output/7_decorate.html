@@ -1116,7 +1116,7 @@ target = decorate(target)</code></pre>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">'running main()'</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'registry ->'</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'registry -&gt;'</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
     <span class="n">f1</span><span class="p">()</span>
     <span class="n">f2</span><span class="p">()</span>
     <span class="n">f3</span><span class="p">()</span>
@@ -1134,10 +1134,10 @@ target = decorate(target)</code></pre>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 运行后答案如下</span>
-<span class="c1"># running register(<function f1 at 0x7fbac67ca6a8>)</span>
-<span class="c1"># running register(<function f2 at 0x7fbac67ca730>)</span>
+<span class="c1"># running register(&lt;function f1 at 0x7fbac67ca6a8&gt;)</span>
+<span class="c1"># running register(&lt;function f2 at 0x7fbac67ca730&gt;)</span>
 <span class="c1"># running main()</span>
-<span class="c1"># registry -> [<function f1 at 0x7fbac67ca6a8>, <function f2 at 0x7fbac67ca730>]</span>
+<span class="c1"># registry -&gt; [&lt;function f1 at 0x7fbac67ca6a8&gt;, &lt;function f2 at 0x7fbac67ca730&gt;]</span>
 <span class="c1"># running f1()</span>
 <span class="c1"># running f2()</span>
 <span class="c1"># running f3()</span>
@@ -1150,7 +1150,7 @@ target = decorate(target)</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>看到 register 在模块中其它函数之前运行（两次）。调用 register 时，传给它的参数是被装饰的函数，例如 <function f1 at 0x7fbac67ca6a8></p>
+<p>看到 register 在模块中其它函数之前运行（两次）。调用 register 时，传给它的参数是被装饰的函数，例如 &lt;function f1 at 0x7fbac67ca6a8&gt;</p>
 <p>加载模块后，registry 有两个被装饰函数的引用：f1 和 f2。这两个函数，以及 f3，只在 main 明确调用它们时候才执行</p>
 <p>如果单纯导入 register.py</p>
 </div>
@@ -1171,8 +1171,8 @@ target = decorate(target)</code></pre>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>running register(<function f1 at 0x7f2054630c80>)
-running register(<function f2 at 0x7f2054630ea0>)
+<pre>running register(&lt;function f1 at 0x7f2054630c80&gt;)
+running register(&lt;function f2 at 0x7f2054630ea0&gt;)
 </pre>
 </div>
 </div>
@@ -1202,7 +1202,7 @@ running register(<function f2 at 0x7f2054630ea0>)
 <div class="output_area">
 <div class="prompt output_prompt">Out[3]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[<function register.f1>, <function register.f2>]</pre>
+<pre>[&lt;function register.f1&gt;, &lt;function register.f2&gt;]</pre>
 </div>
 </div>
 </div>
@@ -1236,7 +1236,7 @@ running register(<function f2 at 0x7f2054630ea0>)
 <span class="nd">@promotion</span>
 <span class="k">def</span> <span class="nf">fidelity_promo</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
     <span class="sd">'''为积分为 1000 或以上的顾客提供 5% 折扣'''</span>
-    <span class="k">return</span> <span class="n">order</span><span class="o">.</span><span class="n">total</span><span class="p">()</span> <span class="o">*</span> <span class="o">.</span><span class="mi">05</span> <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">customer</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">>=</span> <span class="mi">1000</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">order</span><span class="o">.</span><span class="n">total</span><span class="p">()</span> <span class="o">*</span> <span class="o">.</span><span class="mi">05</span> <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">customer</span><span class="o">.</span><span class="n">fidelity</span> <span class="o">&gt;=</span> <span class="mi">1000</span> <span class="k">else</span> <span class="mi">0</span>
 
 <span class="nd">@promotion</span>
 <span class="k">def</span> <span class="nf">bulk_item_promo</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
@@ -1244,7 +1244,7 @@ running register(<function f2 at 0x7f2054630ea0>)
     
     <span class="n">discount</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">order</span><span class="o">.</span><span class="n">cart</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">quantity</span> <span class="o">>=</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
             <span class="n">discount</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">total</span><span class="p">()</span> <span class="o">*</span> <span class="o">.</span><span class="mi">1</span>
     <span class="k">return</span> <span class="n">discount</span>
 
@@ -1303,15 +1303,15 @@ running register(<function f2 at 0x7f2054630ea0>)
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-7-009ad9378744></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-7-009ad9378744&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      3</span>     print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> 
-<span class="ansi-green-fg">----> 5</span><span class="ansi-red-fg"> </span>f1<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span>f1<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg"><ipython-input-7-009ad9378744></span> in <span class="ansi-cyan-fg">f1</span><span class="ansi-blue-fg">(a)</span>
+<span class="ansi-green-fg">&lt;ipython-input-7-009ad9378744&gt;</span> in <span class="ansi-cyan-fg">f1</span><span class="ansi-blue-fg">(a)</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">def</span> f1<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span>     print<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----> 3</span><span class="ansi-red-fg">     </span>print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg">     </span>print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> 
 <span class="ansi-green-intense-fg ansi-bold">      5</span> f1<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
 
@@ -1391,15 +1391,15 @@ running register(<function f2 at 0x7f2054630ea0>)
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">UnboundLocalError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-9-fde9fff01553></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-9-fde9fff01553&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span>     print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span>     b <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">9</span>
-<span class="ansi-green-fg">----> 6</span><span class="ansi-red-fg"> </span>f2<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span>f2<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg"><ipython-input-9-fde9fff01553></span> in <span class="ansi-cyan-fg">f2</span><span class="ansi-blue-fg">(a)</span>
+<span class="ansi-green-fg">&lt;ipython-input-9-fde9fff01553&gt;</span> in <span class="ansi-cyan-fg">f2</span><span class="ansi-blue-fg">(a)</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">def</span> f2<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">      3</span>     print<span class="ansi-blue-fg">(</span>a<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----> 4</span><span class="ansi-red-fg">     </span>print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg">     </span>print<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span>     b <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">9</span>
 <span class="ansi-green-intense-fg ansi-bold">      6</span> f2<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>
 
@@ -1777,7 +1777,7 @@ running register(<function f2 at 0x7f2054630ea0>)
 <div class="output_area">
 <div class="prompt output_prompt">Out[10]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>(<cell at 0x7ff43cdcb378: list object at 0x7ff43d660c48>,)</pre>
+<pre>(&lt;cell at 0x7ff43cdcb378: list object at 0x7ff43d660c48&gt;,)</pre>
 </div>
 </div>
 </div>
@@ -1854,14 +1854,14 @@ running register(<function f2 at 0x7f2054630ea0>)
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">UnboundLocalError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-13-4fe265be513b></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-13-4fe265be513b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> avg <span class="ansi-blue-fg">=</span> make_averager<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----> 2</span><span class="ansi-red-fg"> </span>avg<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>avg<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg"><ipython-input-12-fe9bdbf03cae></span> in <span class="ansi-cyan-fg">averager</span><span class="ansi-blue-fg">(new_value)</span>
+<span class="ansi-green-fg">&lt;ipython-input-12-fe9bdbf03cae&gt;</span> in <span class="ansi-cyan-fg">averager</span><span class="ansi-blue-fg">(new_value)</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> 
 <span class="ansi-green-intense-fg ansi-bold">      5</span>     <span class="ansi-green-fg">def</span> averager<span class="ansi-blue-fg">(</span>new_value<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----> 6</span><span class="ansi-red-fg">         </span>count <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg">         </span>count <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
 <span class="ansi-green-intense-fg ansi-bold">      7</span>         total <span class="ansi-blue-fg">+=</span> new_value
 <span class="ansi-green-intense-fg ansi-bold">      8</span>         <span class="ansi-green-fg">return</span> total <span class="ansi-blue-fg">/</span> count
 
@@ -1972,7 +1972,7 @@ running register(<function f2 at 0x7f2054630ea0>)
         <span class="c1"># repr 方法用得好，用的对象例如列表不能用 str()，但是可以用 repr() 获取对象的标准字符串表示形式</span>
         <span class="n">arg_str</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span> 
         <span class="c1"># %r 把对象转成标准字符串形式，因为不知道返回值类型</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'[</span><span class="si">%0.8f</span><span class="s1">s]</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">) -> </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg_str</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'[</span><span class="si">%0.8f</span><span class="s1">s]</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">) -&gt; </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg_str</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> 
         <span class="k">return</span> <span class="n">result</span>
     <span class="k">return</span> <span class="n">clocked</span>
 </pre></div>
@@ -1993,7 +1993,7 @@ running register(<function f2 at 0x7f2054630ea0>)
     
 <span class="nd">@clock</span>
 <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> 
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'*'</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Calling snooze(.123)'</span><span class="p">)</span>
 <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
@@ -2009,14 +2009,14 @@ running register(<function f2 at 0x7f2054630ea0>)
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>**************************************** Calling snooze(.123)
-[0.12319872s]snooze(0.123) -> None
+[0.12319872s]snooze(0.123) -&gt; None
 **************************************** Calling factorial(6)
-[0.00000132s]factorial(1) -> 1
-[0.00008399s]factorial(2) -> 2
-[0.00014803s]factorial(3) -> 6
-[0.00104888s]factorial(4) -> 24
-[0.00134182s]factorial(5) -> 120
-[0.00140561s]factorial(6) -> 720
+[0.00000132s]factorial(1) -&gt; 1
+[0.00008399s]factorial(2) -&gt; 2
+[0.00014803s]factorial(3) -&gt; 6
+[0.00104888s]factorial(4) -&gt; 24
+[0.00134182s]factorial(5) -&gt; 120
+[0.00140561s]factorial(6) -&gt; 720
 </pre>
 </div>
 </div>
@@ -2037,10 +2037,10 @@ running register(<function f2 at 0x7f2054630ea0>)
 <h3 id="工作原理">工作原理<a class="anchor-link" href="#工作原理">¶</a></h3>
 <pre><code>@clock
 def factorial(n):
-    return 1 if n < 2 else n * factorial(n - 1)</code></pre>
+    return 1 if n &lt; 2 else n * factorial(n - 1)</code></pre>
 <p>等价于</p>
 <pre><code>def factorial(n):
-    return 1 if n < 2 else n * factorial(n - 1) 
+    return 1 if n &lt; 2 else n * factorial(n - 1) 
 factorial = clock(factorial)</code></pre>
 <p>因此，在这两个示例中，factorial 会作为 func 参数传给 clock，然后 clock 函数会返回 clocked 函数， Python 解释器在背后会把 clocked 赋值给 factorial。可以看到查看 factorial 的 <code>__name__</code> 属性会得到以下结果：</p>
 </div>
@@ -2107,7 +2107,7 @@ factorial = clock(factorial)</code></pre>
             <span class="n">arg_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pairs</span><span class="p">))</span>
         <span class="n">arg_str</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arg_lst</span><span class="p">)</span>
         
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'[</span><span class="si">%0.8f</span><span class="s1">s]</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">) -> </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg_str</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'[</span><span class="si">%0.8f</span><span class="s1">s]</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">) -&gt; </span><span class="si">%r</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">elapsed</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg_str</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> 
         <span class="k">return</span> <span class="n">result</span>
     <span class="k">return</span> <span class="n">clocked</span>
 </pre></div>
@@ -2128,7 +2128,7 @@ factorial = clock(factorial)</code></pre>
     
 <span class="nd">@clock</span>
 <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> 
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'*'</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Calling snooze(.123)'</span><span class="p">)</span>
 <span class="n">snooze</span><span class="p">(</span><span class="o">.</span><span class="mi">123</span><span class="p">)</span>
@@ -2144,14 +2144,14 @@ factorial = clock(factorial)</code></pre>
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>**************************************** Calling snooze(.123)
-[0.12322402s]snooze(0.123) -> None
+[0.12322402s]snooze(0.123) -&gt; None
 **************************************** Calling factorial(6)
-[0.00000048s]factorial(1) -> 1
-[0.00003409s]factorial(2) -> 2
-[0.00024486s]factorial(3) -> 6
-[0.00047541s]factorial(4) -> 24
-[0.00056529s]factorial(5) -> 120
-[0.00059152s]factorial(6) -> 720
+[0.00000048s]factorial(1) -&gt; 1
+[0.00003409s]factorial(2) -&gt; 2
+[0.00024486s]factorial(3) -&gt; 6
+[0.00047541s]factorial(4) -&gt; 24
+[0.00056529s]factorial(5) -&gt; 120
+[0.00059152s]factorial(6) -&gt; 720
 </pre>
 </div>
 </div>
@@ -2204,7 +2204,7 @@ factorial = clock(factorial)</code></pre>
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@clock</span>
 <span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span><span class="p">:</span> 
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span> 
         <span class="k">return</span> <span class="n">n</span>
     <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -2218,31 +2218,31 @@ factorial = clock(factorial)</code></pre>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.00000048s]fibonacci(0) -> 0
-[0.00000072s]fibonacci(1) -> 1
-[0.00012255s]fibonacci(2) -> 1
-[0.00000048s]fibonacci(1) -> 1
-[0.00000048s]fibonacci(0) -> 0
-[0.00000072s]fibonacci(1) -> 1
-[0.00004625s]fibonacci(2) -> 1
-[0.00017476s]fibonacci(3) -> 2
-[0.00037074s]fibonacci(4) -> 3
-[0.00000048s]fibonacci(1) -> 1
-[0.00000024s]fibonacci(0) -> 0
-[0.00000048s]fibonacci(1) -> 1
-[0.00014830s]fibonacci(2) -> 1
-[0.00028253s]fibonacci(3) -> 2
-[0.00000024s]fibonacci(0) -> 0
-[0.00000048s]fibonacci(1) -> 1
-[0.00013685s]fibonacci(2) -> 1
-[0.00000048s]fibonacci(1) -> 1
-[0.00000024s]fibonacci(0) -> 0
-[0.00000048s]fibonacci(1) -> 1
-[0.00011635s]fibonacci(2) -> 1
-[0.00023150s]fibonacci(3) -> 2
-[0.00048327s]fibonacci(4) -> 3
-[0.00088310s]fibonacci(5) -> 5
-[0.00136709s]fibonacci(6) -> 8
+<pre>[0.00000048s]fibonacci(0) -&gt; 0
+[0.00000072s]fibonacci(1) -&gt; 1
+[0.00012255s]fibonacci(2) -&gt; 1
+[0.00000048s]fibonacci(1) -&gt; 1
+[0.00000048s]fibonacci(0) -&gt; 0
+[0.00000072s]fibonacci(1) -&gt; 1
+[0.00004625s]fibonacci(2) -&gt; 1
+[0.00017476s]fibonacci(3) -&gt; 2
+[0.00037074s]fibonacci(4) -&gt; 3
+[0.00000048s]fibonacci(1) -&gt; 1
+[0.00000024s]fibonacci(0) -&gt; 0
+[0.00000048s]fibonacci(1) -&gt; 1
+[0.00014830s]fibonacci(2) -&gt; 1
+[0.00028253s]fibonacci(3) -&gt; 2
+[0.00000024s]fibonacci(0) -&gt; 0
+[0.00000048s]fibonacci(1) -&gt; 1
+[0.00013685s]fibonacci(2) -&gt; 1
+[0.00000048s]fibonacci(1) -&gt; 1
+[0.00000024s]fibonacci(0) -&gt; 0
+[0.00000048s]fibonacci(1) -&gt; 1
+[0.00011635s]fibonacci(2) -&gt; 1
+[0.00023150s]fibonacci(3) -&gt; 2
+[0.00048327s]fibonacci(4) -&gt; 3
+[0.00088310s]fibonacci(5) -&gt; 5
+[0.00136709s]fibonacci(6) -&gt; 8
 8
 </pre>
 </div>
@@ -2266,7 +2266,7 @@ factorial = clock(factorial)</code></pre>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">()</span> <span class="c1"># note</span>
 <span class="nd">@clock</span>
 <span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span><span class="p">:</span> 
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span> 
         <span class="k">return</span> <span class="n">n</span>
     <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -2280,13 +2280,13 @@ factorial = clock(factorial)</code></pre>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.00000024s]fibonacci(0) -> 0
-[0.00000095s]fibonacci(1) -> 1
-[0.00141406s]fibonacci(2) -> 1
-[0.00000095s]fibonacci(3) -> 2
-[0.00145030s]fibonacci(4) -> 3
-[0.00000095s]fibonacci(5) -> 5
-[0.00159645s]fibonacci(6) -> 8
+<pre>[0.00000024s]fibonacci(0) -&gt; 0
+[0.00000095s]fibonacci(1) -&gt; 1
+[0.00141406s]fibonacci(2) -&gt; 1
+[0.00000095s]fibonacci(3) -&gt; 2
+[0.00145030s]fibonacci(4) -&gt; 3
+[0.00000095s]fibonacci(5) -&gt; 5
+[0.00159645s]fibonacci(6) -&gt; 8
 8
 </pre>
 </div>
@@ -2324,14 +2324,14 @@ factorial = clock(factorial)</code></pre>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">html</span>
 <span class="k">def</span> <span class="nf">htmlize</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span> <span class="c1"># 对字符串进行转义，详情见注释说明</span>
-    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{}</span><span class="s1"></pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'&lt;pre&gt;</span><span class="si">{}</span><span class="s1">&lt;/pre&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
 <span class="sd">'''</span>
 <span class="sd">html.escape(s, quote=True)</span>
-<span class="sd">Convert the characters &, < and > in string s to HTML-safe sequences. </span>
+<span class="sd">Convert the characters &amp;, &lt; and &gt; in string s to HTML-safe sequences. </span>
 <span class="sd">Use this if you need to display text that might contain such characters in HTML.</span>
 <span class="sd">If the optional flag quote is true, the characters (") and (') are also translated; </span>
-<span class="sd">this helps for inclusion in an HTML attribute value delimited by quotes, as in <a href="...">.</span>
+<span class="sd">this helps for inclusion in an HTML attribute value delimited by quotes, as in &lt;a href="..."&gt;.</span>
 <span class="sd">'''</span>
 </pre></div>
 </div>
@@ -2344,7 +2344,7 @@ factorial = clock(factorial)</code></pre>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>这个函数适用于任何 Python 类型，但是我们想做个扩展，让它使用特别的方式显示某些类型。</p>
 <ul>
-<li>str： 把内部的换行符换成 <code><br>\n</code>；不使用 <code><pre></code>，而是使用 <code><p></code></li>
+<li>str： 把内部的换行符换成 <code>&lt;br&gt;\n</code>；不使用 <code>&lt;pre&gt;</code>，而是使用 <code>&lt;p&gt;</code></li>
 <li>int： 以十进制和十六进制显示数字</li>
 <li>list：输出一个 HTML 列表，根据各个元素的类型进行格式化</li>
 </ul>
@@ -2357,7 +2357,7 @@ factorial = clock(factorial)</code></pre>
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span> <span class="c1"># 默认情况下， 在 <pre> 标签内显示 HTML 转义后的字符串表示形式</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span> <span class="c1"># 默认情况下， 在 &lt;pre&gt; 标签内显示 HTML 转义后的字符串表示形式</span>
 </pre></div>
 </div>
 </div>
@@ -2367,7 +2367,7 @@ factorial = clock(factorial)</code></pre>
 <div class="output_area">
 <div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<pre>{1, 2, 3}</pre>'</pre>
+<pre>'&lt;pre&gt;{1, 2, 3}&lt;/pre&gt;'</pre>
 </div>
 </div>
 </div>
@@ -2388,7 +2388,7 @@ factorial = clock(factorial)</code></pre>
 <div class="output_area">
 <div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<pre>&lt;built-in function abs&gt;</pre>'</pre>
+<pre>'&lt;pre&gt;&amp;lt;built-in function abs&amp;gt;&lt;/pre&gt;'</pre>
 </div>
 </div>
 </div>
@@ -2399,7 +2399,7 @@ factorial = clock(factorial)</code></pre>
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="s1">'Heimlich & Co.</span><span class="se">\n</span><span class="s1">- a game'</span><span class="p">)</span><span class="c1"># str 对象也是显示 HTML 转义后的形式，\n 换成 <br>\n 并且放到 <p> 标签内</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">htmlize</span><span class="p">(</span><span class="s1">'Heimlich &amp; Co.</span><span class="se">\n</span><span class="s1">- a game'</span><span class="p">)</span><span class="c1"># str 对象也是显示 HTML 转义后的形式，\n 换成 &lt;br&gt;\n 并且放到 &lt;p&gt; 标签内</span>
 </pre></div>
 </div>
 </div>
@@ -2409,7 +2409,7 @@ factorial = clock(factorial)</code></pre>
 <div class="output_area">
 <div class="prompt output_prompt">Out[10]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<p>Heimlich &amp; Co.<br>\n- a game</p>'</pre>
+<pre>'&lt;p&gt;Heimlich &amp;amp; Co.&lt;br&gt;\n- a game&lt;/p&gt;'</pre>
 </div>
 </div>
 </div>
@@ -2430,7 +2430,7 @@ factorial = clock(factorial)</code></pre>
 <div class="output_area">
 <div class="prompt output_prompt">Out[11]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<pre>42 (0x2a)</pre>'</pre>
+<pre>'&lt;pre&gt;42 (0x2a)&lt;/pre&gt;'</pre>
 </div>
 </div>
 </div>
@@ -2451,11 +2451,11 @@ factorial = clock(factorial)</code></pre>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><ul>
-<li><p>alpha</p></li>
-<li><pre>66 (0x42)</pre></li>
-<li><pre>{1, 2, 3}</pre></li>
-</ul>
+<pre>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;alpha&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;pre&gt;66 (0x42)&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;pre&gt;{1, 2, 3}&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </pre>
 </div>
 </div>
@@ -2484,22 +2484,22 @@ factorial = clock(factorial)</code></pre>
 <span class="nd">@singledispatch</span>
 <span class="k">def</span> <span class="nf">htmlize</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
-    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{}</span><span class="s1"></pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'&lt;pre&gt;</span><span class="si">{}</span><span class="s1">&lt;/pre&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
 <span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="c1">#各个函数用 @base_function.register(type) 装饰</span>
 <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">text</span><span class="p">):</span> <span class="c1">#专门函数的名称不重要， _ 是个不错的选择</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'<br></span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s1">'<p></span><span class="si">{0}</span><span class="s1"></p>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'&lt;br&gt;</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'&lt;p&gt;</span><span class="si">{0}</span><span class="s1">&lt;/p&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
 <span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">)</span> <span class="c1"># Integral 是 int 的虚拟超类</span>
 <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s1">'<pre></span><span class="si">{0}</span><span class="s1"> (0x</span><span class="si">{0:x}</span><span class="s1">)</pre>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'&lt;pre&gt;</span><span class="si">{0}</span><span class="s1"> (0x</span><span class="si">{0:x}</span><span class="s1">)&lt;/pre&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
 <span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">tuple</span><span class="p">)</span>  <span class="c1">#可以叠放多个装饰器，让同一个函数支持不同的类型</span>
 <span class="nd">@htmlize</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">MutableSequence</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
-    <span class="n">inner</span> <span class="o">=</span> <span class="s1">'</li></span><span class="se">\n</span><span class="s1"><li>'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">htmlize</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s1">'<ul></span><span class="se">\n</span><span class="s1"><li>'</span> <span class="o">+</span> <span class="n">inner</span> <span class="o">+</span> <span class="s1">'</li></span><span class="se">\n</span><span class="s1"></ul>'</span>
+    <span class="n">inner</span> <span class="o">=</span> <span class="s1">'&lt;/li&gt;</span><span class="se">\n</span><span class="s1">&lt;li&gt;'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">htmlize</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">'&lt;ul&gt;</span><span class="se">\n</span><span class="s1">&lt;li&gt;'</span> <span class="o">+</span> <span class="n">inner</span> <span class="o">+</span> <span class="s1">'&lt;/li&gt;</span><span class="se">\n</span><span class="s1">&lt;/ul&gt;'</span>
 </pre></div>
 </div>
 </div>
@@ -2543,7 +2543,7 @@ f = d1(d2(f))</code></pre>
     <span class="nb">print</span><span class="p">(</span><span class="s1">'running f1()'</span><span class="p">)</span>
     
 <span class="nb">print</span><span class="p">(</span><span class="s1">'running main()'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'registry ->'</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'registry -&gt;'</span><span class="p">,</span> <span class="n">registry</span><span class="p">)</span>
 <span class="n">f1</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2554,9 +2554,9 @@ f = d1(d2(f))</code></pre>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>funning register(<function f1 at 0x7f00767727b8>)
+<pre>funning register(&lt;function f1 at 0x7f00767727b8&gt;)
 running main()
-registry -> [<function f1 at 0x7f00767727b8>]
+registry -&gt; [&lt;function f1 at 0x7f00767727b8&gt;]
 running f1()
 </pre>
 </div>
@@ -2582,7 +2582,7 @@ running f1()
 
 <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">active</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">):</span> <span class="c1">#这是真正的装饰器，它的参数是一个函数</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'running register(active=</span><span class="si">%s</span><span class="s1">)->decorate(</span><span class="si">%s</span><span class="s1">)'</span> <span class="o">%</span> <span class="p">(</span><span class="n">active</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'running register(active=</span><span class="si">%s</span><span class="s1">)-&gt;decorate(</span><span class="si">%s</span><span class="s1">)'</span> <span class="o">%</span> <span class="p">(</span><span class="n">active</span><span class="p">,</span> <span class="n">func</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">active</span><span class="p">:</span>
             <span class="n">registry</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2612,15 +2612,15 @@ running f1()
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>running register(active=False)->decorate(<function f1 at 0x7f0075e880d0>)
-running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
+<pre>running register(active=False)-&gt;decorate(&lt;function f1 at 0x7f0075e880d0&gt;)
+running register(active=True)-&gt;decorate(&lt;function f2 at 0x7f0075edcd08&gt;)
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{<function __main__.f2>}</pre>
+<pre>{&lt;function __main__.f2&gt;}</pre>
 </div>
 </div>
 </div>
@@ -2649,14 +2649,14 @@ running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>running register(active=True)->decorate(<function f3 at 0x7f0076772f28>)
+<pre>running register(active=True)-&gt;decorate(&lt;function f3 at 0x7f0076772f28&gt;)
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt output_prompt">Out[17]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><function __main__.f3></pre>
+<pre>&lt;function __main__.f3&gt;</pre>
 </div>
 </div>
 </div>
@@ -2677,7 +2677,7 @@ running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
 <div class="output_area">
 <div class="prompt output_prompt">Out[18]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{<function __main__.f2>, <function __main__.f3>}</pre>
+<pre>{&lt;function __main__.f2&gt;, &lt;function __main__.f3&gt;}</pre>
 </div>
 </div>
 </div>
@@ -2698,14 +2698,14 @@ running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>running register(active=False)->decorate(<function f2 at 0x7f0075edcd08>)
+<pre>running register(active=False)-&gt;decorate(&lt;function f2 at 0x7f0075edcd08&gt;)
 </pre>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt output_prompt">Out[19]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><function __main__.f2></pre>
+<pre>&lt;function __main__.f2&gt;</pre>
 </div>
 </div>
 </div>
@@ -2726,7 +2726,7 @@ running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
 <div class="output_area">
 <div class="prompt output_prompt">Out[20]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{<function __main__.f3>}</pre>
+<pre>{&lt;function __main__.f3&gt;}</pre>
 </div>
 </div>
 </div>
@@ -2748,7 +2748,7 @@ running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 
-<span class="n">DEFAULT_FMT</span> <span class="o">=</span> <span class="s1">'[</span><span class="si">{elapsed:0.8f}</span><span class="s1">s] </span><span class="si">{name}</span><span class="s1">(</span><span class="si">{args}</span><span class="s1">) -> </span><span class="si">{result}</span><span class="s1">'</span>
+<span class="n">DEFAULT_FMT</span> <span class="o">=</span> <span class="s1">'[</span><span class="si">{elapsed:0.8f}</span><span class="s1">s] </span><span class="si">{name}</span><span class="s1">(</span><span class="si">{args}</span><span class="s1">) -&gt; </span><span class="si">{result}</span><span class="s1">'</span>
 
 <span class="k">def</span> <span class="nf">clock</span><span class="p">(</span><span class="n">fmt</span> <span class="o">=</span> <span class="n">DEFAULT_FMT</span><span class="p">):</span> <span class="c1"># 参数化装饰器工厂函数</span>
     <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>       <span class="c1"># 真正的装饰器</span>
@@ -2759,7 +2759,7 @@ running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
             <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
             <span class="n">args</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">_args</span><span class="p">)</span> 
             <span class="n">result</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">_result</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">()))</span> <span class="c1">#是为了在 fmt 中引用 clocked 的局部变量 --> 用得好！</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">()))</span> <span class="c1">#是为了在 fmt 中引用 clocked 的局部变量 --&gt; 用得好！</span>
             <span class="k">return</span> <span class="n">result</span>
         <span class="k">return</span> <span class="n">clocked</span>
     <span class="k">return</span> <span class="n">decorate</span>
@@ -2779,9 +2779,9 @@ running register(active=True)->decorate(<function f2 at 0x7f0075edcd08>)
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[0.12315559s] snooze(0.123) -> None
-[0.12337589s] snooze(0.123) -> None
-[0.12318420s] snooze(0.123) -> None
+<pre>[0.12315559s] snooze(0.123) -&gt; None
+[0.12337589s] snooze(0.123) -&gt; None
+[0.12318420s] snooze(0.123) -&gt; None
 </pre>
 </div>
 </div>
@@ -2914,6 +2914,7 @@ snooze(0.123) dt=0.123s
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

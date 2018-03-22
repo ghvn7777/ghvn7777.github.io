@@ -1042,11 +1042,11 @@ h6:hover .anchor-link {
     <span class="c1"># 这里的 self 是描述符实例，即 LineItem.weight 或 LineItem.price</span>
     <span class="c1"># instance 是托管实例（LineItem 实例），value 是要设定的值</span>
     <span class="k">def</span> <span class="nf">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span> 
-        <span class="k">if</span> <span class="n">value</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1"># 这里必须设值 __dict__ 属性，如果使用内置的 setattr 会再次调用 __set__ 无限递归</span>
             <span class="n">instance</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be &gt; 0'</span><span class="p">)</span>
             
 
 <span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span> <span class="c1"># 托管类</span>
@@ -1135,24 +1135,24 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-53-c62e2ab4903b></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>truffle <span class="ansi-blue-fg">=</span> LineItem<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'White truffle'</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">100</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 代码正常运行，禁止 0 美元</span>
+<span class="ansi-green-fg">&lt;ipython-input-53-c62e2ab4903b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>truffle <span class="ansi-blue-fg">=</span> LineItem<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'White truffle'</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">100</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 代码正常运行，禁止 0 美元</span>
 
-<span class="ansi-green-fg"><ipython-input-50-731d09711b80></span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, description, weight, price)</span>
+<span class="ansi-green-fg">&lt;ipython-input-50-731d09711b80&gt;</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, description, weight, price)</span>
 <span class="ansi-green-intense-fg ansi-bold">     22</span>         self<span class="ansi-blue-fg">.</span>description <span class="ansi-blue-fg">=</span> description
 <span class="ansi-green-intense-fg ansi-bold">     23</span>         self<span class="ansi-blue-fg">.</span>weight <span class="ansi-blue-fg">=</span> weight
-<span class="ansi-green-fg">---> 24</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>price <span class="ansi-blue-fg">=</span> price
+<span class="ansi-green-fg">---&gt; 24</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>price <span class="ansi-blue-fg">=</span> price
 <span class="ansi-green-intense-fg ansi-bold">     25</span> 
 <span class="ansi-green-intense-fg ansi-bold">     26</span>     <span class="ansi-green-fg">def</span> subtotal<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-green-fg"><ipython-input-50-731d09711b80></span> in <span class="ansi-cyan-fg">__set__</span><span class="ansi-blue-fg">(self, instance, value)</span>
+<span class="ansi-green-fg">&lt;ipython-input-50-731d09711b80&gt;</span> in <span class="ansi-cyan-fg">__set__</span><span class="ansi-blue-fg">(self, instance, value)</span>
 <span class="ansi-green-intense-fg ansi-bold">     12</span>             instance<span class="ansi-blue-fg">.</span>__dict__<span class="ansi-blue-fg">[</span>self<span class="ansi-blue-fg">.</span>storage_name<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> value
 <span class="ansi-green-intense-fg ansi-bold">     13</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---> 14</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'value must be > 0'</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 14</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'value must be &gt; 0'</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     15</span> 
 <span class="ansi-green-intense-fg ansi-bold">     16</span> 
 
-<span class="ansi-red-fg">ValueError</span>: value must be > 0</pre>
+<span class="ansi-red-fg">ValueError</span>: value must be &gt; 0</pre>
 </div>
 </div>
 </div>
@@ -1201,10 +1201,10 @@ h6:hover .anchor-link {
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span><span class="p">)</span> <span class="c1"># 使用内置的 getattr 从 instance 获取值</span>
     
     <span class="k">def</span> <span class="nf">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span> 
-        <span class="k">if</span> <span class="n">value</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="c1"># 使用内置的 setattr 向 instance 设置值</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be &gt; 0'</span><span class="p">)</span>
             
 
 <span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span> <span class="c1"># 托管类</span>
@@ -1301,13 +1301,13 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-57-b9c12b383de2></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>LineItem<span class="ansi-blue-fg">.</span>weight
+<span class="ansi-green-fg">&lt;ipython-input-57-b9c12b383de2&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>LineItem<span class="ansi-blue-fg">.</span>weight
 
-<span class="ansi-green-fg"><ipython-input-54-b54aeb0c29d6></span> in <span class="ansi-cyan-fg">__get__</span><span class="ansi-blue-fg">(self, instance, owner)</span>
+<span class="ansi-green-fg">&lt;ipython-input-54-b54aeb0c29d6&gt;</span> in <span class="ansi-cyan-fg">__get__</span><span class="ansi-blue-fg">(self, instance, owner)</span>
 <span class="ansi-green-intense-fg ansi-bold">     12</span>     <span class="ansi-red-fg"># 稍后说明 owner 参数</span>
 <span class="ansi-green-intense-fg ansi-bold">     13</span>     <span class="ansi-green-fg">def</span> __get__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> instance<span class="ansi-blue-fg">,</span> owner<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---> 14</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> getattr<span class="ansi-blue-fg">(</span>instance<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>storage_name<span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 使用内置的 getattr 从 instance 获取值</span>
+<span class="ansi-green-fg">---&gt; 14</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> getattr<span class="ansi-blue-fg">(</span>instance<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>storage_name<span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 使用内置的 getattr 从 instance 获取值</span>
 <span class="ansi-green-intense-fg ansi-bold">     15</span> 
 <span class="ansi-green-intense-fg ansi-bold">     16</span>     <span class="ansi-green-fg">def</span> __set__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> instance<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
@@ -1349,10 +1349,10 @@ has no such attribute 更好。最好能给出缺少的属性名，但是在这�
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span><span class="p">)</span> 
     
     <span class="k">def</span> <span class="nf">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span> 
-        <span class="k">if</span> <span class="n">value</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be &gt; 0'</span><span class="p">)</span>
             
             
 <span class="k">class</span> <span class="nc">LineItem</span><span class="p">:</span> <span class="c1"># 托管类</span>
@@ -1387,7 +1387,7 @@ has no such attribute 更好。最好能给出缺少的属性名，但是在这�
 <div class="output_area">
 <div class="prompt output_prompt">Out[65]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><__main__.Quantity at 0x7fb258ee89e8></pre>
+<pre>&lt;__main__.Quantity at 0x7fb258ee89e8&gt;</pre>
 </div>
 </div>
 </div>
@@ -1448,10 +1448,10 @@ class LineItem:
         <span class="k">return</span> <span class="n">instance</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">storage_name</span><span class="p">]</span>
     
     <span class="k">def</span> <span class="nf">qty_setter</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">instance</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">storage_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be &gt; 0'</span><span class="p">)</span>
             
     <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">qty_getter</span><span class="p">,</span> <span class="n">qty_setter</span><span class="p">)</span>
 </pre></div>
@@ -1515,8 +1515,8 @@ class LineItem:
     
     <span class="c1"># 只需要根据不同的验证规则实现 validate 方法即可</span>
     <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="o"><=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be > 0'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'value must be &gt; 0'</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">value</span>
     
 
@@ -1587,27 +1587,27 @@ class LineItem:
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-72-30e142068013></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>coconuts <span class="ansi-blue-fg">=</span> LineItem<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">' '</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">20</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">17.95</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">&lt;ipython-input-72-30e142068013&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>coconuts <span class="ansi-blue-fg">=</span> LineItem<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">' '</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">20</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">17.95</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg"><ipython-input-70-34986f272045></span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, description, weight, price)</span>
+<span class="ansi-green-fg">&lt;ipython-input-70-34986f272045&gt;</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, description, weight, price)</span>
 <span class="ansi-green-intense-fg ansi-bold">     60</span> 
 <span class="ansi-green-intense-fg ansi-bold">     61</span>     <span class="ansi-green-fg">def</span> __init__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> description<span class="ansi-blue-fg">,</span> weight<span class="ansi-blue-fg">,</span> price<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---> 62</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>description <span class="ansi-blue-fg">=</span> description
+<span class="ansi-green-fg">---&gt; 62</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>description <span class="ansi-blue-fg">=</span> description
 <span class="ansi-green-intense-fg ansi-bold">     63</span>         self<span class="ansi-blue-fg">.</span>weight <span class="ansi-blue-fg">=</span> weight
 <span class="ansi-green-intense-fg ansi-bold">     64</span>         self<span class="ansi-blue-fg">.</span>price <span class="ansi-blue-fg">=</span> price
 
-<span class="ansi-green-fg"><ipython-input-70-34986f272045></span> in <span class="ansi-cyan-fg">__set__</span><span class="ansi-blue-fg">(self, instance, value)</span>
+<span class="ansi-green-fg">&lt;ipython-input-70-34986f272045&gt;</span> in <span class="ansi-cyan-fg">__set__</span><span class="ansi-blue-fg">(self, instance, value)</span>
 <span class="ansi-green-intense-fg ansi-bold">     25</span>     <span class="ansi-green-fg">def</span> __set__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> instance<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">     26</span>         <span class="ansi-red-fg"># __set__ 方法把验证委托给 validate 方法</span>
-<span class="ansi-green-fg">---> 27</span><span class="ansi-red-fg">         </span>value <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>validate<span class="ansi-blue-fg">(</span>instance<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 27</span><span class="ansi-red-fg">         </span>value <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>validate<span class="ansi-blue-fg">(</span>instance<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     28</span>         <span class="ansi-red-fg">#返回的 value 值返回给超类的 __set__ 方法，存储值</span>
 <span class="ansi-green-intense-fg ansi-bold">     29</span>         super<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__set__<span class="ansi-blue-fg">(</span>instance<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg"><ipython-input-70-34986f272045></span> in <span class="ansi-cyan-fg">validate</span><span class="ansi-blue-fg">(self, instance, value)</span>
+<span class="ansi-green-fg">&lt;ipython-input-70-34986f272045&gt;</span> in <span class="ansi-cyan-fg">validate</span><span class="ansi-blue-fg">(self, instance, value)</span>
 <span class="ansi-green-intense-fg ansi-bold">     50</span>         value <span class="ansi-blue-fg">=</span> value<span class="ansi-blue-fg">.</span>strip<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     51</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>value<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---> 52</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'value cannot be empty or blank'</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 52</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'value cannot be empty or blank'</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">     53</span>         <span class="ansi-green-fg">return</span> value
 <span class="ansi-green-intense-fg ansi-bold">     54</span> 
 
@@ -1642,15 +1642,15 @@ class LineItem:
 <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
     <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">'<class &lt; span><span class="si">{}</span><span class="s1">>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'&lt;class </span><span class="si">{}</span><span class="s1">&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
     <span class="k">elif</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="nb">int</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">'<</span><span class="si">{}</span><span class="s1"> object>'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls_name</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s1">'&lt;</span><span class="si">{}</span><span class="s1"> object&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls_name</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
     
 <span class="k">def</span> <span class="nf">print_args</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="n">pseudo_args</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> </span><span class="si">{}</span><span class="s1">.__</span><span class="si">{}</span><span class="s1">__(</span><span class="si">{}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls_name</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">name</span><span class="p">,</span> <span class="n">pseudo_args</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; </span><span class="si">{}</span><span class="s1">.__</span><span class="si">{}</span><span class="s1">__(</span><span class="si">{}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls_name</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">name</span><span class="p">,</span> <span class="n">pseudo_args</span><span class="p">))</span>
   
 
 <span class="c1">### 对这个示例重要的类</span>
@@ -1684,7 +1684,7 @@ class LineItem:
     <span class="n">non_over</span> <span class="o">=</span> <span class="n">NonOverriding</span><span class="p">()</span>
     
     <span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'-> Managed.spam(</span><span class="si">{}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">display</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; Managed.spam(</span><span class="si">{}</span><span class="s1">)'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">display</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -1714,7 +1714,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Overriding.__get__(<overriding object>, <managed object>, <class managed>)
+<pre>-&gt; Overriding.__get__(&lt;Overriding object&gt;, &lt;Managed object&gt;, &lt;class Managed&gt;)
 </pre>
 </div>
 </div>
@@ -1736,7 +1736,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Overriding.__get__(<overriding object>, None, <class managed>)
+<pre>-&gt; Overriding.__get__(&lt;Overriding object&gt;, None, &lt;class Managed&gt;)
 </pre>
 </div>
 </div>
@@ -1758,7 +1758,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Overriding.__set__(<overriding object>, <managed object>, 7)
+<pre>-&gt; Overriding.__set__(&lt;Overriding object&gt;, &lt;Managed object&gt;, 7)
 </pre>
 </div>
 </div>
@@ -1780,7 +1780,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Overriding.__get__(<overriding object>, <managed object>, <class managed>)
+<pre>-&gt; Overriding.__get__(&lt;Overriding object&gt;, &lt;Managed object&gt;, &lt;class Managed&gt;)
 </pre>
 </div>
 </div>
@@ -1824,7 +1824,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Overriding.__get__(<overriding object>, <managed object>, <class managed>)
+<pre>-&gt; Overriding.__get__(&lt;Overriding object&gt;, &lt;Managed object&gt;, &lt;class Managed&gt;)
 </pre>
 </div>
 </div>
@@ -1854,7 +1854,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><__main__.OverridingNoGet at 0x7f6f14686518></pre>
+<pre>&lt;__main__.OverridingNoGet at 0x7f6f14686518&gt;</pre>
 </div>
 </div>
 </div>
@@ -1875,7 +1875,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><__main__.OverridingNoGet at 0x7f6f14686518></pre>
+<pre>&lt;__main__.OverridingNoGet at 0x7f6f14686518&gt;</pre>
 </div>
 </div>
 </div>
@@ -1896,7 +1896,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> OverridingNoGet.__set__(<overridingnoget object>, <managed object>, 7)
+<pre>-&gt; OverridingNoGet.__set__(&lt;OverridingNoGet object&gt;, &lt;Managed object&gt;, 7)
 </pre>
 </div>
 </div>
@@ -1918,7 +1918,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt output_prompt">Out[11]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><__main__.OverridingNoGet at 0x7f6f14686518></pre>
+<pre>&lt;__main__.OverridingNoGet at 0x7f6f14686518&gt;</pre>
 </div>
 </div>
 </div>
@@ -1961,7 +1961,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> OverridingNoGet.__set__(<overridingnoget object>, <managed object>, 7)
+<pre>-&gt; OverridingNoGet.__set__(&lt;OverridingNoGet object&gt;, &lt;Managed object&gt;, 7)
 </pre>
 </div>
 </div>
@@ -2013,7 +2013,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> NonOverriding.__get__(<nonoverriding object>, <managed object>, <class managed>)
+<pre>-&gt; NonOverriding.__get__(&lt;NonOverriding object&gt;, &lt;Managed object&gt;, &lt;class Managed&gt;)
 </pre>
 </div>
 </div>
@@ -2057,7 +2057,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> NonOverriding.__get__(<nonoverriding object>, None, <class managed>)
+<pre>-&gt; NonOverriding.__get__(&lt;NonOverriding object&gt;, None, &lt;class Managed&gt;)
 </pre>
 </div>
 </div>
@@ -2080,7 +2080,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> NonOverriding.__get__(<nonoverriding object>, <managed object>, <class managed>)
+<pre>-&gt; NonOverriding.__get__(&lt;NonOverriding object&gt;, &lt;Managed object&gt;, &lt;class Managed&gt;)
 </pre>
 </div>
 </div>
@@ -2147,7 +2147,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt output_prompt">Out[22]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><bound method managed.spam of &lt;__main__.managed object at 0x7f6f1454d6d8>></pre>
+<pre>&lt;bound method Managed.spam of &lt;__main__.Managed object at 0x7f6f1454d6d8&gt;&gt;</pre>
 </div>
 </div>
 </div>
@@ -2168,7 +2168,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt output_prompt">Out[23]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><function __main__.managed.spam></pre>
+<pre>&lt;function __main__.Managed.spam&gt;</pre>
 </div>
 </div>
 </div>
@@ -2345,7 +2345,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt output_prompt">Out[30]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><bound method text.reverse of text(&#x27;forward&#x27;)></pre>
+<pre>&lt;bound method Text.reverse of Text('forward')&gt;</pre>
 </div>
 </div>
 </div>
@@ -2366,7 +2366,7 @@ class LineItem:
 <div class="output_area">
 <div class="prompt output_prompt">Out[31]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><bound method text.reverse of text(&#x27;forward&#x27;)></pre>
+<pre>&lt;bound method Text.reverse of Text('forward')&gt;</pre>
 </div>
 </div>
 </div>
@@ -2435,17 +2435,6 @@ class LineItem:
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -2506,6 +2495,7 @@ class LineItem:
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

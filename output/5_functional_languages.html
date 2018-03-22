@@ -1041,7 +1041,7 @@ h6:hover .anchor-link {
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">'''return n!'''</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">factorial</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
@@ -1146,7 +1146,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><map at 0x7f6ca05ceac8></pre>
+<pre>&lt;map at 0x7f6ca05ceac8&gt;</pre>
 </div>
 </div>
 </div>
@@ -1507,7 +1507,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[18]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>(<function abs>, str, 13)</pre>
+<pre>(&lt;function abs&gt;, str, 13)</pre>
 </div>
 </div>
 </div>
@@ -1777,10 +1777,10 @@ h6:hover .anchor-link {
     <span class="k">else</span><span class="p">:</span>
         <span class="n">attr_str</span> <span class="o">=</span> <span class="s1">''</span>
     <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'<</span><span class="si">%s%s</span><span class="s1">></span><span class="si">%s</span><span class="s1"><!--</span--><span class="si">%s</span><span class="s1">>'</span> <span class="o">%</span> 
+        <span class="k">return</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'&lt;</span><span class="si">%s%s</span><span class="s1">&gt;</span><span class="si">%s</span><span class="s1">&lt;/</span><span class="si">%s</span><span class="s1">&gt;'</span> <span class="o">%</span> 
                          <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">attr_str</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">content</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">'<</span><span class="si">%s%s</span><span class="s1"> />'</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">attr_str</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'&lt;</span><span class="si">%s%s</span><span class="s1"> /&gt;'</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">attr_str</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1792,7 +1792,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tag</span><span class="p">(</span><span class="s1">'br'</span><span class="p">)</span>
-<span class="c1">#'<br />'</span>
+<span class="c1">#'&lt;br /&gt;'</span>
 </pre></div>
 </div>
 </div>
@@ -1802,7 +1802,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[27]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<br />'</pre>
+<pre>'&lt;br /&gt;'</pre>
 </div>
 </div>
 </div>
@@ -1814,8 +1814,8 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">(</span><span class="s1">'p'</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'world'</span><span class="p">))</span>
-<span class="c1">#<p>hello</p></span>
-<span class="c1">#<p>world</p></span>
+<span class="c1">#&lt;p&gt;hello&lt;/p&gt;</span>
+<span class="c1">#&lt;p&gt;world&lt;/p&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -1825,8 +1825,8 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><p>hello</p>
-<p>world</p>
+<pre>&lt;p&gt;hello&lt;/p&gt;
+&lt;p&gt;world&lt;/p&gt;
 </pre>
 </div>
 </div>
@@ -1839,7 +1839,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tag</span><span class="p">(</span><span class="s1">'p'</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">33</span><span class="p">)</span> <span class="c1"># tag 函数签名中没有明确指定名称的关键字会被 **attrs 捕获，存入一个字典</span>
-<span class="c1">#'<p id="33">hello</p>'</span>
+<span class="c1">#'&lt;p id="33"&gt;hello&lt;/p&gt;'</span>
 </pre></div>
 </div>
 </div>
@@ -1849,7 +1849,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[29]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<p id="33">hello</p>'</pre>
+<pre>'&lt;p id="33"&gt;hello&lt;/p&gt;'</pre>
 </div>
 </div>
 </div>
@@ -1870,8 +1870,8 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><p class="sidebar">hello</p>
-<p class="sidebar">world</p>
+<pre>&lt;p class="sidebar"&gt;hello&lt;/p&gt;
+&lt;p class="sidebar"&gt;world&lt;/p&gt;
 </pre>
 </div>
 </div>
@@ -1884,7 +1884,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">tag</span><span class="p">(</span><span class="n">content</span> <span class="o">=</span> <span class="s1">'testing'</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">"img"</span><span class="p">)</span> <span class="c1"># 调用 tag 时，即使第一个定位参数也能作为关键字参数传入</span>
-<span class="c1">#'<img content="testing" />'</span>
+<span class="c1">#'&lt;img content="testing" /&gt;'</span>
 </pre></div>
 </div>
 </div>
@@ -1894,7 +1894,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[31]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<img content="testing" />'</pre>
+<pre>'&lt;img content="testing" /&gt;'</pre>
 </div>
 </div>
 </div>
@@ -1908,7 +1908,7 @@ h6:hover .anchor-link {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">my_tag</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'img'</span><span class="p">,</span> <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'Sunset Boulevard'</span><span class="p">,</span>
            <span class="s1">'src'</span><span class="p">:</span> <span class="s1">'sunset.jpg'</span><span class="p">,</span> <span class="s1">'cls'</span><span class="p">:</span> <span class="s1">'framed'</span><span class="p">}</span>
 <span class="n">tag</span><span class="p">(</span><span class="o">**</span><span class="n">my_tag</span><span class="p">)</span> <span class="c1">#字典中所有元素作为单个参数传入，同名键会自动对应的具名参数上，剩下的被 **attrs 捕获</span>
-<span class="c1">#'<img class="framed" src="sunset.jpg" title="Sunset Boulevard" />'</span>
+<span class="c1">#'&lt;img class="framed" src="sunset.jpg" title="Sunset Boulevard" /&gt;'</span>
 </pre></div>
 </div>
 </div>
@@ -1918,7 +1918,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[32]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'<img class="framed" src="sunset.jpg" title="Sunset Boulevard" />'</pre>
+<pre>'&lt;img class="framed" src="sunset.jpg" title="Sunset Boulevard" /&gt;'</pre>
 </div>
 </div>
 </div>
@@ -1995,700 +1995,700 @@ Server: WSGIServer/0.2 CPython/3.5.3
 Content-Type: text/html; charset=UTF-8
 Content-Length: 103
 
-<html>
-<head><title>Missing parameter
-<body>Missing form variable person
-
-但是如果访问 http://localhost:8080/?person=Kaka 响应就会变成 'Hello Kaka!'
-kaka@kaka-ubuntu:~/blog/content/fluent_python$ curl -i http://localhost:8080/?person=Kaka
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Missing parameter&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;Missing form variable person&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>但是如果访问 <code>http://localhost:8080/?person=Kaka</code> 响应就会变成 'Hello Kaka!'</p>
+<pre><code>kaka@kaka-ubuntu:~/blog/content/fluent_python$ curl -i http://localhost:8080/?person=Kaka
 HTTP/1.0 200 OK
 Date: Tue, 30 May 2017 06:28:40 GMT
 Server: WSGIServer/0.2 CPython/3.5.3
 Content-Type: text/html; charset=UTF-8
 Content-Length: 11
 
-Hello Kaka!
-Bobo 怎么知道函数需要哪个参数呢？又怎么知道参数有没有默认值呢？
-函数对象有一个 __default__ 属性，它的值是一个元组，里面保存着定位参数和关键字参数的默认值。仅限关键字参数的默认值在 __kwdefaults__ 属性中。然而，参数的名称在 __code__ 属性中，他的值是一个 code 对象的引用，自身也有很多属性。
-为了说明这些属性的用途，下面在 clip.py 模块中定义 clip 函数，如下所示，然后审查它
-
-
-
-
-
-In [35]:
-
-
-def clip(text, max_len = 80):
-    '''
-    在 max_len 前面或后面的第一个空格处截断文本
-    '''
-    end = None
-    if len(text) > max_len:
-        # rfind 方法返回被查找字符串最后一次出现的索引，没有出现返回 -1
-        space_before = text.rfind(' ', 0, max_len)
-        if space_before >= 0:
-            end = space_before
-        else:
-            space_after = text.rfind(' ', max_len)
-            if space_after >= 0:
-                end = space_after
+Hello Kaka!</code></pre>
+<p>Bobo 怎么知道函数需要哪个参数呢？又怎么知道参数有没有默认值呢？</p>
+<p>函数对象有一个 <code>__default__</code> 属性，它的值是一个元组，里面保存着定位参数和关键字参数的默认值。仅限关键字参数的默认值在 <code>__kwdefaults__</code> 属性中。然而，参数的名称在 <code>__code__</code> 属性中，他的值是一个 code 对象的引用，自身也有很多属性。</p>
+<p>为了说明这些属性的用途，下面在 clip.py 模块中定义 clip 函数，如下所示，然后审查它</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [35]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clip</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_len</span> <span class="o">=</span> <span class="mi">80</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    在 max_len 前面或后面的第一个空格处截断文本</span>
+<span class="sd">    '''</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_len</span><span class="p">:</span>
+        <span class="c1"># rfind 方法返回被查找字符串最后一次出现的索引，没有出现返回 -1</span>
+        <span class="n">space_before</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">space_before</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">space_before</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">space_after</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">space_after</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">space_after</span>
     
-    if end is None: #没找到空格
-        end = len(text)
-    return text[:end].rstrip()
-
-
-
-
-
-
-
-
-
-我们看看这个函数的 __defaults__、 __code__.co_varnames、 __code__.co_argcount 的值
-
-
-
-
-
-In [36]:
-
-
-clip.__defaults__
-
-
-
-
-
-
-
-Out[36]:
-
-(80,)
-
-
-
-
-
-
-
-In [37]:
-
-
-clip.__code__
-
-
-
-
-
-
-
-Out[37]:
-
-", line 1>
-
-
-
-
-
-
-
-In [38]:
-
-
-clip.__code__.co_varnames
-
-
-
-
-
-
-
-Out[38]:
-
-('text', 'max_len', 'end', 'space_before', 'space_after')
-
-
-
-
-
-
-
-In [39]:
-
-
-clip.__code__.co_argcount
-
-
-
-
-
-
-
-Out[39]:
-
-2
-
-
-
-
-
-
-
-
-
-可以看出，这种显示信息方式不是很方便，参数名称在 clip.__code__.co_varnames中，不过里面还有函数定义体中的局部变量，因此，函数名称是前 N 个字符串，N 的值由 clip.__code__.co_argcount 决定。顺便说一下，这里不包含前缀为 * 或 ** 的变长参数。参数的默认值只能通过它们在 __defaults__ 元组中的位置确定，因此要从后向前扫描才能把参数和默认值对应。在这里有两个参数，只有一个默认值 80，它属于最后一个参数 max_len，这有违常理
-幸好，我们有更好的方式 -- 使用 inspect 模块
-
-
-
-
-
-In [40]:
-
-
-from inspect import signature
-sig = signature(clip)
-sig
-
-
-
-
-
-
-
-Out[40]:
-
-
-
-
-
-
-
-
-
-In [41]:
-
-
-str(sig)
-
-
-
-
-
-
-
-Out[41]:
-
-'(text, max_len=80)'
-
-
-
-
-
-
-
-In [42]:
-
-
-for name, param in sig.parameters.items():
-    print(param.kind, ':', name, '=', param.default)
-
-
-
-
-
-
-
-
-
-POSITIONAL_OR_KEYWORD : text = 
+    <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="c1">#没找到空格</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span><span class="p">[:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>我们看看这个函数的 <code>__defaults__</code>、 <code>__code__.co_varnames</code>、 <code>__code__.co_argcount</code> 的值</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [36]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clip</span><span class="o">.</span><span class="vm">__defaults__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[36]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(80,)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [37]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clip</span><span class="o">.</span><span class="vm">__code__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[37]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;code object clip at 0x7f6ca05f49c0, file "&lt;ipython-input-35-e44d94c8fb30&gt;", line 1&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [38]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clip</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[38]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('text', 'max_len', 'end', 'space_before', 'space_after')</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [39]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clip</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_argcount</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[39]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>可以看出，这种显示信息方式不是很方便，参数名称在 <code>clip.__code__.co_varnames</code>中，不过里面还有函数定义体中的局部变量，因此，函数名称是前 N 个字符串，N 的值由 <code>clip.__code__.co_argcount</code> 决定。顺便说一下，这里不包含前缀为 <code>*</code> 或 <code>**</code> 的变长参数。参数的默认值只能通过它们在 <code>__defaults__</code> 元组中的位置确定，因此要从后向前扫描才能把参数和默认值对应。在这里有两个参数，只有一个默认值 80，它属于最后一个参数 max_len，这有违常理</p>
+<p>幸好，我们有更好的方式 -- 使用 inspect 模块</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [40]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">signature</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">signature</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+<span class="n">sig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[40]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;Signature (text, max_len=80)&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [41]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[41]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'(text, max_len=80)'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [42]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">kind</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>POSITIONAL_OR_KEYWORD : text = &lt;class 'inspect._empty'&gt;
 POSITIONAL_OR_KEYWORD : max_len = 80
-
-
-
-
-
-
-
-
-
-
-这样看起来就好多了， inspect.signature 函数返回一个 inspect.Signature 对象，它有一个 parameters 属性，这是一个有序映射，把参数名和 inspect.Parameter  对象对应起来。各个 Parameter 属性也有自己的属性，例如 name, default 和 kind。特殊的 inspect.empty 表示没有默认值，考虑到 None 是有效的默认值，这么做是合理的。
-kind 属性的值是 _ParameterKind 类中的 5 个值之一，列举如下：
-
-POSITIONAL_OR_KEYWORD: 可以通过定位参数和关键字参数传入的形参（多数 Python 函数的参数属于此类）
-VAR_POSITIONAL: 定位参数元组
-KEYWORD_ONLY: 关键字参数字典
-KEYWORD_ONLY: 仅限关键字参数（Python 3 新增）
-POSITIONAL_ONLY: 仅限定位参数，目前 Python 声明函数的语法不支持，但是有些使用 C 语言实现且不接受关键字参数的函数（如 divmod）支持
-
-除了 name、default 和 kind，inspect.Parameter 对象还有一个 annotation（注解）属性，它的值通常是 inspect._empty，但是可能包含 Python 3 新的注解语法提供的函数签名元数据，会在后面讨论
-inspect.Signature 对象有一个 bind 方法，它可以把任意个参数绑定到签名函数形参上，所用的规则与实参到形参的匹配方式一样。框架可以使用这个方法在真正调用函数前验证参数。
-下面是 把上面 tag 函数的签名绑定到一个参数字典上
-
-
-
-
-
-In [43]:
-
-
-import inspect
-sig = inspect.signature(tag) #  获取 tag 函数签名
-my_tag = {'name': 'img', 'title': 'Sunset Boulevard', 
-          'src': 'sunset.jpg', 'cls': 'framed'}
-bound_args = sig.bind(**my_tag) # 把一个字典传给 bind 方法
-bound_args # 得到一个 BoundArguments 对象
-
-
-
-
-
-
-
-Out[43]:
-
-
-
-
-
-
-
-
-
-In [44]:
-
-
-for name, value in bound_args.arguments.items(): #迭代 bound_args.arguments 中的元素，显示参数的名称和值
-    print(name, '=', value)
-
-
-
-
-
-
-
-
-
-name = img
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这样看起来就好多了， inspect.signature 函数返回一个 inspect.Signature 对象，它有一个 parameters 属性，这是一个有序映射，把参数名和 inspect.Parameter  对象对应起来。各个 Parameter 属性也有自己的属性，例如 name, default 和 kind。特殊的 inspect.empty 表示没有默认值，考虑到 None 是有效的默认值，这么做是合理的。</p>
+<p>kind 属性的值是 <code>_ParameterKind</code> 类中的 5 个值之一，列举如下：</p>
+<ul>
+<li>POSITIONAL_OR_KEYWORD: 可以通过定位参数和关键字参数传入的形参（多数 Python 函数的参数属于此类）</li>
+<li>VAR_POSITIONAL: 定位参数元组</li>
+<li>KEYWORD_ONLY: 关键字参数字典</li>
+<li>KEYWORD_ONLY: 仅限关键字参数（Python 3 新增）</li>
+<li>POSITIONAL_ONLY: 仅限定位参数，目前 Python 声明函数的语法不支持，但是有些使用 C 语言实现且不接受关键字参数的函数（如 divmod）支持</li>
+</ul>
+<p>除了 name、default 和 kind，inspect.Parameter 对象还有一个 annotation（注解）属性，它的值通常是 <code>inspect._empty</code>，但是可能包含 Python 3 新的注解语法提供的函数签名元数据，会在后面讨论</p>
+<p>inspect.Signature 对象有一个 bind 方法，它可以把任意个参数绑定到签名函数形参上，所用的规则与实参到形参的匹配方式一样。框架可以使用这个方法在真正调用函数前验证参数。</p>
+<p>下面是 把上面 tag 函数的签名绑定到一个参数字典上</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [43]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span> <span class="c1">#  获取 tag 函数签名</span>
+<span class="n">my_tag</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'img'</span><span class="p">,</span> <span class="s1">'title'</span><span class="p">:</span> <span class="s1">'Sunset Boulevard'</span><span class="p">,</span> 
+          <span class="s1">'src'</span><span class="p">:</span> <span class="s1">'sunset.jpg'</span><span class="p">,</span> <span class="s1">'cls'</span><span class="p">:</span> <span class="s1">'framed'</span><span class="p">}</span>
+<span class="n">bound_args</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="o">**</span><span class="n">my_tag</span><span class="p">)</span> <span class="c1"># 把一个字典传给 bind 方法</span>
+<span class="n">bound_args</span> <span class="c1"># 得到一个 BoundArguments 对象</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[43]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;BoundArguments (name='img', cls='framed', attrs={'src': 'sunset.jpg', 'title': 'Sunset Boulevard'})&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [44]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bound_args</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="c1">#迭代 bound_args.arguments 中的元素，显示参数的名称和值</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>name = img
 cls = framed
 attrs = {'src': 'sunset.jpg', 'title': 'Sunset Boulevard'}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [45]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">del</span> <span class="n">my_tag</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span>
+<span class="n">bound_args</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="o">**</span><span class="n">my_tag</span><span class="p">)</span> <span class="c1"># 报错，缺少 name 参数</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-45-b9f4a96c6b40&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">del</span> my_tag<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">'name'</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>bound_args <span class="ansi-blue-fg">=</span> sig<span class="ansi-blue-fg">.</span>bind<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">**</span>my_tag<span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 报错，缺少 name 参数</span>
 
+<span class="ansi-green-fg">/home/kaka/anaconda2/envs/py35/lib/python3.5/inspect.py</span> in <span class="ansi-cyan-fg">bind</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2918</span>         <span class="ansi-green-fg">if</span> the passed arguments can <span class="ansi-green-fg">not</span> be bound<span class="ansi-blue-fg">.</span>
+<span class="ansi-green-intense-fg ansi-bold">   2919</span>         """
+<span class="ansi-green-fg">-&gt; 2920</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>_bind<span class="ansi-blue-fg">(</span>args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2921</span> 
+<span class="ansi-green-intense-fg ansi-bold">   2922</span>     <span class="ansi-green-fg">def</span> bind_partial<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
+<span class="ansi-green-fg">/home/kaka/anaconda2/envs/py35/lib/python3.5/inspect.py</span> in <span class="ansi-cyan-fg">_bind</span><span class="ansi-blue-fg">(self, args, kwargs, partial)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2833</span>                             msg <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">'missing a required argument: {arg!r}'</span>
+<span class="ansi-green-intense-fg ansi-bold">   2834</span>                             msg <span class="ansi-blue-fg">=</span> msg<span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>arg<span class="ansi-blue-fg">=</span>param<span class="ansi-blue-fg">.</span>name<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-&gt; 2835</span><span class="ansi-red-fg">                             </span><span class="ansi-green-fg">raise</span> TypeError<span class="ansi-blue-fg">(</span>msg<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">from</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-green-intense-fg ansi-bold">   2836</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   2837</span>                 <span class="ansi-red-fg"># We have a positional argument to process</span>
 
-
-
-
-
-
-In [45]:
-
-
-del my_tag['name']
-bound_args = sig.bind(**my_tag) # 报错，缺少 name 参数
-
-
-
-
-
-
-
-
-
-
----------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
- in ()
-      1 del my_tag['name']
-----> 2 bound_args = sig.bind(**my_tag) # 报错，缺少 name 参数
-
-/home/kaka/anaconda2/envs/py35/lib/python3.5/inspect.py in bind(*args, **kwargs)
-   2918         if the passed arguments can not be bound.
-   2919         """
--> 2920         return args[0]._bind(args[1:], kwargs)
-   2921 
-   2922     def bind_partial(*args, **kwargs):
-
-/home/kaka/anaconda2/envs/py35/lib/python3.5/inspect.py in _bind(self, args, kwargs, partial)
-   2833                             msg = 'missing a required argument: {arg!r}'
-   2834                             msg = msg.format(arg=param.name)
--> 2835                             raise TypeError(msg) from None
-   2836             else:
-   2837                 # We have a positional argument to process
-
-TypeError: missing a required argument: 'name'
-
-
-
-
-
-
-
-
-
-这个例子在 inspect 模块帮助下，展示了 Python 数据模型把实参绑定给函数调用中形参机制，这与解释器使用的机制相同
-函数注解¶Python 3 提供了一种语法，用于为函数声明中的参数和返回值附加元数据，下面例子是 clip 函数添加注解的版本，二者唯一区别在第一行
-
-
-
-
-
-In [46]:
-
-
-def clip(text:str, max_len: 'int > 0' = 80) -> str:
-    '''
-    在 max_len 前面或后面的第一个空格处截断文本
-    '''
-    end = None
-    if len(text) > max_len:
-        # rfind 方法返回被查找字符串最后一次出现的索引，没有出现返回 -1
-        space_before = text.rfind(' ', 0, max_len)
-        if space_before >= 0:
-            end = space_before
-        else:
-            space_after = text.rfind(' ', max_len)
-            if space_after >= 0:
-                end = space_after
+<span class="ansi-red-fg">TypeError</span>: missing a required argument: 'name'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这个例子在 inspect 模块帮助下，展示了 Python 数据模型把实参绑定给函数调用中形参机制，这与解释器使用的机制相同</p>
+<h2 id="函数注解">函数注解<a class="anchor-link" href="#函数注解">¶</a></h2><p>Python 3 提供了一种语法，用于为函数声明中的参数和返回值附加元数据，下面例子是 clip 函数添加注解的版本，二者唯一区别在第一行</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [46]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clip</span><span class="p">(</span><span class="n">text</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">max_len</span><span class="p">:</span> <span class="s1">'int &gt; 0'</span> <span class="o">=</span> <span class="mi">80</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">'''</span>
+<span class="sd">    在 max_len 前面或后面的第一个空格处截断文本</span>
+<span class="sd">    '''</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_len</span><span class="p">:</span>
+        <span class="c1"># rfind 方法返回被查找字符串最后一次出现的索引，没有出现返回 -1</span>
+        <span class="n">space_before</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">space_before</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">space_before</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">space_after</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">space_after</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="n">space_after</span>
     
-    if end is None: #没找到空格
-        end = len(text)
-    return text[:end].rstrip()
-
-
-
-
-
-
-
-
-
-在函数声明中各个参数可以在 : 后面增加注解表达式。如果参数有默认值，注解放在参数名和 = 之间。如果想注解返回值，在 ) 和函数末尾添加 -> 和一个表达式。那个表达式可以是任何类型。注解中最常用的类型是类（如 str 或 int）和字符串（如 'int > 0'）
-注解不会做任何处理，只是存储在函数的 __annotations__ 属性（一个字典）中：
-
-
-
-
-
-In [47]:
-
-
-clip.__annotations__
-
-
-
-
-
-
-
-Out[47]:
-
-{'max_len': 'int > 0', 'return': str, 'text': str}
-
-
-
-
-
-
-
-
-
-return 键保存的是返回值注解。
-Python 所做的唯一的是就是把注解存到 __annotations__ 属性中，仅此而已，不做任何检查。换句话说，注解对于 Python 解释器没有任何意义。注解只是元数据，可以供 IDE、框架和装饰器等工具使用。
-下面是从 inspect.signature() 函数提取注解
-
-
-
-
-
-In [48]:
-
-
-from inspect import signature
-sig = signature(clip)
-sig.return_annotation
-
-
-
-
-
-
-
-Out[48]:
-
-str
-
-
-
-
-
-
-
-In [49]:
-
-
-for param in sig.parameters.values():
-    note = repr(param.annotation).ljust(13) # ljust 作用是返回 13 个字符，靠左对其，不够用空格补
-    print(note, ':', param.name, '=', param.default)
-
-
-
-
-
-
-
-
-
- : text = 
-'int > 0'     : max_len = 80
-
-
-
-
-
-
-
-
-
-
-signature 函数返回一个 Signature 对象，它有一个 return_annotation 属性和一个 parameters 属性，后者是一个字典，把参数名映射到 Parameter 对象上。每个 Parameter 对象也有自己的 annotation 属性。
-在未来，Bobo 等框架可以支持注解，并进一步自动处理请求。例如，使用 price:float 注解的参数可以自动把查询字符串转成函数期待的 float 类型；quantity:'int > 0' 这样的字符串注解可以转换成对参数的验证
-函数注解的最大的影响或许不是让 Bobo 等框架自动设置，而是为 IDE 和 lint 程序等工具的静态类型检查功能提供额外的信息。
-支持函数式编程的包¶虽然 Guido 明确表明，Python 的目标不是变成函数式编程语言，但是得益于 operator 和 functools 等包的支持，函数式编程风格也可以信手拈来。接下来介绍这两个包
-operator 模块¶在函数式编程中，经常需要把算术运算符当做函数使用。例如，不适用递归计算阶乘。求和可以用 sum 函数，但是求积则没有这样的函数，我们可以用 reduce 函数，但是需要一个函数计算序列中两个元素之积。下面展示如何用 lambda 来解决这个问题：
-
-
-
-
-
-In [50]:
-
-
-from functools import reduce
-def fact(n):
-    return reduce(lambda a, b: a * b, range(1, n + 1))
-
-
-
-
-
-
-
-
-
-operator 模块为算数运算符提供了对应的函数，从而避免写 lambda: a, b: a * b 这样的平凡函数：
-
-
-
-
-
-In [51]:
-
-
-from functools import reduce
-from operator import mul
-
-def fact(n):
-    return reduce(mul, range(1, n + 1))
-
-
-
-
-
-
-
-
-
-operator 模块中还有一类函数，能替代从序列中去除元素或读取对象属性的 lambda 表达式，因此， itemgetter 和 attrgetter 其实会自动构建函数
-下面展示了 itemgetter 的常见用途，根据元组的某个字段给元组列表排序，这个例子中，按照国家代码的顺序打印各个城市的信息。其实， itemgetter(1) 的作用与 lambda fields: fields[1] 一样
-
-
-
-
-
-In [52]:
-
-
-metro_data = [
-    ('Tokyo', 'JP', 36.933, (35.69, 139.69)),
-    ('Delhi NCR', 'IN', 21.935, (28.61, 77.21)),
-    ('Mexico City', 'MX', 20.142, (19.43, -99.13)),
-    ('New York-Newark', 'US', 20.104, (40.81, -74.02)),
-    ('Sao Paulo', 'BR', 19.649, (-23.55, -46.64))
-]
-
-from operator import itemgetter
-for city in sorted(metro_data, key = itemgetter(1)):
-    print(city)
-
-
-
-
-
-
-
-
-
-('Sao Paulo', 'BR', 19.649, (-23.55, -46.64))
+    <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="c1">#没找到空格</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span><span class="p">[:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>在函数声明中各个参数可以在 : 后面增加注解表达式。如果参数有默认值，注解放在参数名和 = 之间。如果想注解返回值，在 ) 和函数末尾添加 -&gt; 和一个表达式。那个表达式可以是任何类型。注解中最常用的类型是类（如 str 或 int）和字符串（如 'int &gt; 0'）</p>
+<p>注解不会做任何处理，只是存储在函数的 <code>__annotations__</code> 属性（一个字典）中：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [47]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">clip</span><span class="o">.</span><span class="vm">__annotations__</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[47]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'max_len': 'int &gt; 0', 'return': str, 'text': str}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>return 键保存的是返回值注解。</p>
+<p>Python 所做的唯一的是就是把注解存到 <code>__annotations__</code> 属性中，仅此而已，不做任何检查。换句话说，注解对于 Python 解释器没有任何意义。注解只是元数据，可以供 IDE、框架和装饰器等工具使用。</p>
+<p>下面是从 inspect.signature() 函数提取注解</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [48]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">signature</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">signature</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+<span class="n">sig</span><span class="o">.</span><span class="n">return_annotation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[48]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>str</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [49]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">annotation</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span> <span class="c1"># ljust 作用是返回 13 个字符，靠左对其，不够用空格补</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class 'str'&gt; : text = &lt;class 'inspect._empty'&gt;
+'int &gt; 0'     : max_len = 80
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>signature 函数返回一个 Signature 对象，它有一个 return_annotation 属性和一个 parameters 属性，后者是一个字典，把参数名映射到 Parameter 对象上。每个 Parameter 对象也有自己的 annotation 属性。</p>
+<p>在未来，Bobo 等框架可以支持注解，并进一步自动处理请求。例如，使用 price:float 注解的参数可以自动把查询字符串转成函数期待的 float 类型；quantity:'int &gt; 0' 这样的字符串注解可以转换成对参数的验证</p>
+<p>函数注解的最大的影响或许不是让 Bobo 等框架自动设置，而是为 IDE 和 lint 程序等工具的静态类型检查功能提供额外的信息。</p>
+<h2 id="支持函数式编程的包">支持函数式编程的包<a class="anchor-link" href="#支持函数式编程的包">¶</a></h2><p>虽然 Guido 明确表明，Python 的目标不是变成函数式编程语言，但是得益于 operator 和 functools 等包的支持，函数式编程风格也可以信手拈来。接下来介绍这两个包</p>
+<h3 id="operator-模块">operator 模块<a class="anchor-link" href="#operator-模块">¶</a></h3><p>在函数式编程中，经常需要把算术运算符当做函数使用。例如，不适用递归计算阶乘。求和可以用 sum 函数，但是求积则没有这样的函数，我们可以用 reduce 函数，但是需要一个函数计算序列中两个元素之积。下面展示如何用 lambda 来解决这个问题：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [50]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span>
+<span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>operator 模块为算数运算符提供了对应的函数，从而避免写 <code>lambda: a, b: a * b</code> 这样的平凡函数：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [51]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">mul</span>
+
+<span class="k">def</span> <span class="nf">fact</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>operator 模块中还有一类函数，能替代从序列中去除元素或读取对象属性的 lambda 表达式，因此， itemgetter 和 attrgetter 其实会自动构建函数</p>
+<p>下面展示了 itemgetter 的常见用途，根据元组的某个字段给元组列表排序，这个例子中，按照国家代码的顺序打印各个城市的信息。其实， itemgetter(1) 的作用与 <code>lambda fields: fields[1]</code> 一样</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [52]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metro_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">'Tokyo'</span><span class="p">,</span> <span class="s1">'JP'</span><span class="p">,</span> <span class="mf">36.933</span><span class="p">,</span> <span class="p">(</span><span class="mf">35.69</span><span class="p">,</span> <span class="mf">139.69</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'Delhi NCR'</span><span class="p">,</span> <span class="s1">'IN'</span><span class="p">,</span> <span class="mf">21.935</span><span class="p">,</span> <span class="p">(</span><span class="mf">28.61</span><span class="p">,</span> <span class="mf">77.21</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'Mexico City'</span><span class="p">,</span> <span class="s1">'MX'</span><span class="p">,</span> <span class="mf">20.142</span><span class="p">,</span> <span class="p">(</span><span class="mf">19.43</span><span class="p">,</span> <span class="o">-</span><span class="mf">99.13</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'New York-Newark'</span><span class="p">,</span> <span class="s1">'US'</span><span class="p">,</span> <span class="mf">20.104</span><span class="p">,</span> <span class="p">(</span><span class="mf">40.81</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.02</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">'Sao Paulo'</span><span class="p">,</span> <span class="s1">'BR'</span><span class="p">,</span> <span class="mf">19.649</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">23.55</span><span class="p">,</span> <span class="o">-</span><span class="mf">46.64</span><span class="p">))</span>
+<span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+<span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">metro_data</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">city</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>('Sao Paulo', 'BR', 19.649, (-23.55, -46.64))
 ('Delhi NCR', 'IN', 21.935, (28.61, 77.21))
 ('Tokyo', 'JP', 36.933, (35.69, 139.69))
 ('Mexico City', 'MX', 20.142, (19.43, -99.13))
 ('New York-Newark', 'US', 20.104, (40.81, -74.02))
-
-
-
-
-
-
-
-
-
-
-如果把多个参数传给 itemgetter， 它构建的函数会返回提取的值构成的元组：
-
-
-
-
-
-In [53]:
-
-
-cc_name = itemgetter(1, 0)
-for city in metro_data:
-    print(cc_name(city))
-
-
-
-
-
-
-
-
-
-('JP', 'Tokyo')
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>如果把多个参数传给 itemgetter， 它构建的函数会返回提取的值构成的元组：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [53]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_name</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">metro_data</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cc_name</span><span class="p">(</span><span class="n">city</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>('JP', 'Tokyo')
 ('IN', 'Delhi NCR')
 ('MX', 'Mexico City')
 ('US', 'New York-Newark')
 ('BR', 'Sao Paulo')
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>itemgetter 使用 [ ] 运算符，它不仅支持序列，还支持所有实现 <code>__getitem__</code> 方法的类</p>
+<p>attrgetter 和 itemgetter 作用类似，它创建的函数根据名称提取对象的属性。如果把多个属性名传给 attrgetter 也会返回提取的值构成的元组。此外如果参数名中包含 .(点号)，attrgetter 会深入嵌套对象，获取指定的属性。这些行为如下面代码所示。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [54]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
 
-
-
-
-
-
-
-
-
-
-itemgetter 使用 [ ] 运算符，它不仅支持序列，还支持所有实现 __getitem__ 方法的类
-attrgetter 和 itemgetter 作用类似，它创建的函数根据名称提取对象的属性。如果把多个属性名传给 attrgetter 也会返回提取的值构成的元组。此外如果参数名中包含 .(点号)，attrgetter 会深入嵌套对象，获取指定的属性。这些行为如下面代码所示。
-
-
-
-
-
-In [54]:
-
-
-from collections import namedtuple
-
-LatLong = namedtuple('LatLong', 'lat long')
-Metropolis = namedtuple('Metropolis', 'name cc pop coord')
-metro_areas = [Metropolis(name, cc, pop, LatLong(lat, long))
-              for name, cc, pop, (lat, long) in metro_data]
-metro_areas[0]
-
-
-
-
-
-
-
-Out[54]:
-
-Metropolis(name='Tokyo', cc='JP', pop=36.933, coord=LatLong(lat=35.69, long=139.69))
-
-
-
-
-
-
-
-In [55]:
-
-
-metro_areas[0].coord.lat
-
-
-
-
-
-
-
-Out[55]:
-
-35.69
-
-
-
-
-
-
-
-In [56]:
-
-
-from operator import attrgetter
-name_lat = attrgetter('name', 'coord.lat')
-for city in sorted(metro_areas, key = attrgetter('coord.lat')):
-    print(name_lat(city))
-
-
-
-
-
-
-
-
-
-('Sao Paulo', -23.55)
+<span class="n">LatLong</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'LatLong'</span><span class="p">,</span> <span class="s1">'lat long'</span><span class="p">)</span>
+<span class="n">Metropolis</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Metropolis'</span><span class="p">,</span> <span class="s1">'name cc pop coord'</span><span class="p">)</span>
+<span class="n">metro_areas</span> <span class="o">=</span> <span class="p">[</span><span class="n">Metropolis</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">LatLong</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">long</span><span class="p">))</span>
+              <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">long</span><span class="p">)</span> <span class="ow">in</span> <span class="n">metro_data</span><span class="p">]</span>
+<span class="n">metro_areas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[54]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Metropolis(name='Tokyo', cc='JP', pop=36.933, coord=LatLong(lat=35.69, long=139.69))</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [55]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metro_areas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coord</span><span class="o">.</span><span class="n">lat</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[55]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>35.69</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [56]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">attrgetter</span>
+<span class="n">name_lat</span> <span class="o">=</span> <span class="n">attrgetter</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'coord.lat'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">metro_areas</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="n">attrgetter</span><span class="p">(</span><span class="s1">'coord.lat'</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name_lat</span><span class="p">(</span><span class="n">city</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>('Sao Paulo', -23.55)
 ('Mexico City', 19.43)
 ('Delhi NCR', 28.61)
 ('Tokyo', 35.69)
 ('New York-Newark', 40.81)
-
-
-
-
-
-
-
-
-
-
-下面是 operator 模块定义的部分函数（省略了以 _ 开头的函数，因为它们基本上是实现细节
-
-
-
-
-
-In [57]:
-
-
-import operator
-[name for name in dir(operator) if not name.startswith('_')]
-
-
-
-
-
-
-
-Out[57]:
-
-['abs',
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面是 operator 模块定义的部分函数（省略了以 <code>_</code> 开头的函数，因为它们基本上是实现细节</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [57]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">operator</span>
+<span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'_'</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[57]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['abs',
  'add',
  'and_',
  'attrgetter',
@@ -2741,353 +2741,353 @@ Out[57]:
  'sub',
  'truediv',
  'truth',
- 'xor']
-
-
-
-
-
-
-
-
-
-这些函数差不多一眼就能看出来啥意思，以 i 开头对应的是增量运算符 += &= 等。如果第一个参数是可变的，那么这些运算符函数就会就地修改它，否则，作用与不带 i 的函数一样，直接返回运算结果
-在 operator 模块余下的函数，我们最后介绍一下 methodcaller。它的作用与 attrgetter 和 itemgetter 类似，它会自行构建函数。methodcaller 创建的函数会在对象上调用参数指定的方法：
-
-
-
-
-
-In [58]:
-
-
-from operator import methodcaller
-s = 'The time has come'
-upcase = methodcaller('upper')
-upcase(s)
-
-
-
-
-
-
-
-Out[58]:
-
-'THE TIME HAS COME'
-
-
-
-
-
-
-
-In [59]:
-
-
-hiphenate = methodcaller('replace', ' ', '-')
-hiphenate(s)
-
-
-
-
-
-
-
-Out[59]:
-
-'The-time-has-come'
-
-
-
-
-
-
-
-
-
-上面第一个测试只是为了展示 methodcaller 的用法，如果想把 str.upper 作为函数使用，只需要在 str 类上调用：
-
-
-
-
-
-In [60]:
-
-
-str.upper(s)
-
-
-
-
-
-
-
-Out[60]:
-
-'THE TIME HAS COME'
-
-
-
-
-
-
-
-
-
-上面的第二个测试表明，methodcaller 还可以冻结某些参数，也就是部分应用（partial application），这与 functools.partial 函数作用类似
-使用 functools.partial 冻结参数¶functools 模块提供了一系列高阶函数，其中最为人熟知的或许是 reduce，余下的函数中，最有用的是 partial 及其变体，partialmethod。
-functools.partial 这个高阶函数用于部分应用一个函数，部分应用是指，基于一个函数创建一个新的可调用对象，把原函数某些参数固定。使用这个函数可以把接受一个或多个的函数改编成需要回调的 API，这样参数更少：
-
-
-
-
-
-In [61]:
-
-
-from operator import mul
-from functools import partial
-
-triple = partial(mul, 3) #使用 mul 创建 partial 函数，第一个参数指定为 3
-triple(7)
-
-
-
-
-
-
-
-Out[61]:
-
-21
-
-
-
-
-
-
-
-In [62]:
-
-
-list(map(triple, range(1, 10)))
-
-
-
-
-
-
-
-Out[62]:
-
-[3, 6, 9, 12, 15, 18, 21, 24, 27]
-
-
-
-
-
-
-
-
-
-我们用第 4 章的规范化语言编码的函数举个例子，如果处理多国语言编写的文本，在比较或排序之前可能想使用 unicode.normalize('NFC', s) 处理所有的字符串 s，如果经常这么做，可以定义一个 nfc 函数
-
-
-
-
-
-In [63]:
-
-
-import unicodedata, functools
-nfc = functools.partial(unicodedata.normalize, 'NFC')
-s1 = 'café'
-s2 = 'cafe\u0301'
-s1, s2
-
-
-
-
-
-
-
-Out[63]:
-
-('café', 'café')
-
-
-
-
-
-
-
-In [64]:
-
-
-s1 == s2
-
-
-
-
-
-
-
-Out[64]:
-
-False
-
-
-
-
-
-
-
-In [65]:
-
-
-nfc(s1) == nfc(s2)
-
-
-
-
-
-
-
-Out[65]:
-
-True
-
-
-
-
-
-
-
-
-
-下面的例子是在前面定义的 tag 函数上使用 partial，冻结一个定位参数和一个关键字参数
-
-
-
-
-
-In [67]:
-
-
-from functools import partial
-
-picture = partial(tag, 'img', cls = 'pic-frame')
-picture(src = 'wumpus.jpeg')
-#''
-
-
-
-
-
-
-
-Out[67]:
-
-''
-
-
-
-
-
-
-
-In [68]:
-
-
-picture #返回一个 functools.partial 对象
-
-
-
-
-
-
-
-Out[68]:
-
-functools.partial(, 'img', cls='pic-frame')
-
-
-
-
-
-
-
-In [69]:
-
-
-picture.func #functools.partial 对象提供了访问原函数的固定参数的属性
-
-
-
-
-
-
-
-Out[69]:
-
-
-
-
-
-
-
-
-
-In [70]:
-
-
-picture.args
-
-
-
-
-
-
-
-Out[70]:
-
-('img',)
-
-
-
-
-
-
-
-In [71]:
-
-
-picture.keywords
-
-
-
-
-
-
-
-Out[71]:
-
-{'cls': 'pic-frame'}
-
-
-
-
-
-
-
-
-
-functools 中的 partialmethod 函数（Python 3.4 新增）的作用与 partial 一样，不过是用于处理方法的。
-functools 模块中的 lru_cache 函数令人印象深刻，它会做备忘(memoization)，这是一种自动优化措施，它会存储耗时的函数调用结果，避免重新计算。第七章会介绍这个函数，还会讨论装饰器。以及旨在用作装饰器的其它高阶函数：singledispatch 和 wraps
-
-
-
+ 'xor']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>这些函数差不多一眼就能看出来啥意思，以 i 开头对应的是增量运算符 += &amp;= 等。如果第一个参数是可变的，那么这些运算符函数就会就地修改它，否则，作用与不带 i 的函数一样，直接返回运算结果</p>
+<p>在 operator 模块余下的函数，我们最后介绍一下 methodcaller。它的作用与 attrgetter 和 itemgetter 类似，它会自行构建函数。methodcaller 创建的函数会在对象上调用参数指定的方法：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [58]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">methodcaller</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s1">'The time has come'</span>
+<span class="n">upcase</span> <span class="o">=</span> <span class="n">methodcaller</span><span class="p">(</span><span class="s1">'upper'</span><span class="p">)</span>
+<span class="n">upcase</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[58]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'THE TIME HAS COME'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [59]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hiphenate</span> <span class="o">=</span> <span class="n">methodcaller</span><span class="p">(</span><span class="s1">'replace'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">)</span>
+<span class="n">hiphenate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[59]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'The-time-has-come'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>上面第一个测试只是为了展示 methodcaller 的用法，如果想把 str.upper 作为函数使用，只需要在 str 类上调用：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [60]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[60]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'THE TIME HAS COME'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>上面的第二个测试表明，methodcaller 还可以冻结某些参数，也就是部分应用（partial application），这与 functools.partial 函数作用类似</p>
+<h2 id="使用-functools.partial-冻结参数">使用 functools.partial 冻结参数<a class="anchor-link" href="#使用-functools.partial-冻结参数">¶</a></h2><p>functools 模块提供了一系列高阶函数，其中最为人熟知的或许是 reduce，余下的函数中，最有用的是 partial 及其变体，partialmethod。</p>
+<p>functools.partial 这个高阶函数用于部分应用一个函数，部分应用是指，基于一个函数创建一个新的可调用对象，把原函数某些参数固定。使用这个函数可以把接受一个或多个的函数改编成需要回调的 API，这样参数更少：</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [61]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">mul</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+
+<span class="n">triple</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">#使用 mul 创建 partial 函数，第一个参数指定为 3</span>
+<span class="n">triple</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[61]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>21</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [62]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">triple</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[62]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[3, 6, 9, 12, 15, 18, 21, 24, 27]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>我们用第 4 章的规范化语言编码的函数举个例子，如果处理多国语言编写的文本，在比较或排序之前可能想使用 unicode.normalize('NFC', s) 处理所有的字符串 s，如果经常这么做，可以定义一个 nfc 函数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [63]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">unicodedata</span><span class="o">,</span> <span class="nn">functools</span>
+<span class="n">nfc</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">,</span> <span class="s1">'NFC'</span><span class="p">)</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="s1">'café'</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s1">'cafe</span><span class="se">\u0301</span><span class="s1">'</span>
+<span class="n">s1</span><span class="p">,</span> <span class="n">s2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[63]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('café', 'café')</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [64]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[64]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [65]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nfc</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="o">==</span> <span class="n">nfc</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[65]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>下面的例子是在前面定义的 tag 函数上使用 partial，冻结一个定位参数和一个关键字参数</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [67]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+
+<span class="n">picture</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s1">'img'</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="s1">'pic-frame'</span><span class="p">)</span>
+<span class="n">picture</span><span class="p">(</span><span class="n">src</span> <span class="o">=</span> <span class="s1">'wumpus.jpeg'</span><span class="p">)</span>
+<span class="c1">#'&lt;img class="pic-frame" src="wumpus.jpeg" /&gt;'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[67]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>'&lt;img class="pic-frame" src="wumpus.jpeg" /&gt;'</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [68]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">picture</span> <span class="c1">#返回一个 functools.partial 对象</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[68]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>functools.partial(&lt;function tag at 0x7f6ca0641d90&gt;, 'img', cls='pic-frame')</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [69]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">picture</span><span class="o">.</span><span class="n">func</span> <span class="c1">#functools.partial 对象提供了访问原函数的固定参数的属性</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[69]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;function __main__.tag&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [70]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">picture</span><span class="o">.</span><span class="n">args</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[70]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>('img',)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [71]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">picture</span><span class="o">.</span><span class="n">keywords</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[71]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'cls': 'pic-frame'}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>functools 中的 partialmethod 函数（Python 3.4 新增）的作用与 partial 一样，不过是用于处理方法的。</p>
+<p>functools 模块中的 lru_cache 函数令人印象深刻，它会做备忘(memoization)，这是一种自动优化措施，它会存储耗时的函数调用结果，避免重新计算。第七章会介绍这个函数，还会讨论装饰器。以及旨在用作装饰器的其它高阶函数：singledispatch 和 wraps</p>
+</div>
+</div>
+</div>
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -3148,6 +3148,7 @@ functools 模块中的 lru_cache 函数令人印象深刻，它会做备忘(memo
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

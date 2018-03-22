@@ -1052,11 +1052,11 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">simple_coroutine</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> coroutine started'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; coroutine started'</span><span class="p">)</span>
     <span class="c1"># 如果协程只需要从客户那里接收数据，那么产出的值是 None</span>
     <span class="c1"># 这个值是隐式指定的，因为 yield 关键字右面没有表达式</span>
     <span class="n">x</span> <span class="o">=</span> <span class="k">yield</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> croutine received:'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; croutine received:'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     
 <span class="n">my_coro</span> <span class="o">=</span> <span class="n">simple_coroutine</span><span class="p">()</span>
 <span class="n">my_coro</span>
@@ -1069,7 +1069,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[1]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><generator object simple_coroutine at 0x7fa7589775c8></pre>
+<pre>&lt;generator object simple_coroutine at 0x7fa7589775c8&gt;</pre>
 </div>
 </div>
 </div>
@@ -1091,7 +1091,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine started
+<pre>-&gt; coroutine started
 </pre>
 </div>
 </div>
@@ -1115,7 +1115,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> croutine received: 42
+<pre>-&gt; croutine received: 42
 </pre>
 </div>
 </div>
@@ -1125,10 +1125,10 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">StopIteration</span>                             Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-3-f6c7a5671d8e></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-3-f6c7a5671d8e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># 协程定义体中的 yield 表达式会计算出 42，现在协程会恢复，</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-red-fg"># 一直运行到下一个 yield 表达式或者终止</span>
-<span class="ansi-green-fg">----> 3</span><span class="ansi-red-fg"> </span>my_coro<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">42</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 控制权流动到协程定义体末尾，生成器抛出 StopIteration 异常</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>my_coro<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">42</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 控制权流动到协程定义体末尾，生成器抛出 StopIteration 异常</span>
 
 <span class="ansi-red-fg">StopIteration</span>: </pre>
 </div>
@@ -1171,9 +1171,9 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-4-4fce4c288d17></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-4-4fce4c288d17&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> my_coro <span class="ansi-blue-fg">=</span> simple_coroutine<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----> 2</span><span class="ansi-red-fg"> </span>my_coro<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">9577</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>my_coro<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">9577</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">TypeError</span>: can't send non-None value to a just-started generator</pre>
 </div>
@@ -1197,11 +1197,11 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">simple_coro2</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> Started a='</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; Started a='</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">a</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> Received: b='</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; Received: b='</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> Received: c='</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; Received: c='</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
     
 <span class="n">my_coro2</span> <span class="o">=</span> <span class="n">simple_coro2</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">getgeneratorstate</span>
@@ -1236,7 +1236,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Started a= 14
+<pre>-&gt; Started a= 14
 </pre>
 </div>
 </div>
@@ -1287,7 +1287,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Received: b= 28
+<pre>-&gt; Received: b= 28
 </pre>
 </div>
 </div>
@@ -1315,7 +1315,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> Received: c= 99
+<pre>-&gt; Received: c= 99
 </pre>
 </div>
 </div>
@@ -1325,8 +1325,8 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">StopIteration</span>                             Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-9-1aa524ca85a6></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>my_coro2<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">99</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">&lt;ipython-input-9-1aa524ca85a6&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>my_coro2<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">99</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">StopIteration</span>: </pre>
 </div>
@@ -11248,13 +11248,13 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-19-b211dcd34a78></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>coro_avg<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'spam'</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 发送的不是数字，导致协程内部有异常抛出</span>
+<span class="ansi-green-fg">&lt;ipython-input-19-b211dcd34a78&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>coro_avg<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'spam'</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 发送的不是数字，导致协程内部有异常抛出</span>
 
-<span class="ansi-green-fg"><ipython-input-16-11c6405b28a4></span> in <span class="ansi-cyan-fg">averager</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-16-11c6405b28a4&gt;</span> in <span class="ansi-cyan-fg">averager</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      6</span>     <span class="ansi-green-fg">while</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">      7</span>         term <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">yield</span> average
-<span class="ansi-green-fg">----> 8</span><span class="ansi-red-fg">         </span>total <span class="ansi-blue-fg">+=</span> term
+<span class="ansi-green-fg">----&gt; 8</span><span class="ansi-red-fg">         </span>total <span class="ansi-blue-fg">+=</span> term
 <span class="ansi-green-intense-fg ansi-bold">      9</span>         count <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
 <span class="ansi-green-intense-fg ansi-bold">     10</span>         average <span class="ansi-blue-fg">=</span> total <span class="ansi-blue-fg">/</span> count
 
@@ -11282,8 +11282,8 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">StopIteration</span>                             Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-20-d1c7d28be0db></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>coro_avg<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">60</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 由于协程内部没有异常处理，协程会终止，试图重新激活协程，会抛出 StopIteration 异常</span>
+<span class="ansi-green-fg">&lt;ipython-input-20-d1c7d28be0db&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>coro_avg<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">60</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 由于协程内部没有异常处理，协程会终止，试图重新激活协程，会抛出 StopIteration 异常</span>
 
 <span class="ansi-red-fg">StopIteration</span>: </pre>
 </div>
@@ -11320,14 +11320,14 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
     <span class="sd">'''为这次演示定义的异常类型'''</span>
     
 <span class="k">def</span> <span class="nf">demo_exc_handling</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> coroutine started'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; coroutine started'</span><span class="p">)</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">x</span> <span class="o">=</span> <span class="k">yield</span>
         <span class="k">except</span> <span class="n">DemoException</span><span class="p">:</span> <span class="c1"># 特别处理 DemoException 异常</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">'*** DemoException handled. Continuing...'</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">'-> coroutine received: </span><span class="si">{!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; coroutine received: </span><span class="si">{!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="c1"># 这一行永远不会执行，因为有未处理异常才会终止循环，而一旦出现未处理异常，协程就会终止</span>
     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">'This line should never run'</span><span class="p">)</span> 
 </pre></div>
@@ -11351,7 +11351,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine started
+<pre>-&gt; coroutine started
 </pre>
 </div>
 </div>
@@ -11373,7 +11373,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine received: 11
+<pre>-&gt; coroutine received: 11
 </pre>
 </div>
 </div>
@@ -11395,7 +11395,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine received: 22
+<pre>-&gt; coroutine received: 22
 </pre>
 </div>
 </div>
@@ -11459,7 +11459,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine started
+<pre>-&gt; coroutine started
 </pre>
 </div>
 </div>
@@ -11481,7 +11481,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine received: 11
+<pre>-&gt; coroutine received: 11
 </pre>
 </div>
 </div>
@@ -11555,7 +11555,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine started
+<pre>-&gt; coroutine started
 </pre>
 </div>
 </div>
@@ -11577,7 +11577,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-> coroutine received: 11
+<pre>-&gt; coroutine received: 11
 </pre>
 </div>
 </div>
@@ -11602,13 +11602,13 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ZeroDivisionError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-33-ab264ab92c46></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>exc_coro<span class="ansi-blue-fg">.</span>throw<span class="ansi-blue-fg">(</span>ZeroDivisionError<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">&lt;ipython-input-33-ab264ab92c46&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>exc_coro<span class="ansi-blue-fg">.</span>throw<span class="ansi-blue-fg">(</span>ZeroDivisionError<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg"><ipython-input-21-422843dfa3e8></span> in <span class="ansi-cyan-fg">demo_exc_handling</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-21-422843dfa3e8&gt;</span> in <span class="ansi-cyan-fg">demo_exc_handling</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      6</span>     <span class="ansi-green-fg">while</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">      7</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----> 8</span><span class="ansi-red-fg">             </span>x <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">yield</span>
+<span class="ansi-green-fg">----&gt; 8</span><span class="ansi-red-fg">             </span>x <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">yield</span>
 <span class="ansi-green-intense-fg ansi-bold">      9</span>         <span class="ansi-green-fg">except</span> DemoException<span class="ansi-blue-fg">:</span> <span class="ansi-red-fg"># 特别处理 DemoException 异常</span>
 <span class="ansi-green-intense-fg ansi-bold">     10</span>             print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'*** DemoException handled. Continuing...'</span><span class="ansi-blue-fg">)</span>
 
@@ -11656,7 +11656,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
     <span class="sd">'''为这次演示定义的异常类型'''</span>
     
 <span class="k">def</span> <span class="nf">demo_finally</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-> coroutine started'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; coroutine started'</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -11664,9 +11664,9 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
             <span class="k">except</span> <span class="n">DemoException</span><span class="p">:</span> <span class="c1"># 特别处理 DemoException 异常</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">'*** DemoException handled. Continuing...'</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">'-> coroutine received: </span><span class="si">{!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; coroutine received: </span><span class="si">{!r}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="k">finally</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">'-> coroutine ending'</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'-&gt; coroutine ending'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -11742,10 +11742,10 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">StopIteration</span>                             Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-38-e280071ab628></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">&lt;ipython-input-38-e280071ab628&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> coro_avg<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">6.5</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># 发 None 会终止循环，导致协程结束，一如既往，生成器会抛出 StopIteration 异常，异常对象的 value 属性保存着返回的值</span>
-<span class="ansi-green-fg">----> 4</span><span class="ansi-red-fg"> </span>coro_avg<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>coro_avg<span class="ansi-blue-fg">.</span>send<span class="ansi-blue-fg">(</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">StopIteration</span>: Result(count=3, average=15.5)</pre>
 </div>
@@ -12022,17 +12022,6 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -12093,6 +12082,7 @@ nh7FaVrpVtfaXyCiAtO8Cr3kjpHHX7pEFwqFQqHwk87/A+3MFZLZAdbxAAAAAElFTkSuQmCC
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

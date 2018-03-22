@@ -1355,7 +1355,7 @@ C
 <div class="output_area">
 <div class="prompt output_prompt">Out[13]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><iterator at 0x7f0a04fc5080></pre>
+<pre>&lt;iterator at 0x7f0a04fc5080&gt;</pre>
 </div>
 </div>
 </div>
@@ -1442,8 +1442,8 @@ C
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">StopIteration</span>                             Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-17-2cdb14c0d4d6></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>next<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">&lt;ipython-input-17-2cdb14c0d4d6&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>next<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">StopIteration</span>: </pre>
 </div>
@@ -1657,7 +1657,7 @@ hello
 <div class="output_area">
 <div class="prompt output_prompt">Out[22]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><function __main__.gen_123></pre>
+<pre>&lt;function __main__.gen_123&gt;</pre>
 </div>
 </div>
 </div>
@@ -1678,7 +1678,7 @@ hello
 <div class="output_area">
 <div class="prompt output_prompt">Out[23]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><generator object gen_123 at 0x7f2d2014d3b8></pre>
+<pre>&lt;generator object gen_123 at 0x7f2d2014d3b8&gt;</pre>
 </div>
 </div>
 </div>
@@ -1791,8 +1791,8 @@ hello
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">StopIteration</span>                             Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-28-42ec62f89883></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>next<span class="ansi-blue-fg">(</span>g<span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 生成器函数定义体执行完毕后，跑出 StopIteration 异常</span>
+<span class="ansi-green-fg">&lt;ipython-input-28-42ec62f89883&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>next<span class="ansi-blue-fg">(</span>g<span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># 生成器函数定义体执行完毕后，跑出 StopIteration 异常</span>
 
 <span class="ansi-red-fg">StopIteration</span>: </pre>
 </div>
@@ -1822,7 +1822,7 @@ hello
     <span class="nb">print</span><span class="p">(</span><span class="s1">'end'</span><span class="p">)</span>
     
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">gen_AB</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-->'</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'--&gt;'</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1833,9 +1833,9 @@ hello
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>start
---> A
+--&gt; A
 continue
---> B
+--&gt; B
 end
 </pre>
 </div>
@@ -1928,7 +1928,7 @@ end
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">res1</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-->'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'--&gt;'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1938,8 +1938,8 @@ end
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>--> AAA
---> BBB
+<pre>--&gt; AAA
+--&gt; BBB
 </pre>
 </div>
 </div>
@@ -1962,7 +1962,7 @@ end
 <div class="output_area">
 <div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><generator object &lt;genexpr> at 0x7f571b179990></pre>
+<pre>&lt;generator object &lt;genexpr&gt; at 0x7f571b179990&gt;</pre>
 </div>
 </div>
 </div>
@@ -1974,7 +1974,7 @@ end
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">res2</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'-->'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'--&gt;'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1985,9 +1985,9 @@ end
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>start
---> AAA
+--&gt; AAA
 continue
---> BBB
+--&gt; BBB
 end
 </pre>
 </div>
@@ -2059,7 +2059,7 @@ end
         <span class="n">result</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">begin</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">begin</span><span class="p">)</span>
         <span class="n">forever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span>
         <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">forever</span> <span class="ow">or</span> <span class="n">result</span> <span class="o"><</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">forever</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
             <span class="k">yield</span> <span class="n">result</span>
             <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">begin</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">*</span> <span class="n">index</span>
@@ -2151,7 +2151,7 @@ end
     <span class="n">result</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">begin</span> <span class="o">+</span> <span class="n">step</span><span class="p">)(</span><span class="n">begin</span><span class="p">)</span>
     <span class="n">forever</span> <span class="o">=</span> <span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span>
     <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="n">forever</span> <span class="ow">or</span> <span class="n">result</span> <span class="o"><</span> <span class="n">end</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">forever</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
         <span class="k">yield</span> <span class="n">result</span>
         <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">index</span>
@@ -2270,7 +2270,7 @@ end
 <div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gen</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o"><</span> <span class="mi">3</span><span class="p">,</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gen</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">))</span>
 <span class="nb">list</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2306,7 +2306,7 @@ end
     <span class="n">first</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">begin</span><span class="o">+</span><span class="n">step</span><span class="p">)(</span><span class="n">begin</span><span class="p">)</span>
     <span class="n">ap_gen</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">ap_gen</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o"><</span> <span class="n">end</span><span class="p">,</span> <span class="n">ap_gen</span><span class="p">)</span>
+        <span class="n">ap_gen</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">,</span> <span class="n">ap_gen</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ap_gen</span>
 </pre></div>
 </div>
@@ -3390,9 +3390,9 @@ end
 <div class="output_area">
 <div class="prompt output_prompt">Out[101]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[('L', <itertools._grouper at 0x7f57144b7cc0>),
- ('A', <itertools._grouper at 0x7f57143595c0>),
- ('G', <itertools._grouper at 0x7f5714359128>)]</pre>
+<pre>[('L', &lt;itertools._grouper at 0x7f57144b7cc0&gt;),
+ ('A', &lt;itertools._grouper at 0x7f57143595c0&gt;),
+ ('G', &lt;itertools._grouper at 0x7f5714359128&gt;)]</pre>
 </div>
 </div>
 </div>
@@ -3404,7 +3404,7 @@ end
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">char</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'LLLLAAAGG'</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s1">'->'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="s1">'-&gt;'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -3414,9 +3414,9 @@ end
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>L -> ['L', 'L', 'L', 'L']
-A -> ['A', 'A', 'A']
-G -> ['G', 'G']
+<pre>L -&gt; ['L', 'L', 'L', 'L']
+A -&gt; ['A', 'A', 'A']
+G -&gt; ['G', 'G']
 </pre>
 </div>
 </div>
@@ -3453,7 +3453,7 @@ G -> ['G', 'G']
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">length</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">animals</span><span class="p">,</span> <span class="nb">len</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="s1">'->'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="s1">'-&gt;'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -3463,10 +3463,10 @@ G -> ['G', 'G']
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>3 -> ['rat', 'bat']
-4 -> ['duck', 'bear', 'lion']
-5 -> ['eagle', 'shark']
-7 -> ['giraffe', 'dolphin']
+<pre>3 -&gt; ['rat', 'bat']
+4 -&gt; ['duck', 'bear', 'lion']
+5 -&gt; ['eagle', 'shark']
+7 -&gt; ['giraffe', 'dolphin']
 </pre>
 </div>
 </div>
@@ -3480,7 +3480,7 @@ G -> ['G', 'G']
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 使用 reverse 生成器从右往左迭代 animals</span>
 <span class="k">for</span> <span class="n">length</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">animals</span><span class="p">),</span> <span class="nb">len</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="s1">'->'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="s1">'-&gt;'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -3490,10 +3490,10 @@ G -> ['G', 'G']
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>7 -> ['dolphin', 'giraffe']
-5 -> ['shark', 'eagle']
-4 -> ['lion', 'bear', 'duck']
-3 -> ['bat', 'rat']
+<pre>7 -&gt; ['dolphin', 'giraffe']
+5 -&gt; ['shark', 'eagle']
+4 -&gt; ['lion', 'bear', 'duck']
+3 -&gt; ['bat', 'rat']
 </pre>
 </div>
 </div>
@@ -3516,7 +3516,7 @@ G -> ['G', 'G']
 <div class="output_area">
 <div class="prompt output_prompt">Out[107]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[<itertools._tee at 0x7f5714502088>, <itertools._tee at 0x7f5714502448>]</pre>
+<pre>[&lt;itertools._tee at 0x7f5714502088&gt;, &lt;itertools._tee at 0x7f5714502448&gt;]</pre>
 </div>
 </div>
 </div>
@@ -3928,7 +3928,7 @@ G -> ['G', 'G']
 <div class="output_area">
 <div class="prompt output_prompt">Out[139]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><callable_iterator at 0x7f571457cbe0></pre>
+<pre>&lt;callable_iterator at 0x7f571457cbe0&gt;</pre>
 </div>
 </div>
 </div>
@@ -4084,17 +4084,6 @@ G -> ['G', 'G']
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -4155,6 +4144,7 @@ G -> ['G', 'G']
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

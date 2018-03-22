@@ -1197,16 +1197,16 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Scheduled for BR: <future at 0x7f174c4bbcc0 state="running">
-Scheduled for CN: <future at 0x7f174c4bf630 state="running">
-Scheduled for ID: <future at 0x7f174c4b3dd8 state="running">
-Scheduled for IN: <future at 0x7f174c4b74e0 state="pending">
-Scheduled for US: <future at 0x7f174c4b7128 state="pending">
-BR <future at 0x7f174c4bbcc0 state="finished" returned str> result: 'BR'
-ID <future at 0x7f174c4b3dd8 state="finished" returned str> result: 'ID'
-IN <future at 0x7f174c4b74e0 state="finished" returned str> result: 'IN'
-US <future at 0x7f174c4b7128 state="finished" returned str> result: 'US'
-CN <future at 0x7f174c4bf630 state="finished" returned str> result: 'CN'
+<pre>Scheduled for BR: &lt;Future at 0x7f174c4bbcc0 state=running&gt;
+Scheduled for CN: &lt;Future at 0x7f174c4bf630 state=running&gt;
+Scheduled for ID: &lt;Future at 0x7f174c4b3dd8 state=running&gt;
+Scheduled for IN: &lt;Future at 0x7f174c4b74e0 state=pending&gt;
+Scheduled for US: &lt;Future at 0x7f174c4b7128 state=pending&gt;
+BR &lt;Future at 0x7f174c4bbcc0 state=finished returned str&gt; result: 'BR'
+ID &lt;Future at 0x7f174c4b3dd8 state=finished returned str&gt; result: 'ID'
+IN &lt;Future at 0x7f174c4b74e0 state=finished returned str&gt; result: 'IN'
+US &lt;Future at 0x7f174c4b7128 state=finished returned str&gt; result: 'US'
+CN &lt;Future at 0x7f174c4bf630 state=finished returned str&gt; result: 'CN'
 
 5 flags downloaded in 4.58s
 </pre>
@@ -1341,7 +1341,7 @@ CN <future at 0x7f174c4bf630 state="finished" returned str> result: 'CN'
 [14:43:36][14:43:36]	loiter(1): doing nothing for 1s...[14:43:36] 
  		loiter(2): doing nothing for 2s... results:loiter(0): done
  
-<generator object executor.map.&lt;locals>.result_iterator at 0x7f174c457eb8>[14:43:36]
+&lt;generator object Executor.map.&lt;locals&gt;.result_iterator at 0x7f174c457eb8&gt;[14:43:36]
  [14:43:36]			loiter(3): doing nothing for 3s... 
 Waiting for individual results:
 [14:43:36] result 0: 0
@@ -1371,17 +1371,6 @@ result 2: 20
 用。</p>
 <blockquote><p>executor.submit 和 futures.as_completed 这个组合比executor.map 更灵活,因为 submit 方法能处理不同的可调用对象和参数,而executor.map 只能处理参数不同的同一个可调用对象。此外,传给futures.as_completed 函数的期物集合可以来自多个 Executor 实例,例如一些由 ThreadPoolExecutor 实例创建,另一些由 ProcessPoolExecutor 实例创建。</p>
 </blockquote>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -1445,6 +1434,7 @@ result 2: 20
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

@@ -35,6 +35,6 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 MARKUP = ('md', 'ipynb')
 
-PLUGIN_PATH = './plugins'
+PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['ipynb.markup']
 THEME = "/custom/pelican-themes/aboutwilson"

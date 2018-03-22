@@ -1111,8 +1111,8 @@ h6:hover .anchor-link {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-4-0f524f080953></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-fg">----> 1</span><span class="ansi-red-fg"> </span>y <span class="ansi-blue-fg">=</span> Gizmo<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">*</span> <span class="ansi-cyan-fg">10</span>
+<span class="ansi-green-fg">&lt;ipython-input-4-0f524f080953&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>y <span class="ansi-blue-fg">=</span> Gizmo<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">*</span> <span class="ansi-cyan-fg">10</span>
 
 <span class="ansi-red-fg">TypeError</span>: unsupported operand type(s) for *: 'Gizmo' and 'int'</pre>
 </div>
@@ -2346,19 +2346,19 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">'''</span>
-<span class="sd">>>> import weakref</span>
-<span class="sd">>>> a_set = {0, 1}</span>
-<span class="sd">>>> wref = weakref.ref(a_set) # 创建弱引用对象</span>
-<span class="sd">>>> wref</span>
-<span class="sd"><weakref at 0x7fa060e36050; to &#x27;set&#x27; at 0x7fa060e40d00></span>
-<span class="sd">>>> wref() # 调用 wref() 返回的是被引用的对象{0， 1}，因为这是控制台会话，索引{0, 1} 会被绑定给 _ 变量</span>
+<span class="sd">&gt;&gt;&gt; import weakref</span>
+<span class="sd">&gt;&gt;&gt; a_set = {0, 1}</span>
+<span class="sd">&gt;&gt;&gt; wref = weakref.ref(a_set) # 创建弱引用对象</span>
+<span class="sd">&gt;&gt;&gt; wref</span>
+<span class="sd">&lt;weakref at 0x7fa060e36050; to 'set' at 0x7fa060e40d00&gt;</span>
+<span class="sd">&gt;&gt;&gt; wref() # 调用 wref() 返回的是被引用的对象{0， 1}，因为这是控制台会话，索引{0, 1} 会被绑定给 _ 变量</span>
 <span class="sd">set([0, 1])</span>
-<span class="sd">>>> a_set = {2, 3, 4} # a_set 不再指向 {0， 1} 集合，因此集合引用数量减少了。但是 _ 变量仍然指代它</span>
-<span class="sd">>>> wref() # 调用 wref() 仍然返回 {0， 1}</span>
+<span class="sd">&gt;&gt;&gt; a_set = {2, 3, 4} # a_set 不再指向 {0， 1} 集合，因此集合引用数量减少了。但是 _ 变量仍然指代它</span>
+<span class="sd">&gt;&gt;&gt; wref() # 调用 wref() 仍然返回 {0， 1}</span>
 <span class="sd">set([0, 1])</span>
-<span class="sd">>>> wref() is None  # 计算这个表达式时， {0, 1} 存在，因此 wref() 不是 None。但是随后 _ 绑定到结果值为 False，现在 {0， 1} 没有强引用了</span>
+<span class="sd">&gt;&gt;&gt; wref() is None  # 计算这个表达式时， {0, 1} 存在，因此 wref() 不是 None。但是随后 _ 绑定到结果值为 False，现在 {0， 1} 没有强引用了</span>
 <span class="sd">False</span>
-<span class="sd">>>> wref() is None # 因为 {0, 1} 对象不存在了，所以 wref() 返回 None</span>
+<span class="sd">&gt;&gt;&gt; wref() is None # 因为 {0, 1} 对象不存在了，所以 wref() 返回 None</span>
 <span class="sd">True</span>
 <span class="sd">'''</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"上面程序在控制台才会有这个效果"</span><span class="p">)</span>
@@ -2500,10 +2500,10 @@ a_list = MyList(range(10)
 #a_list 可以作为弱引用目标
 wref_to_a_list = weakref.ref(a_list)</code></pre>
 <p>set 实例可以作为所指对象，因此前面这段采用 set 实例:</p>
-<pre><code>>>> import weakref
->>> a_set = {0, 1}
->>> wref = weakref.ref(a_set) # 创建弱引用对象
->>> wref
+<pre><code>&gt;&gt;&gt; import weakref
+&gt;&gt;&gt; a_set = {0, 1}
+&gt;&gt;&gt; wref = weakref.ref(a_set) # 创建弱引用对象
+&gt;&gt;&gt; wref
 ...</code></pre>
 <p>其次用户定义的类型也可以，这也就解释了为什么上面使用 Cheese 类。但是，int 和 tuple 实例不能作为弱引用的目标，它们的子类也不行。</p>
 <p>这些局限基本是 CPython 的实现细节，在其它 Python 解释器可能不一样。这些局限内部优化导致的结果</p>
@@ -2679,6 +2679,7 @@ wref_to_a_list = weakref.ref(a_list)</code></pre>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="./category/feature_engineering.html">feature_engineering (1)</a></li>
 							<li><a href="./category/fluent_python.html">fluent_python (23)</a></li>
+							<li><a href="./category/python3-note.html">python3-note (1)</a></li>
 						</ul>
 					</div>
 					<div class="col-md-3">

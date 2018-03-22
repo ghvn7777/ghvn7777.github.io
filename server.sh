@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export PATH=/custom/anaconda3/bin:$PATH
-source activate pelican
+# export PATH=/custom/anaconda3/bin:$PATH
+source activate blog
 find -name ".ipy*" -print | xargs rm -rf
 pelican content -s publishconf.py
 git checkout dev
